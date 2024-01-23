@@ -7,7 +7,7 @@ EasyShopper puts all of your grocery lists in one location, providing a convenie
 ### Who is EasyShopper for? 
 EasyShopper is catered to frequent grocery shoppers of all kinds, including university students, parents and even newlyweds. What they have in common is that their lives are busy and always on the go. Our goal is to simplify one aspect of their busy lifestyle by reducing the complication involved in routine grocery shopping.
 
-### What makes EasyShopper so valuable?
+### What Makes EasyShopper so Valuable?
 What makes this app so valuable is that we are redefining the grocery shopping experience so that it better aligns with our modern lifestyles. We live in a world where inventions are made on a daily basis to make life easier, yet shopping is still so complicated. It can be especially difficult for people who have the tough task of integrating out of the fast food phase.Trying to have a healthier, more cost effective lifestyle sounds appealing, yet keeping track of necessary grocery items while staying organized amid life’s other responsibilities often proves to be a challenge. Many resort to methods such as using a post it note on the fridge, a note on their phone, or even just trying to memorize their list. Inevitably these lackluster attempts to provide some guidance get misplaced, deleted or forgotten. We get it, life is stressful, and the little things are hard to remember, that’s why we designed Easy Shopper: to provide an easy, centralized and accessible way for you to monitor your grocery lists. 
 
 ### Success Criterias for EasyShopper
