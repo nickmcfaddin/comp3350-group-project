@@ -5,9 +5,9 @@ EasyShopper is a new app that enables users to store, view, and modify their per
 - Our [vision](https://code.cs.umanitoba.ca/comp3350-winter2024/lethalcompany-a01-13/-/blob/main/Documents/VisionStatement.md) of the project
 
 ## Features
-- [Iteration 1](https://code.cs.umanitoba.ca/comp3350-winter2024/lethalcompany-a01-13/-/issues/?sort=created_date&state=opened&label_name%5B%5D=Iteration%201&first_page_size=20)
-- Iteration 2 
-- Iteration 3
+- [Iteration 1](https://code.cs.umanitoba.ca/comp3350-winter2024/lethalcompany-a01-13/-/issues/?sort=created_date&state=opened&label_name%5B%5D=Feature&milestone_title=Iteration%201&first_page_size=20)
+- [Iteration 2](https://code.cs.umanitoba.ca/comp3350-winter2024/lethalcompany-a01-13/-/issues/?sort=created_date&state=opened&label_name%5B%5D=Feature&milestone_title=Iteration%202&first_page_size=20) 
+- [Iteration 3](https://code.cs.umanitoba.ca/comp3350-winter2024/lethalcompany-a01-13/-/issues/?sort=created_date&state=opened&label_name%5B%5D=Feature&milestone_title=Iteration%203&first_page_size=20)
 
 ## User Stories
 - [Overview](https://code.cs.umanitoba.ca/comp3350-winter2024/lethalcompany-a01-13/-/blob/main/Documents/UserStories.md)
