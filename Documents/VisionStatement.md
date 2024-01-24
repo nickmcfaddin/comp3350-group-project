@@ -1,5 +1,5 @@
 # Vision Statement
-To enhance the grocery experience, providing a platform that organizes and structures each shopping journey, ensuring simplicity and efficiency for all shoppers. 
+To enhance the grocery shopping experience, providing a platform that organizes and structures each shopping journey, ensuring simplicity and efficiency for all shoppers. 
 
 ### What is EasyShopper? 
 EasyShopper puts all of your grocery lists in one location, providing a convenient and accessible way to monitor your shopping routine. This platform also keeps tabs on the quantities and expiry dates of items in your home. When you're running low on a product, EasyShopper will notice its low stock or automatically add it to your lists if you want, ensuring that you never run out. EasyShopper also allows for shoppers to search for a product, and get more information regarding that product such as nutritional facts.
