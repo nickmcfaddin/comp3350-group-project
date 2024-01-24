@@ -16,9 +16,9 @@ EasyShopper is a new app that enables users to store, view, and modify their per
 - Iteration 3
 
 ## Iteration Milestones 
-- Iteration 1
-- Iteration 2
-- Iteration 3
+- [Iteration 1](https://code.cs.umanitoba.ca/comp3350-winter2024/lethalcompany-a01-13/-/milestones/11#tab-issues)
+- [Iteration 2](https://code.cs.umanitoba.ca/comp3350-winter2024/lethalcompany-a01-13/-/milestones/12#tab-issues)
+- [Iteration 3](https://code.cs.umanitoba.ca/comp3350-winter2024/lethalcompany-a01-13/-/milestones/13#tab-issues)
 
 ## Developer Task
 
