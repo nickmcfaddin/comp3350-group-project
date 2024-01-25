@@ -32,3 +32,8 @@ For user accounts and authentication.
     - Git: Tracks changes in code and facilitates collaboration.
 - Data Management:
     - Repositories/DAOs (Data Access Objects): Interact with the SQLite database to manage data.
+
+
+### Diagram: 
+![Iteration1 Tech Stack Diagram](Iteration1_TechStackDiagram_1.jpg) 
+![Iteration1 Tech Stack Diagram](Iteration1_TechStackDiagram_2.jpg) 
