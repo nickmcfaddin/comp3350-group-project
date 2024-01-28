@@ -25,7 +25,7 @@ EasyShopper is a new app that enables shoppers to store, view, and modify their 
 ## Architecture
 - [Iteration 1](https://code.cs.umanitoba.ca/comp3350-winter2024/lethalcompany-a01-13/-/blob/main/Documents/Iteration%201/Iteration%201%20Architecture%20Diagram.md?ref_type=heads)
 - Iteration 2
-- Iteration 3
+- Iteration 3 
 
 ## Coding Style 
 
