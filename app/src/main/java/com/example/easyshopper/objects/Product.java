@@ -2,11 +2,11 @@ package com.example.easyshopper.objects;
 import java.util.ArrayList;
 
 public class Product {
-    String itemName;
-    float price;
-    ArrayList<String> catgories;
-    String[] contains;
-    Store store;
+    private String itemName;
+    private float price;
+    private ArrayList<String> catgories;
+    private String[] contains;
+    private Store store;
 
     public Product(String itemName, float price, ArrayList<String> catgories, String[] contains, Store store) {
         this.itemName = itemName;
@@ -66,4 +66,6 @@ public class Product {
     public String getStore(){
         return this.store.getStoreName();
     }
+
+
 }

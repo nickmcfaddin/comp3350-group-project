@@ -3,9 +3,9 @@ package com.example.easyshopper.objects;
 import java.util.ArrayList;
 
 public class ShoppingList {
-    ArrayList<Product> items;
-    Store store;
-    float totalAmount;
+    private ArrayList<Product> items;
+    private Store store;
+    private float totalAmount;
     public ShoppingList(Store store){
         this.items = new ArrayList<Product>();
         this.store = store;
@@ -56,5 +56,9 @@ public class ShoppingList {
 
     public float getTotalAmount() {
         return totalAmount;
+    }
+
+    public boolean isEmpty(){
+        return items.size() == 0;
     }
 }
