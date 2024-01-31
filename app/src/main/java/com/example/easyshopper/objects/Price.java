@@ -3,9 +3,9 @@ package com.example.easyshopper.objects;
 public class Price {
     private final int storeID;
     private final int productID;
-    private final float price;
+    private final double price;
 
-    public Price(int storeID, int productID, float price){
+    public Price(int storeID, int productID, double price){
         this.storeID = storeID;
         this.productID = productID;
         this.price = price;
@@ -20,7 +20,9 @@ public class Price {
         return productID;
     }
 
-    public float getPrice(){
+    public double getPrice(){
         return price;
     }
+
+
 }

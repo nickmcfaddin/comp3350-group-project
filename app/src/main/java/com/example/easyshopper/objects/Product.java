@@ -4,18 +4,14 @@ import java.util.ArrayList;
 public class Product {
     private final int productID;
     private String productName;
-    private double price;
     private double fat;
     private double carb;
     private double protein;
     private double calories;
-    private Store store;
 
-    public Product(int productID, String productName, Store store, double price, double fat, double carb, double protein){
+    public Product(int productID, String productName, double fat, double carb, double protein){
         this.productID = productID;
         this.productName = productName;
-        this.store = store;
-        this.price = price;
         this.fat = fat;
         this.carb = carb;
         this.protein = protein;
@@ -42,18 +38,5 @@ public class Product {
 
     public double getCalories() {
         return this.calories;
-    }
-
-    public String getStore(){
-        return this.store.getStoreName();
-    }
-
-    // PRICE FUNCTIONS
-    public double getPrice() {
-        return this.price;
-    }
-
-    public void setPrice (double newPrice) {
-        this.price = newPrice;
     }
 }

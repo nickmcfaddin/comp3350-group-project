@@ -20,16 +20,10 @@ public class ProductPersistenceStub implements ProductPersistence {
         // sort by date added?
         Date date = new Date();
 
-        Store costco = new Store(1, "Costco");
-        Store walmart = new Store(2, "Walmart");
-        Store superstore = new Store(3, "SuperStore");
-
-        productList.add(new Product(1, "Apple", walmart, 0.5, 0.3, 25, 0.5));
-        productList.add(new Product(2, "Apple", costco, 0.6, 0.3, 25, 0.5));
-        productList.add(new Product(3, "Kiwi", walmart, 0.5, 0.5, 11, 1));
-        productList.add(new Product(4, "Kiwi", superstore, 0.5, 0.3, 25, 0.5));
-        productList.add(new Product(5, "Banana", costco, 0.25, 0.3, 27, 1.3));
-        productList.add(new Product(6, "Orange", superstore, 0.4, 0.2, 15, 1));
+        productList.add(new Product(1, "Apple",  0.3, 25, 0.5));
+        productList.add(new Product(2, "Kiwi",  0.5, 11, 1));
+        productList.add(new Product(3, "Banana", 0.3, 27, 1.3));
+        productList.add(new Product(4, "Orange", 0.2, 15, 1));
     }
 
     @Override
@@ -59,26 +53,6 @@ public class ProductPersistenceStub implements ProductPersistence {
 
         return newList;
     }
-
-    @Override
-    public void updateProductPrice(int productID, double price) {
-        int index = -1;
-
-        for (int i = 0; i < productList.size(); i++){
-            if (productList.get(i).getProductID() == productID) {
-                // productID will not repeat
-                index = i;
-            }
-        }
-
-        if (index != -1) {
-            Product newProduct = productList.get(index);
-            newProduct.setPrice(price);
-
-            productList.set(index, newProduct);
-        }
-    }
-
     @Override
     public void updateProduct(int productID, Product newProduct){
         int index = -1;

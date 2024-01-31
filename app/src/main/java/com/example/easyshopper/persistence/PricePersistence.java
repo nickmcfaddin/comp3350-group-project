@@ -12,5 +12,5 @@ public interface PricePersistence {
     List<Price> getPriceByProduct(int productID);
     List<Price> getAllPrices(int productID);
 
-    void addPrice(Price price);
+    void addPrice(int productID, int StoreID);
 }

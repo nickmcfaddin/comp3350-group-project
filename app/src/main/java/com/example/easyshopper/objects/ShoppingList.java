@@ -4,24 +4,19 @@ import java.util.ArrayList;
 
 public class ShoppingList {
     private int shoppingListID;
-    private ArrayList<Product> items;
+    private ArrayList<Product> cart;
     private Store store;
-    private int storeID;
     private double totalAmount;
 
     public ShoppingList(int shoppingListID, Store store){
         this.shoppingListID = shoppingListID;
         this.store = store;
-        this.storeID = store.getStoreID();
-        this.items = new ArrayList<>();
+        this.cart = new ArrayList<>();
         this.totalAmount = 0;
     }
 
     // GETTERS
-    public Store getStore(){
-        return store;
-    }
-
+    public Store getStore(){return store;}
     public int getShoppingListID() {
         return shoppingListID;
     }
@@ -31,54 +26,46 @@ public class ShoppingList {
     }
 
     public boolean isEmpty(){
-        return items.size() == 0;
+        return cart.size() == 0;
     }
 
     public ArrayList<Product> getItemList(){
-        return items;
+        return cart;
     }
 
-    // trying to add item object into list, if the object from different store return false
-    public boolean searchProduct(Product item) {
-        for (Product i : items){
-            if (item.getProductName().equals(i.getProductName()) && item.getStore().equals(this.store.getStoreName())){
+    // check if product is in the shopping list cart
+    public boolean checkForProductInCart (String productName) {
+        for(Product i : cart){
+            if(i.getProductName().equals(productName))
                 return true;
-            }
         }
         return false;
     }
 
-    // use for search item by name in the list
-    public Product searchItem(String item) {
-        for(Product i : items){
-            if(i.getProductName().equals(item))
-                return i;
-        }
-        return null;
-    }
-
-    public void addItem(Product item){
-        if(!searchProduct(item)) {
-            items.add(item);
-            totalAmount += item.getPrice();
+    public void addProductToCart(Product product){
+        if(!checkForProductInCart(product.getProductName())) {
+            cart.add(product);
+            // totalAmount += product.getPrice();
+            // later
         }
     }
     
-    public void deleteItem(Product item){
-        if(searchProduct(item)) {
-            items.remove(item);
-            totalAmount -= item.getPrice();
+    public void removeProductFromCart(Product product){
+        if(checkForProductInCart(product.getProductName())) {
+            cart.remove(product);
+            // totalAmount -= item.getPrice();
+            // LATER
         }
     }
 
-    //
+    /*
     public void calcTotalAmount(){
         double total = 0;
 
-        for (Product i : items){
+        for (Product i : carts){
             total += i.getPrice();
         }
 
         totalAmount = total;
-    }
+    }*/
 }

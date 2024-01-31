@@ -9,8 +9,6 @@ public interface ProductPersistence {
     Product getProductById(int productID);
     List<Product> getProductsByName(String productName);
 
-    void updateProductPrice(int productID, double price);
-
     void updateProduct(int productID, Product newProduct);
 
     // OPTIONAL
