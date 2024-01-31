@@ -1,5 +1,9 @@
 package com.example.easyshopper.objects;
 
+import com.example.easyshopper.application.Services;
+import com.example.easyshopper.persistence.PricePersistence;
+import com.example.easyshopper.persistence.stub.PricePersistenceStub;
+
 import java.util.ArrayList;
 
 public class ShoppingList {
@@ -33,7 +37,7 @@ public class ShoppingList {
         return cart;
     }
 
-    // check if product is in the shopping list cart
+    //Check if the product is in this shopping list's cart
     public boolean checkForProductInCart (String productName) {
         for(Product i : cart){
             if(i.getProductName().equals(productName))
@@ -43,29 +47,37 @@ public class ShoppingList {
     }
 
     public void addProductToCart(Product product){
+
+        Services service = new Services();
+        PricePersistence pricePersistence = service.getPricePersistence();
+
         if(!checkForProductInCart(product.getProductName())) {
             cart.add(product);
-            // totalAmount += product.getPrice();
-            // later
+            totalAmount += pricePersistence.getPrice(product.getProductID(), this.store.getStoreID());
         }
     }
     
     public void removeProductFromCart(Product product){
+        Services service = new Services();
+        PricePersistence pricePersistence = service.getPricePersistence();
+
         if(checkForProductInCart(product.getProductName())) {
             cart.remove(product);
-            // totalAmount -= item.getPrice();
-            // LATER
+            totalAmount -= pricePersistence.getPrice(product.getProductID(), this.store.getStoreID());
         }
     }
 
-    /*
-    public void calcTotalAmount(){
+    public void cartTotal(){
+
+        Services service = new Services();
+        PricePersistence pricePersistence = service.getPricePersistence();
+
         double total = 0;
 
-        for (Product i : carts){
-            total += i.getPrice();
+        for (Product i : cart){
+            total += pricePersistence.getPrice(i.getProductID(), this.store.getStoreID());
         }
 
         totalAmount = total;
-    }*/
+    }
 }

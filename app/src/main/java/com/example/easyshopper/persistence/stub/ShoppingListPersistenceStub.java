@@ -1,9 +1,12 @@
 package com.example.easyshopper.persistence.stub;
 
+import com.example.easyshopper.application.Services;
 import com.example.easyshopper.objects.Product;
 import com.example.easyshopper.objects.ShoppingList;
 import com.example.easyshopper.objects.Store;
+import com.example.easyshopper.persistence.ProductPersistence;
 import com.example.easyshopper.persistence.ShoppingListPersistence;
+import com.example.easyshopper.persistence.StorePersistence;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -16,20 +19,26 @@ public class ShoppingListPersistenceStub implements ShoppingListPersistence {
     public ShoppingListPersistenceStub(){
         this.shoppingListArray = new ArrayList<>();
 
-        Store costco = new Store(1, "Costco");
-        Store walmart = new Store(2, "Walmart");
-        Store superstore = new Store(3, "SuperStore");
+        Services services = new Services();
+        StorePersistence storePersistence = services.getStorePersistence();
+        ProductPersistence productPersistence = services.getProductPersistence();
 
-        ShoppingList costcoList = new ShoppingList(1, costco);
-        ShoppingList walmartList = new ShoppingList(2, walmart);
-        ShoppingList superStoreList = new ShoppingList(3, superstore);
+        List<Store> existingStores = storePersistence.getExistingStores();
+        List<Product> existingProducts = productPersistence.getExistingProducts();
 
-        costcoList.addItem(new Product(2, "Apple", costco, 0.6, 0.3, 25, 0.5));
-        costcoList.addItem(new Product(5, "Banana", costco, 0.25, 0.3, 27, 1.3));
-        walmartList.addItem(new Product(1, "Apple", walmart, 0.5, 0.3, 25, 0.5));
-        walmartList.addItem(new Product(3, "Kiwi", walmart, 0.5, 0.5, 11, 1));
-        superStoreList.addItem(new Product(4, "Kiwi", superstore, 0.5, 0.3, 25, 0.5));
-        superStoreList.addItem(new Product(6, "Orange", superstore, 0.4, 0.2, 15, 1));
+        for (int i=0; i<existingStores.size(); i++){
+            shoppingListArray.add(new ShoppingList(i+1, existingStores.get(i)));
+        }
+
+        for (int i=0; i<shoppingListArray.size(); i++){
+            ShoppingList indexList = shoppingListArray.get(i);
+
+            for (int j=0; j<existingProducts.size(); j++){
+                indexList.addProductToCart(existingProducts.get(j));
+            }
+
+            shoppingListArray.set(i, indexList);
+        }
     }
 
     @Override
@@ -44,7 +53,6 @@ public class ShoppingListPersistenceStub implements ShoppingListPersistence {
                 return shoppingListArray.get(i);
             }
         }
-
         return null;
     }
 
@@ -109,7 +117,6 @@ public class ShoppingListPersistenceStub implements ShoppingListPersistence {
                 total = shoppingListArray.get(i).getTotalAmount();
             }
         }
-
         return total;
     }
 }

@@ -36,7 +36,5 @@ public class Product {
         return this.protein;
     }
 
-    public double getCalories() {
-        return this.calories;
-    }
+    public double getCalories() {return this.calories;}
 }

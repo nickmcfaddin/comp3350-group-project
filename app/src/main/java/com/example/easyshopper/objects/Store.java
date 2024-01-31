@@ -1,6 +1,7 @@
 package com.example.easyshopper.objects;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Store {
     // KEVIN
@@ -24,5 +25,9 @@ public class Store {
 
     public int getStoreID() {
         return storeID;
+    }
+
+    public ArrayList<Product> getStoreProducts(){
+        return storeProducts;
     }
 }

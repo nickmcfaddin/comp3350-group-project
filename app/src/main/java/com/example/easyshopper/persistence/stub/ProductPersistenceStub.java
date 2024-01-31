@@ -17,10 +17,7 @@ public class ProductPersistenceStub implements ProductPersistence {
     public ProductPersistenceStub() {
         this.productList = new ArrayList<>();
 
-        // sort by date added?
-        Date date = new Date();
-
-        productList.add(new Product(1, "Apple",  0.3, 25, 0.5));
+        productList.add(new Product(1, "Apple", 1.00, 0.3, 0.5));
         productList.add(new Product(2, "Kiwi",  0.5, 11, 1));
         productList.add(new Product(3, "Banana", 0.3, 27, 1.3));
         productList.add(new Product(4, "Orange", 0.2, 15, 1));
@@ -75,7 +72,7 @@ public class ProductPersistenceStub implements ProductPersistence {
         for (int i=0; i<productList.size(); i++){
             Product indexProduct = productList.get(i);
 
-            if ((indexProduct.getProductID() == newProduct.getProductID()) || (Objects.equals(indexProduct.getProductName(), newProduct.getProductName()) && Objects.equals(indexProduct.getStore(), newProduct.getStore()))){
+            if ((indexProduct.getProductID() == newProduct.getProductID()) || (Objects.equals(indexProduct.getProductName(), newProduct.getProductName()))){
                 // newProduct id already existed
                 // or adding same item at the same store
                 return;
