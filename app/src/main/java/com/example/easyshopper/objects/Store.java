@@ -1,21 +1,19 @@
 package com.example.easyshopper.objects;
 
 public class Store {
-
+    private int storeID;
     private String storeName;
-    private String[] address;
 
-    public Store(String storeName, String[] address){
+    public Store(int storeID, String storeName) {
+        this.storeID = storeID;
         this.storeName = storeName;
-        this.address = address;
     }
 
-    public String getStoreName(){
+    public int getStoreID() {
+        return storeID;
+    }
+
+    public String getStoreName() {
         return storeName;
     }
-
-    public String [] getAddress(){
-        return address;
-    }
-
 }
