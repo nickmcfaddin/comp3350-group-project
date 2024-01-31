@@ -2,70 +2,58 @@ package com.example.easyshopper.objects;
 import java.util.ArrayList;
 
 public class Product {
-    private String itemName;
-    private float price;
-    private ArrayList<String> catgories;
-    private String[] contains;
+    private final int productID;
+    private String productName;
+    private double price;
+    private double fat;
+    private double carb;
+    private double protein;
+    private double calories;
     private Store store;
 
-    public Product(String itemName, float price, ArrayList<String> catgories, String[] contains, Store store) {
-        this.itemName = itemName;
-        this.price = price;
-        this.catgories = catgories;
-        this.contains = contains;
+    public Product(int productID, String productName, Store store, double price, double fat, double carb, double protein){
+        this.productID = productID;
+        this.productName = productName;
         this.store = store;
+        this.price = price;
+        this.fat = fat;
+        this.carb = carb;
+        this.protein = protein;
+        this.calories = fat*9 + carb*4 + protein*4;
     }
 
-    public String getItemName() {
-        return this.itemName;
+    public int getProductID() {
+        return this.productID;
+    };
+
+    public String getProductName() {
+        return this.productName;
     }
 
-    public float getPrice() {
-        return this.price;
+    public double getFat(){
+        return this.fat;
     }
 
-    public void setPrice(float newPrice) {
-        this.price = newPrice;
+    public double getCarb(){return this.carb;}
+
+    public double getProtein(){
+        return this.protein;
     }
 
-    public ArrayList<String> getCatgories() {
-        return catgories;
+    public double getCalories() {
+        return this.calories;
     }
 
-    public boolean searchCatgory(String catgory) {
-        for (String i : catgories) {
-            if (i.equals(catgory))
-                return true;
-        }
-        return false;
-    }
-
-    public void addCatgory(String catgory) {
-        if (!searchCatgory(catgory))
-            catgories.add(catgory);
-    }
-
-    public void deleteCatgory(String catgory) {
-        if (searchCatgory(catgory))
-            catgories.remove(catgory);
-    }
-
-    public String[] getContains() {
-        return contains;
-    }
-
-    public boolean searchContain(String contain) {
-        for (String i : contains) {
-            if (i.equals(contain))
-                return true;
-        }
-        return false;
-    }
-
-    //for same item in different stor, maybe should deal it in database
     public String getStore(){
         return this.store.getStoreName();
     }
 
+    // PRICE FUNCTIONS
+    public double getPrice() {
+        return this.price;
+    }
 
+    public void setPrice (double newPrice) {
+        this.price = newPrice;
+    }
 }

@@ -5,8 +5,7 @@ import com.example.easyshopper.persistence.PricePersistence;
 import java.util.List;
 
 public class PricePersistenceStub implements PricePersistence {
-    @Override
-    public double getPriceByStore(int productID, int storeID) {
+    public double getPrice(int productID, int storeID) {
         return 0;
     }
 

@@ -5,7 +5,18 @@ import com.example.easyshopper.objects.Product;
 import java.util.List;
 
 public interface ProductPersistence {
-    Product getProductById(int id);
-    List<Product> getProductsByName(String name);
-    void setProductPrice(double price);
+    List<Product> getExistingProducts();
+    Product getProductById(int productID);
+    List<Product> getProductsByName(String productName);
+
+    void updateProductPrice(int productID, double price);
+
+    void updateProduct(int productID, Product newProduct);
+
+    // OPTIONAL
+    void addProduct(Product newProduct);
+
+    void deleteProduct(Product product);
+
+    void deleteProductByID(int productID);
 }
