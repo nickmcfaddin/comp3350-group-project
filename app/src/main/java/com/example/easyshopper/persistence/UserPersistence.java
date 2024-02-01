@@ -1,5 +1,4 @@
 package com.example.easyshopper.persistence;
 
-public interface UserPersistence {
-
-}
+//Coming soon (Iteration 3)
+public interface UserPersistence { }

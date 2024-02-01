@@ -1,4 +1,4 @@
 package com.example.easyshopper.logic;
 
-public class HomeInventoryHandler {
-}
+//Coming soon (Iteration 2)
+public class HomeInventoryHandler { }

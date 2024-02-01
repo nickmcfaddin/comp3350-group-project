@@ -1,17 +1,19 @@
 package com.example.easyshopper.objects;
 
+//Price class acts as link between Store's and Product's.
 public class Price {
     private final int storeID;
     private final int productID;
     private final double price;
 
+    //Constructor
     public Price(int storeID, int productID, double price){
         this.storeID = storeID;
         this.productID = productID;
         this.price = price;
     }
 
-    // GETTER
+    // GETTERS
     public int getStoreID(){
         return  storeID;
     }

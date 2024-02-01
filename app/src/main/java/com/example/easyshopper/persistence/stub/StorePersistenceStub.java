@@ -13,6 +13,7 @@ import java.util.Objects;
 public class StorePersistenceStub {
     private List<Store> storeList;
 
+    //Constructor
     public StorePersistenceStub(){
         storeList = new ArrayList<>();
 
@@ -25,8 +26,10 @@ public class StorePersistenceStub {
         storeList.add(superstore);
     }
 
+    //Returns a list of all existing Store's
     public List<Store> getExistingStores(){return Collections.unmodifiableList(storeList);};
 
+    //Returns a list of every Product in a selected Store
     public List<Product> getAllProductInStore(Store store){
         for (int i=0; i<storeList.size(); i++){
             if (Objects.equals(storeList.get(i).getStoreName(), store.getStoreName())){
@@ -36,6 +39,7 @@ public class StorePersistenceStub {
         return null;
     };
 
+    //Returns a single Store identified by a storeID
     public Store getStoreById(int storeID){
         for (int i=0; i<storeList.size(); i++){
             if (storeList.get(i).getStoreID() == storeID)
@@ -46,6 +50,7 @@ public class StorePersistenceStub {
         return null;
     }
 
+    //Returns a single Store identified by a storeName
     public Store getStoreByName(String storeName){
         for (int i=0; i<storeList.size(); i++){
             if (Objects.equals(storeList.get(i).getStoreName(), storeName)){

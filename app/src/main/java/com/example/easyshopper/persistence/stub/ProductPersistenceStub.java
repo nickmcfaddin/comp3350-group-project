@@ -11,9 +11,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
+//Product fake db
 public class ProductPersistenceStub implements ProductPersistence {
     private List<Product> productList;
 
+    //Constructor
     public ProductPersistenceStub() {
         this.productList = new ArrayList<>();
 
@@ -23,11 +25,13 @@ public class ProductPersistenceStub implements ProductPersistence {
         productList.add(new Product(4, "Orange", 0.2, 15, 1));
     }
 
+    //Get a list of all Product's
     @Override
     public List<Product> getExistingProducts() {
         return Collections.unmodifiableList(productList);
     }
 
+    //Obtain a product using its productID
     public Product getProductById(int productID) {
         for (int i = 0; i < productList.size(); i++){
             if (productList.get(i).getProductID() == productID){
@@ -38,6 +42,7 @@ public class ProductPersistenceStub implements ProductPersistence {
         return null;
     }
 
+    //Obtain a product using its productName
     @Override
     public List<Product> getProductsByName(String name) {
         List<Product> newList = new ArrayList<>();
@@ -50,6 +55,8 @@ public class ProductPersistenceStub implements ProductPersistence {
 
         return newList;
     }
+
+    //Update a Product's information
     @Override
     public void updateProduct(int productID, Product newProduct){
         int index = -1;
@@ -66,7 +73,9 @@ public class ProductPersistenceStub implements ProductPersistence {
         }
     }
 
-    // OPTIONAL
+    //OPTIONAL: The following 3 functions should be put on hold for now.
+
+    //Add a new Product to the overall list of Product's
     @Override
     public void addProduct(Product newProduct) {
         for (int i=0; i<productList.size(); i++){
@@ -82,6 +91,7 @@ public class ProductPersistenceStub implements ProductPersistence {
         productList.add(newProduct);
     }
 
+    //Delete a Product from the overall list of Product's
     @Override
     public void deleteProduct(Product product) {
         int index = productList.indexOf(product);
@@ -94,6 +104,7 @@ public class ProductPersistenceStub implements ProductPersistence {
         productList.remove(index);
     }
 
+    //Delete a Product from the overall list of Product's by its productID
     @Override
     public void deleteProductByID(int productID) {
         for (int i = 0; i < productList.size(); i++){

@@ -16,9 +16,11 @@ import java.util.Objects;
 public class ShoppingListPersistenceStub implements ShoppingListPersistence {
     private List<ShoppingList> shoppingListArray;
 
+    //Constructor
     public ShoppingListPersistenceStub(){
         this.shoppingListArray = new ArrayList<>();
 
+        //Setup connections to StorePersistence and ProductPersistence stubs
         Services services = new Services();
         StorePersistence storePersistence = services.getStorePersistence();
         ProductPersistence productPersistence = services.getProductPersistence();
@@ -41,11 +43,13 @@ public class ShoppingListPersistenceStub implements ShoppingListPersistence {
         }
     }
 
+    //Returns all currently existing ShoppingList's
     @Override
     public List<ShoppingList> getExistingShoppingLists() {
         return Collections.unmodifiableList(shoppingListArray);
     }
 
+    //Returns a single ShoppingList, obtainable by its shoppingListID
     @Override
     public ShoppingList getShoppingListById(int id) {
         for (int i = 0; i < shoppingListArray.size(); i++){
@@ -56,6 +60,7 @@ public class ShoppingListPersistenceStub implements ShoppingListPersistence {
         return null;
     }
 
+    //Updates the ShoppingList's information
     @Override
     public void updateShoppingList(int shoppingListID, ShoppingList newShoppingList) {
         int index = -1;
@@ -72,6 +77,7 @@ public class ShoppingListPersistenceStub implements ShoppingListPersistence {
         }
     }
 
+    //Adds a ShoppingList to the overall ShoppingList array
     @Override
     public void addShoppingList(ShoppingList shoppingList) {
         for (int i=0; i<shoppingListArray.size(); i++){
@@ -83,10 +89,10 @@ public class ShoppingListPersistenceStub implements ShoppingListPersistence {
                 return;
             }
         }
-
         shoppingListArray.add(shoppingList);
     }
 
+    //Delete a ShoppingList from the overall ShoppingList array by it's shoppingListID
     @Override
     public void deleteShoppingListById(int shoppingListID) {
         for (int i = 0; i < shoppingListArray.size(); i++){
@@ -97,6 +103,7 @@ public class ShoppingListPersistenceStub implements ShoppingListPersistence {
         }
     }
 
+    //Returns the total price of all Product's on all ShoppingList's combined
     @Override
     public double getAllShoppingListTotal() {
         int total = 0;
@@ -104,10 +111,10 @@ public class ShoppingListPersistenceStub implements ShoppingListPersistence {
         for (int i=0; i<shoppingListArray.size(); i++){
             total += shoppingListArray.get(i).getTotalAmount();
         }
-
         return total;
     }
 
+    //Get the total of a single ShoppingList by its shoppingListID
     @Override
     public double getShoppingListTotalById(int shoppingListID) {
         double total = 0;

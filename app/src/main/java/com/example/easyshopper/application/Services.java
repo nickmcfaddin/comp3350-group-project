@@ -6,13 +6,17 @@ import com.example.easyshopper.persistence.ShoppingListPersistence;
 import com.example.easyshopper.persistence.StorePersistence;
 import com.example.easyshopper.persistence.UserPersistence;
 
+//Bridge between persistence layer and business layer
 public class Services {
+
+    //Declarations of persistence instances
     private static ProductPersistence productPersistence = null;
     private static UserPersistence userPersistence = null;
     private static ShoppingListPersistence shoppingListPersistence = null;
     private static PricePersistence pricePersistence = null;
     private static StorePersistence storePersistence = null;
 
+    //GETTERS
     public static ProductPersistence getProductPersistence() {
         return productPersistence;
     }

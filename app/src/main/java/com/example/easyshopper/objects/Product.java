@@ -1,14 +1,18 @@
 package com.example.easyshopper.objects;
 import java.util.ArrayList;
 
+
 public class Product {
     private final int productID;
     private String productName;
+
+    //Nutritional Facts
     private double fat;
     private double carb;
     private double protein;
     private double calories;
 
+    //Constructor
     public Product(int productID, String productName, double fat, double carb, double protein){
         this.productID = productID;
         this.productName = productName;
@@ -18,6 +22,7 @@ public class Product {
         this.calories = fat*9 + carb*4 + protein*4;
     }
 
+    //GETTERS
     public int getProductID() {
         return this.productID;
     };

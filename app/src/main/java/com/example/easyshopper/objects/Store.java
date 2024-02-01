@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Store {
-    // KEVIN
     private final int storeID;
     private final String storeName;
 
@@ -12,13 +11,14 @@ public class Store {
 
     private int productID;
 
+    //Constructor
     public Store(int storeID, String storeName){
         this.storeID = storeID;
         this.storeName = storeName;
         this.storeProducts = new ArrayList<>();
     }
 
-    // GETTER FUNCTIONS
+    // GETTERS
     public String getStoreName(){
         return storeName;
     }
