@@ -1,16 +1,19 @@
 package com.example.easyshopper.persistence.stub;
 
+import com.example.easyshopper.application.Services;
 import com.example.easyshopper.objects.Product;
 import com.example.easyshopper.objects.ShoppingList;
 import com.example.easyshopper.objects.Store;
+import com.example.easyshopper.persistence.ProductPersistence;
 import com.example.easyshopper.persistence.ShoppingListPersistence;
+import com.example.easyshopper.persistence.StorePersistence;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-public class StorePersistenceStub {
+public class StorePersistenceStub implements StorePersistence {
     private List<Store> storeList;
 
     //Constructor
@@ -24,10 +27,25 @@ public class StorePersistenceStub {
         storeList.add(costco);
         storeList.add(walmart);
         storeList.add(superstore);
+
+        addAllProductsToStore(costco);
+        addAllProductsToStore(walmart);
+        addAllProductsToStore(superstore);
     }
 
     //Returns a list of all existing Store's
     public List<Store> getExistingStores(){return Collections.unmodifiableList(storeList);};
+
+    //Adds all Product's to the identified Store
+    public void addAllProductsToStore(Store store){
+        Services services = new Services();
+        ProductPersistence productPersistence = services.getProductPersistence();
+
+        List<Product> existingProducts = productPersistence.getExistingProducts();
+        for (Product product : existingProducts){
+            store.addProductToStore(product);
+        }
+    }
 
     //Returns a list of every Product in a selected Store
     public List<Product> getAllProductInStore(Store store){

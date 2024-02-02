@@ -18,14 +18,19 @@ public class Store {
         this.storeProducts = new ArrayList<>();
     }
 
+    //Adds a single Product to the Store
+    public void addProductToStore(Product product){
+        if(product != null){
+            storeProducts.add(product);
+        }
+    }
+
     // GETTERS
     public String getStoreName(){
         return storeName;
     }
 
-    public int getStoreID() {
-        return storeID;
-    }
+    public int getStoreID() {return storeID;}
 
     public ArrayList<Product> getStoreProducts(){
         return storeProducts;

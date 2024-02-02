@@ -9,7 +9,7 @@ public class ShoppingListHandler {
     *   Add an item to a shopping list
     *   Creating a shopping list
     *   Deleting a shopping list
-    *   Removing an item to a shopping list
+    *   Removing an item from a shopping list
     *   Does a list contain a certain item
      */
 }
