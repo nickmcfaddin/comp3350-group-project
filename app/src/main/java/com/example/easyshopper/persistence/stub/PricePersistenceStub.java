@@ -43,11 +43,18 @@ public class PricePersistenceStub implements PricePersistence {
         double totalPrice;
 
         //Iterates over every Store and every Product, assigning a random price to each specific Product in a Store
-        for (int i=0; i<totalStores; i++){
-            for (int j=0; j<totalProducts; j++){
-                randomInt = rand.nextInt(49);
-                randomDouble = Double.parseDouble(decfor.format(rand.nextDouble()));
-                totalPrice = randomInt + randomDouble;
+        // i = storeID, j = productID and both IDs start at 1
+        for (int i=1; i<totalStores + 1; i++){
+            for (int j=1; j<totalProducts + 1; j++){
+                if (i==1 && j==1){
+                    totalPrice = 12.34;
+                }
+                else {
+                    randomInt = rand.nextInt(49);
+                    randomDouble = Double.parseDouble(decfor.format(rand.nextDouble()));
+                    totalPrice = randomInt + randomDouble;
+                }
+
                 priceList.add(new Price(i, j, totalPrice));
             }
         }

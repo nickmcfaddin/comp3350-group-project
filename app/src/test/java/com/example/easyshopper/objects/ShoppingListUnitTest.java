@@ -21,7 +21,7 @@ public class ShoppingListUnitTest {
         System.out.println("\nStarting testCreateAShoppingList");
 
         //Create Store to use for tests
-        Store store = new Store(19, "Kwik-E-Mart");
+        Store store = new Store(1, "Kwik-E-Mart");
 
         //Create ShoppingList to use for tests
         ShoppingList shoppingList = new ShoppingList(25, store);
@@ -35,7 +35,7 @@ public class ShoppingListUnitTest {
         assertTrue(shoppingList.isEmpty());
 
         //Create new Product to use for test
-        Product product = new Product(100, "Eggs", 0.3, 5, 0.8);
+        Product product = new Product(1, "Eggs", 0.3, 5, 0.8);
 
         //Add our new Product's to the ArrayList<Product> to test against
         ArrayList<Product> productArrayList = new ArrayList<>();
@@ -44,14 +44,11 @@ public class ShoppingListUnitTest {
         //Test Product addition to ShoppingList
         shoppingList.addProductToCart(product);
 
-        //Create Price to use for tests
-        //Price price = new Price(1, 1, 150);
-
         //Testing ShoppingList functions
         assertEquals(productArrayList, shoppingList.getItemList());
         assertTrue(shoppingList.checkForProductInCart("Eggs"));
 
-        //assertEquals(150, shoppingList.cartTotal(), 0.00001);
+        assertEquals(12.34, shoppingList.cartTotal(), 0.00001);
 
         //Test Product removal from ShoppingList
         shoppingList.removeProductFromCart(product);
