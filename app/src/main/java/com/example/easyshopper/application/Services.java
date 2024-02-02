@@ -5,6 +5,11 @@ import com.example.easyshopper.persistence.ProductPersistence;
 import com.example.easyshopper.persistence.ShoppingListPersistence;
 import com.example.easyshopper.persistence.StorePersistence;
 import com.example.easyshopper.persistence.UserPersistence;
+import com.example.easyshopper.persistence.stub.PricePersistenceStub;
+import com.example.easyshopper.persistence.stub.ProductPersistenceStub;
+import com.example.easyshopper.persistence.stub.ShoppingListPersistenceStub;
+import com.example.easyshopper.persistence.stub.StorePersistenceStub;
+import com.example.easyshopper.persistence.stub.UserPersistenceStub;
 
 //Bridge between persistence layer and business layer
 public class Services {
@@ -17,17 +22,15 @@ public class Services {
     private static StorePersistence storePersistence = null;
 
     //GETTERS
-    public static ProductPersistence getProductPersistence() {
-        return productPersistence;
-    }
+    public static ProductPersistence getProductPersistence() {return new ProductPersistenceStub();}
 
     public static UserPersistence getUserPersistence() {
-        return userPersistence;
+        return new UserPersistenceStub();
     }
 
-    public static ShoppingListPersistence getShoppingListPersistence() {return shoppingListPersistence;}
-    public static PricePersistence getPricePersistence() {return pricePersistence;}
-    public static StorePersistence getStorePersistence() {return storePersistence;}
+    public static ShoppingListPersistence getShoppingListPersistence() {return new ShoppingListPersistenceStub();}
+    public static PricePersistence getPricePersistence() {return new PricePersistenceStub();}
+    public static StorePersistence getStorePersistence() {return new StorePersistenceStub();}
 
     /**
      * clean
