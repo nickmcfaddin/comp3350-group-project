@@ -106,10 +106,10 @@ public class ShoppingListPersistenceStub implements ShoppingListPersistence {
     //Returns the total price of all Product's on all ShoppingList's combined
     @Override
     public double getAllShoppingListTotal() {
-        int total = 0;
+        double total = 0;
 
         for (int i=0; i<shoppingListArray.size(); i++){
-            total += shoppingListArray.get(i).getTotalAmount();
+            total += shoppingListArray.get(i).cartTotal();
         }
         return total;
     }
@@ -121,7 +121,7 @@ public class ShoppingListPersistenceStub implements ShoppingListPersistence {
 
         for (int i=0; i < shoppingListArray.size(); i++){
             if (shoppingListArray.get(i).getShoppingListID() == shoppingListID){
-                total = shoppingListArray.get(i).getTotalAmount();
+                total = shoppingListArray.get(i).cartTotal();
             }
         }
         return total;
