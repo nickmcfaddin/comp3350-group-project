@@ -4,13 +4,14 @@ import com.example.easyshopper.objects.Product;
 import com.example.easyshopper.objects.ShoppingList;
 import com.example.easyshopper.objects.Store;
 import com.example.easyshopper.persistence.ShoppingListPersistence;
+import com.example.easyshopper.persistence.StorePersistence;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-public class StorePersistenceStub {
+public class StorePersistenceStub implements StorePersistence {
     private List<Store> storeList;
 
     //Constructor
