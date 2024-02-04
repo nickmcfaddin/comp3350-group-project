@@ -40,6 +40,15 @@
         app:layout_constraintTop_toTopOf="@+id/searchContainer"
         app:layout_constraintVertical_bias="0.0" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/productListView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchContainer" />
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
         android:layout_width="0dp"

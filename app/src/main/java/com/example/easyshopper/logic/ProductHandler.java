@@ -13,9 +13,9 @@ import java.util.List;
 
 public class ProductHandler {
 
-    private ProductPersistence productPersistence;
+    private ProductPersistence productPersistence = Services.getProductPersistence();
     private PricePersistence pricePersistence = Services.getPricePersistence();
-    private StorePersistence storePersistence;
+    private StorePersistence storePersistence = Services.getStorePersistence();
 
     public ProductHandler() {}
 
@@ -24,11 +24,7 @@ public class ProductHandler {
      */
     public List<Product> getProductsByName(String prodName)
     {
-        try{
-            return productPersistence.getProductsByName(prodName);
-        } catch (Exception e) {
-            return null;
-        }
+        return productPersistence.getProductsByName(prodName);
     }
 
     /*
@@ -36,11 +32,7 @@ public class ProductHandler {
      */
     public List<Product> getAllProducts()
     {
-        try{
-            return productPersistence.getExistingProducts();
-        } catch (Exception e) {
-            return null;
-        }
+        return productPersistence.getExistingProducts();
     }
 
     /* this method takes
@@ -48,33 +40,20 @@ public class ProductHandler {
      */
     public Product getProductByID(int id)
     {
-        try{
-            return productPersistence.getProductById(id);
-        } catch (Exception e) {
-            return null;
-        }
+        return productPersistence.getProductById(id);
     }
 
-    public double getPriceOfProductInStore(Product findProd, Store storeName, List<Product> storeList)
+    public double getPriceOfProductInStore(Product product, Store store)
     {
-        double found = -1;
-        int prodId = findProd.getProductID();
-        int storeId = storeName.getStoreID();
-
-       if(storeList.contains(findProd))
-           return pricePersistence.getPrice(prodId, storeId);
-       else
-           return found;
+        return pricePersistence.getPrice(product.getProductID(), store.getStoreID());
     }
 
     /*
      * Im not sure if this actually does anything
      */
-    public List<Price> allStoreSortedPrice(List<Price> priceList, int productId)
+    public List<Price> allStoreSortedPrice(int productId)
     {
-        List<Price> productPrices;
-
-        productPrices = pricePersistence.getAllPricesForSameProduct(productId);
+        List<Price> productPrices = pricePersistence.getAllPricesForSameProduct(productId);
 
         // Sort the list by their price
         productPrices.sort(new Comparator<Price>() {
