@@ -46,7 +46,7 @@ public class ShoppingListUnitTest {
 
         //Testing ShoppingList functions
         assertEquals(productArrayList, shoppingList.getItemList());
-        assertTrue(shoppingList.checkForProductInCart("Eggs"));
+        assertTrue(shoppingList.checkForProductInCart(product.getProductID()));
 
         assertEquals(12.34, shoppingList.cartTotal(), 0.00001);
 

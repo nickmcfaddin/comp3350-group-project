@@ -20,9 +20,10 @@ public class ShoppingListHandler {
     *   Does a list contain a certain item
      */
 
+    private ShoppingListPersistence shoppingListPersistence = Services.getShoppingListPersistence();;
+
     //construct
-    public ShoppingListHandler(){
-    }
+    public ShoppingListHandler(){}
 
     public String getShoppingListByName(){
         return null;
@@ -30,9 +31,6 @@ public class ShoppingListHandler {
 
     //add item into the given shopping list by id
     public void addItemToList(Product newProduct, int shoppingListId){
-        Services service = new Services();
-        ShoppingListPersistence shoppingListPersistence = service.getShoppingListPersistence();
-
         ShoppingList list = shoppingListPersistence.getShoppingListById(shoppingListId);
 
         list.addProductToCart(newProduct);
@@ -44,35 +42,24 @@ public class ShoppingListHandler {
     public void createShoppingList(int shoppingListId, Store store){
         ShoppingList newList = new ShoppingList(shoppingListId, store);
 
-        Services service = new Services();
-        ShoppingListPersistence shoppingListPersistence = service.getShoppingListPersistence();
-
         shoppingListPersistence.addShoppingList(newList);
     }
 
     //remove given shoppingList from overall shopping list array
     public void removeShoppingList(int shoppingListId){
-        Services service = new Services();
-        ShoppingListPersistence shoppingListPersistence = service.getShoppingListPersistence();
-
         shoppingListPersistence.deleteShoppingListById(shoppingListId);
     }
 
     //remove an item from a shopping list
     public void removeProduct(Product product, int shoppingListId){
-        Services service = new Services();
-        ShoppingListPersistence shoppingListPersistence = service.getShoppingListPersistence();
-
         ShoppingList list = shoppingListPersistence.getShoppingListById(shoppingListId);
+
         list.removeProductFromCart(product);
     }
 
     //Does a list contain an item
     public boolean checkItemExistInList(Product product, int shoppingListId){
-        Services service = new Services();
-        ShoppingListPersistence shoppingListPersistence = service.getShoppingListPersistence();
-
         ShoppingList list = shoppingListPersistence.getShoppingListById(shoppingListId);
-        return list.checkForProductInCart(product.getProductName());
+        return list.checkForProductInCart(product.getProductID());
     }
 }

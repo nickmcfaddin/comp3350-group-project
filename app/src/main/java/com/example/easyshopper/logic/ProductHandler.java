@@ -1,42 +1,47 @@
 package com.example.easyshopper.logic;
 
 import com.example.easyshopper.application.Services;
-import com.example.easyshopper.objects.Product;
 import com.example.easyshopper.objects.Price;
+import com.example.easyshopper.objects.Product;
 import com.example.easyshopper.objects.Store;
-import com.example.easyshopper.objects.ShoppingList;
 import com.example.easyshopper.persistence.PricePersistence;
 import com.example.easyshopper.persistence.ProductPersistence;
 import com.example.easyshopper.persistence.StorePersistence;
-import com.example.easyshopper.persistence.stub.StorePersistenceStub;
 
-import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.Comparator;
 import java.util.List;
 
 public class ProductHandler {
 
     private ProductPersistence productPersistence;
-    private PricePersistence pricePersistence ;
+    private PricePersistence pricePersistence = Services.getPricePersistence();
     private StorePersistence storePersistence;
 
-    Services services = new Services();
-
-    public ProductHandler() {pricePersistence=services.getPricePersistence();}
+    public ProductHandler() {}
 
     /*
-     * method searches a list for Product and returns the name, or returns
-     * exception "Not in list"
+     * method searches a list for Product and returns the name, or returns null
      */
-    public String getProductsByName(String prodName, List<Product> list)
+    public List<Product> getProductsByName(String prodName)
     {
-        try {
-            return productPersistence.getProductsByName(prodName).toString();
-        }catch (Exception e) {
-            return "Not in list";
+        try{
+            return productPersistence.getProductsByName(prodName);
+        } catch (Exception e) {
+            return null;
         }
     }
 
+    /*
+     * method gets a list of all products initialized in the database
+     */
+    public List<Product> getAllProducts()
+    {
+        try{
+            return productPersistence.getExistingProducts();
+        } catch (Exception e) {
+            return null;
+        }
+    }
 
     /* this method takes
      *
@@ -52,7 +57,7 @@ public class ProductHandler {
 
     public double getPriceOfProductInStore(Product findProd, Store storeName, List<Product> storeList)
     {
-        double found = 0.00;
+        double found = -1;
         int prodId = findProd.getProductID();
         int storeId = storeName.getStoreID();
 
@@ -61,14 +66,25 @@ public class ProductHandler {
        else
            return found;
     }
-/*
- * Im not sure if this actually does anything
- */
+
+    /*
+     * Im not sure if this actually does anything
+     */
     public List<Price> allStoreSortedPrice(List<Price> priceList, int productId)
     {
-        List<Price> productAscOrder ;
-        productAscOrder=pricePersistence.getAllPricesForSameProduct(productId);
-        return productAscOrder;
+        List<Price> productPrices;
+
+        productPrices = pricePersistence.getAllPricesForSameProduct(productId);
+
+        // Sort the list by their price
+        productPrices.sort(new Comparator<Price>() {
+            @Override
+            public int compare(Price p1, Price p2) {
+                return Double.compare(p1.getPrice(), p2.getPrice());
+            }
+        });
+
+        return productPrices;
     }
 
     /*
