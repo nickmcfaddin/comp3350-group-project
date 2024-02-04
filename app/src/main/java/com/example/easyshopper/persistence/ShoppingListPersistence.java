@@ -12,7 +12,7 @@ public interface ShoppingListPersistence {
     List<ShoppingList> getExistingShoppingLists();
 
     //Returns a single ShoppingList, obtainable by its shoppingListID
-    ShoppingList getShoppingListById(int id);
+    ShoppingList getShoppingListById(String id);
 
     //Updates the ShoppingList's information
     void updateShoppingList(ShoppingList shoppingList);

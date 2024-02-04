@@ -51,9 +51,9 @@ public class ShoppingListPersistenceStub implements ShoppingListPersistence {
 
     //Returns a single ShoppingList, obtainable by its shoppingListID
     @Override
-    public ShoppingList getShoppingListById(int id) {
+    public ShoppingList getShoppingListById(String id) {
         for (int i = 0; i < shoppingListArray.size(); i++){
-            if (shoppingListArray.get(i).getShoppingListID() == id){
+            if (shoppingListArray.get(i).getShoppingListID().equals(id)){
                 return shoppingListArray.get(i);
             }
         }
@@ -66,7 +66,7 @@ public class ShoppingListPersistenceStub implements ShoppingListPersistence {
         int index = -1;
 
         for (int i = 0; i < shoppingListArray.size(); i++){
-            if (shoppingListArray.get(i).getShoppingListID() == newShoppingList.getShoppingListID()) {
+            if (shoppingListArray.get(i).getShoppingListID().equals(newShoppingList.getShoppingListID())) {
                 // productID will not repeat
                 index = i;
             }
@@ -83,7 +83,7 @@ public class ShoppingListPersistenceStub implements ShoppingListPersistence {
         for (int i=0; i<shoppingListArray.size(); i++){
             ShoppingList indexShoppingList = shoppingListArray.get(i);
 
-            if ((indexShoppingList.getShoppingListID() == shoppingList.getShoppingListID()) || (Objects.equals(indexShoppingList.getStore().getStoreName(), shoppingList.getStore().getStoreName()))){
+            if ((indexShoppingList.getShoppingListID().equals(shoppingList.getShoppingListID())) || (Objects.equals(indexShoppingList.getStore().getStoreName(), shoppingList.getStore().getStoreName()))){
                 // shoppingList id already existed
                 // or adding list of same store
                 return;
@@ -96,7 +96,7 @@ public class ShoppingListPersistenceStub implements ShoppingListPersistence {
     @Override
     public void deleteShoppingList(ShoppingList shoppingList) {
         for (int i = 0; i < shoppingListArray.size(); i++){
-            if (shoppingListArray.get(i).getShoppingListID() == shoppingList.getShoppingListID()){
+            if (shoppingListArray.get(i).getShoppingListID().equals(shoppingList.getShoppingListID())){
                 shoppingListArray.remove(i);
                 return;
             }

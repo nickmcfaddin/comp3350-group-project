@@ -3,22 +3,20 @@ package com.example.easyshopper.objects;
 import com.example.easyshopper.application.Services;
 import com.example.easyshopper.persistence.PricePersistence;
 import com.example.easyshopper.persistence.stub.PricePersistenceStub;
+import java.util.UUID;
 
 import java.util.ArrayList;
 
 //List is created per store, products added to list
 public class ShoppingList {
-    //id generator
-    private static int shoppingListCounter = 0;
-
     private String shoppingListName;
-    private int shoppingListID;
+    private String shoppingListID;
     private ArrayList<Product> cart;
     private Store store;
 
     //Constructor
     public ShoppingList(String shoppingListName, Store store){
-        this.shoppingListID = shoppingListCounter++;
+        this.shoppingListID = UUID.randomUUID().toString();
         this.shoppingListName = shoppingListName;
         this.store = store;
         this.cart = new ArrayList<>(); //Cart represents the items in the ShoppingList
@@ -36,7 +34,7 @@ public class ShoppingList {
 
     public Store getStore(){return store;}
 
-    public int getShoppingListID() {return shoppingListID;}
+    public String getShoppingListID() {return shoppingListID;}
 
     public boolean isEmpty(){
         return cart.size() == 0;
