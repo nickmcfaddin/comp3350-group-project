@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="50dp"
+    android:background="@color/primary_theme"
+    android:backgroundTint="#1CFFFFFF"
+    android:paddingHorizontal="20dp"
+    android:paddingVertical="15dp">
+
+    <TextView
+        android:id="@+id/store_select_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/inter_semibold"
+        android:text="Select Affiliated Store:"
+        android:textSize="17sp" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/store_select_title"
+        android:hint="Store">
+
+        <AutoCompleteTextView
+            android:id="@+id/dropdown_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="none">
+        </AutoCompleteTextView>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/list_name_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textInputLayout"
+        android:fontFamily="@font/inter_semibold"
+        android:text="Enter Shopping List Name:"
+        android:textSize="17sp"
+        android:layout_marginTop="20dp"/>
+
+    <EditText
+        android:id="@+id/list_name_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/list_name_title"
+        android:layout_marginBottom="20dp">
+    </EditText>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/cancel_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/list_name_input"
+        android:layout_alignParentStart="true"
+        android:fontFamily="@font/inter_semibold"
+        android:background="@color/secondary_theme"
+        android:textColor="@color/primary_theme"
+        android:text="CANCEL">
+    </androidx.appcompat.widget.AppCompatButton>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/submit_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/list_name_input"
+        android:layout_alignParentEnd="true"
+        android:fontFamily="@font/inter_semibold"
+        android:background="@color/secondary_theme"
+        android:textColor="@color/primary_theme"
+        android:text="SUBMIT">
+    </androidx.appcompat.widget.AppCompatButton>
+
+</RelativeLayout>
