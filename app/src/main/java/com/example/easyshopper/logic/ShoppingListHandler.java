@@ -20,7 +20,7 @@ public class ShoppingListHandler {
     *   Does a list contain a certain item
      */
 
-    private ShoppingListPersistence shoppingListPersistence = Services.getShoppingListPersistence();;
+    private ShoppingListPersistence shoppingListPersistence = Services.getShoppingListPersistence();
 
     //construct
     public ShoppingListHandler(){}
@@ -29,37 +29,29 @@ public class ShoppingListHandler {
         return null;
     }
 
-    //add item into the given shopping list by id
-    public void addItemToList(Product newProduct, int shoppingListId){
-        ShoppingList list = shoppingListPersistence.getShoppingListById(shoppingListId);
-
-        list.addProductToCart(newProduct);
+    //add item into the given shopping list
+    public void addItemToList(Product newProduct, ShoppingList shoppingList){
+        shoppingList.addProductToCart(newProduct);
+        shoppingListPersistence.updateShoppingList(shoppingList);
     }
 
     //!!
     //create a new shopping list and add to overall shopping list array
     //idk How shoppingListId work, does it will be gaven as parameter with this function?
-    public void createShoppingList(int shoppingListId, Store store){
-        ShoppingList newList = new ShoppingList(shoppingListId, store);
+    public void createShoppingList(String shoppingListName, Store store){
+        ShoppingList newList = new ShoppingList(shoppingListName, store);
 
         shoppingListPersistence.addShoppingList(newList);
     }
 
     //remove given shoppingList from overall shopping list array
-    public void removeShoppingList(int shoppingListId){
-        shoppingListPersistence.deleteShoppingListById(shoppingListId);
+    public void removeShoppingList(ShoppingList shoppingList){
+        shoppingListPersistence.deleteShoppingList(shoppingList);
     }
 
     //remove an item from a shopping list
-    public void removeProduct(Product product, int shoppingListId){
-        ShoppingList list = shoppingListPersistence.getShoppingListById(shoppingListId);
-
-        list.removeProductFromCart(product);
-    }
-
-    //Does a list contain an item
-    public boolean checkItemExistInList(Product product, int shoppingListId){
-        ShoppingList list = shoppingListPersistence.getShoppingListById(shoppingListId);
-        return list.checkForProductInCart(product.getProductID());
+    public void removeProduct(Product product, ShoppingList shoppingList){
+        shoppingList.removeProductFromCart(product);
+        shoppingListPersistence.updateShoppingList(shoppingList);
     }
 }

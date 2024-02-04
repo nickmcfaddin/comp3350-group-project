@@ -61,9 +61,9 @@ public class PricePersistenceStub implements PricePersistence {
     }
 
     //Get Price of a single Product (single store)
-    public double getPrice(int productID, int storeID) {
+    public double getPrice(Product product, Store store) {
         for (int i=0; i<priceList.size(); i++){
-            if (priceList.get(i).getProductID() == productID && priceList.get(i).getStoreID() == storeID){
+            if (priceList.get(i).getProductID() == product.getProductID() && priceList.get(i).getStoreID() == store.getStoreID()){
                 return priceList.get(i).getPrice();
             }
         }
@@ -73,11 +73,11 @@ public class PricePersistenceStub implements PricePersistence {
 
     //Get Price for a single Product (every store)
     @Override
-    public List<Price> getAllPricesForSameProduct(int productID) {
+    public List<Price> getAllPricesForSameProduct(Product product) {
         List<Price> returnList = new ArrayList<>();
 
         for (int i=0; i<priceList.size(); i++){
-            if (priceList.get(i).getProductID() == productID){
+            if (priceList.get(i).getProductID() == product.getProductID()){
                 returnList.add(priceList.get(i));
             }
         }

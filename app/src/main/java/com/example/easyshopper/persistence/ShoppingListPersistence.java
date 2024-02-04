@@ -15,19 +15,16 @@ public interface ShoppingListPersistence {
     ShoppingList getShoppingListById(int id);
 
     //Updates the ShoppingList's information
-    void updateShoppingList(int index, ShoppingList shoppingList);
+    void updateShoppingList(ShoppingList shoppingList);
 
     //Adds a ShoppingList to the overall ShoppingList array
     void addShoppingList(ShoppingList shoppingList);
 
     //Delete a ShoppingList from the overall ShoppingList array by it's shoppingListID
-    void deleteShoppingListById(int id);
+    void deleteShoppingList(ShoppingList shoppingList);
 
     //Returns the total price of all Product's on all ShoppingList's combined
     double getAllShoppingListTotal();
-
-    //Get the total of a single ShoppingList by its shoppingListID
-    double getShoppingListTotalById(int id);
 
     //Currently removed functions -> ProductPersistence
     //Product addProduct(Product newProduct);

@@ -29,7 +29,7 @@ public class ShoppingListPersistenceStub implements ShoppingListPersistence {
         List<Product> existingProducts = productPersistence.getExistingProducts();
 
         for (int i=0; i<existingStores.size(); i++){
-            shoppingListArray.add(new ShoppingList(i+1, existingStores.get(i)));
+            shoppingListArray.add(new ShoppingList(String.valueOf(i + 1), existingStores.get(i)));
         }
 
         for (int i=0; i<shoppingListArray.size(); i++){
@@ -62,11 +62,11 @@ public class ShoppingListPersistenceStub implements ShoppingListPersistence {
 
     //Updates the ShoppingList's information
     @Override
-    public void updateShoppingList(int shoppingListID, ShoppingList newShoppingList) {
+    public void updateShoppingList(ShoppingList newShoppingList) {
         int index = -1;
 
         for (int i = 0; i < shoppingListArray.size(); i++){
-            if (shoppingListArray.get(i).getShoppingListID() == shoppingListID) {
+            if (shoppingListArray.get(i).getShoppingListID() == newShoppingList.getShoppingListID()) {
                 // productID will not repeat
                 index = i;
             }
@@ -94,9 +94,9 @@ public class ShoppingListPersistenceStub implements ShoppingListPersistence {
 
     //Delete a ShoppingList from the overall ShoppingList array by it's shoppingListID
     @Override
-    public void deleteShoppingListById(int shoppingListID) {
+    public void deleteShoppingList(ShoppingList shoppingList) {
         for (int i = 0; i < shoppingListArray.size(); i++){
-            if (shoppingListArray.get(i).getShoppingListID() == shoppingListID){
+            if (shoppingListArray.get(i).getShoppingListID() == shoppingList.getShoppingListID()){
                 shoppingListArray.remove(i);
                 return;
             }
@@ -110,19 +110,6 @@ public class ShoppingListPersistenceStub implements ShoppingListPersistence {
 
         for (int i=0; i<shoppingListArray.size(); i++){
             total += shoppingListArray.get(i).cartTotal();
-        }
-        return total;
-    }
-
-    //Get the total of a single ShoppingList by its shoppingListID
-    @Override
-    public double getShoppingListTotalById(int shoppingListID) {
-        double total = 0;
-
-        for (int i=0; i < shoppingListArray.size(); i++){
-            if (shoppingListArray.get(i).getShoppingListID() == shoppingListID){
-                total = shoppingListArray.get(i).cartTotal();
-            }
         }
         return total;
     }

@@ -45,15 +45,15 @@ public class ProductHandler {
 
     public double getPriceOfProductInStore(Product product, Store store)
     {
-        return pricePersistence.getPrice(product.getProductID(), store.getStoreID());
+        return pricePersistence.getPrice(product, store);
     }
 
     /*
      * Im not sure if this actually does anything
      */
-    public List<Price> allStoreSortedPrice(int productId)
+    public List<Price> allStoreSortedPrice(Product product)
     {
-        List<Price> productPrices = pricePersistence.getAllPricesForSameProduct(productId);
+        List<Price> productPrices = pricePersistence.getAllPricesForSameProduct(product);
 
         // Sort the list by their price
         productPrices.sort(new Comparator<Price>() {
