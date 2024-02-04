@@ -24,9 +24,7 @@ public class Services {
     //GETTERS
     public static ProductPersistence getProductPersistence() {return new ProductPersistenceStub();}
 
-    public static UserPersistence getUserPersistence() {
-        return new UserPersistenceStub();
-    }
+    public static UserPersistence getUserPersistence() {return new UserPersistenceStub();}
 
     public static ShoppingListPersistence getShoppingListPersistence() {return new ShoppingListPersistenceStub();}
     public static PricePersistence getPricePersistence() {return new PricePersistenceStub();}

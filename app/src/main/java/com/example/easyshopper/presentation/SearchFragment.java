@@ -1,5 +1,6 @@
 package com.example.easyshopper.presentation;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -71,6 +72,16 @@ public class SearchFragment extends Fragment implements ProductViewInterface {
     public void onItemClick(int position) {
         //get product that has been clicked
         Product clickedProduct = productList.get(position);
+        Intent intent = new Intent(getActivity(), ProductViewActivity.class);
+
+        intent.putExtra("Product Name", clickedProduct.getProductName());
+        intent.putExtra("Calories", clickedProduct.getCalories());
+        intent.putExtra("Fat", clickedProduct.getFat());
+        intent.putExtra("Carbs", clickedProduct.getCarb());
+        intent.putExtra("Protein", clickedProduct.getProtein());
+
+        intent.putExtra("List of Prices", productHandler.sameProductStoreAndPriceList(clickedProduct));
+        startActivity(intent);
     }
 
     private void initComponents(View rootView) {
