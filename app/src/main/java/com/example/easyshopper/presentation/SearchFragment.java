@@ -69,7 +69,8 @@ public class SearchFragment extends Fragment implements ProductViewInterface {
 
     @Override
     public void onItemClick(int position) {
-
+        //get product that has been clicked
+        Product clickedProduct = productList.get(position);
     }
 
     private void initComponents(View rootView) {
