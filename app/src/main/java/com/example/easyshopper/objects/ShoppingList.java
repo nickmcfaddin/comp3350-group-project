@@ -21,9 +21,8 @@ public class ShoppingList {
 
     // GETTERS
     public Store getStore(){return store;}
-    public int getShoppingListID() {
-        return shoppingListID;
-    }
+
+    public int getShoppingListID() {return shoppingListID;}
 
     public boolean isEmpty(){
         return cart.size() == 0;
@@ -34,33 +33,32 @@ public class ShoppingList {
     }
 
     //Check if the Product is in this ShoppingList
-    public boolean checkForProductInCart (String productName) {
+    public boolean checkForProductInCart (int productID) {
         for(Product i : cart){
-            if(i.getProductName().equals(productName))
+            if(i.getProductID() == productID)
                 return true;
         }
+
         return false;
     }
 
     //Adds Product to the ShoppingList
     public void addProductToCart(Product product){
-        if(!checkForProductInCart(product.getProductName())) {
+        if(!checkForProductInCart(product.getProductID())) {
             cart.add(product);
         }
     }
 
     //Removes Product from ShoppingList
     public void removeProductFromCart(Product product){
-        if(checkForProductInCart(product.getProductName())) {
+        if(checkForProductInCart(product.getProductID())) {
             cart.remove(product);
         }
     }
 
     //Gives total price of the ShoppingList
     public double cartTotal(){
-
-        Services service = new Services();
-        PricePersistence pricePersistence = service.getPricePersistence();
+        PricePersistence pricePersistence = Services.getPricePersistence();
 
         double total = 0;
 
