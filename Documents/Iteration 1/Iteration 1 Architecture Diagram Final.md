@@ -1,4 +1,3 @@
-# Architecture
+# Iteration 1 Architecture Diagram
 
-## Diagram
 ![Iteration1 Architecture Diagram](Iteration1_Architecture_Diagram.jpeg) 
