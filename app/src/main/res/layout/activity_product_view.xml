@@ -16,8 +16,19 @@
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/itemPopUpBackBtn"
+            android:layout_width="55dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="@+id/ShoppingListToolBar"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/icon_item_popup_backbtn" />
 
         <TextView
             android:id="@+id/searchedProductName"
@@ -32,6 +43,23 @@
             tools:layout_editor_absoluteY="24dp" />
 
     </androidx.appcompat.widget.Toolbar>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineVertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <ImageView
+        android:id="@+id/productPopUpIcon"
+        android:layout_width="245dp"
+        android:layout_height="245dp"
+        android:layout_marginTop="64dp"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineVertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nutritionalFactsLabel"
+        tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
         android:id="@+id/nutritionalFactsLabel"
@@ -50,13 +78,14 @@
         android:id="@+id/caloriesLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="144dp"
         android:layout_marginEnd="200dp"
         android:fontFamily="@font/inter_semibold"
         android:text="Calories: "
         android:textColor="@color/white"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.85"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nutritionalFactsLabel" />
 
@@ -65,12 +94,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="144dp"
         android:fontFamily="@font/inter_semibold"
         android:text="Fat: "
         android:textColor="@color/white"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.778"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nutritionalFactsLabel" />
 
@@ -78,7 +108,8 @@
         android:id="@+id/carbLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="32dp"
         android:fontFamily="@font/inter_semibold"
         android:text="Carbs: "
         android:textColor="@color/white"
@@ -90,7 +121,8 @@
         android:id="@+id/proteinLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
         android:fontFamily="@font/inter_semibold"
         android:text="Protein: "
         android:textColor="@color/white"
@@ -102,14 +134,14 @@
         android:id="@+id/pricesLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="275dp"
+        android:layout_marginTop="35dp"
         android:fontFamily="@font/inter_semibold"
         android:text="Current Prices"
         android:textColor="@color/white"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ShoppingListToolBar" />
+        app:layout_constraintTop_toBottomOf="@+id/productPopUpIcon" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/pricePerStoreList"
@@ -118,17 +150,17 @@
         android:layout_marginTop="32dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pricesLabel" />
+        app:layout_constraintTop_toBottomOf="@+id/pricesLabel"
+        app:layout_constraintVertical_bias="0.024" />
 
-    <ImageView
-        android:id="@+id/itemPopUpBackBtn"
-        android:layout_width="55dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintStart_toStartOf="@+id/ShoppingListToolBar"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/icon_item_popup_backbtn" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="84dp"
+        android:layout_height="111dp"
+        android:layout_marginStart="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guidelineVertical" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,6 +4,13 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
+import android.util.Log;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+
 public class PriceTest {
 
     @Before
@@ -24,6 +31,7 @@ public class PriceTest {
         assertEquals(2.99, price.getPrice(), 0.00001);
 
         System.out.println("Finished testCreateAPrice");
+
     }
 }
 

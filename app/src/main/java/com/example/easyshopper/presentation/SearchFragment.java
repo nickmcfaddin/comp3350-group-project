@@ -3,10 +3,12 @@ package com.example.easyshopper.presentation;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +21,7 @@ import com.example.easyshopper.presentation.adapter.ProductSearchAdapter;
 import com.example.easyshopper.presentation.adapter.ProductViewInterface;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -79,6 +82,18 @@ public class SearchFragment extends Fragment implements ProductViewInterface {
         intent.putExtra("Fat", clickedProduct.getFat());
         intent.putExtra("Carbs", clickedProduct.getCarb());
         intent.putExtra("Protein", clickedProduct.getProtein());
+
+        // add drawable file to intent
+        // will use to set icon for pop-up later
+        if (Objects.equals(clickedProduct.getProductName(), "Apple")){
+            intent.putExtra("Product Icon", R.drawable.icon_apple);
+        } else if (Objects.equals(clickedProduct.getProductName(), "Kiwi")) {
+            intent.putExtra("Product Icon", R.drawable.icon_kiwi);
+        } else if (Objects.equals(clickedProduct.getProductName(), "Banana")) {
+            intent.putExtra("Product Icon", R.drawable.icon_banana);
+        } else if (Objects.equals(clickedProduct.getProductName(), "Orange")) {
+            intent.putExtra("Product Icon", R.drawable.icon_orange);
+        }
 
         intent.putExtra("List of Prices", productHandler.sameProductStoreAndPriceList(clickedProduct));
         startActivity(intent);
