@@ -6,11 +6,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
+import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,7 +18,6 @@ import com.example.easyshopper.objects.Price;
 import com.example.easyshopper.objects.Product;
 import com.example.easyshopper.presentation.adapter.ItemPopupAdapter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ProductViewActivity extends AppCompatActivity {
@@ -49,7 +46,7 @@ public class ProductViewActivity extends AppCompatActivity {
         double fat = product.getFat();
         double carbs = product.getCarb();
         double protein = product.getProtein();
-        int iconName = getIntent().getIntExtra("Product Icon", 0);
+        String xmlFileName = "icon_" + name.toLowerCase();
 
         List<Price> prices = productHandler.allStoreSortedPrice(product);
 
@@ -63,14 +60,18 @@ public class ProductViewActivity extends AppCompatActivity {
 
 
         // set icon for product
-        productIconImgView.setImageResource(iconName);
+        Context context = productIconImgView.getContext();
+        int id = context.getResources().getIdentifier(xmlFileName, "drawable", context.getPackageName());
+        productIconImgView.setImageResource(id);
 
+        // set product nutritional facts
         nameTextView.setText(name);
         caloriesTextView.setText("Calories: " + calories);
         fatTextView.setText("Fat: " + fat + "g");
         carbsTextView.setText("Carbs: " + carbs + "g");
         proteinTextView.setText("Protein: " + protein + "g");
 
+        //  set adapter for price per store of product
         RecyclerView pricePerStoreList = findViewById(R.id.pricePerStoreList);
         pricePerStoreList.setLayoutManager(new LinearLayoutManager(this));
         ItemPopupAdapter adapter = new ItemPopupAdapter(this, prices);

@@ -79,18 +79,6 @@ public class SearchFragment extends Fragment implements ProductViewInterface {
 
         intent.putExtra("Product ID", clickedProduct.getProductID());
 
-        // add drawable file to intent
-        // will use to set icon for pop-up later
-        if (Objects.equals(clickedProduct.getProductName(), "Apple")){
-            intent.putExtra("Product Icon", R.drawable.icon_apple);
-        } else if (Objects.equals(clickedProduct.getProductName(), "Kiwi")) {
-            intent.putExtra("Product Icon", R.drawable.icon_kiwi);
-        } else if (Objects.equals(clickedProduct.getProductName(), "Banana")) {
-            intent.putExtra("Product Icon", R.drawable.icon_banana);
-        } else if (Objects.equals(clickedProduct.getProductName(), "Orange")) {
-            intent.putExtra("Product Icon", R.drawable.icon_orange);
-        }
-
         startActivity(intent);
     }
 

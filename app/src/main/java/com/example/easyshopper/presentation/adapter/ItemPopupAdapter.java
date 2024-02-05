@@ -40,7 +40,6 @@ public class ItemPopupAdapter extends RecyclerView.Adapter<ItemPopupAdapter.Prod
         int storeID = currentPrice.getStoreID();
         Store store = storeHandler.getStoreById(storeID);
 
-        Log.i("aaaa", store.getStoreName() + " " + currentPrice.getPrice());
         holder.productPriceView.setText("$" + currentPrice.getPrice());
         holder.productStoreNameView.setText(store.getStoreName());
     }

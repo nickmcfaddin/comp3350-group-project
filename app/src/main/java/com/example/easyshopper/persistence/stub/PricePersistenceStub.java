@@ -50,8 +50,8 @@ public class PricePersistenceStub implements PricePersistence {
                 }
                 else {
                     randomInt = rand.nextInt(49);
-                    randomDouble = Double.parseDouble(decfor.format(rand.nextDouble()));
-                    totalPrice = randomInt + randomDouble;
+                    randomDouble = rand.nextDouble();
+                    totalPrice = Double.parseDouble(decfor.format(randomInt + randomDouble));
                 }
 
                 priceList.add(new Price(i, j, totalPrice));
