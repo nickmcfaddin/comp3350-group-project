@@ -19,7 +19,6 @@ import java.text.DecimalFormat;
 //Price fake db
 public class PricePersistenceStub implements PricePersistence {
     private List<Price> priceList;
-
     private static final DecimalFormat decfor = new DecimalFormat("0.00");
 
     //Stub Constructor

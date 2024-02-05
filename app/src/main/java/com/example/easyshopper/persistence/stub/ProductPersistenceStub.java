@@ -1,7 +1,5 @@
 package com.example.easyshopper.persistence.stub;
 
-import android.util.Log;
-
 import com.example.easyshopper.objects.Product;
 import com.example.easyshopper.objects.Store;
 import com.example.easyshopper.persistence.ProductPersistence;
@@ -48,10 +46,9 @@ public class ProductPersistenceStub implements ProductPersistence {
     @Override
     public List<Product> getProductsByName(String name) {
         List<Product> newList = new ArrayList<>();
-        name = name.toLowerCase();
 
         for (int i = 0; i < productList.size(); i++){
-            if (productList.get(i).getProductName().toLowerCase().contains(name)){
+            if (productList.get(i).getProductName().contains(name)){
                 newList.add(productList.get(i));
             }
         }

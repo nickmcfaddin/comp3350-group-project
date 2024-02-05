@@ -1,21 +1,30 @@
 package com.example.easyshopper.presentation;
 
+import static androidx.core.content.ContentProviderCompat.requireContext;
+
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.easyshopper.R;
+import com.example.easyshopper.logic.ProductHandler;
+import com.example.easyshopper.objects.Price;
+import com.example.easyshopper.objects.Product;
+import com.example.easyshopper.presentation.adapter.ItemPopupAdapter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ProductViewActivity extends AppCompatActivity {
-
+    ProductHandler productHandler = new ProductHandler();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,13 +41,17 @@ public class ProductViewActivity extends AppCompatActivity {
             }
         });
 
-        String name = getIntent().getStringExtra("Product Name");
-        double calories = getIntent().getDoubleExtra("Calories",0);
-        double fat = getIntent().getDoubleExtra("Fat",0);
-        double carbs = getIntent().getDoubleExtra("Carbs",0);
-        double protein = getIntent().getDoubleExtra("Protein",0);
+        int productID = getIntent().getIntExtra("Product ID", 0);
+        Product product = productHandler.getProductByID(productID);
+
+        String name = product.getProductName();
+        double calories = product.getCalories();
+        double fat = product.getFat();
+        double carbs = product.getCarb();
+        double protein = product.getProtein();
         int iconName = getIntent().getIntExtra("Product Icon", 0);
-        ArrayList<String> pricePerStore = getIntent().getStringArrayListExtra("List of Prices");
+
+        List<Price> prices = productHandler.allStoreSortedPrice(product);
 
         TextView nameTextView = findViewById(R.id.searchedProductName);
         TextView caloriesTextView = findViewById(R.id.caloriesLabel);
@@ -47,7 +60,7 @@ public class ProductViewActivity extends AppCompatActivity {
         TextView proteinTextView = findViewById(R.id.proteinLabel);
 
         ImageView productIconImgView = findViewById(R.id.productPopUpIcon);
-        RecyclerView pricePerStoreList = findViewById(R.id.pricePerStoreList);
+
 
         // set icon for product
         productIconImgView.setImageResource(iconName);
@@ -58,7 +71,9 @@ public class ProductViewActivity extends AppCompatActivity {
         carbsTextView.setText("Carbs: " + carbs + "g");
         proteinTextView.setText("Protein: " + protein + "g");
 
-        // ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, pricePerStore);
-        // pricePerStoreList.setAdapter(adapter);
+        RecyclerView pricePerStoreList = findViewById(R.id.pricePerStoreList);
+        pricePerStoreList.setLayoutManager(new LinearLayoutManager(this));
+        ItemPopupAdapter adapter = new ItemPopupAdapter(this, prices);
+        pricePerStoreList.setAdapter(adapter);
     }
 }

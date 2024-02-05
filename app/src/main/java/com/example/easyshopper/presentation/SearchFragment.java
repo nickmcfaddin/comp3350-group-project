@@ -77,11 +77,7 @@ public class SearchFragment extends Fragment implements ProductViewInterface {
         Product clickedProduct = productList.get(position);
         Intent intent = new Intent(getActivity(), ProductViewActivity.class);
 
-        intent.putExtra("Product Name", clickedProduct.getProductName());
-        intent.putExtra("Calories", clickedProduct.getCalories());
-        intent.putExtra("Fat", clickedProduct.getFat());
-        intent.putExtra("Carbs", clickedProduct.getCarb());
-        intent.putExtra("Protein", clickedProduct.getProtein());
+        intent.putExtra("Product ID", clickedProduct.getProductID());
 
         // add drawable file to intent
         // will use to set icon for pop-up later
@@ -95,7 +91,6 @@ public class SearchFragment extends Fragment implements ProductViewInterface {
             intent.putExtra("Product Icon", R.drawable.icon_orange);
         }
 
-        intent.putExtra("List of Prices", productHandler.sameProductStoreAndPriceList(clickedProduct));
         startActivity(intent);
     }
 
