@@ -1,4 +1,4 @@
-package com.example.easyshopper.presentation;
+package com.example.easyshopper.presentation.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,6 +8,7 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 
 import com.example.easyshopper.R;
+import com.example.easyshopper.logic.ProductHandler;
 import com.example.easyshopper.objects.Product;
 import com.example.easyshopper.objects.Store;
 
@@ -18,6 +19,7 @@ public class ShoppingListAdapter extends BaseExpandableListAdapter {
     private Context context;
     private List<Store> shoppingListHeaders;
     private HashMap<Store, List<Product>> shoppingLists;
+    private ProductHandler productHandler = new ProductHandler();
 
     public ShoppingListAdapter(Context context, List<Store> shoppingListHeaders, HashMap<Store, List<Product>> shoppingLists) {
         this.context = context;
@@ -79,7 +81,9 @@ public class ShoppingListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-        Product shoppingListProduct = (Product) getChild(groupPosition,childPosition);
+        Product product = (Product) getChild(groupPosition,childPosition);
+        Store store = (Store) getGroup(groupPosition);
+        String price = "$" + productHandler.getPriceOfProductInStore(product, store);
 
         if(convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -90,8 +94,8 @@ public class ShoppingListAdapter extends BaseExpandableListAdapter {
         TextView productNameView = convertView.findViewById(R.id.productNameView);
         TextView productPriceView = convertView.findViewById(R.id.productPriceView);
 
-        //productNameView.setText(shoppingListProduct.getName());
-        //productPriceView.setText(shoppingListProduct.getPrice());
+        productNameView.setText(product.getProductName());
+        productPriceView.setText(price);
 
         return null;
     }

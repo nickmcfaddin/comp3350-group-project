@@ -8,14 +8,23 @@ import com.example.easyshopper.persistence.PricePersistence;
 import com.example.easyshopper.persistence.ProductPersistence;
 import com.example.easyshopper.persistence.StorePersistence;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 public class ProductHandler {
 
-    private ProductPersistence productPersistence;
+    private ProductPersistence productPersistence = Services.getProductPersistence();
     private PricePersistence pricePersistence = Services.getPricePersistence();
-    private StorePersistence storePersistence;
+    private StorePersistence storePersistence = Services.getStorePersistence();
 
     public ProductHandler() {}
 
@@ -24,11 +33,7 @@ public class ProductHandler {
      */
     public List<Product> getProductsByName(String prodName)
     {
-        try{
-            return productPersistence.getProductsByName(prodName);
-        } catch (Exception e) {
-            return null;
-        }
+        return productPersistence.getProductsByName(prodName);
     }
 
     /*
@@ -36,11 +41,7 @@ public class ProductHandler {
      */
     public List<Product> getAllProducts()
     {
-        try{
-            return productPersistence.getExistingProducts();
-        } catch (Exception e) {
-            return null;
-        }
+        return productPersistence.getExistingProducts();
     }
 
     /* this method takes
@@ -48,33 +49,20 @@ public class ProductHandler {
      */
     public Product getProductByID(int id)
     {
-        try{
-            return productPersistence.getProductById(id);
-        } catch (Exception e) {
-            return null;
-        }
+        return productPersistence.getProductById(id);
     }
 
-    public double getPriceOfProductInStore(Product findProd, Store storeName, List<Product> storeList)
+    public double getPriceOfProductInStore(Product product, Store store)
     {
-        double found = -1;
-        int prodId = findProd.getProductID();
-        int storeId = storeName.getStoreID();
-
-       if(storeList.contains(findProd))
-           return pricePersistence.getPrice(prodId, storeId);
-       else
-           return found;
+        return pricePersistence.getPrice(product, store);
     }
 
     /*
      * Im not sure if this actually does anything
      */
-    public List<Price> allStoreSortedPrice(List<Price> priceList, int productId)
+    public List<Price> allStoreSortedPrice(Product product)
     {
-        List<Price> productPrices;
-
-        productPrices = pricePersistence.getAllPricesForSameProduct(productId);
+        List<Price> productPrices = pricePersistence.getAllPricesForSameProduct(product);
 
         // Sort the list by their price
         productPrices.sort(new Comparator<Price>() {
@@ -85,6 +73,52 @@ public class ProductHandler {
         });
 
         return productPrices;
+    }
+
+    public ArrayList<String> sameProductStoreAndPriceList (Product product)
+    {
+        HashMap<String, Double> map = new HashMap<>();
+
+        List<Store> stores = storePersistence.getExistingStores();
+
+        for (Store store : stores){
+            if (pricePersistence.getPrice(product, store) != -1) {
+                map.put(store.getStoreName(), pricePersistence.getPrice(product, store));
+            }
+        }
+
+        Map<String, Double> sortedMap = sortByValue(map);
+
+        ArrayList<String> output = new ArrayList<>();
+
+        for (Map.Entry<String, Double> entry : sortedMap.entrySet()){
+            output.add(entry.getKey() + ": " + entry.getValue());
+        }
+
+        return output;
+    }
+
+    public static HashMap<String, Double> sortByValue(HashMap<String, Double> map)
+    {
+        // Create a list from elements of HashMap
+        List<Map.Entry<String, Double> > list =
+                new LinkedList<Map.Entry<String, Double> >(map.entrySet());
+
+        // Sort the list
+        Collections.sort(list, new Comparator<Map.Entry<String, Double> >() {
+            public int compare(Map.Entry<String, Double> o1,
+                               Map.Entry<String, Double> o2)
+            {
+                return (o1.getValue()).compareTo(o2.getValue());
+            }
+        });
+
+        // put data from sorted list to hashmap
+        HashMap<String, Double> temp = new LinkedHashMap<String, Double>();
+        for (Map.Entry<String, Double> aa : list) {
+            temp.put(aa.getKey(), aa.getValue());
+        }
+        return temp;
     }
 
     /*

@@ -29,7 +29,7 @@ public class ShoppingListPersistenceStub implements ShoppingListPersistence {
         List<Product> existingProducts = productPersistence.getExistingProducts();
 
         for (int i=0; i<existingStores.size(); i++){
-            shoppingListArray.add(new ShoppingList(i+1, existingStores.get(i)));
+            shoppingListArray.add(new ShoppingList(String.valueOf(i + 1), existingStores.get(i)));
         }
 
         for (int i=0; i<shoppingListArray.size(); i++){
@@ -51,9 +51,9 @@ public class ShoppingListPersistenceStub implements ShoppingListPersistence {
 
     //Returns a single ShoppingList, obtainable by its shoppingListID
     @Override
-    public ShoppingList getShoppingListById(int id) {
+    public ShoppingList getShoppingListById(String id) {
         for (int i = 0; i < shoppingListArray.size(); i++){
-            if (shoppingListArray.get(i).getShoppingListID() == id){
+            if (shoppingListArray.get(i).getShoppingListID().equals(id)){
                 return shoppingListArray.get(i);
             }
         }
@@ -62,11 +62,11 @@ public class ShoppingListPersistenceStub implements ShoppingListPersistence {
 
     //Updates the ShoppingList's information
     @Override
-    public void updateShoppingList(int shoppingListID, ShoppingList newShoppingList) {
+    public void updateShoppingList(ShoppingList newShoppingList) {
         int index = -1;
 
         for (int i = 0; i < shoppingListArray.size(); i++){
-            if (shoppingListArray.get(i).getShoppingListID() == shoppingListID) {
+            if (shoppingListArray.get(i).getShoppingListID().equals(newShoppingList.getShoppingListID())) {
                 // productID will not repeat
                 index = i;
             }
@@ -83,7 +83,7 @@ public class ShoppingListPersistenceStub implements ShoppingListPersistence {
         for (int i=0; i<shoppingListArray.size(); i++){
             ShoppingList indexShoppingList = shoppingListArray.get(i);
 
-            if ((indexShoppingList.getShoppingListID() == shoppingList.getShoppingListID()) || (Objects.equals(indexShoppingList.getStore().getStoreName(), shoppingList.getStore().getStoreName()))){
+            if ((indexShoppingList.getShoppingListID().equals(shoppingList.getShoppingListID())) || (Objects.equals(indexShoppingList.getStore().getStoreName(), shoppingList.getStore().getStoreName()))){
                 // shoppingList id already existed
                 // or adding list of same store
                 return;
@@ -94,9 +94,9 @@ public class ShoppingListPersistenceStub implements ShoppingListPersistence {
 
     //Delete a ShoppingList from the overall ShoppingList array by it's shoppingListID
     @Override
-    public void deleteShoppingListById(int shoppingListID) {
+    public void deleteShoppingList(ShoppingList shoppingList) {
         for (int i = 0; i < shoppingListArray.size(); i++){
-            if (shoppingListArray.get(i).getShoppingListID() == shoppingListID){
+            if (shoppingListArray.get(i).getShoppingListID().equals(shoppingList.getShoppingListID())){
                 shoppingListArray.remove(i);
                 return;
             }
@@ -110,19 +110,6 @@ public class ShoppingListPersistenceStub implements ShoppingListPersistence {
 
         for (int i=0; i<shoppingListArray.size(); i++){
             total += shoppingListArray.get(i).cartTotal();
-        }
-        return total;
-    }
-
-    //Get the total of a single ShoppingList by its shoppingListID
-    @Override
-    public double getShoppingListTotalById(int shoppingListID) {
-        double total = 0;
-
-        for (int i=0; i < shoppingListArray.size(); i++){
-            if (shoppingListArray.get(i).getShoppingListID() == shoppingListID){
-                total = shoppingListArray.get(i).cartTotal();
-            }
         }
         return total;
     }

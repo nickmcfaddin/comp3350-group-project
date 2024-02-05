@@ -19,7 +19,6 @@ import java.text.DecimalFormat;
 //Price fake db
 public class PricePersistenceStub implements PricePersistence {
     private List<Price> priceList;
-
     private static final DecimalFormat decfor = new DecimalFormat("0.00");
 
     //Stub Constructor
@@ -51,8 +50,8 @@ public class PricePersistenceStub implements PricePersistence {
                 }
                 else {
                     randomInt = rand.nextInt(49);
-                    randomDouble = Double.parseDouble(decfor.format(rand.nextDouble()));
-                    totalPrice = randomInt + randomDouble;
+                    randomDouble = rand.nextDouble();
+                    totalPrice = Double.parseDouble(decfor.format(randomInt + randomDouble));
                 }
 
                 priceList.add(new Price(i, j, totalPrice));
@@ -61,9 +60,9 @@ public class PricePersistenceStub implements PricePersistence {
     }
 
     //Get Price of a single Product (single store)
-    public double getPrice(int productID, int storeID) {
+    public double getPrice(Product product, Store store) {
         for (int i=0; i<priceList.size(); i++){
-            if (priceList.get(i).getProductID() == productID && priceList.get(i).getStoreID() == storeID){
+            if (priceList.get(i).getProductID() == product.getProductID() && priceList.get(i).getStoreID() == store.getStoreID()){
                 return priceList.get(i).getPrice();
             }
         }
@@ -73,11 +72,11 @@ public class PricePersistenceStub implements PricePersistence {
 
     //Get Price for a single Product (every store)
     @Override
-    public List<Price> getAllPricesForSameProduct(int productID) {
+    public List<Price> getAllPricesForSameProduct(Product product) {
         List<Price> returnList = new ArrayList<>();
 
         for (int i=0; i<priceList.size(); i++){
-            if (priceList.get(i).getProductID() == productID){
+            if (priceList.get(i).getProductID() == product.getProductID()){
                 returnList.add(priceList.get(i));
             }
         }

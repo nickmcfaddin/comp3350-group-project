@@ -1,6 +1,8 @@
 package com.example.easyshopper.persistence;
 
 import com.example.easyshopper.objects.Price;
+import com.example.easyshopper.objects.Product;
+import com.example.easyshopper.objects.Store;
 
 import java.util.List;
 
@@ -8,8 +10,8 @@ import java.util.List;
 public interface PricePersistence {
 
     //Returns a Price of a Product, identified by the productID and storeID
-    double getPrice(int productID, int storeID);
+    double getPrice(Product product, Store store);
 
     //Returns all Price's for the same Product across all Store's identified by the productID
-    List<Price> getAllPricesForSameProduct(int productID);
+    List<Price> getAllPricesForSameProduct(Product product);
 }
