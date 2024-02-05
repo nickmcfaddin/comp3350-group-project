@@ -1,5 +1,6 @@
 package com.example.easyshopper.presentation;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.os.Bundle;
 
@@ -10,11 +11,17 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AutoCompleteTextView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.PopupMenu;
+import android.widget.TextView;
 
 import com.example.easyshopper.R;
+import com.google.android.material.textfield.TextInputLayout;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -63,9 +70,9 @@ public class ShoppingListFragment extends Fragment {
                     @Override
                     public boolean onMenuItemClick(MenuItem menuItem) {
                         if (menuItem.getItemId() == R.id.addProduct) {
-                            //handle here
+                            addProductDialog();
                         } else if (menuItem.getItemId() == R.id.createList) {
-                            //handle here
+                            createListDialog();
                         }
                         return true;
                     }
@@ -75,4 +82,70 @@ public class ShoppingListFragment extends Fragment {
             }
         });
     }
+
+    private void addProductDialog() {
+        //Create alert and link it to our custom dialog
+        AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
+        View dialogView = getLayoutInflater().inflate(R.layout.dialog_multiple_choice, null);
+        alert.setView(dialogView);
+        final AlertDialog alertDialog = alert.create();
+
+        //get and init components
+        ListView listView = dialogView.findViewById(R.id.list_view);
+        Button cancelButton = dialogView.findViewById(R.id.cancel_btn);
+        Button submitButton = dialogView.findViewById(R.id.submit_btn);
+
+        submitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                alertDialog.dismiss();
+            }
+        });
+
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+            }
+        });
+
+        // Show the dialog
+        alertDialog.show();
+    }
+
+    private void createListDialog() {
+        //Create alert and link it to our custom dialog
+        AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
+        View dialogView = getLayoutInflater().inflate(R.layout.dialog_create_list, null);
+        alert.setView(dialogView);
+        final AlertDialog alertDialog = alert.create();
+
+        //get and init components
+        TextInputLayout textInputLayout = dialogView.findViewById(R.id.textInputLayout);
+        AutoCompleteTextView autoCompleteTextView = dialogView.findViewById(R.id.dropdown_field);
+        EditText editText = dialogView.findViewById(R.id.list_name_input);
+        Button cancelButton = dialogView.findViewById(R.id.cancel_btn);
+        Button submitButton = dialogView.findViewById(R.id.submit_btn);
+
+        submitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                alertDialog.dismiss();
+            }
+        });
+
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                alertDialog.dismiss();
+            }
+        });
+
+        // Show the dialog
+        alertDialog.show();
+    }
+
 }

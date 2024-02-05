@@ -7,45 +7,40 @@
     android:paddingVertical="15dp"
     android:background="@color/primary_theme"
     android:backgroundTint="#1CFFFFFF"
-    android:layout_marginHorizontal="50dp">
+    android:layout_marginHorizontal="350dp">
 
     <TextView
         android:id="@+id/input_dialog_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/inter_semibold"
-        android:text="Select Products to Add:"
-        android:textSize="17sp" />
-
-    <ListView
-        android:id="@+id/list_view"
-        android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:layout_below="@id/input_dialog_title"
-        android:layout_marginVertical="10dp" />
+        android:text="Do you want to remove this product from the list?"
+        android:textSize="20sp" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/cancel_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/list_view"
+        android:layout_below="@+id/input_dialog_title"
         android:layout_alignParentStart="true"
+        android:layout_marginTop="50dp"
         android:fontFamily="@font/inter_semibold"
         android:background="@color/secondary_theme"
         android:textColor="@color/primary_theme"
-        android:text="CANCEL">
+        android:text="NO">
     </androidx.appcompat.widget.AppCompatButton>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/submit_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/list_view"
+        android:layout_below="@+id/input_dialog_title"
+        android:layout_marginTop="50dp"
         android:layout_alignParentEnd="true"
         android:fontFamily="@font/inter_semibold"
         android:background="@color/secondary_theme"
         android:textColor="@color/primary_theme"
-        android:text="SUBMIT">
+        android:text="YES">
     </androidx.appcompat.widget.AppCompatButton>
 
 </RelativeLayout>
