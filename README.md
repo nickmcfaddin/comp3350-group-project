@@ -33,7 +33,7 @@ EasyShopper is a new app that enables shoppers to store, view, and modify their 
 
 ## Restrospective 
 - [Iteration 0](https://code.cs.umanitoba.ca/comp3350-winter2024/lethalcompany-a01-13/-/blob/main/Documents/Iteration0Retrospective.md)
-- Iteration 1
+- [Iteration 1](https://code.cs.umanitoba.ca/comp3350-winter2024/lethalcompany-a01-13/-/blob/main/Documents/Iteration%202/Iteration%202%20Architecture%20Diagram.md?ref_type=heads)
 - Iteration 2
 - Iteration 3
 
