@@ -48,7 +48,7 @@ public class ProductPersistenceStub implements ProductPersistence {
         List<Product> newList = new ArrayList<>();
 
         for (int i = 0; i < productList.size(); i++){
-            if (productList.get(i).getProductName().contains(name)){
+            if (productList.get(i).getProductName().toLowerCase().contains(name.toLowerCase())){
                 newList.add(productList.get(i));
             }
         }
