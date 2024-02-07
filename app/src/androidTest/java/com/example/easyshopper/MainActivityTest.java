@@ -111,6 +111,8 @@ public class MainActivityTest {
             assertNotNull(view);
         });
 
+
+
         //Tests the UI to see if we get the Kiwi product at index 0 when we type "Kiwi" in the search bar
         onView(withId(R.id.searchView)).perform(typeText("Kiwi"));
         onView(allOf(withId(R.id.productListView), isDisplayed())).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));

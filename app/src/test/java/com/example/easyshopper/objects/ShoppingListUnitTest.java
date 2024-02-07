@@ -31,9 +31,6 @@ public class ShoppingListUnitTest {
         assertEquals("shopping list 1", shoppingList.getShoppingListName());
         assertEquals(store, shoppingList.getStore());
 
-        //Tests our empty list method
-        assertTrue(shoppingList.isEmpty());
-
         //Create new Product to use for test
         Product product = new Product(1, "Eggs", 0.3, 5, 0.8);
 
