@@ -31,8 +31,12 @@ We were able to implement every feature we intended to, however there were some 
     Much like the previous change we made to the change item price, this removal stems from the lack of a need to search for a list as we have decided to have a maximum of 10 preloaded lists. Since we have such a small amount of lists that are able to be created, it would render the "Search for a list" function practically useless.
  
 ## Testing Instructions
+
+### Running The Application
+Use the latest version on the "production" release branch (last commit made).
+
 ### Running Unit Tests
-1. To run all the tests that cover the Persistence and Logic layers (as well as the DSO's), run the AllUnitTests.java file under the com.example.easyshopper (test) package. You can also use the link in the Testing section of the README.md to find the file. You can run the tests with or without coverage and they should produce the values given in the "Code Coverage Statistics" section of the release document.
+1. To run all the tests that cover the Persistence and Logic layers (as well as the DSO's), run the AllUnitTests.java file under the com.example.easyshopper (test) package. You can also use the link in the Tests section of the README.md to find the file. You can run the tests with or without coverage and they should produce the values given in the "Code Coverage Statistics" section of the release document.
     - If you want to break down the Unit Tests for these layers individually, they are found within the "business" and "objects" packages within the com.example.easyshopper (test) package.
 
 2. To run the tests for the Presentation layer, navigate to the com.example.easyshopper (androidTest) package and click on the AllAcceptanceTests.java file. This file will run all of the tests for the Presentation layer. If you want to break them down individually, they are all found within the com.example.easyshopper (androidTest) package.
