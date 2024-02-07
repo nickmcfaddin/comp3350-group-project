@@ -28,7 +28,7 @@ public class ShoppingListPersistenceStub implements ShoppingListPersistence {
         List<Product> existingProducts = productPersistence.getExistingProducts();
 
         for (int i=0; i<existingStores.size(); i++){
-            shoppingListArray.add(new ShoppingList(String.valueOf(i + 1), existingStores.get(i)));
+            shoppingListArray.add(new ShoppingList(existingStores.get(i)));
         }
 
         for (int i=0; i<shoppingListArray.size(); i++){
@@ -71,8 +71,9 @@ public class ShoppingListPersistenceStub implements ShoppingListPersistence {
         for (int i=0; i<shoppingListArray.size(); i++){
             ShoppingList indexShoppingList = shoppingListArray.get(i);
 
-            if ((indexShoppingList.getShoppingListID().equals(shoppingList.getShoppingListID()))){
+            if ((indexShoppingList.getShoppingListID().equals(shoppingList.getShoppingListID())) || shoppingList.getStore().getStoreID() == indexShoppingList.getStore().getStoreID()){
                 // shoppingList id already existed
+                // or shopping list with store already exists
                 return;
             }
         }
