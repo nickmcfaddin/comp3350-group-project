@@ -1,11 +1,14 @@
 package com.example.easyshopper.presentation;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +21,7 @@ import com.example.easyshopper.presentation.adapter.ProductSearchAdapter;
 import com.example.easyshopper.presentation.adapter.ProductViewInterface;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -71,6 +75,11 @@ public class SearchFragment extends Fragment implements ProductViewInterface {
     public void onItemClick(int position) {
         //get product that has been clicked
         Product clickedProduct = productList.get(position);
+        Intent intent = new Intent(getActivity(), ProductViewActivity.class);
+
+        intent.putExtra("Product ID", clickedProduct.getProductID());
+
+        startActivity(intent);
     }
 
     private void initComponents(View rootView) {

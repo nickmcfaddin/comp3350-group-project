@@ -8,8 +8,17 @@ import com.example.easyshopper.persistence.PricePersistence;
 import com.example.easyshopper.persistence.ProductPersistence;
 import com.example.easyshopper.persistence.StorePersistence;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 public class ProductHandler {
 
@@ -64,6 +73,52 @@ public class ProductHandler {
         });
 
         return productPrices;
+    }
+
+    public ArrayList<String> sameProductStoreAndPriceList (Product product)
+    {
+        HashMap<String, Double> map = new HashMap<>();
+
+        List<Store> stores = storePersistence.getExistingStores();
+
+        for (Store store : stores){
+            if (pricePersistence.getPrice(product, store) != -1) {
+                map.put(store.getStoreName(), pricePersistence.getPrice(product, store));
+            }
+        }
+
+        Map<String, Double> sortedMap = sortByValue(map);
+
+        ArrayList<String> output = new ArrayList<>();
+
+        for (Map.Entry<String, Double> entry : sortedMap.entrySet()){
+            output.add(entry.getKey() + ": " + entry.getValue());
+        }
+
+        return output;
+    }
+
+    public static HashMap<String, Double> sortByValue(HashMap<String, Double> map)
+    {
+        // Create a list from elements of HashMap
+        List<Map.Entry<String, Double> > list =
+                new LinkedList<Map.Entry<String, Double> >(map.entrySet());
+
+        // Sort the list
+        Collections.sort(list, new Comparator<Map.Entry<String, Double> >() {
+            public int compare(Map.Entry<String, Double> o1,
+                               Map.Entry<String, Double> o2)
+            {
+                return (o1.getValue()).compareTo(o2.getValue());
+            }
+        });
+
+        // put data from sorted list to hashmap
+        HashMap<String, Double> temp = new LinkedHashMap<String, Double>();
+        for (Map.Entry<String, Double> aa : list) {
+            temp.put(aa.getKey(), aa.getValue());
+        }
+        return temp;
     }
 
     /*
