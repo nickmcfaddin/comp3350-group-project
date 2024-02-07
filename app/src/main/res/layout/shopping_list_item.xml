@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingVertical="25dp"
+    android:paddingVertical="10dp"
     android:paddingStart="50dp">
 
     <TextView
@@ -13,7 +13,8 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/inter_semibold"
         android:text="•"
-        android:textSize="35sp"
+        android:textSize="30sp"
+        android:textColor="@color/secondary_theme"
         android:gravity="center_vertical"
         app:layout_constraintBottom_toBottomOf="@+id/productPriceView"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,7 +27,8 @@
         android:layout_marginHorizontal="30dp"
         android:fontFamily="@font/inter_semibold"
         android:text="Apple"
-        android:textSize="30sp"
+        android:textSize="25sp"
+        android:textColor="@color/secondary_theme"
         app:layout_constraintStart_toEndOf="@+id/productBulletPoint"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -35,7 +37,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="$2.50"
-        android:textSize="20sp"
+        android:textSize="15sp"
         android:textColor="@color/subtitle"
         android:fontFamily="@font/inter_semibold"
         android:layout_marginHorizontal="30dp"

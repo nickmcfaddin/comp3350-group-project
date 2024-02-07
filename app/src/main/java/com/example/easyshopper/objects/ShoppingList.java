@@ -1,5 +1,7 @@
 package com.example.easyshopper.objects;
 
+import androidx.annotation.NonNull;
+
 import com.example.easyshopper.application.Services;
 import com.example.easyshopper.persistence.PricePersistence;
 import com.example.easyshopper.persistence.stub.PricePersistenceStub;
@@ -9,6 +11,7 @@ import java.util.ArrayList;
 
 //List is created per store, products added to list
 public class ShoppingList {
+    PricePersistence pricePersistence = Services.getPricePersistence();
     private String shoppingListName;
     private String shoppingListID;
     private ArrayList<Product> cart;
@@ -70,14 +73,22 @@ public class ShoppingList {
 
     //Gives total price of the ShoppingList
     public double cartTotal(){
-        PricePersistence pricePersistence = Services.getPricePersistence();
-
         double total = 0;
 
         for (Product i : cart){
             total += pricePersistence.getPrice(i, this.store);
         }
 
+        //modify this double value so that it is only two decimal places long
+        String formattedNumber = String.format("%.2f", total);
+        total = Double.parseDouble(formattedNumber);
+
         return total;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return shoppingListName;
     }
 }

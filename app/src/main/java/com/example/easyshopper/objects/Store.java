@@ -1,5 +1,7 @@
 package com.example.easyshopper.objects;
 
+import androidx.annotation.NonNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,5 +36,11 @@ public class Store {
 
     public ArrayList<Product> getStoreProducts(){
         return storeProducts;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return storeName;
     }
 }

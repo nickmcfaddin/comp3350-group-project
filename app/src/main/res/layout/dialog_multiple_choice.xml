@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingHorizontal="20dp"
+    android:paddingVertical="15dp"
+    android:background="@color/primary_theme"
+    android:backgroundTint="#0DFFFFFF"
+    android:layout_marginHorizontal="50dp">
+
+    <TextView
+        android:id="@+id/input_dialog_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/inter_semibold"
+        android:text="Select Products to Add:"
+        android:textSize="17sp" />
+
+    <ListView
+        android:id="@+id/list_view"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:layout_below="@id/input_dialog_title"
+        android:layout_marginVertical="10dp" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/cancel_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/list_view"
+        android:layout_alignParentStart="true"
+        android:fontFamily="@font/inter_semibold"
+        android:background="@color/secondary_theme"
+        android:textColor="@color/primary_theme"
+        android:text="CANCEL">
+    </androidx.appcompat.widget.AppCompatButton>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/submit_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/list_view"
+        android:layout_alignParentEnd="true"
+        android:fontFamily="@font/inter_semibold"
+        android:background="@color/secondary_theme"
+        android:textColor="@color/primary_theme"
+        android:text="SUBMIT">
+    </androidx.appcompat.widget.AppCompatButton>
+
+</RelativeLayout>

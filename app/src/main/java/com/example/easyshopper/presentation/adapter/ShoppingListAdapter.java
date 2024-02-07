@@ -1,50 +1,67 @@
 package com.example.easyshopper.presentation.adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.graphics.Paint;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.easyshopper.R;
 import com.example.easyshopper.logic.ProductHandler;
+import com.example.easyshopper.logic.ShoppingListHandler;
 import com.example.easyshopper.objects.Product;
+import com.example.easyshopper.objects.ShoppingList;
 import com.example.easyshopper.objects.Store;
 
-import java.util.HashMap;
 import java.util.List;
 
-public class ShoppingListAdapter extends BaseExpandableListAdapter {
+public class ShoppingListAdapter extends BaseExpandableListAdapter  {
     private Context context;
-    private List<Store> shoppingListHeaders;
-    private HashMap<Store, List<Product>> shoppingLists;
+    private List<ShoppingList> shoppingLists;
     private ProductHandler productHandler = new ProductHandler();
+    private ShoppingListHandler shoppingListHandler = new ShoppingListHandler();
 
-    public ShoppingListAdapter(Context context, List<Store> shoppingListHeaders, HashMap<Store, List<Product>> shoppingLists) {
+    public ShoppingListAdapter(Context context, List<ShoppingList> shoppingLists) {
         this.context = context;
-        this.shoppingListHeaders = shoppingListHeaders;
         this.shoppingLists = shoppingLists;
+    }
+
+    //update from an outer sources
+    public void updateData(List<ShoppingList> shoppingLists) {
+        this.shoppingLists = shoppingLists;
+        notifyDataSetChanged();
+    }
+
+    //update from internal sources
+    public void updateData() {
+        shoppingLists = shoppingListHandler.getAllShoppingLists();
+        Log.i("asdas", shoppingLists.toString());
+        notifyDataSetChanged();
     }
 
     @Override
     public int getGroupCount() {
-        return shoppingListHeaders.size();
+        return shoppingLists.size();
     }
 
     @Override
     public int getChildrenCount(int groupPosition) {
-        return shoppingLists.get(shoppingListHeaders.get(groupPosition)).size();
+        return shoppingLists.get(groupPosition).getCart().size();
     }
 
     @Override
     public Object getGroup(int groupPosition) {
-        return this.shoppingListHeaders.get(groupPosition);
+        return shoppingLists.get(groupPosition);
     }
 
     @Override
     public Object getChild(int groupPosition, int childPosition) {
-        return shoppingLists.get(shoppingListHeaders.get(groupPosition)).get(childPosition);
+        return shoppingLists.get(groupPosition).getCart().get(childPosition);
     }
 
     @Override
@@ -64,8 +81,8 @@ public class ShoppingListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-        Store shoppingList = (Store) getGroup(groupPosition);
-        String shoppingListTitle = shoppingList.getStoreName();
+        final ShoppingList shoppingList = (ShoppingList) getGroup(groupPosition);
+        String shoppingListTitle = shoppingList.getShoppingListName();
 
         if(convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -74,15 +91,21 @@ public class ShoppingListAdapter extends BaseExpandableListAdapter {
         }
 
         TextView shoppingListTitleView = convertView.findViewById(R.id.shopping_list_header_name);
-        shoppingListTitleView.setText(shoppingListTitle);
+        TextView shoppingListPriceView = convertView.findViewById(R.id.shopping_list_price);
 
-        return null;
+        shoppingListTitleView.setText(shoppingListTitle);
+        shoppingListPriceView.setText("$" + shoppingList.cartTotal());
+
+        return convertView;
     }
 
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-        Product product = (Product) getChild(groupPosition,childPosition);
-        Store store = (Store) getGroup(groupPosition);
+        final ShoppingList shoppingList = (ShoppingList) getGroup(groupPosition);
+        final Product product = (Product) getChild(groupPosition,childPosition);
+        final Store store = shoppingList.getStore();
+        final boolean[] isStrikeThrough = {false};
+
         String price = "$" + productHandler.getPriceOfProductInStore(product, store);
 
         if(convertView == null) {
@@ -91,17 +114,63 @@ public class ShoppingListAdapter extends BaseExpandableListAdapter {
             convertView = inflater.inflate(R.layout.shopping_list_item, null);
         }
 
-        TextView productNameView = convertView.findViewById(R.id.productNameView);
-        TextView productPriceView = convertView.findViewById(R.id.productPriceView);
+        final TextView productNameView = convertView.findViewById(R.id.productNameView);
+        final TextView productPriceView = convertView.findViewById(R.id.productPriceView);
 
         productNameView.setText(product.getProductName());
         productPriceView.setText(price);
 
-        return null;
+        convertView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                removeProductPrompt(shoppingList,product);
+                return true;
+            }
+        });
+        return convertView;
     }
 
     @Override
     public boolean isChildSelectable(int groupPosition, int childPosition) {
         return false;
+    }
+
+    public void removeProductPrompt(ShoppingList shoppingList, Product product) {
+        //Create alert and link it to our custom dialog
+        AlertDialog.Builder alert = new AlertDialog.Builder(context);
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View dialogView = inflater.inflate(R.layout.dialog_delete_prompt, null);
+        alert.setView(dialogView);
+        final AlertDialog alertDialog = alert.create();
+
+        //get and init components
+        TextView dialogTitle = dialogView.findViewById(R.id.dialog_title);
+        dialogTitle.setText("Remove Product From List?");
+
+        Button yesButton = dialogView.findViewById(R.id.yes_btn);
+        Button noButton = dialogView.findViewById(R.id.no_btn);
+
+        //set behaviour for buttons
+        yesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //remove product from list and update view
+                shoppingListHandler.removeProduct(product,shoppingList);
+
+                updateData();
+
+                alertDialog.dismiss();
+            }
+        });
+
+        noButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+            }
+        });
+
+        // Show the dialog
+        alertDialog.show();
     }
 }
