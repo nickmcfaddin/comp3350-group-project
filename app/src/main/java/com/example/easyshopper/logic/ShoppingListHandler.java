@@ -3,7 +3,6 @@ package com.example.easyshopper.logic;
 import com.example.easyshopper.application.Services;
 import com.example.easyshopper.objects.Product;
 import com.example.easyshopper.objects.ShoppingList;
-import com.example.easyshopper.objects.Store;
 import com.example.easyshopper.persistence.ShoppingListPersistence;
 
 import java.util.List;
@@ -44,9 +43,7 @@ public class ShoppingListHandler {
     //!!
     //create a new shopping list and add to overall shopping list array
     //idk How shoppingListId work, does it will be gaven as parameter with this function?
-    public void createShoppingList(String shoppingListName, Store store){
-        ShoppingList newList = new ShoppingList(shoppingListName, store);
-
+    public void createShoppingList(ShoppingList newList){
         shoppingListPersistence.addShoppingList(newList);
     }
 

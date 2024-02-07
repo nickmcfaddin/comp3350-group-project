@@ -2,10 +2,8 @@ package com.example.easyshopper.persistence.stub;
 
 import com.example.easyshopper.application.Services;
 import com.example.easyshopper.objects.Product;
-import com.example.easyshopper.objects.ShoppingList;
 import com.example.easyshopper.objects.Store;
 import com.example.easyshopper.persistence.ProductPersistence;
-import com.example.easyshopper.persistence.ShoppingListPersistence;
 import com.example.easyshopper.persistence.StorePersistence;
 
 import java.util.ArrayList;
@@ -76,5 +74,24 @@ public class StorePersistenceStub implements StorePersistence {
             }
         }
         return null;
+    }
+
+    //remove store form list, for unittest
+    public void removeStore(Store store){
+        for(Store i : storeList){
+            if(i.equals(store)){
+                storeList.remove(i);
+                return;
+            }
+        }
+    }
+
+    public void addStore(Store store){
+        for (Store i :storeList){
+            if(i.equals(store)){
+                return;
+            }
+        }
+        storeList.add(store);
     }
 }

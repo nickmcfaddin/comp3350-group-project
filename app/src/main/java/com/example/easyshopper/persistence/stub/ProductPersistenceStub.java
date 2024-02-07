@@ -1,13 +1,10 @@
 package com.example.easyshopper.persistence.stub;
 
 import com.example.easyshopper.objects.Product;
-import com.example.easyshopper.objects.Store;
 import com.example.easyshopper.persistence.ProductPersistence;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -41,6 +38,8 @@ public class ProductPersistenceStub implements ProductPersistence {
 
         return null;
     }
+
+
 
     //Obtain a product using its productName
     @Override

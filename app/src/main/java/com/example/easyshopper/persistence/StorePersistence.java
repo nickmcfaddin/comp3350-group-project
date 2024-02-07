@@ -19,4 +19,8 @@ public interface StorePersistence {
 
     //Returns a single Store identified by a storeName
     Store getStoreByName(String storeName);
+
+    void removeStore(Store store);
+
+    void addStore(Store store);
 }
