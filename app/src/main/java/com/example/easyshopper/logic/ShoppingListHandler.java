@@ -33,10 +33,8 @@ public class ShoppingListHandler {
     }
 
     //create a new shopping list and add to overall shopping list array
-    //idk How shoppingListId work, does it will be gaven as parameter with this function?
     public void createShoppingList(Store store){
         ShoppingList newList = new ShoppingList(store);
-
         shoppingListPersistence.addShoppingList(newList);
     }
 

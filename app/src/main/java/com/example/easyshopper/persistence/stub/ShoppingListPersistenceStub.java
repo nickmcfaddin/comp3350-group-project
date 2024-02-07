@@ -45,7 +45,7 @@ public class ShoppingListPersistenceStub implements ShoppingListPersistence {
     //Returns all currently existing ShoppingList's
     @Override
     public List<ShoppingList> getExistingShoppingLists() {
-        return Collections.unmodifiableList(shoppingListArray);
+        return shoppingListArray;
     }
 
     //Updates the ShoppingList's information

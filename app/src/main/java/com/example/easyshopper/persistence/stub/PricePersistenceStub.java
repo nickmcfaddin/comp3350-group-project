@@ -18,7 +18,6 @@ import java.text.DecimalFormat;
 //Price fake db
 public class PricePersistenceStub implements PricePersistence {
     private List<Price> priceList;
-    private static final DecimalFormat decfor = new DecimalFormat("0.00");
 
     //Stub Constructor
     public PricePersistenceStub() {
@@ -33,12 +32,6 @@ public class PricePersistenceStub implements PricePersistence {
         //Gives us the total quantity of stores and products
         int totalStores = storePersistence.getExistingStores().size();
         int totalProducts = productPersistence.getExistingProducts().size();
-
-        //Setup for random price generator between $1.00 and $49.99
-        Random rand = new Random();
-        int randomInt;
-        double randomDouble;
-        double totalPrice;
 
         //Iterates over every Store and every Product, assigning a random price to each specific Product in a Store
         // i = storeID, j = productID and both IDs start at 1

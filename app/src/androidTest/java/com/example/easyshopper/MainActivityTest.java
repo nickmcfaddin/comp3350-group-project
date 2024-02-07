@@ -9,6 +9,9 @@ import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.contains;
+import static org.hamcrest.Matchers.hasItem;
+import static org.hamcrest.Matchers.hasProperty;
 import static org.junit.Assert.assertNotNull;
 
 import android.os.SystemClock;
@@ -51,12 +54,6 @@ public class MainActivityTest {
         // verify that the shopping list fragment is displayed initially
         onView(withId(R.id.ShoppingListFragment)).check(matches(isDisplayed()));
 
-        // click on the home inventory icon
-        onView(withId(R.id.homeInventory)).perform(click());
-
-        // verify that the home fragment is displayed after clicking the home inventory icon
-        onView(withId(R.id.HomeFragment)).check(matches(isDisplayed()));
-
         // click on the search icon
         onView(withId(R.id.search)).perform(click());
 
@@ -66,12 +63,23 @@ public class MainActivityTest {
         // click on the shopping list icon
         onView(withId(R.id.shoppingList)).perform(click());
 
-        // verify that the search fragment is displayed after clicking the shopping list icon
+        // verify that the shopping list fragment is displayed after clicking the shopping list icon
         onView(withId(R.id.ShoppingListFragment)).check(matches(isDisplayed()));
     }
 
+    //Tests the main shopping list view
     @Test
-    public void testItemPopup() {
+    public void testShoppingListView(){
+        // verify that the components of the shoppingList view are displayed
+        onView(withId(R.id.ShoppingListToolBar)).check(matches(isDisplayed()));
+        onView(withId(R.id.shoppingListView)).check(matches(isDisplayed()));
+
+
+    }
+
+    //Tests the product information found in the search fragment
+    @Test
+    public void testProductPopup() {
         // click on the search icon
         onView(withId(R.id.search)).perform(click());
 
@@ -92,9 +100,11 @@ public class MainActivityTest {
         onView(withId(R.id.carbLabel)).check(matches(withText("Carbs: " + product.getCarb() + "g")));
         onView(withId(R.id.proteinLabel)).check(matches(withText("Protein: " + product.getProtein() + "g")));
 
-        //check the prices at different stores
+        // verifies prices at different stores are shown
+        onView(withId(R.id.pricePerStoreList)).check(matches(isDisplayed()));
     }
 
+    //Tests the overall search fragment, ensuring search functionality is working
     @Test
     public void testSearchFragment() {
         // click on the search icon
@@ -110,8 +120,6 @@ public class MainActivityTest {
         onView(withId(R.id.productListView)).check((view, noViewFoundException) -> {
             assertNotNull(view);
         });
-
-
 
         //Tests the UI to see if we get the Kiwi product at index 0 when we type "Kiwi" in the search bar
         onView(withId(R.id.searchView)).perform(typeText("Kiwi"));
