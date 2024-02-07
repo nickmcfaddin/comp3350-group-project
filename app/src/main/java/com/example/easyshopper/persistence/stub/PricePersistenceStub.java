@@ -45,16 +45,7 @@ public class PricePersistenceStub implements PricePersistence {
         // i = storeID, j = productID and both IDs start at 1
         for (int i=1; i<totalStores + 1; i++){
             for (int j=1; j<totalProducts + 1; j++){
-                if (i==1 && j==1){
-                    totalPrice = 12.34;
-                }
-                else {
-                    randomInt = rand.nextInt(49);
-                    randomDouble = rand.nextDouble();
-                    totalPrice = Double.parseDouble(decfor.format(randomInt + randomDouble));
-                }
-
-                priceList.add(new Price(i, j, totalPrice));
+                priceList.add(new Price(i, j, 2.50));
             }
         }
     }

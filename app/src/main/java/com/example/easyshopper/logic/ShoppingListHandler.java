@@ -6,6 +6,8 @@ import com.example.easyshopper.objects.ShoppingList;
 import com.example.easyshopper.objects.Store;
 import com.example.easyshopper.persistence.ShoppingListPersistence;
 
+import java.util.List;
+
 
 //Handles the shopping lists
 public class ShoppingListHandler {
@@ -27,6 +29,10 @@ public class ShoppingListHandler {
 
     public String getShoppingListByName(){
         return null;
+    }
+
+    public List<ShoppingList> getAllShoppingLists(){
+        return shoppingListPersistence.getExistingShoppingLists();
     }
 
     //add item into the given shopping list

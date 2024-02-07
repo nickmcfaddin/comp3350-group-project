@@ -1,4 +1,6 @@
 package com.example.easyshopper.objects;
+import androidx.annotation.NonNull;
+
 import java.util.ArrayList;
 
 
@@ -42,4 +44,10 @@ public class Product {
     }
 
     public double getCalories() {return this.calories;}
+
+    @NonNull
+    @Override
+    public String toString() {
+        return productName;
+    }
 }

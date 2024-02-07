@@ -6,11 +6,11 @@
     android:paddingHorizontal="20dp"
     android:paddingVertical="15dp"
     android:background="@color/primary_theme"
-    android:backgroundTint="#1CFFFFFF"
+    android:backgroundTint="#0DFFFFFF"
     android:layout_marginHorizontal="350dp">
 
     <TextView
-        android:id="@+id/input_dialog_title"
+        android:id="@+id/dialog_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/inter_semibold"
@@ -18,7 +18,7 @@
         android:textSize="20sp" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/cancel_btn"
+        android:id="@+id/no_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/input_dialog_title"
@@ -31,7 +31,7 @@
     </androidx.appcompat.widget.AppCompatButton>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/submit_btn"
+        android:id="@+id/yes_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/input_dialog_title"

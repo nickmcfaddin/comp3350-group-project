@@ -12,7 +12,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:icon="@drawable/icon_home_line"
-        android:title="Home Inventory" />
+        android:title="Home Inventory"
+        android:visible="false" />
     <item
         android:id="@+id/search"
         android:layout_width="wrap_content"
