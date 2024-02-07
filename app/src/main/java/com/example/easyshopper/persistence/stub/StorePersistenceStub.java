@@ -54,4 +54,33 @@ public class StorePersistenceStub implements StorePersistence {
         }
         return null;
     }
+
+    //Returns a single Store identified by a storeName
+    public Store getStoreByName(String storeName){
+        for (int i=0; i<storeList.size(); i++){
+            if (storeList.get(i).getStoreName().toLowerCase().contains(storeName.toLowerCase())){
+                return storeList.get(i);
+            }
+        }
+        return null;
+    }
+
+    //remove store form list, for unittest
+    public void removeStore(Store store){
+        for(Store i : storeList){
+            if(i.equals(store)){
+                storeList.remove(i);
+                return;
+            }
+        }
+    }
+
+    public void addStore(Store store){
+        for (Store i :storeList){
+            if(i.equals(store)){
+                return;
+            }
+        }
+        storeList.add(store);
+    }
 }
