@@ -42,7 +42,6 @@ public class SearchFragment extends Fragment implements ProductViewInterface {
         // Required empty public constructor
     }
 
-    // TODO: Rename and change types and number of parameters
     public static SearchFragment newInstance() {
         return new SearchFragment();
     }
@@ -58,6 +57,7 @@ public class SearchFragment extends Fragment implements ProductViewInterface {
         // Inflate the layout for this fragment
         View rootView =  inflater.inflate(R.layout.fragment_search, container, false);
 
+        //set behaviour for components
         initComponents(rootView);
 
         return rootView;
@@ -75,10 +75,10 @@ public class SearchFragment extends Fragment implements ProductViewInterface {
     public void onItemClick(int position) {
         //get product that has been clicked
         Product clickedProduct = productList.get(position);
+
+        //start an popup showing more information about the clicked product
         Intent intent = new Intent(getActivity(), ProductViewActivity.class);
-
         intent.putExtra("Product ID", clickedProduct.getProductID());
-
         startActivity(intent);
     }
 

@@ -16,7 +16,6 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckedTextView;
-import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -67,12 +66,15 @@ public class ShoppingListFragment extends Fragment {
         // Inflate the layout for this fragment
         View rootView =  inflater.inflate(R.layout.fragment_shopping_list, container, false);
 
+        //set behaviour for components
         initComponents(rootView);
 
         return rootView;
     }
 
+    //show a prompt asking the user what products they would like added to their lists
     public void addProductDialog() {
+        //get list of products to show
         List<Product> productList = productHandler.getAllProducts();
 
         //Create alert and link it to our custom dialog
@@ -81,7 +83,7 @@ public class ShoppingListFragment extends Fragment {
         alert.setView(dialogView);
         final AlertDialog alertDialog = alert.create();
 
-        // Initialize boolean array to track selected categories
+        // Initialize boolean array to track selected products
         boolean[] checkedItems = new boolean[productList.size()];
 
         //get and init components
@@ -116,7 +118,8 @@ public class ShoppingListFragment extends Fragment {
 
                 //check if user has not clicked any product
                 if(!clickedProducts.isEmpty()){
-                    addProductsToStoreDialog(clickedProducts);
+                    //show prompt asking which shopping lists to add to
+                    addProductsToListDialog(clickedProducts);
                 }
 
                 alertDialog.dismiss();
@@ -134,7 +137,8 @@ public class ShoppingListFragment extends Fragment {
         alertDialog.show();
     }
 
-    public void addProductsToStoreDialog(List<Product> clickedProducts) {
+    //show a prompt asking the user what lists they would like to add their products onto
+    public void addProductsToListDialog(List<Product> clickedProducts) {
         List<ShoppingList> shoppingLists = shoppingListHandler.getAllShoppingLists();
 
         //Create alert and link it to our custom dialog
@@ -148,7 +152,7 @@ public class ShoppingListFragment extends Fragment {
 
         //get and init components
         TextView dialogTitle = dialogView.findViewById(R.id.input_dialog_title);
-        dialogTitle.setText("Choose Shopping lists to add Products into:");
+        dialogTitle.setText("Choose Shopping Lists to Add Products Onto:");
 
         ListView listView = dialogView.findViewById(R.id.list_view);
         ArrayAdapter<ShoppingList> listAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_multiple_choice, shoppingLists);
@@ -183,6 +187,7 @@ public class ShoppingListFragment extends Fragment {
                     }
                 }
 
+                //update the displayed lists
                 updateShoppingListView();
 
                 alertDialog.dismiss();
@@ -200,6 +205,7 @@ public class ShoppingListFragment extends Fragment {
         alertDialog.show();
     }
 
+    //show a prompt asking the user what store they'd like to make a shopping list for
     public void createListDialog() {
         final Store[] selectedStore = {null};
 
@@ -239,7 +245,6 @@ public class ShoppingListFragment extends Fragment {
 
                 //create shopping list and update the list view
                 shoppingListHandler.createShoppingList(store);
-
                 updateShoppingListView();
 
                 alertDialog.dismiss();
@@ -257,7 +262,9 @@ public class ShoppingListFragment extends Fragment {
         alertDialog.show();
     }
 
+    //show a prompt asking the user what list they'd like to delete
     public void deleteListDialog() {
+        //get all existing shopping lists
         List<ShoppingList> shoppingLists = shoppingListHandler.getAllShoppingLists();
 
         //Create alert and link it to our custom dialog
@@ -271,7 +278,7 @@ public class ShoppingListFragment extends Fragment {
 
         //get and init components
         TextView dialogTitle = dialogView.findViewById(R.id.input_dialog_title);
-        dialogTitle.setText("Choose Shopping lists to Delete:");
+        dialogTitle.setText("Choose Shopping Lists to Delete:");
 
         ListView listView = dialogView.findViewById(R.id.list_view);
         ArrayAdapter<ShoppingList> listAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_multiple_choice, shoppingLists);

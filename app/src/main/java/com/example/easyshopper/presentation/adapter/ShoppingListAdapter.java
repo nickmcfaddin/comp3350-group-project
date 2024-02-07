@@ -40,7 +40,6 @@ public class ShoppingListAdapter extends BaseExpandableListAdapter  {
     //update from internal sources
     public void updateData() {
         shoppingLists = shoppingListHandler.getAllShoppingLists();
-        Log.i("asdas", shoppingLists.toString());
         notifyDataSetChanged();
     }
 
@@ -81,15 +80,18 @@ public class ShoppingListAdapter extends BaseExpandableListAdapter  {
 
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
+        //get values
         final ShoppingList shoppingList = (ShoppingList) getGroup(groupPosition);
         String shoppingListTitle = shoppingList.getShoppingListName();
 
+        //create view if not initialized
         if(convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
             convertView = inflater.inflate(R.layout.shopping_list_header, null);
         }
 
+        //bind value to display
         TextView shoppingListTitleView = convertView.findViewById(R.id.shopping_list_header_name);
         TextView shoppingListPriceView = convertView.findViewById(R.id.shopping_list_price);
 
@@ -101,11 +103,10 @@ public class ShoppingListAdapter extends BaseExpandableListAdapter  {
 
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
+        //get values
         final ShoppingList shoppingList = (ShoppingList) getGroup(groupPosition);
         final Product product = (Product) getChild(groupPosition,childPosition);
         final Store store = shoppingList.getStore();
-        final boolean[] isStrikeThrough = {false};
-
         String price = "$" + productHandler.getPriceOfProductInStore(product, store);
 
         if(convertView == null) {
@@ -114,12 +115,14 @@ public class ShoppingListAdapter extends BaseExpandableListAdapter  {
             convertView = inflater.inflate(R.layout.shopping_list_item, null);
         }
 
+        //bind values to display
         final TextView productNameView = convertView.findViewById(R.id.productNameView);
         final TextView productPriceView = convertView.findViewById(R.id.productPriceView);
 
         productNameView.setText(product.getProductName());
         productPriceView.setText(price);
 
+        //ask user if they want to remove this item from the list
         convertView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -135,6 +138,7 @@ public class ShoppingListAdapter extends BaseExpandableListAdapter  {
         return false;
     }
 
+    //show user a prompt asking them if they want to remove product from a list
     public void removeProductPrompt(ShoppingList shoppingList, Product product) {
         //Create alert and link it to our custom dialog
         AlertDialog.Builder alert = new AlertDialog.Builder(context);
