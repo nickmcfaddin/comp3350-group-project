@@ -24,15 +24,12 @@ public class ShoppingListUnitTest {
         Store store = new Store(1, "Kwik-E-Mart");
 
         //Create ShoppingList to use for tests
-        ShoppingList shoppingList = new ShoppingList("shopping list 1", store);
+        ShoppingList shoppingList = new ShoppingList(store);
 
         //Test GETTER methods
         assertNotNull(store);
-        assertEquals("shopping list 1", shoppingList.getShoppingListName());
+        assertEquals("Kwik-E-Mart", shoppingList.getShoppingListName());
         assertEquals(store, shoppingList.getStore());
-
-        //Tests our empty list method
-        assertTrue(shoppingList.isEmpty());
 
         //Create new Product to use for test
         Product product = new Product(1, "Eggs", 0.3, 5, 0.8);
@@ -47,8 +44,6 @@ public class ShoppingListUnitTest {
         //Testing ShoppingList functions
         assertEquals(productArrayList, shoppingList.getItemList());
         assertTrue(shoppingList.checkForProductInCart(product));
-
-        assertEquals(12.34, shoppingList.cartTotal(), 0.00001);
 
         //Test Product removal from ShoppingList
         shoppingList.removeProductFromCart(product);

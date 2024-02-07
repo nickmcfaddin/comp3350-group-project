@@ -3,6 +3,8 @@ package com.example.easyshopper.logic;
 import com.example.easyshopper.application.Services;
 import com.example.easyshopper.objects.Product;
 import com.example.easyshopper.objects.ShoppingList;
+import com.example.easyshopper.objects.Store;
+import com.example.easyshopper.persistence.PricePersistence;
 import com.example.easyshopper.persistence.ShoppingListPersistence;
 
 import java.util.List;
@@ -10,18 +12,8 @@ import java.util.List;
 
 //Handles the shopping lists
 public class ShoppingListHandler {
-
-    /*
-    *Methods to implement
-    *   Get shopping list by name
-    *   Add an item to a shopping list
-    *   Creating a shopping list
-    *   Deleting a shopping list
-    *   Removing an item from a shopping list
-    *   Does a list contain a certain item
-     */
-
     private ShoppingListPersistence shoppingListPersistence = Services.getShoppingListPersistence();
+    private PricePersistence pricePersistence = Services.getPricePersistence();
 
     //construct
     public ShoppingListHandler(){}
@@ -40,10 +32,11 @@ public class ShoppingListHandler {
         shoppingListPersistence.updateShoppingList(shoppingList);
     }
 
-    //!!
     //create a new shopping list and add to overall shopping list array
     //idk How shoppingListId work, does it will be gaven as parameter with this function?
-    public void createShoppingList(ShoppingList newList){
+    public void createShoppingList(Store store){
+        ShoppingList newList = new ShoppingList(store);
+
         shoppingListPersistence.addShoppingList(newList);
     }
 
@@ -56,5 +49,34 @@ public class ShoppingListHandler {
     public void removeProduct(Product product, ShoppingList shoppingList){
         shoppingList.removeProductFromCart(product);
         shoppingListPersistence.updateShoppingList(shoppingList);
+    }
+
+
+    //Gives total price of the ShoppingList
+    public double getCartTotal(ShoppingList shoppingList){
+        double total = 0;
+        Store store = shoppingList.getStore();
+
+        for (Product i : shoppingList.getCart()){
+            total += pricePersistence.getPrice(i, store);
+        }
+
+        //modify this double value so that it is only two decimal places long
+        String formattedNumber = String.format("%.2f", total);
+        total = Double.parseDouble(formattedNumber);
+
+        return total;
+    }
+
+    //Returns the total price of all Product's on all ShoppingList's combined
+    public double getAllShoppingListTotal() {
+        double total = 0;
+        List<ShoppingList> shoppingLists = shoppingListPersistence.getExistingShoppingLists();
+
+        for (ShoppingList shoppingList : shoppingLists){
+            total += getCartTotal(shoppingList);
+        }
+
+        return total;
     }
 }

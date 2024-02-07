@@ -13,7 +13,6 @@ import java.util.List;
 
 //For price assigning to products
 import java.util.Random;
-import java.math.RoundingMode;
 import java.text.DecimalFormat;
 
 //Price fake db
@@ -45,7 +44,7 @@ public class PricePersistenceStub implements PricePersistence {
         // i = storeID, j = productID and both IDs start at 1
         for (int i=1; i<totalStores + 1; i++){
             for (int j=1; j<totalProducts + 1; j++){
-                priceList.add(new Price(i, j, i * j));
+                priceList.add(new Price(i, j, i * j + 0.99));
             }
         }
     }

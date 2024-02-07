@@ -15,5 +15,5 @@
         android:id="@+id/deleteList"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:title="Delete a List" />
+        android:title="Delete a list" />
 </menu>

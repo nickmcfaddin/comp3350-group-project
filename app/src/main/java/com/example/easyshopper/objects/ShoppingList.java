@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 
 import com.example.easyshopper.application.Services;
 import com.example.easyshopper.persistence.PricePersistence;
-import com.example.easyshopper.persistence.stub.PricePersistenceStub;
 import java.util.UUID;
 
 import java.util.ArrayList;
@@ -12,15 +11,13 @@ import java.util.ArrayList;
 //List is created per store, products added to list
 public class ShoppingList {
     PricePersistence pricePersistence = Services.getPricePersistence();
-    private String shoppingListName;
     private String shoppingListID;
     private ArrayList<Product> cart;
     private Store store;
 
     //Constructor
-    public ShoppingList(String shoppingListName, Store store){
+    public ShoppingList(Store store){
         this.shoppingListID = UUID.randomUUID().toString();
-        this.shoppingListName = shoppingListName;
         this.store = store;
         this.cart = new ArrayList<>(); //Cart represents the items in the ShoppingList
     }
@@ -28,7 +25,7 @@ public class ShoppingList {
     // GETTERS
 
     public String getShoppingListName() {
-        return shoppingListName;
+        return store.getStoreName();
     }
 
     public ArrayList<Product> getCart() {
@@ -38,10 +35,6 @@ public class ShoppingList {
     public Store getStore(){return store;}
 
     public String getShoppingListID() {return shoppingListID;}
-
-    public boolean isEmpty(){
-        return cart.size() == 0;
-    }
 
     public ArrayList<Product> getItemList(){
         return cart;
@@ -71,24 +64,9 @@ public class ShoppingList {
         }
     }
 
-    //Gives total price of the ShoppingList
-    public double cartTotal(){
-        double total = 0;
-
-        for (Product i : cart){
-            total += pricePersistence.getPrice(i, this.store);
-        }
-
-        //modify this double value so that it is only two decimal places long
-        String formattedNumber = String.format("%.2f", total);
-        total = Double.parseDouble(formattedNumber);
-
-        return total;
-    }
-
     @NonNull
     @Override
     public String toString() {
-        return shoppingListName;
+        return store.getStoreName();
     }
 }

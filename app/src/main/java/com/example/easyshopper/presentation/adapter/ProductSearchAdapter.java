@@ -59,6 +59,7 @@ public class ProductSearchAdapter extends RecyclerView.Adapter<ProductSearchAdap
             super(itemView);
             productNameView = itemView.findViewById(R.id.productNameView);
 
+            //listen for item clicks and create a method
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

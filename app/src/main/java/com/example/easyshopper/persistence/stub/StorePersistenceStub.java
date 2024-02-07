@@ -9,7 +9,6 @@ import com.example.easyshopper.persistence.StorePersistence;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 
 public class StorePersistenceStub implements StorePersistence {
     private List<Store> storeList;
@@ -44,16 +43,6 @@ public class StorePersistenceStub implements StorePersistence {
             store.addProductToStore(product);
         }
     }
-
-    //Returns a list of every Product in a selected Store
-    public List<Product> getAllProductInStore(Store store){
-        for (int i=0; i<storeList.size(); i++){
-            if (Objects.equals(storeList.get(i).getStoreName(), store.getStoreName())){
-                return storeList.get(i).getStoreProducts();
-            }
-        }
-        return null;
-    };
 
     //Returns a single Store identified by a storeID
     public Store getStoreById(int storeID){

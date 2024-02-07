@@ -38,26 +38,26 @@ public class ProductViewActivity extends AppCompatActivity {
             }
         });
 
+        //get id passed to the intent
         int productID = getIntent().getIntExtra("Product ID", 0);
-        Product product = productHandler.getProductByID(productID);
 
+        //get product with associating id and its values
+        Product product = productHandler.getProductByID(productID);
         String name = product.getProductName();
         double calories = product.getCalories();
         double fat = product.getFat();
         double carbs = product.getCarb();
         double protein = product.getProtein();
         String xmlFileName = "icon_" + name.toLowerCase();
-
         List<Price> prices = productHandler.allStoreSortedPrice(product);
 
+        //get components from xml
         TextView nameTextView = findViewById(R.id.searchedProductName);
         TextView caloriesTextView = findViewById(R.id.caloriesLabel);
         TextView fatTextView = findViewById(R.id.fatLabel);
         TextView carbsTextView = findViewById(R.id.carbLabel);
         TextView proteinTextView = findViewById(R.id.proteinLabel);
-
         ImageView productIconImgView = findViewById(R.id.productPopUpIcon);
-
 
         // set icon for product
         Context context = productIconImgView.getContext();

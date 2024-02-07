@@ -11,7 +11,6 @@ import com.example.easyshopper.persistence.StorePersistence;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 
 public class ShoppingListPersistenceStub implements ShoppingListPersistence {
     private List<ShoppingList> shoppingListArray;
@@ -29,7 +28,7 @@ public class ShoppingListPersistenceStub implements ShoppingListPersistence {
         List<Product> existingProducts = productPersistence.getExistingProducts();
 
         for (int i=0; i<existingStores.size(); i++){
-            shoppingListArray.add(new ShoppingList(String.valueOf(i + 1), existingStores.get(i)));
+            shoppingListArray.add(new ShoppingList(existingStores.get(i)));
         }
 
         for (int i=0; i<shoppingListArray.size(); i++){
@@ -47,17 +46,6 @@ public class ShoppingListPersistenceStub implements ShoppingListPersistence {
     @Override
     public List<ShoppingList> getExistingShoppingLists() {
         return Collections.unmodifiableList(shoppingListArray);
-    }
-
-    //Returns a single ShoppingList, obtainable by its shoppingListID
-    @Override
-    public ShoppingList getShoppingListById(String id) {
-        for (int i = 0; i < shoppingListArray.size(); i++){
-            if (shoppingListArray.get(i).getShoppingListID().equals(id)){
-                return shoppingListArray.get(i);
-            }
-        }
-        return null;
     }
 
     //Updates the ShoppingList's information
@@ -83,8 +71,9 @@ public class ShoppingListPersistenceStub implements ShoppingListPersistence {
         for (int i=0; i<shoppingListArray.size(); i++){
             ShoppingList indexShoppingList = shoppingListArray.get(i);
 
-            if ((indexShoppingList.getShoppingListID().equals(shoppingList.getShoppingListID()))){
+            if ((indexShoppingList.getShoppingListID().equals(shoppingList.getShoppingListID())) || shoppingList.getStore().getStoreID() == indexShoppingList.getStore().getStoreID()){
                 // shoppingList id already existed
+                // or shopping list with store already exists
                 return;
             }
         }
@@ -100,16 +89,5 @@ public class ShoppingListPersistenceStub implements ShoppingListPersistence {
                 return;
             }
         }
-    }
-
-    //Returns the total price of all Product's on all ShoppingList's combined
-    @Override
-    public double getAllShoppingListTotal() {
-        double total = 0;
-
-        for (int i=0; i<shoppingListArray.size(); i++){
-            total += shoppingListArray.get(i).cartTotal();
-        }
-        return total;
     }
 }

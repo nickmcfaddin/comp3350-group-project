@@ -34,12 +34,14 @@ public class ItemPopupAdapter extends RecyclerView.Adapter<ItemPopupAdapter.Prod
 
     @Override
     public void onBindViewHolder(@NonNull ProductPriceViewHolder holder, int position) {
+        //get values
         StoreHandler storeHandler = new StoreHandler();
         Price currentPrice = priceList.get(position);
 
         int storeID = currentPrice.getStoreID();
         Store store = storeHandler.getStoreById(storeID);
 
+        //bind values to the display
         holder.productPriceView.setText("$" + currentPrice.getPrice());
         holder.productStoreNameView.setText(store.getStoreName());
     }

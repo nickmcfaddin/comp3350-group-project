@@ -44,11 +44,6 @@ public class MainActivity extends AppCompatActivity {
 
             currentFragment = itemId;
 
-            //If the current fragment was the search page, retrieve the searched list to display once the user comes back
-            if (currentFragment == bottomNavigationView.getMenu().getItem(2).getItemId()) {
-                //busStopsList = searchFragment.getBusStops();
-            }
-
             //display the fragment requested by the user
             if (itemId == R.id.shoppingList) {
                 replaceFragment(shoppingListFragment);
@@ -56,13 +51,6 @@ public class MainActivity extends AppCompatActivity {
                 //Update Icons
                 item.setIcon(R.drawable.icon_paper_fill);
                 bottomNavigationView.getMenu().getItem(1).setIcon(R.drawable.icon_home_line);
-                bottomNavigationView.getMenu().getItem(2).setIcon(R.drawable.icon_search_line);
-            } else if (itemId == R.id.homeInventory) {
-                replaceFragment(new HomeFragment());
-
-                //Update Icons
-                item.setIcon(R.drawable.icon_home_fill);
-                bottomNavigationView.getMenu().getItem(0).setIcon(R.drawable.icon_paper_line);
                 bottomNavigationView.getMenu().getItem(2).setIcon(R.drawable.icon_search_line);
             } else if (itemId == R.id.search) {
                 replaceFragment(searchFragment);
