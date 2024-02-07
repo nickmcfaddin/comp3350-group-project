@@ -28,25 +28,24 @@ public class ShoppingListHandlerTest {
         //add a test store to store list
         Product productTemp = pHandlerTemp.getProductByID(1);
         Store store = new Store(10, "testStore");
-        ShoppingList testList = new ShoppingList("TestList", store);
+        ShoppingList testList = new ShoppingList(store);
 
         StorePersistence storePersistence = Services.getStorePersistence();
         storePersistence.addStore(store);
 
         System.out.println("Testing createShoppingList");
-        sLHandlertemp.createShoppingList(testList);
+        sLHandlertemp.createShoppingList(store);
         assert(existLists.size() != Services.getShoppingListPersistence().getExistingShoppingLists().size());
         System.out.println("Pass");
 
-
         System.out.println("Testing addItemToList");
         sLHandlertemp.addItemToList(productTemp, testList);
-        assert(!testList.isEmpty());
+        assert(!testList.getCart().isEmpty());
         System.out.println("Pass");
 
         System.out.println("Testing removeProduct");
         sLHandlertemp.removeProduct(productTemp, testList);
-        assert (testList.isEmpty());
+        assert (testList.getCart().isEmpty());
         System.out.println("Pass");
 
         System.out.println("Testing removeShoppingList");

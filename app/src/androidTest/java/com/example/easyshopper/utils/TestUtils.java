@@ -44,7 +44,7 @@ public class TestUtils {
 
     public void addItemToList(Product newProduct, ShoppingList shoppingList){shoppingListHandler.addItemToList(newProduct, shoppingList);}
 
-    public void createShoppingList(String shoppingListName, Store store){shoppingListHandler.createShoppingList(shoppingListName, store);}
+    public void createShoppingList(String shoppingListName, Store store){shoppingListHandler.createShoppingList(store);}
 
     public void removeShoppingList(ShoppingList shoppingList){shoppingListHandler.removeShoppingList(shoppingList);}
 
