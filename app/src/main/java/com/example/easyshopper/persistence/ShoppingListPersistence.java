@@ -23,9 +23,6 @@ public interface ShoppingListPersistence {
     //Delete a ShoppingList from the overall ShoppingList array by it's shoppingListID
     void deleteShoppingList(ShoppingList shoppingList);
 
-    //Returns the total price of all Product's on all ShoppingList's combined
-    double getAllShoppingListTotal();
-
     //Currently removed functions -> ProductPersistence
     //Product addProduct(Product newProduct);
     //Product deleteProduct(Product product);

@@ -94,7 +94,7 @@ public class ShoppingListAdapter extends BaseExpandableListAdapter  {
         TextView shoppingListPriceView = convertView.findViewById(R.id.shopping_list_price);
 
         shoppingListTitleView.setText(shoppingListTitle);
-        shoppingListPriceView.setText("$" + shoppingList.cartTotal());
+        shoppingListPriceView.setText("$" + shoppingListHandler.getCartTotal(shoppingList));
 
         return convertView;
     }

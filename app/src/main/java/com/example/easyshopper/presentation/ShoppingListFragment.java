@@ -215,7 +215,6 @@ public class ShoppingListFragment extends Fragment {
         ArrayAdapter<Store> listAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, storeList);
         autoCompleteTextView.setAdapter(listAdapter);
 
-        EditText editText = dialogView.findViewById(R.id.list_name_input);
         Button cancelButton = dialogView.findViewById(R.id.cancel_btn);
         Button submitButton = dialogView.findViewById(R.id.submit_btn);
 
@@ -233,14 +232,13 @@ public class ShoppingListFragment extends Fragment {
             public void onClick(View v) {
                 //check if user has entered values for both inputs
                 Store store = selectedStore[0];
-                String userString = editText.getText().toString().trim();
-                if(store == null || userString.isEmpty())
+                if(store == null)
                 {
                     return;
                 }
 
                 //create shopping list and update the list view
-                shoppingListHandler.createShoppingList(userString, store);
+                shoppingListHandler.createShoppingList(store);
 
                 updateShoppingListView();
 
@@ -273,7 +271,7 @@ public class ShoppingListFragment extends Fragment {
 
         //get and init components
         TextView dialogTitle = dialogView.findViewById(R.id.input_dialog_title);
-        dialogTitle.setText("Choose Shopping lists to add Products into:");
+        dialogTitle.setText("Choose Shopping lists to Delete:");
 
         ListView listView = dialogView.findViewById(R.id.list_view);
         ArrayAdapter<ShoppingList> listAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_multiple_choice, shoppingLists);
