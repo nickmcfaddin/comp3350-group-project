@@ -11,7 +11,6 @@ import com.example.easyshopper.persistence.StorePersistence;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 
 public class ShoppingListPersistenceStub implements ShoppingListPersistence {
     private List<ShoppingList> shoppingListArray;
@@ -47,17 +46,6 @@ public class ShoppingListPersistenceStub implements ShoppingListPersistence {
     @Override
     public List<ShoppingList> getExistingShoppingLists() {
         return Collections.unmodifiableList(shoppingListArray);
-    }
-
-    //Returns a single ShoppingList, obtainable by its shoppingListID
-    @Override
-    public ShoppingList getShoppingListById(String id) {
-        for (int i = 0; i < shoppingListArray.size(); i++){
-            if (shoppingListArray.get(i).getShoppingListID().equals(id)){
-                return shoppingListArray.get(i);
-            }
-        }
-        return null;
     }
 
     //Updates the ShoppingList's information

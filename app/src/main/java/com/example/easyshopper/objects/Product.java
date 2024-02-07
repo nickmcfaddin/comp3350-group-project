@@ -1,9 +1,6 @@
 package com.example.easyshopper.objects;
 import androidx.annotation.NonNull;
 
-import java.util.ArrayList;
-
-
 public class Product {
     private final int productID;
     private String productName;

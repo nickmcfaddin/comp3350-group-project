@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 
 import com.example.easyshopper.application.Services;
 import com.example.easyshopper.persistence.PricePersistence;
-import com.example.easyshopper.persistence.stub.PricePersistenceStub;
 import java.util.UUID;
 
 import java.util.ArrayList;
@@ -36,10 +35,6 @@ public class ShoppingList {
     public Store getStore(){return store;}
 
     public String getShoppingListID() {return shoppingListID;}
-
-    public boolean isEmpty(){
-        return cart.size() == 0;
-    }
 
     public ArrayList<Product> getItemList(){
         return cart;

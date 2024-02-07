@@ -3,15 +3,12 @@ package com.example.easyshopper.objects;
 import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Store {
     private final int storeID;
     private final String storeName;
 
     private ArrayList<Product> storeProducts;
-
-    private int productID;
 
     //Constructor
     public Store(int storeID, String storeName){
