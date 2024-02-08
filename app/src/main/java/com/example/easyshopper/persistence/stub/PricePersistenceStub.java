@@ -66,6 +66,4 @@ public class PricePersistenceStub implements PricePersistence {
 
         return returnList;
     }
-
-    //Removed functions: getAllPrices, addPrice, getPriceByStore
 }

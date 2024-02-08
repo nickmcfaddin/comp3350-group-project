@@ -14,7 +14,6 @@ public class ProductHandler {
 
     private ProductPersistence productPersistence = Services.getProductPersistence();
     private PricePersistence pricePersistence = Services.getPricePersistence();
-
     public ProductHandler() {}
 
     /*
@@ -33,21 +32,24 @@ public class ProductHandler {
         return productPersistence.getExistingProducts();
     }
 
-    /* this method takes
-     *
+    /*
+     * method gets a product by its productId
      */
     public Product getProductByID(int id)
     {
         return productPersistence.getProductById(id);
     }
 
+    /*
+    * method gets the price of a product in a store
+     */
     public double getPriceOfProductInStore(Product product, Store store)
     {
         return pricePersistence.getPrice(product, store);
     }
 
     /*
-     * Im not sure if this actually does anything
+     * returns a list of all the prices sorted in order for a given product
      */
     public List<Price> allStoreSortedPrice(Product product)
     {

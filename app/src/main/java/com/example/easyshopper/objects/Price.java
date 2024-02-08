@@ -17,11 +17,9 @@ public class Price {
     public int getStoreID(){
         return  storeID;
     }
-
     public int getProductID(){
         return productID;
     }
-
     public double getPrice(){
         return price;
     }
