@@ -38,8 +38,6 @@ public class ProductPersistenceStub implements ProductPersistence {
         return null;
     }
 
-
-
     //Obtain a product using its productName
     @Override
     public List<Product> getProductsByName(String name) {

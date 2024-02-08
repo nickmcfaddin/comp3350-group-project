@@ -1,7 +1,6 @@
 package com.example.easyshopper.business;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
 import com.example.easyshopper.application.Services;

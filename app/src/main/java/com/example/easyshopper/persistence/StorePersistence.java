@@ -1,6 +1,5 @@
 package com.example.easyshopper.persistence;
 
-import com.example.easyshopper.objects.Product;
 import com.example.easyshopper.objects.Store;
 
 import java.util.List;
@@ -13,11 +12,6 @@ public interface StorePersistence {
 
     //Returns a single Store identified by a storeID
     Store getStoreById(int storeID);
-
-    //Returns a single Store identified by a storeName
-    Store getStoreByName(String storeName);
-
-    void removeStore(Store store);
 
     void addStore(Store store);
 }

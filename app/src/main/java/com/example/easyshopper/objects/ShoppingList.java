@@ -1,16 +1,11 @@
 package com.example.easyshopper.objects;
 
 import androidx.annotation.NonNull;
-
-import com.example.easyshopper.application.Services;
-import com.example.easyshopper.persistence.PricePersistence;
 import java.util.UUID;
-
 import java.util.ArrayList;
 
 //List is created per store, products added to list
 public class ShoppingList {
-    PricePersistence pricePersistence = Services.getPricePersistence();
     private String shoppingListID;
     private ArrayList<Product> cart;
     private Store store;

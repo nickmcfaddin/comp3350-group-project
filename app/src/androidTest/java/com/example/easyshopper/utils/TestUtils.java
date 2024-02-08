@@ -22,8 +22,6 @@ public class TestUtils {
     }
 
     //ProductHandler implementations
-    public List<Product> getProductsByName(String productName) {return productHandler.getProductsByName(productName);}
-
     public List<Product> getAllProducts()
     {
         return productHandler.getAllProducts();
@@ -40,17 +38,7 @@ public class TestUtils {
 
 
     //ShoppingListHandler implementations
-    public String getShoppingListByName(){return shoppingListHandler.getShoppingListByName();}
-
     public List<ShoppingList> getAllShoppingList(){return shoppingListHandler.getAllShoppingLists();};
-
-    public void addItemToList(Product newProduct, ShoppingList shoppingList){shoppingListHandler.addItemToList(newProduct, shoppingList);}
-
-    public void createShoppingList(Store store){shoppingListHandler.createShoppingList(store);}
-
-    public void removeShoppingList(ShoppingList shoppingList){shoppingListHandler.removeShoppingList(shoppingList);}
-
-    public void removeProduct(Product product, ShoppingList shoppingList){shoppingListHandler.removeProduct(product, shoppingList);}
 
     public double getCartTotal(ShoppingList shoppingList){return shoppingListHandler.getCartTotal(shoppingList);};
 

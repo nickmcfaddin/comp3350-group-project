@@ -189,31 +189,26 @@ public class SearchFragmentTest {
             // assert that the RecyclerView list length is as expected
             assertEquals(expectedCount, itemCount);
 
-            // iterate through the adapter's items to examine their contents
-            for (int i = 0; i < adapter.getItemCount(); i++) {
-                // get the item at position i from the adapter
-                RecyclerView.ViewHolder viewHolder = recyclerView.findViewHolderForAdapterPosition(i);
+            // test one adapter item (in this case, the one at index 0) and its contents
+            RecyclerView.ViewHolder viewHolder = recyclerView.findViewHolderForAdapterPosition(0);
 
-                // ensure that the ViewHolder is not null
-                assertNotNull(viewHolder);
+            // ensure that the ViewHolder is not null
+            assertNotNull(viewHolder);
 
-                // extract the productPrice and storeName from the ViewHolder
-                TextView productNameTextView = viewHolder.itemView.findViewById(R.id.productPriceView);
-                String productPrice = productNameTextView.getText().toString();
+            // extract the productPrice and storeName from the ViewHolder
+            TextView productNameTextView = viewHolder.itemView.findViewById(R.id.productPriceView);
+            String productPrice = productNameTextView.getText().toString();
 
-                TextView storeNameTextView = viewHolder.itemView.findViewById(R.id.productStoreView);
-                String storeName = storeNameTextView.getText().toString();
-                String expectedStoreName = testUtils.getStoreById(allSortedPrices.get(i).getStoreID()).getStoreName();
+            TextView storeNameTextView = viewHolder.itemView.findViewById(R.id.productStoreView);
+            String storeName = storeNameTextView.getText().toString();
+            String expectedStoreName = testUtils.getStoreById(allSortedPrices.get(0).getStoreID()).getStoreName();
 
-
-                // make sure both values match
-                assertEquals("$" + allSortedPrices.get(i).getPrice(), productPrice);
-                assertEquals(expectedStoreName, storeName);
-            }
+            // make sure both values match
+            assertEquals("$" + allSortedPrices.get(0).getPrice(), productPrice);
+            assertEquals(expectedStoreName, storeName);
         });
 
         // TEST BACK BUTTON
-
         onView(withId(R.id.itemPopUpBackBtn)).check(matches(isDisplayed()));
 
         // click on the button

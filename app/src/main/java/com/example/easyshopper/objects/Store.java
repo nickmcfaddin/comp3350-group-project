@@ -28,12 +28,7 @@ public class Store {
     public String getStoreName(){
         return storeName;
     }
-
     public int getStoreID() {return storeID;}
-
-    public ArrayList<Product> getStoreProducts(){
-        return storeProducts;
-    }
 
     @NonNull
     @Override

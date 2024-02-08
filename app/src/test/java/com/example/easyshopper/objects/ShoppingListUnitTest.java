@@ -1,9 +1,5 @@
 package com.example.easyshopper.objects;
 
-import com.example.easyshopper.objects.Store;
-import com.example.easyshopper.objects.Product;
-import com.example.easyshopper.objects.Price;
-
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;

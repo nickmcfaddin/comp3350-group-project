@@ -13,7 +13,6 @@ import com.example.easyshopper.persistence.stub.StorePersistenceStub;
 public class Services {
     //GETTERS
     public static ProductPersistence getProductPersistence() {return new ProductPersistenceStub();}
-
     public static ShoppingListPersistence getShoppingListPersistence() {return new ShoppingListPersistenceStub();}
     public static PricePersistence getPricePersistence() {return new PricePersistenceStub();}
     public static StorePersistence getStorePersistence() {return new StorePersistenceStub();}

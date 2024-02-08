@@ -9,7 +9,6 @@ import com.example.easyshopper.persistence.ShoppingListPersistence;
 import com.example.easyshopper.persistence.StorePersistence;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class ShoppingListPersistenceStub implements ShoppingListPersistence {

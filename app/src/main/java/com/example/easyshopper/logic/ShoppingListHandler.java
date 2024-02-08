@@ -15,12 +15,8 @@ public class ShoppingListHandler {
     private ShoppingListPersistence shoppingListPersistence = Services.getShoppingListPersistence();
     private PricePersistence pricePersistence = Services.getPricePersistence();
 
-    //construct
+    //constructor
     public ShoppingListHandler(){}
-
-    public String getShoppingListByName(){
-        return null;
-    }
 
     public List<ShoppingList> getAllShoppingLists(){
         return shoppingListPersistence.getExistingShoppingLists();

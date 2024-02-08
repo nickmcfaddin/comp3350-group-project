@@ -1,8 +1,5 @@
 package com.example.easyshopper.objects;
 
-import com.example.easyshopper.objects.Store;
-import com.example.easyshopper.objects.Product; //For store product test
-
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -38,9 +35,6 @@ public class StoreTest {
         //Tests our addProductToStore method ensuring we only have the Product with content and not the nullProduct
         store.addProductToStore(product);
         store.addProductToStore(nullProduct);
-
-        //Tests our last GETTER method with our now verified ArrayList<Product>
-        assertEquals(productArrayList, store.getStoreProducts());
 
         System.out.println("Finished testCreateAStore");
     }

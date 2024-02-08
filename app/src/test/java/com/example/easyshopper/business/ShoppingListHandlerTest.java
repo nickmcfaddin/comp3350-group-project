@@ -51,7 +51,6 @@ public class ShoppingListHandlerTest {
         assertEquals(3, Services.getShoppingListPersistence().getExistingShoppingLists().size());
     }
 
-
     @Test
     public void testItemAddAndRemove() {
         sLHandlertemp.addItemToList(product, sLHandlertemp.getAllShoppingLists().get(0));
@@ -60,7 +59,6 @@ public class ShoppingListHandlerTest {
         sLHandlertemp.removeProduct(product, sLHandlertemp.getAllShoppingLists().get(0));
         assertEquals(4, sLHandlertemp.getAllShoppingLists().get(0).getItemList().size());
     }
-
 
     @Test
     public void testCartTotal(){
