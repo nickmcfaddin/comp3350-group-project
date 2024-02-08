@@ -8,7 +8,9 @@ import org.junit.runners.Suite;
 @LargeTest
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-        MainActivityTest.class
+        MainActivityTest.class,
+        SearchFragmentTest.class,
+        ShoppingListFragmentTest.class
 })
 
 public class AllAcceptanceTests {}

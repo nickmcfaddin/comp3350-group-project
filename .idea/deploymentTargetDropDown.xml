@@ -5,6 +5,12 @@
       <entry key="ActivityTest">
         <State />
       </entry>
+      <entry key="AllAcceptanceTests">
+        <State />
+      </entry>
+      <entry key="ShoppingListFragmentTest">
+        <State />
+      </entry>
       <entry key="app">
         <State>
           <targetSelectedWithDropDown>
