@@ -15,18 +15,18 @@ EasyShopper is a new app that enables shoppers to store, view, and modify their 
 - [Iteration 3](https://code.cs.umanitoba.ca/comp3350-winter2024/lethalcompany-a01-13/-/milestones/13#tab-issues)
 
 ## Features
-- [Overview](https://code.cs.umanitoba.ca/comp3350-winter2024/lethalcompany-a01-13/-/issues/?sort=created_date&state=opened&label_name%5B%5D=Feature&first_page_size=20)
-- [Iteration 1](https://code.cs.umanitoba.ca/comp3350-winter2024/lethalcompany-a01-13/-/issues/?sort=created_date&state=opened&label_name%5B%5D=Feature&milestone_title=Iteration%201&first_page_size=20)
-- [Iteration 2](https://code.cs.umanitoba.ca/comp3350-winter2024/lethalcompany-a01-13/-/issues/?sort=created_date&state=opened&label_name%5B%5D=Feature&milestone_title=Iteration%202&first_page_size=20) 
-- [Iteration 3](https://code.cs.umanitoba.ca/comp3350-winter2024/lethalcompany-a01-13/-/issues/?sort=created_date&state=opened&label_name%5B%5D=Feature&milestone_title=Iteration%203&first_page_size=20)
+- [Overview](https://code.cs.umanitoba.ca/comp3350-winter2024/lethalcompany-a01-13/-/issues/?sort=created_date&state=all&label_name%5B%5D=Feature&first_page_size=20)
+- [Iteration 1](https://code.cs.umanitoba.ca/comp3350-winter2024/lethalcompany-a01-13/-/issues/?sort=created_date&state=all&label_name%5B%5D=Feature&milestone_title=Iteration%201&first_page_size=20)
+- [Iteration 2](https://code.cs.umanitoba.ca/comp3350-winter2024/lethalcompany-a01-13/-/issues/?sort=created_date&state=all&label_name%5B%5D=Feature&milestone_title=Iteration%202&first_page_size=20) 
+- [Iteration 3](https://code.cs.umanitoba.ca/comp3350-winter2024/lethalcompany-a01-13/-/issues/?sort=created_date&state=all&label_name%5B%5D=Feature&milestone_title=Iteration%203&first_page_size=20)
 
 ## User Stories
-- [Iteration 1](https://code.cs.umanitoba.ca/comp3350-winter2024/lethalcompany-a01-13/-/issues/?sort=created_date&state=opened&label_name%5B%5D=User%20Stories&milestone_title=Iteration%201&first_page_size=20)
+- [Iteration 1](https://code.cs.umanitoba.ca/comp3350-winter2024/lethalcompany-a01-13/-/issues/?sort=created_date&state=all&label_name%5B%5D=User%20Stories&milestone_title=Iteration%201&first_page_size=20)
 - Iteration 2
 - Iteration 3
 
 ## Developer Task
-- [Iteration 1](https://code.cs.umanitoba.ca/comp3350-winter2024/lethalcompany-a01-13/-/issues/?sort=created_date&state=opened&label_name%5B%5D=Dev%20Task&milestone_title=Iteration%201&first_page_size=20)
+- [Iteration 1](https://code.cs.umanitoba.ca/comp3350-winter2024/lethalcompany-a01-13/-/issues/?sort=created_date&state=all&label_name%5B%5D=Dev%20Task&milestone_title=Iteration%201&first_page_size=20)
 - Iteration 2
 - Iteration 3
 
