@@ -35,8 +35,6 @@ We were able to implement every feature we intended to, however there were some 
 ## Testing Instructions
 
 ### Running The Application
-Use the latest version on the "production" release branch (last commit made).
-
 There are two screens able to be selected from the bottom navigation bar, the list view and the search view, found on the left and right respectively. 
 
 On the list view, users can add and remove shopping lists associated with affiliated stores, as well as add products to those lists using the "+" icon in the top right hand corner. By holding down an item within a list, users can also delete those items. Stores cannot have duplicates and items cannot be duplicated within a store.
