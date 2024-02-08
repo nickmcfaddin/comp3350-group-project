@@ -46,3 +46,5 @@ EasyShopper is a new app that enables shoppers to store, view, and modify their 
 - Iteration 3
 
 ## Tests
+- [Unit Tests](https://code.cs.umanitoba.ca/comp3350-winter2024/lethalcompany-a01-13/-/blob/main/app/src/test/java/com/example/easyshopper/AllUnitTests.java?ref_type=heads)
+- [Acceptance Tests](https://code.cs.umanitoba.ca/comp3350-winter2024/lethalcompany-a01-13/-/blob/main/app/src/androidTest/java/com/example/easyshopper/AllAcceptanceTests.java?ref_type=heads)
