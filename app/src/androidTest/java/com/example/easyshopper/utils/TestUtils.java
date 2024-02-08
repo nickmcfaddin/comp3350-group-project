@@ -42,18 +42,23 @@ public class TestUtils {
     //ShoppingListHandler implementations
     public String getShoppingListByName(){return shoppingListHandler.getShoppingListByName();}
 
+    public List<ShoppingList> getAllShoppingList(){return shoppingListHandler.getAllShoppingLists();};
+
     public void addItemToList(Product newProduct, ShoppingList shoppingList){shoppingListHandler.addItemToList(newProduct, shoppingList);}
 
-    public void createShoppingList(String shoppingListName, Store store){shoppingListHandler.createShoppingList(store);}
+    public void createShoppingList(Store store){shoppingListHandler.createShoppingList(store);}
 
     public void removeShoppingList(ShoppingList shoppingList){shoppingListHandler.removeShoppingList(shoppingList);}
 
     public void removeProduct(Product product, ShoppingList shoppingList){shoppingListHandler.removeProduct(product, shoppingList);}
 
+    public double getCartTotal(ShoppingList shoppingList){return shoppingListHandler.getCartTotal(shoppingList);};
 
     //StoreHandler implementations
     public Store getStoreById(int storeID)
     {
         return storeHandler.getStoreById(storeID);
-    }
+    };
+
+    public List<Store> getExistingStores(){ return storeHandler.getExistingStores();};
 }

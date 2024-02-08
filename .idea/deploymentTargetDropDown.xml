@@ -2,7 +2,7 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
-      <entry key="AllAcceptanceTests">
+      <entry key="ActivityTest">
         <State />
       </entry>
       <entry key="app">
@@ -20,6 +20,9 @@
           </targetSelectedWithDropDown>
           <timeTargetWasSelectedWithDropDown value="2024-02-07T15:40:11.552713200Z" />
         </State>
+      </entry>
+      <entry key="testShoppingListFragment()">
+        <State />
       </entry>
     </value>
   </component>
