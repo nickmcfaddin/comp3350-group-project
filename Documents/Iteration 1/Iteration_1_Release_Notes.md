@@ -53,3 +53,6 @@ On the search view, users can get more information about any specific product. T
 - Domain specific objects: 93%
 - Persistence layer (stubs): 95%
 - Presentation layer: Not applicable for Line%, ran by androidTest
+
+## Architecture Diagram
+Found in the following [link](https://code.cs.umanitoba.ca/comp3350-winter2024/lethalcompany-a01-13/-/blob/main/Documents/Iteration%201/Iteration%201%20Architecture%20Diagram%20Final.md)
