@@ -49,7 +49,7 @@ On the search view, users can get more information about any specific product. T
 
 ## Code Coverage Statistics
 - Application layer: 100%
-- Logic layer: 92%
-- Domain specific objects: 94%
-- Persistence layer (stubs): 87%
+- Logic layer: 95%
+- Domain specific objects: 93%
+- Persistence layer (stubs): 95%
 - Presentation layer: Not applicable for Line%, ran by androidTest
