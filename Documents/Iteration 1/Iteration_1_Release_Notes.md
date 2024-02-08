@@ -35,6 +35,12 @@ We were able to implement every feature we intended to, however there were some 
 ### Running The Application
 Use the latest version on the "production" release branch (last commit made).
 
+There are two screens able to be selected from the bottom navigation bar, the list view and the search view, found on the left and right respectively. 
+
+On the list view, users can add and remove shopping lists associated with affiliated stores, as well as add products to those lists using the "+" icon in the top right hand corner. By holding down an item within a list, users can also delete those items. Stores cannot have duplicates and items cannot be duplicated within a store.
+
+On the search view, users can get more information about any specific product. This includes the nutritional facts as well as the prices at competing stores. They may either scroll to find the product or use our search tool by typing in the search bar to find the product they are looking for.
+
 ### Running Unit Tests
 1. To run all the tests that cover the Persistence and Logic layers (as well as the DSO's), run the AllUnitTests.java file under the com.example.easyshopper (test) package. You can also use the link in the Tests section of the README.md to find the file. You can run the tests with or without coverage and they should produce the values given in the "Code Coverage Statistics" section of the release document.
     - If you want to break down the Unit Tests for these layers individually, they are found within the "business" and "objects" packages within the com.example.easyshopper (test) package.
