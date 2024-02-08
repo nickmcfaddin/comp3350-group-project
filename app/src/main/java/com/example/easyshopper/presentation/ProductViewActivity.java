@@ -1,7 +1,5 @@
 package com.example.easyshopper.presentation;
 
-import static androidx.core.content.ContentProviderCompat.requireContext;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;

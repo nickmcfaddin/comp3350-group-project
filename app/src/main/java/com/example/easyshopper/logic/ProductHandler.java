@@ -6,7 +6,6 @@ import com.example.easyshopper.objects.Product;
 import com.example.easyshopper.objects.Store;
 import com.example.easyshopper.persistence.PricePersistence;
 import com.example.easyshopper.persistence.ProductPersistence;
-import com.example.easyshopper.persistence.StorePersistence;
 
 import java.util.Comparator;
 import java.util.List;

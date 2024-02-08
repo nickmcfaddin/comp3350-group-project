@@ -1,10 +1,11 @@
-package com.example.easyshopper.logic;
+package com.example.easyshopper.business;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
 import com.example.easyshopper.application.Services;
+import com.example.easyshopper.logic.ProductHandler;
 import com.example.easyshopper.objects.Price;
 import com.example.easyshopper.objects.Product;
 import com.example.easyshopper.persistence.ProductPersistence;

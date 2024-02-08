@@ -1,8 +1,9 @@
-package com.example.easyshopper.logic;
+package com.example.easyshopper.business;
 
 import static junit.framework.TestCase.assertEquals;
 
 import com.example.easyshopper.application.Services;
+import com.example.easyshopper.logic.ShoppingListHandler;
 import com.example.easyshopper.objects.Product;
 import com.example.easyshopper.objects.ShoppingList;
 import com.example.easyshopper.objects.Store;
@@ -14,7 +15,6 @@ import org.junit.Test;
 import java.util.List;
 
 public class ShoppingListHandlerTest {
-
 
     private ShoppingListHandler sLHandlertemp;
     private Product product;
