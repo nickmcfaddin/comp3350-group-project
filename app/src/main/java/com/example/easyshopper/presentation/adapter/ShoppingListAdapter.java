@@ -146,7 +146,7 @@ public class ShoppingListAdapter extends BaseExpandableListAdapter  {
         final AlertDialog alertDialog = alert.create();
 
         //get and init components
-        TextView dialogTitle = dialogView.findViewById(R.id.dialog_title);
+        TextView dialogTitle = dialogView.findViewById(R.id.input_dialog_title);
         dialogTitle.setText("Remove Product From List?");
 
         Button yesButton = dialogView.findViewById(R.id.yes_btn);
