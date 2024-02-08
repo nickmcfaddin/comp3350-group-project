@@ -16,6 +16,8 @@ We were able to implement every feature we intended to, however there were some 
 2. Removing a list: completed.
 3. Adding an item: completed.
 4. Deleting an item: completed.
+5. Modifying an item: removed.\
+    We made the choice to remove this feature as we switched our database structure to have items that were non-modifiable instead of being added manually by the user. By doing this, we could have more control over the subcategories of each item, including price and nutritional facts which are shown in this iteration.
 
 #### Prices
 1. Item price: completed.
