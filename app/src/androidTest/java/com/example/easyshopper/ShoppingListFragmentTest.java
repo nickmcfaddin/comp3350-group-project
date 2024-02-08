@@ -48,7 +48,7 @@ import java.util.List;
 
 @RunWith(AndroidJUnit4.class)
 @LargeTest
-public class ActivityTest {
+public class ShoppingListFragmentTest {
     // sleepTime used to add a delay any time we need to wait for the GUI
     private final int sleepTime = 500;
 
@@ -62,198 +62,17 @@ public class ActivityTest {
     }
 
     @Test
-    public void testBottomNavigation() {
-        // verify that the shopping list fragment is displayed initially
-        onView(withId(R.id.ShoppingListFragment)).check(matches(isDisplayed()));
-
-        // click on the search icon
-        onView(withId(R.id.search)).perform(click());
-
-        // verify that the search fragment is displayed after clicking the search icon
-        onView(withId(R.id.SearchFragment)).check(matches(isDisplayed()));
-
+    public void testShoppingListFragmentUI() {
         // click on the shopping list icon
         onView(withId(R.id.shoppingList)).perform(click());
 
-        // verify that the search fragment is displayed after clicking the shopping list icon
-        onView(withId(R.id.ShoppingListFragment)).check(matches(isDisplayed()));
-    }
-
-    @Test
-    public void testItemPopup() {
-        // click on the search icon
-        onView(withId(R.id.search)).perform(click());
-
-        // verify that the search fragment is displayed after clicking the search icon
-        onView(withId(R.id.SearchFragment)).check(matches(isDisplayed()));
-
-        // getting the product at ID 1 to test against
-        Product product = testUtils.getProductByID(1);
-
-        // clicks on the first item in the productList
-        onView(allOf(withId(R.id.productListView), isDisplayed())).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
         SystemClock.sleep(sleepTime);
-
-        // checks if item name toolbar is in the right place
-        onView(withId(R.id.ShoppingListToolBar)).check(matches(isDisplayed()));
-
-        // check if toolbar name is correct
-        onView(withId(R.id.searchedProductName)).check(matches(withText(product.getProductName())));
-
-        // checks if nutritional fact text view is correct
-        onView(withId(R.id.nutritionalFactsLabel)).check((matches(withText("Nutritional Facts"))));
-
-        // verifies all nutritional facts are as expected
-        onView(withId(R.id.searchedProductName)).check(matches(withText(product.getProductName())));
-        onView(withId(R.id.caloriesLabel)).check(matches(withText("Calories: " + product.getCalories())));
-        onView(withId(R.id.fatLabel)).check(matches(withText("Fat: " + product.getFat() + "g")));
-        onView(withId(R.id.carbLabel)).check(matches(withText("Carbs: " + product.getCarb() + "g")));
-        onView(withId(R.id.proteinLabel)).check(matches(withText("Protein: " + product.getProtein() + "g")));
-
-        // checks if prices label text view is correct
-        onView(withId(R.id.pricesLabel)).check((matches(withText("Current Prices"))));
-
-        // check the prices at different stores
-        onView(withId(R.id.pricePerStoreList)).check(matches(isDisplayed()));
-
-        // check the productList recycled view
-        onView(withId(R.id.pricePerStoreList)).check((view, noViewFoundException) -> {
-            // check if product list recycled view is not null
-            assertNotNull(view);
-
-            // get the RecyclerView
-            RecyclerView recyclerView = (RecyclerView) view;
-
-            // get the adapter associated with the RecyclerView
-            RecyclerView.Adapter adapter = recyclerView.getAdapter();
-
-            // check if the adapter is not null
-            assertNotNull(adapter);
-
-            // get the list of all prices for the product
-            List<Price> allSortedPrices = testUtils.allStoreSortedPrice(product);
-
-            // check the number of items in the adapter (length of the RecyclerView list)
-            int itemCount = adapter.getItemCount();
-            int expectedCount = allSortedPrices.size();
-
-            // assert that the RecyclerView list length is as expected
-            assertEquals(expectedCount, itemCount);
-
-            // iterate through the adapter's items to examine their contents
-            for (int i = 0; i < adapter.getItemCount(); i++) {
-                // get the item at position i from the adapter
-                RecyclerView.ViewHolder viewHolder = recyclerView.findViewHolderForAdapterPosition(i);
-
-                // ensure that the ViewHolder is not null
-                assertNotNull(viewHolder);
-
-                // extract the productPrice and storeName from the ViewHolder
-                TextView productNameTextView = viewHolder.itemView.findViewById(R.id.productPriceView);
-                String productPrice = productNameTextView.getText().toString();
-
-                TextView storeNameTextView = viewHolder.itemView.findViewById(R.id.productStoreView);
-                String storeName = storeNameTextView.getText().toString();
-                String expectedStoreName = testUtils.getStoreById(allSortedPrices.get(i).getStoreID()).getStoreName();
-
-
-                // make sure both values match
-                assertEquals("$" + allSortedPrices.get(i).getPrice(), productPrice);
-                assertEquals(expectedStoreName, storeName);
-            }
-        });
-
-        // TEST BACK BUTTON
-
-        // click on the button
-        onView(withId(R.id.itemPopUpBackBtn)).perform(click());
-
-        // check if we go back to the search fragment
-        onView(withId(R.id.SearchFragment)).check(matches(isDisplayed()));
-    }
-
-    @Test
-    public void testSearchFragment() {
-        // click on the search icon
-        onView(withId(R.id.search)).perform(click());
-
-        // verify that the search fragment is displayed after clicking the search icon
-        onView(withId(R.id.SearchFragment)).check(matches(isDisplayed()));
-
-        // checks if the search bar is in the correct place
-        onView(withId(R.id.searchContainer)).check(matches(isDisplayed()));
-
-        // check if the productList recycled view is display
-        onView(withId(R.id.productListView)).check(matches(isDisplayed()));
-
-        // check the productList recycled view
-        onView(withId(R.id.productListView)).check((view, noViewFoundException) -> {
-            // check if product list recycled view is not null
-            assertNotNull(view);
-
-            // get the RecyclerView
-            RecyclerView recyclerView = (RecyclerView) view;
-
-            // get the adapter associated with the RecyclerView
-            RecyclerView.Adapter adapter = recyclerView.getAdapter();
-
-            // check if the adapter is not null
-            assertNotNull(adapter);
-
-            // get the list of all products
-            List<Product> allProducts = testUtils.getAllProducts();
-
-            // check the number of items in the adapter (length of the RecyclerView list)
-            int itemCount = adapter.getItemCount();
-            int expectedCount = allProducts.size();
-
-            // assert that the RecyclerView list length is as expected
-            assertEquals(expectedCount, itemCount);
-
-            // iterate through the adapter's items to examine their contents
-            for (int i = 0; i < adapter.getItemCount(); i++) {
-                // get the item at position i from the adapter
-                RecyclerView.ViewHolder viewHolder = recyclerView.findViewHolderForAdapterPosition(i);
-
-                // ensure that the ViewHolder is not null
-                assertNotNull(viewHolder);
-
-                // extract the productName from the ViewHolder
-                TextView productNameTextView = viewHolder.itemView.findViewById(R.id.productNameView);
-                String productName = productNameTextView.getText().toString();
-
-                // make sure both values match
-                assertEquals(allProducts.get(i).getProductName(), productName);
-            }
-        });
-
-        // TEST SEARCH
-
-        //Tests the UI to see if we get the Kiwi product at index 0 when we type "Kiwi" in the search bar
-        onView(withId(R.id.searchView)).perform(typeText("Kiwi"));
-        onView(allOf(withId(R.id.productListView), isDisplayed())).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
-        SystemClock.sleep(sleepTime);
-
-        onView(withId(R.id.searchedProductName)).check(matches(withText("Kiwi")));
-
-        pressBack();
-        SystemClock.sleep(sleepTime);
-    }
-
-    // TEST SHOPPING LIST FRAGMENT
-    @Test
-    public void testShoppingListFragment() {
-        // click on the shopping list icon
-        onView(withId(R.id.shoppingList)).perform(click());
 
         // verify that the search fragment is displayed after clicking the shopping list icon
         onView(withId(R.id.ShoppingListFragment)).check(matches(isDisplayed()));
 
         // checks if item name toolbar is in the right place
         onView(withId(R.id.ShoppingListToolBar)).check(matches(isDisplayed()));
-
-        // check if the add button display
-        onView(withId(R.id.addButton)).check(matches(isDisplayed()));
 
         // check if the expandable list view for shopping list display
         onView(withId(R.id.shoppingListView)).check(matches(isDisplayed()));
@@ -279,9 +98,6 @@ public class ActivityTest {
             assertEquals(allShoppingList.size(), adapter.getGroupCount());
 
             for (int i = 0; i < adapter.getGroupCount(); i++) {
-                // get the number of children before expanding
-                //int childCountBefore = adapter.getChildrenCount(i);
-
                 // get the product cart for shopping list
                 ArrayList<Product> shoppingListCart = allShoppingList.get(i).getItemList();
 
@@ -304,6 +120,8 @@ public class ActivityTest {
 
                 // expand the group
                 expandableListView.expandGroup(i);
+
+                SystemClock.sleep(sleepTime);
 
                 int childCount = adapter.getChildrenCount(i);
                 int expectedChildCount = shoppingListCart.size();
@@ -337,10 +155,26 @@ public class ActivityTest {
             }
         });
 
-        // TEST + BUTTON on ShoppingListFragment
+        // check if the add button display
+        onView(withId(R.id.addButton)).check(matches(isDisplayed()));
 
         // click on the addButton
         onView(withId(R.id.addButton)).perform(click());
+
+        SystemClock.sleep(sleepTime);
+
+        // check if the menu and all items pop up
+        onView(withText("Add product to list")).check(matches(isDisplayed()));
+        onView(withText("Create a list")).check(matches(isDisplayed()));
+        onView(withText("Delete a list")).check(matches(isDisplayed()));
+    }
+
+    @Test
+    public void testShoppingListFragmentDeleteList() {
+        // click on the addButton
+        onView(withId(R.id.addButton)).perform(click());
+
+        SystemClock.sleep(sleepTime);
 
         // check if the menu and all items pop up
         onView(withText("Add product to list")).check(matches(isDisplayed()));
@@ -391,14 +225,28 @@ public class ActivityTest {
 
         // click on the cancel button and check if it goes back to the shoppingListFragment
         onView(withId(R.id.cancel_btn)).perform(click());
+
+        SystemClock.sleep(sleepTime);
+
         onView(withId(R.id.ShoppingListFragment)).check(matches(isDisplayed()));
+    }
 
-        // TEST ADD PRODUCT
-
+    @Test
+    public void testShoppingListFragmentAddProduct() {
         // click on the addButton
         onView(withId(R.id.addButton)).perform(click());
 
+        SystemClock.sleep(sleepTime);
+
+        // check if the menu and all items pop up
+        onView(withText("Add product to list")).check(matches(isDisplayed()));
+        onView(withText("Create a list")).check(matches(isDisplayed()));
+        onView(withText("Delete a list")).check(matches(isDisplayed()));
+
+        // click addProduct
         onView(withText("Add product to list")).perform(click());
+
+        SystemClock.sleep(sleepTime);
 
         // check if the add product pop up appears
         onView(withId(R.id.addProductPopUp)).check(matches(isDisplayed()));
@@ -443,14 +291,28 @@ public class ActivityTest {
 
         // click on the cancel button and check if it goes back to the shoppingListFragment
         onView(withId(R.id.cancel_btn)).perform(click());
+
+        SystemClock.sleep(sleepTime);
+
         onView(withId(R.id.ShoppingListFragment)).check(matches(isDisplayed()));
+    }
 
-        // TEST CREATE A LIST
-
+    @Test
+    public void testShoppingListFragmentCreateList() {
         // click on the addButton
         onView(withId(R.id.addButton)).perform(click());
 
+        SystemClock.sleep(sleepTime);
+
+        // check if the menu and all items pop up
+        onView(withText("Add product to list")).check(matches(isDisplayed()));
+        onView(withText("Create a list")).check(matches(isDisplayed()));
+        onView(withText("Delete a list")).check(matches(isDisplayed()));
+
+        // click on createList
         onView(withText("Create a list")).perform(click());
+
+        SystemClock.sleep(sleepTime);
 
         // check if the create list pop up appears
         onView(withId(R.id.createListPopUp)).check(matches(isDisplayed()));
@@ -468,6 +330,9 @@ public class ActivityTest {
 
         // click on the cancel button and check if it goes back to the shoppingListFragment
         onView(withId(R.id.cancel_btn)).perform(click());
+
+        SystemClock.sleep(sleepTime);
+
         onView(withId(R.id.ShoppingListFragment)).check(matches(isDisplayed()));
 
         // get current ShoppingList length and number of stores
@@ -477,10 +342,16 @@ public class ActivityTest {
         // go back to the create a list pop up
         onView(withId(R.id.addButton)).perform(click());
 
+        SystemClock.sleep(sleepTime);
+
         onView(withText("Create a list")).perform(click());
+
+        SystemClock.sleep(sleepTime);
 
         // check submit button without choosing any store for dropdown
         onView(withId(R.id.submit_btn)).perform(click());
+
+        SystemClock.sleep(sleepTime);
 
         // check if the create list pop up is still displayed
         onView(withId(R.id.createListPopUp)).check(matches(isDisplayed()));
@@ -499,9 +370,9 @@ public class ActivityTest {
 
             // check if the values in dropdown menu is correct
             onData(anything())
-                        .inRoot(isPlatformPopup())
-                        .atPosition(i)
-                        .check(matches(withText(allStores.get(i).getStoreName())));
+                    .inRoot(isPlatformPopup())
+                    .atPosition(i)
+                    .check(matches(withText(allStores.get(i).getStoreName())));
 
             SystemClock.sleep(sleepTime);
 
@@ -535,5 +406,4 @@ public class ActivityTest {
             assertEquals(beforeShoppingListLen, afterAllShoppingList.size());
         }
     }
-
 }
