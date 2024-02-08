@@ -16,6 +16,8 @@ We were able to implement every feature we intended to, however there were some 
 2. Removing a list: completed.
 3. Adding an item: completed.
 4. Deleting an item: completed.
+5. Modifying an item: removed.\
+    We made the choice to remove this feature as we switched our database structure to have items that were non-modifiable instead of being added manually by the user. By doing this, we could have more control over the subcategories of each item, including price and nutritional facts which are shown in this iteration.
 
 #### Prices
 1. Item price: completed.
@@ -33,8 +35,6 @@ We were able to implement every feature we intended to, however there were some 
 ## Testing Instructions
 
 ### Running The Application
-Use the latest version on the "production" release branch (last commit made).
-
 There are two screens able to be selected from the bottom navigation bar, the list view and the search view, found on the left and right respectively. 
 
 On the list view, users can add and remove shopping lists associated with affiliated stores, as well as add products to those lists using the "+" icon in the top right hand corner. By holding down an item within a list, users can also delete those items. Stores cannot have duplicates and items cannot be duplicated within a store.
@@ -49,7 +49,7 @@ On the search view, users can get more information about any specific product. T
 
 ## Code Coverage Statistics
 - Application layer: 100%
-- Logic layer: 92%
-- Domain specific objects: 94%
-- Persistence layer (stubs): 87%
+- Logic layer: 95%
+- Domain specific objects: 93%
+- Persistence layer (stubs): 95%
 - Presentation layer: Not applicable for Line%, ran by androidTest

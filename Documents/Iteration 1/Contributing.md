@@ -8,6 +8,9 @@ Software Engineering Winter 2024 Project created by Lethal Company.
 - Yuan Tao
 - Jarett Koley
 
+## General Contributing
+When doing a dev task for the project, if the task is not already on GitLab, create a new task for it with a time estimate. Every time you work on a task, add a time entry so everyone can see how long each person worked on each task for, thus improving our future estimates. When finished a dev task, close the issue on GitLab and once all the dev tasks for a user story are done, close the story. Same goes for closing features once all the stories within are complete. 
+
 ## Branching
 In this project we used GitLab flow, a subversion of GitHub flow that works by creating feature branches off of the main branch and using the main as your develop branch.
 
