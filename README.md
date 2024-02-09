@@ -31,7 +31,7 @@ EasyShopper is a new app that enables shoppers to store, view, and modify their 
 - Iteration 3
 
 ## Architecture
-- [Iteration 1](https://code.cs.umanitoba.ca/comp3350-winter2024/lethalcompany-a01-13/-/blob/main/Documents/Iteration%201/Iteration%201%20Architecture%20Diagram%20Final.md)
+- [Iteration 1](https://code.cs.umanitoba.ca/comp3350-winter2024/lethalcompany-a01-13/-/blob/main/Documents/Iteration%201/Architecture%20Diagram/Iteration%201%20Architecture%20Diagram%20Final.md?ref_type=heads)
 - Iteration 2
 - Iteration 3
 
@@ -41,8 +41,8 @@ EasyShopper is a new app that enables shoppers to store, view, and modify their 
 ## Restrospective 
 - [Iteration 0](https://code.cs.umanitoba.ca/comp3350-winter2024/lethalcompany-a01-13/-/blob/main/Documents/Iteration0Retrospective.md)
 - Iteration 1
-    * [Group](https://code.cs.umanitoba.ca/comp3350-winter2024/lethalcompany-a01-13/-/blob/main/Documents/Iteration%201/Iteration1_GroupRetrospective.md?ref_type=heads)
-    * Individual
+    * [Group](https://code.cs.umanitoba.ca/comp3350-winter2024/lethalcompany-a01-13/-/blob/main/Documents/Iteration%201/Retrospective/Iteration1_GroupRetrospective.md?ref_type=heads)
+    * [Individual](https://code.cs.umanitoba.ca/comp3350-winter2024/lethalcompany-a01-13/-/blob/main/Documents/Iteration%201/Retrospective/Iteration1_IndividualRetrospective.md?ref_type=heads)
 - Iteration 2
 - Iteration 3
 
