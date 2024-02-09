@@ -18,7 +18,10 @@
     * One thing I did well in this iteration was writing the persistence and persistence stub classes and services class to connect with the database, as well as writing some of the Unit Tests for objects and cleaning up necessary code from classes with Nick.
 * What is your best code? 
     * My best code is figuring out how to interact with UI Testing units for the latest Android Studio version and SDK, as the UI Testing in the sample ECookBook is outdated.
-    * [Link to my code](https://code.cs.umanitoba.ca/comp3350-winter2024/lethalcompany-a01-13/-/tree/main/app/src/androidTest/java/com/example/easyshopper?ref_type=heads)
+    * Link to my code
+        * [MainActivityTest](https://code.cs.umanitoba.ca/comp3350-winter2024/lethalcompany-a01-13/-/blob/main/app/src/androidTest/java/com/example/easyshopper/MainActivityTest.java?ref_type=heads)
+        * [SearchFragmentTest](https://code.cs.umanitoba.ca/comp3350-winter2024/lethalcompany-a01-13/-/blob/main/app/src/androidTest/java/com/example/easyshopper/SearchFragmentTest.java?ref_type=heads)
+        * [ShoppingListFragementTest](https://code.cs.umanitoba.ca/comp3350-winter2024/lethalcompany-a01-13/-/blob/main/app/src/androidTest/java/com/example/easyshopper/ShoppingListFragmentTest.java?ref_type=heads)
 
 ## Jarett 
 * What did you do well? 
