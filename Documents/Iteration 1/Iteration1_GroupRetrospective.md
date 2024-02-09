@@ -1,4 +1,4 @@
-# Iteration 1 Retrospective
+# Iteration 1 Group Retrospective
 
 In iteration 1, we created an initial model of our Android application. This included multiple GUIs allowing users to add and remove shopping lists from our affiliated stores within our stubs. They can add and remove items from their stores from the current fake database we have in place. In the future, we are going to expand this to create a real database that we are pulling from rather than spoofing the data. Secondly, we added a price function that enables the user to view the price of their products, see the totals of their lists and view the prices of the same product that is present at different stores, allowing for price comparison. Lastly, we built a search function that lets you search for any item in the database and get information about it, such as its nutritional facts and price at competing stores.
 
