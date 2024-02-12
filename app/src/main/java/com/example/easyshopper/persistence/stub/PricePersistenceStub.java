@@ -8,6 +8,7 @@ import com.example.easyshopper.persistence.PricePersistence;
 import com.example.easyshopper.persistence.ProductPersistence;
 import com.example.easyshopper.persistence.StorePersistence;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +17,7 @@ import java.util.Random;
 import java.text.DecimalFormat;
 
 //Price fake db
-public class PricePersistenceStub implements PricePersistence {
+public class PricePersistenceStub implements PricePersistence, Serializable {
     private List<Price> priceList;
 
     //Stub Constructor

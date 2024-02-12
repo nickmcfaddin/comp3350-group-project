@@ -8,10 +8,11 @@ import com.example.easyshopper.persistence.ProductPersistence;
 import com.example.easyshopper.persistence.ShoppingListPersistence;
 import com.example.easyshopper.persistence.StorePersistence;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShoppingListPersistenceStub implements ShoppingListPersistence {
+public class ShoppingListPersistenceStub implements ShoppingListPersistence, Serializable {
     private List<ShoppingList> shoppingListArray;
 
     //Constructor

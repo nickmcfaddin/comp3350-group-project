@@ -1,7 +1,9 @@
 package com.example.easyshopper.objects;
 
+import java.io.Serializable;
+
 //Price class acts as link between Store's and Product's.
-public class Price {
+public class Price implements Serializable {
     private final int storeID;
     private final int productID;
     private final double price;

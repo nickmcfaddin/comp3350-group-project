@@ -7,11 +7,12 @@ import com.example.easyshopper.objects.Store;
 import com.example.easyshopper.persistence.PricePersistence;
 import com.example.easyshopper.persistence.ShoppingListPersistence;
 
+import java.io.Serializable;
 import java.util.List;
 
 
 //Handles the shopping lists
-public class ShoppingListHandler {
+public class ShoppingListHandler implements Serializable {
     private ShoppingListPersistence shoppingListPersistence = Services.getShoppingListPersistence();
     private PricePersistence pricePersistence = Services.getPricePersistence();
 

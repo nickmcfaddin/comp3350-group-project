@@ -6,11 +6,12 @@ import com.example.easyshopper.objects.Store;
 import com.example.easyshopper.persistence.ProductPersistence;
 import com.example.easyshopper.persistence.StorePersistence;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class StorePersistenceStub implements StorePersistence {
+public class StorePersistenceStub implements StorePersistence, Serializable {
     private List<Store> storeList;
 
     //Constructor
@@ -56,11 +57,8 @@ public class StorePersistenceStub implements StorePersistence {
     }
 
     public void addStore(Store store){
-        for (Store i :storeList){
-            if(i.equals(store)){
-                return;
-            }
+        if(store != null){
+            storeList.add(store);
         }
-        storeList.add(store);
     }
 }

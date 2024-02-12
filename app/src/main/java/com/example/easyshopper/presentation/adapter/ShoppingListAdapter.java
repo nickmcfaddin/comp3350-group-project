@@ -21,12 +21,14 @@ import java.util.List;
 public class ShoppingListAdapter extends BaseExpandableListAdapter  {
     private Context context;
     private List<ShoppingList> shoppingLists;
-    private ProductHandler productHandler = new ProductHandler();
-    private ShoppingListHandler shoppingListHandler = new ShoppingListHandler();
+    private ProductHandler productHandler;
+    private ShoppingListHandler shoppingListHandler;
 
-    public ShoppingListAdapter(Context context, List<ShoppingList> shoppingLists) {
+    public ShoppingListAdapter(Context context, List<ShoppingList> shoppingLists, ProductHandler productHandler, ShoppingListHandler shoppingListHandler) {
         this.context = context;
         this.shoppingLists = shoppingLists;
+        this.productHandler = productHandler;
+        this.shoppingListHandler = shoppingListHandler;
     }
 
     //update from an outer sources

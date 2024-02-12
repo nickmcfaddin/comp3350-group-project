@@ -34,30 +34,58 @@ import com.example.easyshopper.presentation.adapter.ShoppingListAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ShoppingListFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class ShoppingListFragment extends Fragment {
-    private StoreHandler storeHandler = new StoreHandler();
-    private ProductHandler productHandler = new ProductHandler();
-    private ShoppingListHandler shoppingListHandler = new ShoppingListHandler();
+    //keys for serializable objects
+    private static final String PRODUCT_HANDLER_KEY = "productHandler";
+    private static final String STORE_HANDLER_KEY = "storeHandler";
+    private static final String LIST_HANDLER_KEY = "shoppingListHandler";
 
-    private List<ShoppingList> shoppingLists = shoppingListHandler.getAllShoppingLists();
+    private StoreHandler storeHandler;
+    private ProductHandler productHandler;
+    private ShoppingListHandler shoppingListHandler;
+
+    private List<ShoppingList> shoppingLists;
     private ShoppingListAdapter shoppingListAdapter;
 
     public ShoppingListFragment() {
-        // Required empty public constructor
     }
 
-    public static ShoppingListFragment newInstance() {
-        return new ShoppingListFragment();
+    public ShoppingListFragment(StoreHandler storeHandler, ProductHandler productHandler, ShoppingListHandler shoppingListHandler) {
+        this.storeHandler = storeHandler;
+        this.productHandler = productHandler;
+        this.shoppingListHandler = shoppingListHandler;
+    }
+
+    public static ShoppingListFragment newInstance(ProductHandler productHandler, StoreHandler storeHandler, ShoppingListHandler shoppingListHandler) {
+        Bundle args = new Bundle();
+        ShoppingListFragment fragment = new ShoppingListFragment(storeHandler, productHandler, shoppingListHandler);
+        args.putSerializable(PRODUCT_HANDLER_KEY, productHandler);
+        args.putSerializable(STORE_HANDLER_KEY, storeHandler);
+        args.putSerializable(LIST_HANDLER_KEY, shoppingListHandler);
+        fragment.setArguments(args);
+        return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (savedInstanceState != null) {
+            productHandler = (ProductHandler) savedInstanceState.getSerializable(PRODUCT_HANDLER_KEY);
+            storeHandler = (StoreHandler) savedInstanceState.getSerializable(STORE_HANDLER_KEY);
+            shoppingListHandler = (ShoppingListHandler) savedInstanceState.getSerializable(LIST_HANDLER_KEY);
+        } else if (getArguments() != null) {
+            productHandler = (ProductHandler) getArguments().getSerializable(PRODUCT_HANDLER_KEY);
+            storeHandler = (StoreHandler) getArguments().getSerializable(STORE_HANDLER_KEY);
+            shoppingListHandler = (ShoppingListHandler) getArguments().getSerializable(LIST_HANDLER_KEY);
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putSerializable(PRODUCT_HANDLER_KEY, productHandler);
+        outState.putSerializable(STORE_HANDLER_KEY, storeHandler);
+        outState.putSerializable(LIST_HANDLER_KEY, shoppingListHandler);
+        super.onSaveInstanceState(outState);
     }
 
     @Override
@@ -334,8 +362,9 @@ public class ShoppingListFragment extends Fragment {
         shoppingListAdapter.updateData(shoppingLists);
     }
     private void initComponents(View rootView) {
+        shoppingLists = shoppingListHandler.getAllShoppingLists();
         ExpandableListView shoppingListView = rootView.findViewById(R.id.shoppingListView);
-        shoppingListAdapter = new ShoppingListAdapter(getContext(), shoppingLists);
+        shoppingListAdapter = new ShoppingListAdapter(getContext(), shoppingLists, productHandler, shoppingListHandler);
         shoppingListView.setAdapter(shoppingListAdapter);
 
         ImageButton addButton = rootView.findViewById(R.id.addButton);
