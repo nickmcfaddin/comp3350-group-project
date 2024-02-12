@@ -25,9 +25,10 @@
 
 ## Jarett 
 * What did you do well? 
-    
+    * One thing i did well this iteration was writing part of the Prodcut handeler class and its tests.
 * What is your best code? 
-
+    * [Links to my code] (https://code.cs.umanitoba.ca/comp3350-winter2024/lethalcompany-a01-13/-/blob/main/app/src/main/java/com/example/easyshopper/logic/ProductHandler.java)
+    * (https://code.cs.umanitoba.ca/comp3350-winter2024/lethalcompany-a01-13/-/blob/main/app/src/test/java/com/example/easyshopper/business/ProductHandlerTest.java)
 ## Yuan
 * What did you do well? 
     * One thing I did well in this iteration was writing part of the Handler class and the unitTest associated with it
