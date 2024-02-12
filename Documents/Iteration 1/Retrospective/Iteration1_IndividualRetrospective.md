@@ -25,8 +25,12 @@
 
 ## Jarett 
 * What did you do well? 
+    
 * What is your best code? 
 
 ## Yuan
 * What did you do well? 
+    * One thing I did well in this iteration was writing part of the Handler class and the unitTest associated with it
 * What is your best code? 
+    * My best code is ShoppingListHandler and ShoppListHandlerUnitTest
+    * [Link to my code](https://code.cs.umanitoba.ca/comp3350-winter2024/lethalcompany-a01-13/-/blob/main/app/src/main/java/com/example/easyshopper/logic/ShoppingListHandler.java?ref_type=heads)
