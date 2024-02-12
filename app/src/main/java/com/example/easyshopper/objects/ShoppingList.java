@@ -1,11 +1,13 @@
 package com.example.easyshopper.objects;
 
 import androidx.annotation.NonNull;
+
+import java.io.Serializable;
 import java.util.UUID;
 import java.util.ArrayList;
 
 //List is created per store, products added to list
-public class ShoppingList {
+public class ShoppingList implements Serializable {
     private String shoppingListID;
     private ArrayList<Product> cart;
     private Store store;

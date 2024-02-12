@@ -7,13 +7,14 @@ import com.example.easyshopper.objects.Store;
 import com.example.easyshopper.persistence.PricePersistence;
 import com.example.easyshopper.persistence.ProductPersistence;
 
+import java.io.Serializable;
 import java.util.Comparator;
 import java.util.List;
 
-public class ProductHandler {
-
+public class ProductHandler implements Serializable {
     private ProductPersistence productPersistence = Services.getProductPersistence();
     private PricePersistence pricePersistence = Services.getPricePersistence();
+
     public ProductHandler() {}
 
     /*
@@ -37,6 +38,10 @@ public class ProductHandler {
      */
     public Product getProductByID(int id)
     {
+        if(id < 0) {
+            return null;
+        }
+
         return productPersistence.getProductById(id);
     }
 
@@ -45,6 +50,10 @@ public class ProductHandler {
      */
     public double getPriceOfProductInStore(Product product, Store store)
     {
+        if(product == null || store == null) {
+            return -1;
+        }
+
         return pricePersistence.getPrice(product, store);
     }
 
@@ -53,6 +62,10 @@ public class ProductHandler {
      */
     public List<Price> allStoreSortedPrice(Product product)
     {
+        if(product == null) {
+            return  null;
+        }
+
         List<Price> productPrices = pricePersistence.getAllPricesForSameProduct(product);
 
         // Sort the list by their price

@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.example.easyshopper.R;
 import com.example.easyshopper.logic.ProductHandler;
+import com.example.easyshopper.logic.StoreHandler;
 import com.example.easyshopper.objects.Price;
 import com.example.easyshopper.objects.Product;
 import com.example.easyshopper.presentation.adapter.ItemPopupAdapter;
@@ -19,7 +20,9 @@ import com.example.easyshopper.presentation.adapter.ItemPopupAdapter;
 import java.util.List;
 
 public class ProductViewActivity extends AppCompatActivity {
-    ProductHandler productHandler = new ProductHandler();
+    private ProductHandler productHandler;
+    private StoreHandler storeHandler;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,8 +39,10 @@ public class ProductViewActivity extends AppCompatActivity {
             }
         });
 
-        //get id passed to the intent
-        int productID = getIntent().getIntExtra("Product ID", 0);
+        //get values passed to the intent
+        int productID = getIntent().getIntExtra("productID", 0);
+        productHandler = (ProductHandler) getIntent().getSerializableExtra("productHandler");
+        storeHandler = (StoreHandler) getIntent().getSerializableExtra("storeHandler");
 
         //get product with associating id and its values
         Product product = productHandler.getProductByID(productID);
@@ -72,7 +77,7 @@ public class ProductViewActivity extends AppCompatActivity {
         //  set adapter for price per store of product
         RecyclerView pricePerStoreList = findViewById(R.id.pricePerStoreList);
         pricePerStoreList.setLayoutManager(new LinearLayoutManager(this));
-        ItemPopupAdapter adapter = new ItemPopupAdapter(this, prices);
+        ItemPopupAdapter adapter = new ItemPopupAdapter(storeHandler, this, prices);
         pricePerStoreList.setAdapter(adapter);
     }
 }

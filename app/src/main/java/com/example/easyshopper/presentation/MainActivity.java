@@ -8,25 +8,51 @@ import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 
 import com.example.easyshopper.R;
+import com.example.easyshopper.logic.ProductHandler;
+import com.example.easyshopper.logic.ShoppingListHandler;
+import com.example.easyshopper.logic.StoreHandler;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
+    //keys for serializable objects
+    private static final String PRODUCT_HANDLER_KEY = "productHandler";
+    private static final String STORE_HANDLER_KEY = "storeHandler";
+    private static final String LIST_HANDLER_KEY = "shoppingListHandler";
 
     //id of currentFragment that is being displayed
     int currentFragment;
+
+    //get handlers
+    private ProductHandler productHandler = new ProductHandler();
+    private StoreHandler storeHandler = new StoreHandler();
+    private ShoppingListHandler shoppingListHandler = new ShoppingListHandler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        if (savedInstanceState != null) {
+            productHandler = (ProductHandler) savedInstanceState.getSerializable(PRODUCT_HANDLER_KEY);
+            storeHandler = (StoreHandler) savedInstanceState.getSerializable(STORE_HANDLER_KEY);
+            shoppingListHandler = (ShoppingListHandler) savedInstanceState.getSerializable(LIST_HANDLER_KEY);
+        }
+
         initComponents();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putSerializable(PRODUCT_HANDLER_KEY, productHandler);
+        outState.putSerializable(STORE_HANDLER_KEY, storeHandler);
+        outState.putSerializable(LIST_HANDLER_KEY, shoppingListHandler);
+        super.onSaveInstanceState(outState);
     }
 
     private void initComponents() {
         //get and init components
-        ShoppingListFragment shoppingListFragment = new ShoppingListFragment();
-        SearchFragment searchFragment = new SearchFragment();
+        ShoppingListFragment shoppingListFragment = ShoppingListFragment.newInstance(productHandler, storeHandler, shoppingListHandler);
+        SearchFragment searchFragment = SearchFragment.newInstance(productHandler, storeHandler);
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
 
         //On startup, the Shopping List fragment is displayed

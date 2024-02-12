@@ -14,38 +14,59 @@ import android.widget.SearchView;
 
 import com.example.easyshopper.R;
 import com.example.easyshopper.logic.ProductHandler;
+import com.example.easyshopper.logic.StoreHandler;
 import com.example.easyshopper.objects.Product;
 import com.example.easyshopper.presentation.adapter.ProductSearchAdapter;
 import com.example.easyshopper.presentation.adapter.ProductViewInterface;
 
+import java.io.Serializable;
 import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link SearchFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class SearchFragment extends Fragment implements ProductViewInterface {
+    //keys for serializable objects
+    private static final String PRODUCT_HANDLER_KEY = "productHandler";
+    private static final String STORE_HANDLER_KEY = "storeHandler";
+    private static final String PRODUCT_ID_KEY = "productID";
+
     //communicate with the logic layer
-    private ProductHandler productHandler = new ProductHandler();
+    private ProductHandler productHandler;
+    private StoreHandler storeHandler;
 
     //UI components
     private SearchView searchView;
     private RecyclerView productListView;
     private ProductSearchAdapter productSearchAdapter;
-    private List<Product> productList = productHandler.getAllProducts();
+    private List<Product> productList;
 
-    public SearchFragment() {
-        // Required empty public constructor
+    public SearchFragment(){
+
     }
 
-    public static SearchFragment newInstance() {
-        return new SearchFragment();
+    public SearchFragment(ProductHandler productHandler, StoreHandler storeHandler) {
+        this.productHandler = productHandler;
+        this.storeHandler = storeHandler;
+        productList = productHandler.getAllProducts();
+    }
+
+    public static SearchFragment newInstance(ProductHandler productHandler, StoreHandler storeHandler) {
+        Bundle args = new Bundle();
+        SearchFragment fragment = new SearchFragment(productHandler, storeHandler);
+        args.putSerializable(PRODUCT_HANDLER_KEY, productHandler);
+        args.putSerializable(STORE_HANDLER_KEY, storeHandler);
+        fragment.setArguments(args);
+        return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (savedInstanceState != null) {
+            productHandler = (ProductHandler) savedInstanceState.getSerializable(PRODUCT_HANDLER_KEY);
+            storeHandler = (StoreHandler) savedInstanceState.getSerializable(STORE_HANDLER_KEY);
+        } else if (getArguments() != null) {
+            productHandler = (ProductHandler) getArguments().getSerializable(PRODUCT_HANDLER_KEY);
+            storeHandler = (StoreHandler) getArguments().getSerializable(STORE_HANDLER_KEY);
+        }
     }
 
     @Override
@@ -58,6 +79,13 @@ public class SearchFragment extends Fragment implements ProductViewInterface {
         initComponents(rootView);
 
         return rootView;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putSerializable(PRODUCT_HANDLER_KEY, productHandler);
+        outState.putSerializable(STORE_HANDLER_KEY, storeHandler);
+        super.onSaveInstanceState(outState);
     }
 
     private void searchProducts(String query){
@@ -75,7 +103,9 @@ public class SearchFragment extends Fragment implements ProductViewInterface {
 
         //start an popup showing more information about the clicked product
         Intent intent = new Intent(getActivity(), ProductViewActivity.class);
-        intent.putExtra("Product ID", clickedProduct.getProductID());
+        intent.putExtra(PRODUCT_ID_KEY, clickedProduct.getProductID());
+        intent.putExtra(PRODUCT_HANDLER_KEY, productHandler);
+        intent.putExtra(STORE_HANDLER_KEY, storeHandler);
         startActivity(intent);
     }
 

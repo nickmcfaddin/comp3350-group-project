@@ -2,9 +2,10 @@ package com.example.easyshopper.objects;
 
 import androidx.annotation.NonNull;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Store {
+public class Store implements Serializable {
     private final int storeID;
     private final String storeName;
 

@@ -3,12 +3,13 @@ package com.example.easyshopper.persistence.stub;
 import com.example.easyshopper.objects.Product;
 import com.example.easyshopper.persistence.ProductPersistence;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 //Product fake db
-public class ProductPersistenceStub implements ProductPersistence {
+public class ProductPersistenceStub implements ProductPersistence, Serializable {
     private List<Product> productList;
 
     //Constructor

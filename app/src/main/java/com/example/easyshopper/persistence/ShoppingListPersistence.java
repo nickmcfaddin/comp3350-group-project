@@ -1,6 +1,7 @@
 package com.example.easyshopper.persistence;
 
 import com.example.easyshopper.objects.ShoppingList;
+import com.example.easyshopper.objects.Store;
 
 import java.util.List;
 
@@ -18,6 +19,10 @@ public interface ShoppingListPersistence {
 
     //Delete a ShoppingList from the overall ShoppingList array by it's shoppingListID
     void deleteShoppingList(ShoppingList shoppingList);
+
+    boolean shoppingListExists(ShoppingList queryList);
+
+    boolean listWithStoreExists(Store queryStore);
 
     //Currently removed functions -> ProductPersistence
     //Product addProduct(Product newProduct);
