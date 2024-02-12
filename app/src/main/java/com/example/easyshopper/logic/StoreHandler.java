@@ -16,5 +16,5 @@ public class StoreHandler implements Serializable {
 
     public List<Store> getExistingStores() {
         return storePersistence.getExistingStores();
-     }
+    }
 }

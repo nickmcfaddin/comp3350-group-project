@@ -68,26 +68,44 @@ public class ShoppingListPersistenceStub implements ShoppingListPersistence, Ser
     //Adds a ShoppingList to the overall ShoppingList array
     @Override
     public void addShoppingList(ShoppingList shoppingList) {
-        for (int i=0; i<shoppingListArray.size(); i++){
-            ShoppingList indexShoppingList = shoppingListArray.get(i);
-
-            if ((indexShoppingList.getShoppingListID().equals(shoppingList.getShoppingListID())) || shoppingList.getStore().getStoreID() == indexShoppingList.getStore().getStoreID()){
-                // shoppingList id already existed
-                // or shopping list with store already exists
-                return;
-            }
+        if (shoppingList != null) {
+            shoppingListArray.add(shoppingList);
         }
-        shoppingListArray.add(shoppingList);
     }
 
     //Delete a ShoppingList from the overall ShoppingList array by it's shoppingListID
     @Override
     public void deleteShoppingList(ShoppingList shoppingList) {
-        for (int i = 0; i < shoppingListArray.size(); i++){
-            if (shoppingListArray.get(i).getShoppingListID().equals(shoppingList.getShoppingListID())){
-                shoppingListArray.remove(i);
-                return;
+        if (shoppingList != null) {
+            shoppingListArray.remove(shoppingList);
+        }
+    }
+
+    public boolean shoppingListExists(ShoppingList queryList) {
+        if (queryList == null) {
+            return false;
+        }
+
+        for(ShoppingList list : shoppingListArray) {
+            if(list.getShoppingListID().equals(queryList.getShoppingListID())) {
+                return true;
             }
         }
+
+        return false;
+    }
+
+    public boolean listWithStoreExists(Store queryStore) {
+        if (queryStore == null) {
+            return false;
+        }
+
+        for(ShoppingList list : shoppingListArray) {
+            if(list.getStore().getStoreID() == queryStore.getStoreID()) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
