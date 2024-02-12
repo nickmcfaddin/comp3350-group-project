@@ -27,6 +27,7 @@
 * What did you do well? 
     * One thing i did well this iteration was writing part of the Prodcut handeler class and its tests.
 * What is your best code? 
+    * My best code was my tests for the productHander as I needed some help with connecting the layers for the hander code itself.
     * [Links to my code] (https://code.cs.umanitoba.ca/comp3350-winter2024/lethalcompany-a01-13/-/blob/main/app/src/main/java/com/example/easyshopper/logic/ProductHandler.java)
     * (https://code.cs.umanitoba.ca/comp3350-winter2024/lethalcompany-a01-13/-/blob/main/app/src/test/java/com/example/easyshopper/business/ProductHandlerTest.java)
 ## Yuan
