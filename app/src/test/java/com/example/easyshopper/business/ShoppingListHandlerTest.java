@@ -49,6 +49,12 @@ public class ShoppingListHandlerTest {
 
         sLHandlertemp.removeShoppingList(Services.getShoppingListPersistence().getExistingShoppingLists().get(0));
         assertEquals(3, Services.getShoppingListPersistence().getExistingShoppingLists().size());
+
+        sLHandlertemp.createShoppingList(null);
+        assertEquals(3, Services.getShoppingListPersistence().getExistingShoppingLists().size());
+
+        sLHandlertemp.removeShoppingList(null);
+        assertEquals(3, Services.getShoppingListPersistence().getExistingShoppingLists().size());
     }
 
     @Test
@@ -58,12 +64,27 @@ public class ShoppingListHandlerTest {
 
         sLHandlertemp.removeProduct(product, sLHandlertemp.getAllShoppingLists().get(0));
         assertEquals(4, sLHandlertemp.getAllShoppingLists().get(0).getItemList().size());
+
+        sLHandlertemp.addItemToList(null, sLHandlertemp.getAllShoppingLists().get(0));
+        assertEquals(4, sLHandlertemp.getAllShoppingLists().get(0).getItemList().size());
+
+        sLHandlertemp.addItemToList(product, null);
+        assertEquals(4, sLHandlertemp.getAllShoppingLists().get(0).getItemList().size());
+
+        sLHandlertemp.removeProduct(null, sLHandlertemp.getAllShoppingLists().get(0));
+        assertEquals(4, sLHandlertemp.getAllShoppingLists().get(0).getItemList().size());
+
+        sLHandlertemp.removeProduct(product, null);
+        assertEquals(4, sLHandlertemp.getAllShoppingLists().get(0).getItemList().size());
     }
 
     @Test
     public void testCartTotal(){
-        double total = sLHandlertemp.getCartTotal(Services.getShoppingListPersistence().getExistingShoppingLists().get(0));
+        double total = sLHandlertemp.getCartTotal(sLHandlertemp.getAllShoppingLists().get(0));
         assertEquals(13.96, total);
+
+        total = sLHandlertemp.getCartTotal(null);
+        assertEquals(-1.0, total);
     }
 
     @Test
