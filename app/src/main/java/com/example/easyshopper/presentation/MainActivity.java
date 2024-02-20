@@ -53,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
         //get and init components
         ShoppingListFragment shoppingListFragment = ShoppingListFragment.newInstance(productHandler, storeHandler, shoppingListHandler);
         SearchFragment searchFragment = SearchFragment.newInstance(productHandler, storeHandler);
+        InventoryFragment inventoryFragment = new InventoryFragment();
+        UserRequestFragment userRequestFragment = new UserRequestFragment();
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
 
         //On startup, the Shopping List fragment is displayed
@@ -72,22 +74,41 @@ public class MainActivity extends AppCompatActivity {
 
             //display the fragment requested by the user
             if (itemId == R.id.shoppingList) {
+                // Shopping List
                 replaceFragment(shoppingListFragment);
 
                 //Update Icons
                 item.setIcon(R.drawable.icon_paper_fill);
                 bottomNavigationView.getMenu().getItem(1).setIcon(R.drawable.icon_home_line);
-                bottomNavigationView.getMenu().getItem(2).setIcon(R.drawable.icon_search_line);
-            } else if (itemId == R.id.search) {
-                replaceFragment(searchFragment);
-
-                //display the list that was previously searched by the user
-                //searchFragment.setBusStops(busStopsList);
+                bottomNavigationView.getMenu().getItem(2).setIcon(R.drawable.icon_request_line);
+                bottomNavigationView.getMenu().getItem(3).setIcon(R.drawable.icon_search_line);
+            } else if (itemId == R.id.homeInventory) {
+                // Home Inventory
+                replaceFragment(inventoryFragment);
 
                 //Update Icons
-                item.setIcon(R.drawable.icon_search_fill);
+                bottomNavigationView.getMenu().getItem(0).setIcon(R.drawable.icon_paper_line);
+                item.setIcon(R.drawable.icon_home_fill);
+                bottomNavigationView.getMenu().getItem(2).setIcon(R.drawable.icon_request_line);
+                bottomNavigationView.getMenu().getItem(3).setIcon(R.drawable.icon_search_line);
+            } else if (itemId == R.id.userRequest) {
+                // User Request
+                replaceFragment(userRequestFragment);
+
+                //Update Icons
                 bottomNavigationView.getMenu().getItem(0).setIcon(R.drawable.icon_paper_line);
                 bottomNavigationView.getMenu().getItem(1).setIcon(R.drawable.icon_home_line);
+                item.setIcon(R.drawable.icon_request_fill);
+                bottomNavigationView.getMenu().getItem(3).setIcon(R.drawable.icon_search_line);
+            } else if (itemId == R.id.search) {
+                // Search
+                replaceFragment(searchFragment);
+
+                // Update Icons
+                bottomNavigationView.getMenu().getItem(0).setIcon(R.drawable.icon_paper_line);
+                bottomNavigationView.getMenu().getItem(1).setIcon(R.drawable.icon_home_line);
+                bottomNavigationView.getMenu().getItem(2).setIcon(R.drawable.icon_request_line);
+                item.setIcon(R.drawable.icon_search_fill);
             }
 
             return true;
