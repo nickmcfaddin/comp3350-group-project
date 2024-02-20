@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ShoppingListFragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/primary_theme"
+    tools:context=".presentation.ShoppingListFragment">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/ShoppingListToolBar"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:background="@color/primary_theme"
+        android:backgroundTint="#0DFFFFFF"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/inter_semibold"
+            android:text="User Requests"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            tools:layout_editor_absoluteX="561dp"
+            tools:layout_editor_absoluteY="24dp" />
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:background="@color/primary_theme"
+        android:visibility="invisible"
+        app:backgroundTint="#0DFFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:visibility="invisible" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
