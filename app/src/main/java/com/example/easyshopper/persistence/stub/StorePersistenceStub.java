@@ -37,7 +37,7 @@ public class StorePersistenceStub implements StorePersistence, Serializable {
     //Adds all Product's to the identified Store
     public void addAllProductsToStore(Store store){
         Services services = new Services();
-        ProductPersistence productPersistence = services.getProductPersistence();
+        ProductPersistence productPersistence = services.getProductPersistence(false);
 
         List<Product> existingProducts = productPersistence.getExistingProducts();
         for (Product product : existingProducts){

@@ -11,6 +11,7 @@ import com.example.easyshopper.R;
 import com.example.easyshopper.logic.ProductHandler;
 import com.example.easyshopper.logic.ShoppingListHandler;
 import com.example.easyshopper.logic.StoreHandler;
+import com.example.easyshopper.persistence.utils.DBHelper;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -23,14 +24,17 @@ public class MainActivity extends AppCompatActivity {
     int currentFragment;
 
     //get handlers
-    private ProductHandler productHandler = new ProductHandler();
-    private StoreHandler storeHandler = new StoreHandler();
-    private ShoppingListHandler shoppingListHandler = new ShoppingListHandler();
+    private boolean forProduction = true;
+    private ProductHandler productHandler = new ProductHandler(forProduction);
+    private StoreHandler storeHandler = new StoreHandler(forProduction);
+    private ShoppingListHandler shoppingListHandler = new ShoppingListHandler(forProduction);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        DBHelper.copyDatabaseToDevice(this);
 
         if (savedInstanceState != null) {
             productHandler = (ProductHandler) savedInstanceState.getSerializable(PRODUCT_HANDLER_KEY);

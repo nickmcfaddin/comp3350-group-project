@@ -28,7 +28,7 @@ public class ShoppingListUnitTest {
         assertEquals(store, shoppingList.getStore());
 
         //Create new Product to use for test
-        Product product = new Product(1, "Eggs", 0.3, 5, 0.8);
+        Product product = new Product(1, "Eggs", 0.3, 5, 0.8, 1);
 
         //Add our new Product's to the ArrayList<Product> to test against
         ArrayList<Product> productArrayList = new ArrayList<>();

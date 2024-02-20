@@ -27,8 +27,8 @@ public class PricePersistenceStub implements PricePersistence, Serializable {
 
         //Setup connections to StorePersistence and ProductPersistence stubs
         Services services = new Services();
-        StorePersistence storePersistence = services.getStorePersistence();
-        ProductPersistence productPersistence = services.getProductPersistence();
+        StorePersistence storePersistence = services.getStorePersistence(false);
+        ProductPersistence productPersistence = services.getProductPersistence(false);
 
         //Gives us the total quantity of stores and products
         int totalStores = storePersistence.getExistingStores().size();

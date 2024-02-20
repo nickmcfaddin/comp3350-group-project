@@ -8,7 +8,11 @@ import java.io.Serializable;
 import java.util.List;
 
 public class StoreHandler implements Serializable {
-    StorePersistence storePersistence = Services.getStorePersistence();
+    StorePersistence storePersistence;
+
+    public StoreHandler(boolean forProduction) {
+        storePersistence = Services.getStorePersistence(forProduction);
+    }
 
     public Store getStoreById(int storeID) {
         return storePersistence.getStoreById(storeID);

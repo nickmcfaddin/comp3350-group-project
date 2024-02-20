@@ -11,6 +11,12 @@
       <entry key="Tests in 'com.example.easyshopper'">
         <State />
       </entry>
+      <entry key="SearchFragmentTest">
+        <State />
+      </entry>
+      <entry key="ShoppingListFragmentTest">
+        <State />
+      </entry>
       <entry key="app">
         <State>
           <targetSelectedWithDropDown>

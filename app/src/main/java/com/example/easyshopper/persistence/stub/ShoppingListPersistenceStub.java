@@ -21,8 +21,8 @@ public class ShoppingListPersistenceStub implements ShoppingListPersistence, Ser
 
         //Setup connections to StorePersistence and ProductPersistence stubs
         Services services = new Services();
-        StorePersistence storePersistence = services.getStorePersistence();
-        ProductPersistence productPersistence = services.getProductPersistence();
+        StorePersistence storePersistence = services.getStorePersistence(false);
+        ProductPersistence productPersistence = services.getProductPersistence(false);
 
         List<Store> existingStores = storePersistence.getExistingStores();
         List<Product> existingProducts = productPersistence.getExistingProducts();
@@ -54,7 +54,7 @@ public class ShoppingListPersistenceStub implements ShoppingListPersistence, Ser
         int index = -1;
 
         for (int i = 0; i < shoppingListArray.size(); i++){
-            if (shoppingListArray.get(i).getShoppingListID().equals(newShoppingList.getShoppingListID())) {
+            if (shoppingListArray.get(i).getShoppingListID() == newShoppingList.getShoppingListID()) {
                 // productID will not repeat
                 index = i;
             }
@@ -87,7 +87,7 @@ public class ShoppingListPersistenceStub implements ShoppingListPersistence, Ser
         }
 
         for(ShoppingList list : shoppingListArray) {
-            if(list.getShoppingListID().equals(queryList.getShoppingListID())) {
+            if(list.getShoppingListID() == queryList.getShoppingListID()) {
                 return true;
             }
         }

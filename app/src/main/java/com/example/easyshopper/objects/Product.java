@@ -12,15 +12,17 @@ public class Product implements Serializable {
     private double carb;
     private double protein;
     private double calories;
+    private int lifeTimeDays;
 
     //Constructor
-    public Product(int productID, String productName, double fat, double carb, double protein){
+    public Product(int productID, String productName, double fat, double carb, double protein, int lifeTimeDays){
         this.productID = productID;
         this.productName = productName;
         this.fat = fat;
         this.carb = carb;
         this.protein = protein;
         this.calories = fat*9 + carb*4 + protein*4;
+        this.lifeTimeDays = lifeTimeDays;
     }
 
     //GETTERS
@@ -44,6 +46,9 @@ public class Product implements Serializable {
 
     public double getCalories() {return this.calories;}
 
+    public int getLifeTimeDays() {
+        return lifeTimeDays;
+    }
     @NonNull
     @Override
     public String toString() {

@@ -16,10 +16,10 @@ public class ProductPersistenceStub implements ProductPersistence, Serializable 
     public ProductPersistenceStub() {
         this.productList = new ArrayList<>();
 
-        productList.add(new Product(1, "Apple", 1.00, 0.3, 0.5));
-        productList.add(new Product(2, "Kiwi",  0.5, 11, 1));
-        productList.add(new Product(3, "Banana", 0.3, 27, 1.3));
-        productList.add(new Product(4, "Orange", 0.2, 15, 1));
+        productList.add(new Product(1, "Apple", 1.00, 0.3, 0.5, 1));
+        productList.add(new Product(2, "Kiwi",  0.5, 11, 1, 1));
+        productList.add(new Product(3, "Banana", 0.3, 27, 1.3, 1));
+        productList.add(new Product(4, "Orange", 0.2, 15, 1, 1));
     }
 
     //Get a list of all Product's

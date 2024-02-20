@@ -8,13 +8,11 @@ import java.util.ArrayList;
 
 //List is created per store, products added to list
 public class ShoppingList implements Serializable {
-    private String shoppingListID;
     private ArrayList<Product> cart;
     private Store store;
 
     //Constructor
     public ShoppingList(Store store){
-        this.shoppingListID = UUID.randomUUID().toString();
         this.store = store;
         this.cart = new ArrayList<>(); //Cart represents the items in the ShoppingList
     }
@@ -31,7 +29,7 @@ public class ShoppingList implements Serializable {
 
     public Store getStore(){return store;}
 
-    public String getShoppingListID() {return shoppingListID;}
+    public int getShoppingListID() {return store.getStoreID();}
 
     public ArrayList<Product> getItemList(){
         return cart;

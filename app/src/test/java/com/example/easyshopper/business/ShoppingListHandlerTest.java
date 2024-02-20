@@ -8,6 +8,7 @@ import com.example.easyshopper.objects.Product;
 import com.example.easyshopper.objects.ShoppingList;
 import com.example.easyshopper.objects.Store;
 import com.example.easyshopper.persistence.StorePersistence;
+import com.example.easyshopper.persistence.stub.StorePersistenceStub;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -23,8 +24,10 @@ public class ShoppingListHandlerTest {
     @Before
     public void setup(){
         System.out.println("Starting test ShoppingListHandler");
-        sLHandlertemp = new ShoppingListHandler();
-        product = new Product(10, "TestProduct", 0.1, 0.2, 0.3);
+        boolean forProduction = false;
+
+        sLHandlertemp = new ShoppingListHandler(forProduction);
+        product = new Product(10, "TestProduct", 0.1, 0.2, 0.3, 1);
         store = new Store(10, "TestStore");
     }
 
@@ -38,7 +41,7 @@ public class ShoppingListHandlerTest {
     @Test
     public void testCreateAndDeleteShoppingList() {
         //Add a store to the database using the storePersistence
-        StorePersistence storePersistence = Services.getStorePersistence();
+        StorePersistence storePersistence = new StorePersistenceStub();
         storePersistence.addStore(store);
 
         //Create a list with the new store as the parameter
@@ -47,14 +50,14 @@ public class ShoppingListHandlerTest {
         //Tests that the size of the existing shopping lists reflects the change
         assertEquals(4, sLHandlertemp.getAllShoppingLists().size());
 
-        sLHandlertemp.removeShoppingList(Services.getShoppingListPersistence().getExistingShoppingLists().get(0));
-        assertEquals(3, Services.getShoppingListPersistence().getExistingShoppingLists().size());
+        sLHandlertemp.removeShoppingList(Services.getShoppingListPersistence(false).getExistingShoppingLists().get(0));
+        assertEquals(3, Services.getShoppingListPersistence(false).getExistingShoppingLists().size());
 
         sLHandlertemp.createShoppingList(null);
-        assertEquals(3, Services.getShoppingListPersistence().getExistingShoppingLists().size());
+        assertEquals(3, Services.getShoppingListPersistence(false).getExistingShoppingLists().size());
 
         sLHandlertemp.removeShoppingList(null);
-        assertEquals(3, Services.getShoppingListPersistence().getExistingShoppingLists().size());
+        assertEquals(3, Services.getShoppingListPersistence(false).getExistingShoppingLists().size());
     }
 
     @Test
