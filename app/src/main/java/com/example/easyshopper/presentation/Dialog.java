@@ -10,6 +10,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckedTextView;
 import android.widget.ListView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.easyshopper.R;
@@ -67,6 +68,7 @@ public class Dialog {
 
         ListView listView = dialogView.findViewById(R.id.list_view);
         ArrayAdapter<Product> listAdapter = new ArrayAdapter<>(context, android.R.layout.simple_list_item_multiple_choice, productList);
+        listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         listView.setAdapter(listAdapter);
 
         Button cancelButton = dialogView.findViewById(R.id.cancel_btn);
