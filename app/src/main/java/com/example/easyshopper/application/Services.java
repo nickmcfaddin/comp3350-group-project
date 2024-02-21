@@ -1,5 +1,7 @@
 package com.example.easyshopper.application;
 
+import android.util.Log;
+
 import com.example.easyshopper.persistence.PricePersistence;
 import com.example.easyshopper.persistence.ProductPersistence;
 import com.example.easyshopper.persistence.ShoppingListPersistence;
@@ -35,11 +37,7 @@ public class Services {
 
     public static ShoppingListPersistence getShoppingListPersistence(boolean forProduction) {
         if(shoppingListPersistence == null) {
-            if(forProduction) {
-                shoppingListPersistence = new ShoppingListPersistenceHSQLDB(Main.getDBPathName());
-            } else {
-                shoppingListPersistence = new ShoppingListPersistenceStub();
-            }
+            shoppingListPersistence = new ShoppingListPersistenceStub();
         }
 
         return shoppingListPersistence;

@@ -6,15 +6,17 @@ import com.example.easyshopper.objects.Price;
 import com.example.easyshopper.objects.Product;
 import com.example.easyshopper.persistence.ProductPersistence;
 
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductPersistenceHSQLDB implements ProductPersistence {
+public class ProductPersistenceHSQLDB implements ProductPersistence, Serializable {
     private final String dbPath;
     private List<Product> products;
 
@@ -31,9 +33,9 @@ public class ProductPersistenceHSQLDB implements ProductPersistence {
     private Product fromResultSet(final ResultSet rs) throws SQLException {
         int productID = rs.getInt("ProductID");
         String name = rs.getString("Name");
-        float protein = rs.getFloat("Protein");
-        float carbs = rs.getFloat("Carbs");
-        float fat = rs.getFloat("Fat");
+        double protein = rs.getBigDecimal("Protein").doubleValue();
+        double carbs = rs.getBigDecimal("Carbs").doubleValue();
+        double fat = rs.getBigDecimal("Fat").doubleValue();
         int lifetimeDays = rs.getInt("LifetimeDays");
 
         return new Product(productID, name, fat, carbs, protein, lifetimeDays);
@@ -56,16 +58,30 @@ public class ProductPersistenceHSQLDB implements ProductPersistence {
 
     @Override
     public List<Product> getExistingProducts() {
-        return null;
+        return products;
     }
 
     @Override
     public Product getProductById(int productID) {
+        for (int i = 0; i < products.size(); i++){
+            if (products.get(i).getProductID() == productID){
+                return products.get(i);
+            }
+        }
+
         return null;
     }
 
     @Override
     public List<Product> getProductsByName(String productName) {
-        return null;
+        List<Product> newList = new ArrayList<>();
+
+        for (int i = 0; i < products.size(); i++){
+            if (products.get(i).getProductName().toLowerCase().contains(productName.toLowerCase())){
+                newList.add(products.get(i));
+            }
+        }
+
+        return newList;
     }
 }

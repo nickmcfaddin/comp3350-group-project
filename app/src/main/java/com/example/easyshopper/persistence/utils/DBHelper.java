@@ -2,6 +2,7 @@ package com.example.easyshopper.persistence.utils;
 
 import android.content.Context;
 import android.content.res.AssetManager;
+import android.util.Log;
 
 import com.example.easyshopper.application.Main;
 
@@ -28,7 +29,6 @@ public class DBHelper {
             copyAssetsToDirectory(context, assetNames, dataDirectory);
 
             Main.setDBPathName(dataDirectory.toString() + "/" + Main.getDBPathName());
-
         } catch (final IOException ioe) {
             System.out.println("Unable to access application data: " + ioe.getMessage());
         }

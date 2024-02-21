@@ -22,9 +22,13 @@ public class Price implements Serializable {
     public int getProductID(){
         return productID;
     }
+
     public double getPrice(){
         return price;
     }
 
+    public String getPriceFormatted() {
+        return "$" + String.format("%.2f", price);
+    }
 
 }

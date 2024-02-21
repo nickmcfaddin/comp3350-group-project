@@ -25,9 +25,9 @@ public class MainActivity extends AppCompatActivity {
 
     //get handlers
     private boolean forProduction = true;
-    private ProductHandler productHandler = new ProductHandler(forProduction);
-    private StoreHandler storeHandler = new StoreHandler(forProduction);
-    private ShoppingListHandler shoppingListHandler = new ShoppingListHandler(forProduction);
+    private ProductHandler productHandler;
+    private StoreHandler storeHandler;
+    private ShoppingListHandler shoppingListHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +40,11 @@ public class MainActivity extends AppCompatActivity {
             productHandler = (ProductHandler) savedInstanceState.getSerializable(PRODUCT_HANDLER_KEY);
             storeHandler = (StoreHandler) savedInstanceState.getSerializable(STORE_HANDLER_KEY);
             shoppingListHandler = (ShoppingListHandler) savedInstanceState.getSerializable(LIST_HANDLER_KEY);
+        }
+        else {
+            productHandler = new ProductHandler(forProduction);
+            storeHandler = new StoreHandler(forProduction);
+            shoppingListHandler = new ShoppingListHandler(forProduction);
         }
 
         initComponents();

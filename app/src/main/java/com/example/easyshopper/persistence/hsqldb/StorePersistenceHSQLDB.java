@@ -6,15 +6,17 @@ import com.example.easyshopper.objects.Price;
 import com.example.easyshopper.objects.Store;
 import com.example.easyshopper.persistence.StorePersistence;
 
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StorePersistenceHSQLDB implements StorePersistence {
+public class StorePersistenceHSQLDB implements StorePersistence, Serializable {
     private final String dbPath;
     private List<Store> stores;
 
@@ -52,16 +54,35 @@ public class StorePersistenceHSQLDB implements StorePersistence {
 
     @Override
     public List<Store> getExistingStores() {
-        return null;
+        return stores;
     }
 
     @Override
     public Store getStoreById(int storeID) {
+        for (int i=0; i<stores.size(); i++){
+            if (stores.get(i).getStoreID() == storeID)
+            {
+                return stores.get(i);
+            }
+        }
         return null;
     }
 
     @Override
     public void addStore(Store store) {
+        try (Connection connection = connect()) {
+            final PreparedStatement statement = connection.prepareStatement("INSERT INTO STORES VALUES(?, ?)");
+            statement.setInt(1, store.getStoreID());
+            statement.setString(2, store.getStoreName());
 
+            statement.executeUpdate();
+            statement.close();
+
+            this.stores = new ArrayList<>();
+            loadStores();
+        } catch (final SQLException e) {
+            Log.e("Connect SQL", e.getMessage() + e.getSQLState());
+            e.printStackTrace();
+        }
     }
 }

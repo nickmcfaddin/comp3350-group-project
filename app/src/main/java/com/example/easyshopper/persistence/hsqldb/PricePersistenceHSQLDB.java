@@ -7,15 +7,17 @@ import com.example.easyshopper.objects.Product;
 import com.example.easyshopper.objects.Store;
 import com.example.easyshopper.persistence.PricePersistence;
 
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PricePersistenceHSQLDB implements PricePersistence {
+public class PricePersistenceHSQLDB implements PricePersistence, Serializable {
     private final String dbPath;
     private List<Price> prices;
 
@@ -32,7 +34,7 @@ public class PricePersistenceHSQLDB implements PricePersistence {
     private Price fromResultSet(final ResultSet rs) throws SQLException {
         int storeID = rs.getInt("StoreID");
         int productID = rs.getInt("ProductID");
-        float price = rs.getBigDecimal("Price").floatValue();
+        double price = rs.getBigDecimal("Price").doubleValue();
 
         return new Price(storeID,productID,price);
     }
@@ -54,11 +56,25 @@ public class PricePersistenceHSQLDB implements PricePersistence {
 
     @Override
     public double getPrice(Product product, Store store) {
-        return 0;
+        for (int i=0; i<prices.size(); i++){
+            if (prices.get(i).getProductID() == product.getProductID() && prices.get(i).getStoreID() == store.getStoreID()){
+                return prices.get(i).getPrice();
+            }
+        }
+
+        return -1;
     }
 
     @Override
     public List<Price> getAllPricesForSameProduct(Product product) {
-        return null;
+        List<Price> returnList = new ArrayList<>();
+
+        for (int i=0; i<prices.size(); i++){
+            if (prices.get(i).getProductID() == product.getProductID()){
+                returnList.add(prices.get(i));
+            }
+        }
+
+        return returnList;
     }
 }
