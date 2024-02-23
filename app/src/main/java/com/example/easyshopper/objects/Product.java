@@ -13,6 +13,7 @@ public class Product implements Serializable {
     private double protein;
     private double calories;
 
+
     //Constructor
     public Product(int productID, String productName, double fat, double carb, double protein){
         this.productID = productID;
