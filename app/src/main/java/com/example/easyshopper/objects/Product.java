@@ -14,6 +14,7 @@ public class Product implements Serializable {
     private double calories;
     private int lifeTimeDays;
 
+
     //Constructor
     public Product(int productID, String productName, double fat, double carb, double protein, int lifeTimeDays){
         this.productID = productID;
