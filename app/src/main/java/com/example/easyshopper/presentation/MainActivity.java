@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 
 import com.example.easyshopper.R;
+import com.example.easyshopper.logic.HomeInventoryHandler;
 import com.example.easyshopper.logic.ProductHandler;
 import com.example.easyshopper.logic.ShoppingListHandler;
 import com.example.easyshopper.logic.StoreHandler;
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private ProductHandler productHandler = new ProductHandler();
     private StoreHandler storeHandler = new StoreHandler();
     private ShoppingListHandler shoppingListHandler = new ShoppingListHandler();
+    private HomeInventoryHandler homeInventoryHandler = new HomeInventoryHandler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         //get and init components
         ShoppingListFragment shoppingListFragment = ShoppingListFragment.newInstance(productHandler, storeHandler, shoppingListHandler);
         SearchFragment searchFragment = SearchFragment.newInstance(productHandler, storeHandler);
-        InventoryFragment inventoryFragment = new InventoryFragment();
+        InventoryFragment inventoryFragment = InventoryFragment.newInstance(homeInventoryHandler);
         UserRequestFragment userRequestFragment = new UserRequestFragment();
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
 

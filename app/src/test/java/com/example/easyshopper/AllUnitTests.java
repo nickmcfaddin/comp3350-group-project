@@ -6,6 +6,8 @@ import org.junit.runners.Suite;
 import com.example.easyshopper.business.ProductHandlerTest;
 import com.example.easyshopper.business.ShoppingListHandlerTest;
 import com.example.easyshopper.business.StoreHandlerTest;
+import com.example.easyshopper.objects.HomeInventoryTest;
+import com.example.easyshopper.objects.HomeProductTest;
 import com.example.easyshopper.objects.PriceTest;
 import com.example.easyshopper.objects.ProductTest;
 import com.example.easyshopper.objects.ShoppingListUnitTest;
@@ -23,7 +25,9 @@ import com.example.easyshopper.objects.StoreTest;
         PriceTest.class,
         ProductTest.class,
         ShoppingListUnitTest.class,
-        StoreTest.class
+        StoreTest.class,
+        HomeProductTest.class,
+        HomeInventoryTest.class
 })
 
 public class AllUnitTests{}

@@ -1,101 +1,128 @@
 package com.example.easyshopper.objects;
 
 import java.io.Serializable;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 public class HomeInventory implements Serializable{
-    ArrayList<HomeProduct> stock;
-    ArrayList<Integer> desiredQuantity;
-
-    ArrayList<Integer> stockQuantity;
+    List<HomeProduct> allProducts;
 
     // Using singleton for the object
     private HomeInventory(){
-        stock = new ArrayList<>();
-        desiredQuantity = new ArrayList<>();
-        stockQuantity = new ArrayList<>();
+        allProducts = new ArrayList<>();
+    }
+
+    public HomeInventory(List<HomeProduct> allProducts){
+        this.allProducts = allProducts;
     }
 
     // GETTERS
-    public ArrayList<HomeProduct> getHomeProduct(){
-        return stock;
+    public List<HomeProduct> getAllProducts(){
+        return allProducts;
     }
 
-    public ArrayList<Integer> getDesiredQuantity(){
-        return desiredQuantity;
+    public List<HomeProduct> getStockProduct(){
+        List<HomeProduct> stockProduct = new ArrayList<>();
+
+        for (int i=0; i<allProducts.size(); i++){
+            HomeProduct curHomeProduct = allProducts.get(i);
+
+            if (curHomeProduct.getHomeProductDesiredQuantity() != 0 || curHomeProduct.getHomeProductStockQuantity() != 0) {
+                stockProduct.add(allProducts.get(i));
+            }
+        }
+
+        return stockProduct;
     }
 
-    public ArrayList<Integer> getStockQuantity(){
-        return stockQuantity;
+    public List<HomeProduct> getStockProductSorted() {
+        // sort product by desired/have quantity decreasing order
+        // if have = 0 and desired = 1, it will be at the top
+        List<HomeProduct> stockProductWithHave0 = new ArrayList<>();
+        List<HomeProduct> stockProductWithoutHave0 = new ArrayList<>();
+
+        for (int i=0; i<allProducts.size(); i++){
+            HomeProduct curHomeProduct = allProducts.get(i);
+
+            if (curHomeProduct.getHomeProductDesiredQuantity() != 0 || curHomeProduct.getHomeProductStockQuantity() != 0) {
+                if (curHomeProduct.getHomeProductStockQuantity() == 0){
+                    stockProductWithHave0.add(curHomeProduct);
+                }
+                else{
+                    stockProductWithoutHave0.add(curHomeProduct);
+                }
+            }
+        }
+
+        stockProductWithoutHave0.sort(new Comparator<HomeProduct>() {
+            public int compare(HomeProduct product1, HomeProduct product2) {
+                // Calculate the ratio of have/desired for each product
+                double ratio1 = product1.getHomeProductDesiredQuantity() / (double) product1.getHomeProductStockQuantity();
+                double ratio2 = product2.getHomeProductDesiredQuantity() / (double) product2.getHomeProductStockQuantity();
+
+                // Compare the ratios in decreasing order
+                return Double.compare(ratio2, ratio1);
+            }
+        });
+
+        stockProductWithHave0.addAll(stockProductWithoutHave0);
+
+        return stockProductWithHave0;
     }
 
-    //}
+    public List<HomeProduct> getHiddenProduct(){
+        List<HomeProduct> hiddenProduct = new ArrayList<>();
+
+        for (int i=0; i<allProducts.size(); i++){
+            if (allProducts.get(i).getHomeProductDesiredQuantity() == 0 && allProducts.get(i).getHomeProductStockQuantity() == 0) {
+                hiddenProduct.add(allProducts.get(i));
+            }
+        }
+
+        return hiddenProduct;
+    }
 
     // METHODS
-    public void addHomeProductToStock(HomeProduct homeProduct){
-        if (homeProduct != null && !stock.contains(homeProduct)){
-            stock.add(homeProduct);
+    public void incrementStockQuantityBy1(HomeProduct homeProduct){
+        if (allProducts.contains(homeProduct)){
+            int curIndex = allProducts.indexOf(homeProduct);
+            HomeProduct curHomeProduct = allProducts.get(curIndex);
+
+            curHomeProduct.incrementStockQuantityBy1();
+            allProducts.set(curIndex, curHomeProduct);
         }
     }
 
-    public void removeHomeProductFromStock(HomeProduct homeProduct){
-        if (homeProduct != null){
-            stock.remove(homeProduct);
+    public void incrementDesiredQuantityBy1(HomeProduct homeProduct){
+        if (allProducts.contains(homeProduct)){
+            int curIndex = allProducts.indexOf(homeProduct);
+            HomeProduct curHomeProduct = allProducts.get(curIndex);
+
+            curHomeProduct.incrementDesiredQuantityBy1();
+            allProducts.set(curIndex, curHomeProduct);
         }
     }
 
-    public void addOneToHomeProductDesiredQuantity(HomeProduct homeProduct){
-        if (homeProduct != null){
-            int index = stock.indexOf(homeProduct);
+    public void decreaseStockQuantityBy1(HomeProduct homeProduct){
+        if (allProducts.contains(homeProduct)){
+            int curIndex = allProducts.indexOf(homeProduct);
+            HomeProduct curHomeProduct = allProducts.get(curIndex);
 
-            if (index != -1) {
-                int curDesiredQuantity = desiredQuantity.get(index);
-
-                desiredQuantity.set(index, curDesiredQuantity + 1);
-            }
+            curHomeProduct.decreaseStockQuantityBy1();
+            allProducts.set(curIndex, curHomeProduct);
         }
     }
 
-    public void addOneToHomeProductStockQuantity(HomeProduct homeProduct){
-        if (homeProduct != null){
-            int index = stock.indexOf(homeProduct);
+    public void decreaseDesiredQuantityBy1(HomeProduct homeProduct){
+        if (allProducts.contains(homeProduct)){
+            int curIndex = allProducts.indexOf(homeProduct);
+            HomeProduct curHomeProduct = allProducts.get(curIndex);
 
-            if (index != -1) {
-                int curStockQuantity = stockQuantity.get(index);
-
-                stockQuantity.set(index, curStockQuantity + 1);
-            }
+            curHomeProduct.decreaseDesiredQuantityBy1();
+            allProducts.set(curIndex, curHomeProduct);
         }
     }
-
-    public void removeOneFromHomeProductDesiredQuantity(HomeProduct homeProduct){
-        if (homeProduct != null){
-            int index = stock.indexOf(homeProduct);
-
-            if (index != -1) {
-                int curDesiredQuantity = desiredQuantity.get(index);
-
-                if (curDesiredQuantity > 0) {
-                    desiredQuantity.set(index, curDesiredQuantity - 1);
-                }
-            }
-        }
-    }
-
-    public void removeOneFromHomeProductStockQuantity(HomeProduct homeProduct){
-        if (homeProduct != null){
-            int index = stock.indexOf(homeProduct);
-
-            if (index != -1) {
-                int curStockQuantity = stockQuantity.get(index);
-
-                if (curStockQuantity > 0) {
-                    stockQuantity.set(index, curStockQuantity - 1);
-                }
-            }
-        }
-    }
-
-
-
 }
