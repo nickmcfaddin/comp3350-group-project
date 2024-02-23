@@ -1,11 +1,13 @@
 package com.example.easyshopper.presentation;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +23,7 @@ import com.example.easyshopper.logic.StoreHandler;
 import com.example.easyshopper.objects.HomeProduct;
 import com.example.easyshopper.objects.Product;
 import com.example.easyshopper.objects.ShoppingList;
+import com.example.easyshopper.presentation.adapter.HomeProductButtonInterface;
 import com.example.easyshopper.presentation.adapter.HomeProductHiddenAdapter;
 import com.example.easyshopper.presentation.adapter.HomeProductStockAdapter;
 import com.example.easyshopper.presentation.adapter.ProductSearchAdapter;
@@ -32,7 +35,7 @@ import java.util.List;
  * Use the {@link InventoryFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class InventoryFragment extends Fragment {
+public class InventoryFragment extends Fragment implements HomeProductButtonInterface {
     //keys for serializable objects
     private static final String HOME_INVENTORY_HANDLER_KEY = "homeInventoryHandler";
 
@@ -103,13 +106,13 @@ public class InventoryFragment extends Fragment {
         // set adapter for stock products recyclerview
         stockHomeProductView = rootView.findViewById(R.id.stockHomeInventoryView);
         stockHomeProductView.setLayoutManager(new LinearLayoutManager(requireContext()));
-        homeProductStockAdapter = new HomeProductStockAdapter(getContext(), homeProductInventoryList, homeInventoryHandler);
+        homeProductStockAdapter = new HomeProductStockAdapter(getContext(), homeProductInventoryList, homeInventoryHandler, this);
         stockHomeProductView.setAdapter(homeProductStockAdapter);
 
         // set adapter for hidden products recyclerview
         hiddenHomeProductView = rootView.findViewById(R.id.hiddenHomeInventoryView);
         hiddenHomeProductView.setLayoutManager(new LinearLayoutManager(requireContext()));
-        homeProductHiddenAdapter = new HomeProductHiddenAdapter(getContext(), homeProductHiddenList, homeInventoryHandler);
+        homeProductHiddenAdapter = new HomeProductHiddenAdapter(getContext(), homeProductHiddenList, homeInventoryHandler, this);
         hiddenHomeProductView.setAdapter(homeProductHiddenAdapter);
 
         // sort button
@@ -144,6 +147,81 @@ public class InventoryFragment extends Fragment {
             // the view is VISIBLE, which means hidden products is shown
             hiddenHomeProductView.setVisibility(View.GONE);
             arrowImage.setImageResource(R.drawable.icon_arrow_up);
+        }
+    }
+
+    @Override
+    public void onButtonClick(View view, int position, String buttonType) {
+        // Handle button click events here
+        // Get the context for logging
+        Context context = getContext();
+
+        // Check if the context is not null and buttonType is not null or empty
+        if (context != null && buttonType != null && !buttonType.isEmpty()) {
+            // Construct the log message
+            String logMessage = "Button clicked at position " + position + ", Type: " + buttonType;
+
+            // Log the message to the logcat
+            Log.d("InventoryFragment", logMessage);
+
+            Log.d("InventoryFragment", String.valueOf(view.getId()));
+        }
+
+        if (view.getId() == R.id.stockHomeInventoryView) {
+            Log.d("hello", "abc");
+            // Get the clicked HomeProduct from the stock inventory list
+            HomeProduct clickedProduct = homeProductInventoryList.get(position);
+
+            // Check the buttonType and update quantities accordingly
+            switch (buttonType) {
+                case "removeStock":
+                    homeInventoryHandler.decreaseStockQuantityBy1(clickedProduct);
+                    break;
+                case "addStock":
+                    homeInventoryHandler.incrementStockQuantityBy1(clickedProduct);
+                    break;
+                case "removeDesired":
+                    homeInventoryHandler.decreaseDesiredQuantityBy1(clickedProduct);
+                    break;
+                case "addDesired":
+                    homeInventoryHandler.incrementDesiredQuantityBy1(clickedProduct);
+                    break;
+                default:
+                    break;
+            }
+
+            // Notify the stock inventory adapter that the data has changed
+            homeProductInventoryList = homeInventoryHandler.getStockProduct();
+            homeProductHiddenList = homeInventoryHandler.getHiddenProduct();
+            homeProductStockAdapter.updateData(homeProductInventoryList);
+            homeProductHiddenAdapter.updateData(homeProductHiddenList);
+        } else if (view.getId() == R.id.hiddenHomeInventoryView) {
+            // Get the clicked HomeProduct from the hidden list
+            HomeProduct clickedProduct = homeProductHiddenList.get(position);
+
+            // Check the buttonType and update quantities accordingly
+            switch (buttonType) {
+                case "removeStock":
+                    homeInventoryHandler.decreaseStockQuantityBy1(clickedProduct);
+                    break;
+                case "addStock":
+                    homeInventoryHandler.incrementStockQuantityBy1(clickedProduct);
+                    break;
+                case "removeDesired":
+                    homeInventoryHandler.decreaseDesiredQuantityBy1(clickedProduct);
+                    break;
+                case "addDesired":
+                    homeInventoryHandler.incrementDesiredQuantityBy1(clickedProduct);
+                    break;
+                default:
+                    break;
+            }
+
+            // Notify the hidden inventory adapter that the data has changed
+            homeProductInventoryList = homeInventoryHandler.getStockProduct();
+            homeProductHiddenList = homeInventoryHandler.getHiddenProduct();
+            homeProductStockAdapter.updateData(homeProductInventoryList);
+            homeProductHiddenAdapter.updateData(homeProductHiddenList);
         }
     }
 }

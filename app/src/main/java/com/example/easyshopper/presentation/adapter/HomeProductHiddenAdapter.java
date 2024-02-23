@@ -3,6 +3,7 @@ package com.example.easyshopper.presentation.adapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -20,16 +21,19 @@ public class HomeProductHiddenAdapter extends RecyclerView.Adapter<HomeProductSt
     private Context context;
     private List<HomeProduct> hiddenHomeProduct;
     private HomeInventoryHandler homeInventoryHandler;
+    private HomeProductButtonInterface buttonClickListener;
 
-    public HomeProductHiddenAdapter(@NonNull Context context, List<HomeProduct> hiddenHomeProduct, HomeInventoryHandler homeInventoryHandler) {
+    public HomeProductHiddenAdapter(@NonNull Context context, List<HomeProduct> hiddenHomeProduct, HomeInventoryHandler homeInventoryHandler, HomeProductButtonInterface buttonClickListener) {
         this.context = context;
         this.hiddenHomeProduct = hiddenHomeProduct;
         this.homeInventoryHandler = homeInventoryHandler;
+        this.buttonClickListener = buttonClickListener;
     }
 
     @NonNull
     public HomeProductStockViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new HomeProductStockViewHolder(LayoutInflater.from(context).inflate(R.layout.inventory_item, parent, false));
+        View itemView = LayoutInflater.from(context).inflate(R.layout.inventory_item, parent, false);
+        return new HomeProductStockViewHolder(itemView, buttonClickListener);
     }
 
     @Override
