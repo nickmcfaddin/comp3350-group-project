@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String PRODUCT_HANDLER_KEY = "productHandler";
     private static final String STORE_HANDLER_KEY = "storeHandler";
     private static final String LIST_HANDLER_KEY = "shoppingListHandler";
+    private static final String HOME_INVENTORY_HANDLER_KEY = "homeInventoryHandler";
 
     //id of currentFragment that is being displayed
     int currentFragment;
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
             productHandler = (ProductHandler) savedInstanceState.getSerializable(PRODUCT_HANDLER_KEY);
             storeHandler = (StoreHandler) savedInstanceState.getSerializable(STORE_HANDLER_KEY);
             shoppingListHandler = (ShoppingListHandler) savedInstanceState.getSerializable(LIST_HANDLER_KEY);
+            homeInventoryHandler = (HomeInventoryHandler) savedInstanceState.getSerializable(HOME_INVENTORY_HANDLER_KEY);
         }
 
         initComponents();
@@ -48,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
         outState.putSerializable(PRODUCT_HANDLER_KEY, productHandler);
         outState.putSerializable(STORE_HANDLER_KEY, storeHandler);
         outState.putSerializable(LIST_HANDLER_KEY, shoppingListHandler);
+        outState.putSerializable(HOME_INVENTORY_HANDLER_KEY, homeInventoryHandler);
         super.onSaveInstanceState(outState);
     }
 

@@ -28,6 +28,7 @@ import com.example.easyshopper.presentation.adapter.HomeProductHiddenAdapter;
 import com.example.easyshopper.presentation.adapter.HomeProductStockAdapter;
 import com.example.easyshopper.presentation.adapter.ProductSearchAdapter;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -59,8 +60,6 @@ public class InventoryFragment extends Fragment implements HomeProductButtonInte
 
     public InventoryFragment(HomeInventoryHandler homeInventoryHandler) {
         this.homeInventoryHandler = homeInventoryHandler;
-        homeProductInventoryList = homeInventoryHandler.getStockProduct();
-        homeProductHiddenList = homeInventoryHandler.getHiddenProduct();
     }
 
     public static InventoryFragment newInstance(HomeInventoryHandler homeInventoryHandler) {
@@ -106,13 +105,13 @@ public class InventoryFragment extends Fragment implements HomeProductButtonInte
         // set adapter for stock products recyclerview
         stockHomeProductView = rootView.findViewById(R.id.stockHomeInventoryView);
         stockHomeProductView.setLayoutManager(new LinearLayoutManager(requireContext()));
-        homeProductStockAdapter = new HomeProductStockAdapter(getContext(), homeProductInventoryList, homeInventoryHandler, this);
+        homeProductStockAdapter = new HomeProductStockAdapter(getContext(), homeProductInventoryList, homeInventoryHandler, this, R.id.stockHomeInventoryView);
         stockHomeProductView.setAdapter(homeProductStockAdapter);
 
         // set adapter for hidden products recyclerview
         hiddenHomeProductView = rootView.findViewById(R.id.hiddenHomeInventoryView);
         hiddenHomeProductView.setLayoutManager(new LinearLayoutManager(requireContext()));
-        homeProductHiddenAdapter = new HomeProductHiddenAdapter(getContext(), homeProductHiddenList, homeInventoryHandler, this);
+        homeProductHiddenAdapter = new HomeProductHiddenAdapter(getContext(), homeProductHiddenList, homeInventoryHandler, this, R.id.hiddenHomeInventoryView);
         hiddenHomeProductView.setAdapter(homeProductHiddenAdapter);
 
         // sort button
@@ -129,10 +128,9 @@ public class InventoryFragment extends Fragment implements HomeProductButtonInte
     }
 
     private void sortStockHomeProduct() {
-        List<HomeProduct> sortedHomeProduct = homeInventoryHandler.getSortedStockProduct();
-        homeProductStockAdapter.updateData(sortedHomeProduct);
+        homeProductInventoryList = homeInventoryHandler.getSortedStockProduct();
+        homeProductStockAdapter.updateData(homeProductInventoryList);
     }
-
 
     private void showAndHideHiddenProduct(View view) {
         int visibility = hiddenHomeProductView.getVisibility();
@@ -151,7 +149,7 @@ public class InventoryFragment extends Fragment implements HomeProductButtonInte
     }
 
     @Override
-    public void onButtonClick(View view, int position, String buttonType) {
+    public void onButtonClick(View view, int position, String buttonType, int recyclerViewId) {
         // Handle button click events here
         // Get the context for logging
         Context context = getContext();
@@ -167,8 +165,7 @@ public class InventoryFragment extends Fragment implements HomeProductButtonInte
             Log.d("InventoryFragment", String.valueOf(view.getId()));
         }
 
-        if (view.getId() == R.id.stockHomeInventoryView) {
-            Log.d("hello", "abc");
+        if (recyclerViewId == R.id.stockHomeInventoryView) {
             // Get the clicked HomeProduct from the stock inventory list
             HomeProduct clickedProduct = homeProductInventoryList.get(position);
 
@@ -193,9 +190,16 @@ public class InventoryFragment extends Fragment implements HomeProductButtonInte
             // Notify the stock inventory adapter that the data has changed
             homeProductInventoryList = homeInventoryHandler.getStockProduct();
             homeProductHiddenList = homeInventoryHandler.getHiddenProduct();
+
+            for (HomeProduct homeProduct : homeProductInventoryList) {
+                Log.d("HomeProduct Details", "Product ID: " + homeProduct.getProductID() +
+                        ", Product Name: " + homeProduct.getProductName() +
+                        ", Stock Quantity: " + homeProduct.getHomeProductStockQuantity() +
+                        ", Desired Quantity: " + homeProduct.getHomeProductDesiredQuantity());}
+
             homeProductStockAdapter.updateData(homeProductInventoryList);
             homeProductHiddenAdapter.updateData(homeProductHiddenList);
-        } else if (view.getId() == R.id.hiddenHomeInventoryView) {
+        } else if (recyclerViewId == R.id.hiddenHomeInventoryView) {
             // Get the clicked HomeProduct from the hidden list
             HomeProduct clickedProduct = homeProductHiddenList.get(position);
 
@@ -220,6 +224,11 @@ public class InventoryFragment extends Fragment implements HomeProductButtonInte
             // Notify the hidden inventory adapter that the data has changed
             homeProductInventoryList = homeInventoryHandler.getStockProduct();
             homeProductHiddenList = homeInventoryHandler.getHiddenProduct();
+            for (HomeProduct homeProduct : homeProductInventoryList) {
+                Log.d("HomeProduct Details", "Product ID: " + homeProduct.getProductID() +
+                        ", Product Name: " + homeProduct.getProductName() +
+                        ", Stock Quantity: " + homeProduct.getHomeProductStockQuantity() +
+                        ", Desired Quantity: " + homeProduct.getHomeProductDesiredQuantity());}
             homeProductStockAdapter.updateData(homeProductInventoryList);
             homeProductHiddenAdapter.updateData(homeProductHiddenList);
         }

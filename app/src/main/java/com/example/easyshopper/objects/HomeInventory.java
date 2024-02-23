@@ -8,14 +8,14 @@ import java.util.Comparator;
 import java.util.List;
 
 public class HomeInventory implements Serializable{
-    List<HomeProduct> allProducts;
+    ArrayList<HomeProduct> allProducts;
 
     // Using singleton for the object
     private HomeInventory(){
         allProducts = new ArrayList<>();
     }
 
-    public HomeInventory(List<HomeProduct> allProducts){
+    public HomeInventory(ArrayList<HomeProduct> allProducts){
         this.allProducts = allProducts;
     }
 

@@ -12,7 +12,7 @@ import java.util.List;
 import com.example.easyshopper.persistence.HomeProductPersistence;
 
 public class HomeProductPersistenceStub implements HomeProductPersistence, Serializable{
-    private List<HomeProduct> homeProductList;
+    private ArrayList<HomeProduct> homeProductList;
 
     //Constructor
     public HomeProductPersistenceStub() {
@@ -30,8 +30,8 @@ public class HomeProductPersistenceStub implements HomeProductPersistence, Seria
 
     //Get a list of all HomeProduct's
     @Override
-    public List<HomeProduct> getExistingHomeProducts() {
-        return Collections.unmodifiableList(homeProductList);
+    public ArrayList<HomeProduct> getExistingHomeProducts() {
+        return homeProductList;
     }
 
     //Obtain a product using its productID

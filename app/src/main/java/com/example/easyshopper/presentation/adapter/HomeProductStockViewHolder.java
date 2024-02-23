@@ -17,9 +17,11 @@ public class HomeProductStockViewHolder extends RecyclerView.ViewHolder{
     private ImageButton addStockButton;
     private ImageButton removeDesiredButton;
     private ImageButton addDesiredButton;
+    private int recyclerViewId;
 
-    public HomeProductStockViewHolder(@NonNull View itemView, HomeProductButtonInterface listener) {
+    public HomeProductStockViewHolder(@NonNull View itemView, HomeProductButtonInterface listener, int recyclerViewId) {
         super(itemView);
+        this.recyclerViewId = recyclerViewId;
 
         // set values for home products
         homeProductName = itemView.findViewById(R.id.homeProductName);
@@ -36,28 +38,28 @@ public class HomeProductStockViewHolder extends RecyclerView.ViewHolder{
         removeStockButton.setOnClickListener(v -> {
             int position = getAdapterPosition();
             if (position != RecyclerView.NO_POSITION && listener != null) {
-                listener.onButtonClick(v, position, "removeStock");
+                listener.onButtonClick(v, position, "removeStock", recyclerViewId);
             }
         });
 
         addStockButton.setOnClickListener(v -> {
             int position = getAdapterPosition();
             if (position != RecyclerView.NO_POSITION && listener != null) {
-                listener.onButtonClick(v, position, "addStock");
+                listener.onButtonClick(v, position, "addStock", recyclerViewId);
             }
         });
 
         removeDesiredButton.setOnClickListener(v -> {
             int position = getAdapterPosition();
             if (position != RecyclerView.NO_POSITION && listener != null) {
-                listener.onButtonClick(v, position, "removeDesired");
+                listener.onButtonClick(v, position, "removeDesired", recyclerViewId);
             }
         });
 
         addDesiredButton.setOnClickListener(v -> {
             int position = getAdapterPosition();
             if (position != RecyclerView.NO_POSITION && listener != null) {
-                listener.onButtonClick(v, position, "addDesired");
+                listener.onButtonClick(v, position, "addDesired", recyclerViewId);
             }
         });
     }

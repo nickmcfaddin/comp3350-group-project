@@ -4,6 +4,6 @@ import android.view.View;
 
 public interface HomeProductButtonInterface {
     // 4 strings for button type: "addStock", "removeStock", "addDesired", "removeDesired"
-    void onButtonClick(View view, int position, String buttonType);
+    void onButtonClick(View view, int position, String buttonType, int recyclerViewID);
 }
 

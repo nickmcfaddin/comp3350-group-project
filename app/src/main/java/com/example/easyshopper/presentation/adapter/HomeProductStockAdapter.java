@@ -22,18 +22,20 @@ public class HomeProductStockAdapter extends RecyclerView.Adapter<HomeProductSto
     private List<HomeProduct> stockHomeProduct;
     private HomeInventoryHandler homeInventoryHandler;
     private HomeProductButtonInterface buttonClickListener;
+    private int recyclerViewId;
 
-    public HomeProductStockAdapter(@NonNull Context context, List<HomeProduct> homeProduct, HomeInventoryHandler homeInventoryHandler, HomeProductButtonInterface buttonClickListener) {
+    public HomeProductStockAdapter(@NonNull Context context, List<HomeProduct> homeProduct, HomeInventoryHandler homeInventoryHandler, HomeProductButtonInterface buttonClickListener, int recyclerViewId) {
         this.context = context;
         this.stockHomeProduct = homeProduct;
         this.homeInventoryHandler = homeInventoryHandler;
         this.buttonClickListener = buttonClickListener;
+        this.recyclerViewId = recyclerViewId;
     }
 
     @NonNull
     public HomeProductStockViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(context).inflate(R.layout.inventory_item, parent, false);
-        return new HomeProductStockViewHolder(itemView, buttonClickListener);
+        return new HomeProductStockViewHolder(itemView, buttonClickListener, recyclerViewId);
     }
 
     @Override
