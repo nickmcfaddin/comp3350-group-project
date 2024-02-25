@@ -10,36 +10,32 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.easyshopper.R;
-import com.example.easyshopper.logic.HomeInventoryHandler;
-import com.example.easyshopper.logic.ShoppingListHandler;
 import com.example.easyshopper.objects.HomeProduct;
 
 import java.util.List;
 
-public class HomeProductStockAdapter extends RecyclerView.Adapter<HomeProductStockViewHolder> {
+public class HomeProductStockAdapter extends RecyclerView.Adapter<HomeProductViewHolder> {
     @NonNull
     private Context context;
     private List<HomeProduct> stockHomeProduct;
-    private HomeInventoryHandler homeInventoryHandler;
     private HomeProductButtonInterface buttonClickListener;
     private int recyclerViewId;
 
-    public HomeProductStockAdapter(@NonNull Context context, List<HomeProduct> homeProduct, HomeInventoryHandler homeInventoryHandler, HomeProductButtonInterface buttonClickListener, int recyclerViewId) {
+    public HomeProductStockAdapter(@NonNull Context context, List<HomeProduct> homeProduct, HomeProductButtonInterface buttonClickListener, int recyclerViewId) {
         this.context = context;
         this.stockHomeProduct = homeProduct;
-        this.homeInventoryHandler = homeInventoryHandler;
         this.buttonClickListener = buttonClickListener;
         this.recyclerViewId = recyclerViewId;
     }
 
     @NonNull
-    public HomeProductStockViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public HomeProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(context).inflate(R.layout.inventory_item, parent, false);
-        return new HomeProductStockViewHolder(itemView, buttonClickListener, recyclerViewId);
+        return new HomeProductViewHolder(itemView, buttonClickListener, recyclerViewId);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull HomeProductStockViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull HomeProductViewHolder holder, int position) {
         holder.homeProductName.setText(stockHomeProduct.get(position).getProductName());
         holder.homeProductStockQuantity.setText(String.valueOf(stockHomeProduct.get(position).getHomeProductStockQuantity()));
         holder.homeProductDesiredQuantity.setText(String.valueOf(stockHomeProduct.get(position).getHomeProductDesiredQuantity()));

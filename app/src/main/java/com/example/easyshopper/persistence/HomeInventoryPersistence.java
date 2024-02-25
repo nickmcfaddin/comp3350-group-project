@@ -1,9 +1,6 @@
 package com.example.easyshopper.persistence;
 
 import com.example.easyshopper.objects.HomeProduct;
-import com.example.easyshopper.objects.ShoppingList;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public interface HomeInventoryPersistence {

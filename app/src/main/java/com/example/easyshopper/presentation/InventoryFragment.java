@@ -7,30 +7,20 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.SearchView;
 
 import com.example.easyshopper.R;
 import com.example.easyshopper.logic.HomeInventoryHandler;
-import com.example.easyshopper.logic.ProductHandler;
-import com.example.easyshopper.logic.StoreHandler;
-import com.example.easyshopper.objects.HomeInventory;
 import com.example.easyshopper.objects.HomeProduct;
-import com.example.easyshopper.objects.Product;
-import com.example.easyshopper.objects.ShoppingList;
 import com.example.easyshopper.presentation.adapter.HomeProductButtonInterface;
 import com.example.easyshopper.presentation.adapter.HomeProductHiddenAdapter;
 import com.example.easyshopper.presentation.adapter.HomeProductStockAdapter;
-import com.example.easyshopper.presentation.adapter.ProductSearchAdapter;
 
-import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -104,23 +94,18 @@ public class InventoryFragment extends Fragment implements HomeProductButtonInte
 
     private void initComponents(View rootView) {
         homeProductInventoryList = homeInventoryHandler.getStockProduct();
-
-        for (HomeProduct abc : homeProductInventoryList){
-            Log.d("abc stock ", abc.getHomeProductName());
-        }
-
         homeProductHiddenList = homeInventoryHandler.getHiddenProduct();
 
         // set adapter for stock products recyclerview
         stockHomeProductView = rootView.findViewById(R.id.stockHomeInventoryView);
         stockHomeProductView.setLayoutManager(new LinearLayoutManager(requireContext()));
-        homeProductStockAdapter = new HomeProductStockAdapter(getContext(), homeProductInventoryList, homeInventoryHandler, this, R.id.stockHomeInventoryView);
+        homeProductStockAdapter = new HomeProductStockAdapter(getContext(), homeProductInventoryList, this, R.id.stockHomeInventoryView);
         stockHomeProductView.setAdapter(homeProductStockAdapter);
 
         // set adapter for hidden products recyclerview
         hiddenHomeProductView = rootView.findViewById(R.id.hiddenHomeInventoryView);
         hiddenHomeProductView.setLayoutManager(new LinearLayoutManager(requireContext()));
-        homeProductHiddenAdapter = new HomeProductHiddenAdapter(getContext(), homeProductHiddenList, homeInventoryHandler, this, R.id.hiddenHomeInventoryView);
+        homeProductHiddenAdapter = new HomeProductHiddenAdapter(getContext(), homeProductHiddenList, this, R.id.hiddenHomeInventoryView);
         hiddenHomeProductView.setAdapter(homeProductHiddenAdapter);
 
         // allow for dialogs to be displayed in this class

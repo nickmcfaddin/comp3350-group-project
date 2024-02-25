@@ -1,7 +1,5 @@
 package com.example.easyshopper.presentation.adapter;
-import com.example.easyshopper.presentation.adapter.HomeProductButtonInterface;
 
-import android.annotation.SuppressLint;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -11,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.easyshopper.R;
 
-public class HomeProductStockViewHolder extends RecyclerView.ViewHolder{
+public class HomeProductViewHolder extends RecyclerView.ViewHolder{
     TextView homeProductName, homeProductStockQuantity, homeProductDesiredQuantity;
     private ImageButton removeStockButton;
     private ImageButton addStockButton;
@@ -19,7 +17,7 @@ public class HomeProductStockViewHolder extends RecyclerView.ViewHolder{
     private ImageButton addDesiredButton;
     private int recyclerViewId;
 
-    public HomeProductStockViewHolder(@NonNull View itemView, HomeProductButtonInterface listener, int recyclerViewId) {
+    public HomeProductViewHolder(@NonNull View itemView, HomeProductButtonInterface listener, int recyclerViewId) {
         super(itemView);
         this.recyclerViewId = recyclerViewId;
 

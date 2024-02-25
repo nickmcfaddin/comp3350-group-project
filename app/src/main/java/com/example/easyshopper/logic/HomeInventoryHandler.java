@@ -5,7 +5,6 @@ import com.example.easyshopper.objects.HomeProduct;
 import com.example.easyshopper.persistence.HomeInventoryPersistence;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 public class HomeInventoryHandler implements Serializable {
@@ -13,10 +12,6 @@ public class HomeInventoryHandler implements Serializable {
 
     //constructor
     public HomeInventoryHandler(){};
-
-    public List<HomeProduct> getAllHomeProduct(){
-        return homeInventoryPersistence.getAllHomeProduct();
-    }
 
     public List<HomeProduct> getStockProduct(){
         return homeInventoryPersistence.getStockProduct();

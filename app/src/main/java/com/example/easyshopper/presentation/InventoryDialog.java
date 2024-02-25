@@ -3,7 +3,6 @@ package com.example.easyshopper.presentation;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -15,20 +14,12 @@ import android.widget.TextView;
 
 import com.example.easyshopper.R;
 import com.example.easyshopper.logic.HomeInventoryHandler;
-import com.example.easyshopper.logic.ProductHandler;
-import com.example.easyshopper.logic.ShoppingListHandler;
-import com.example.easyshopper.logic.StoreHandler;
-import com.example.easyshopper.objects.HomeInventory;
 import com.example.easyshopper.objects.HomeProduct;
-import com.example.easyshopper.objects.Product;
-import com.example.easyshopper.objects.ShoppingList;
-import com.example.easyshopper.presentation.adapter.DynamicListAdapter;
 import com.example.easyshopper.presentation.adapter.HomeProductHiddenAdapter;
 import com.example.easyshopper.presentation.adapter.HomeProductStockAdapter;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 

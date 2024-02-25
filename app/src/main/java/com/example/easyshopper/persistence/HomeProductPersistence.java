@@ -1,7 +1,5 @@
 package com.example.easyshopper.persistence;
 
-import com.example.easyshopper.objects.Product;
-
 import com.example.easyshopper.objects.HomeProduct;
 
 import java.util.ArrayList;
