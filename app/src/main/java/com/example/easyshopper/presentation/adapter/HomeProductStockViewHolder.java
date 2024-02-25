@@ -38,28 +38,36 @@ public class HomeProductStockViewHolder extends RecyclerView.ViewHolder{
         removeStockButton.setOnClickListener(v -> {
             int position = getAdapterPosition();
             if (position != RecyclerView.NO_POSITION && listener != null) {
-                listener.onButtonClick(v, position, "removeStock", recyclerViewId);
+                listener.onButtonClick(v, position, "removeStock", this.recyclerViewId);
             }
         });
 
         addStockButton.setOnClickListener(v -> {
             int position = getAdapterPosition();
             if (position != RecyclerView.NO_POSITION && listener != null) {
-                listener.onButtonClick(v, position, "addStock", recyclerViewId);
+                listener.onButtonClick(v, position, "addStock", this.recyclerViewId);
             }
         });
 
         removeDesiredButton.setOnClickListener(v -> {
             int position = getAdapterPosition();
             if (position != RecyclerView.NO_POSITION && listener != null) {
-                listener.onButtonClick(v, position, "removeDesired", recyclerViewId);
+                listener.onButtonClick(v, position, "removeDesired", this.recyclerViewId);
             }
         });
 
         addDesiredButton.setOnClickListener(v -> {
             int position = getAdapterPosition();
             if (position != RecyclerView.NO_POSITION && listener != null) {
-                listener.onButtonClick(v, position, "addDesired", recyclerViewId);
+                listener.onButtonClick(v, position, "addDesired", this.recyclerViewId);
+            }
+        });
+
+        // Set click listener for product name TextView
+        homeProductName.setOnClickListener(v -> {
+            int position = getAdapterPosition();
+            if (position != RecyclerView.NO_POSITION && listener != null) {
+                listener.onButtonClick(v, position, "productName", this.recyclerViewId);
             }
         });
     }

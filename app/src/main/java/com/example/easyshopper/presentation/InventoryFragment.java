@@ -20,6 +20,7 @@ import com.example.easyshopper.R;
 import com.example.easyshopper.logic.HomeInventoryHandler;
 import com.example.easyshopper.logic.ProductHandler;
 import com.example.easyshopper.logic.StoreHandler;
+import com.example.easyshopper.objects.HomeInventory;
 import com.example.easyshopper.objects.HomeProduct;
 import com.example.easyshopper.objects.Product;
 import com.example.easyshopper.objects.ShoppingList;
@@ -29,6 +30,7 @@ import com.example.easyshopper.presentation.adapter.HomeProductStockAdapter;
 import com.example.easyshopper.presentation.adapter.ProductSearchAdapter;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -42,6 +44,8 @@ public class InventoryFragment extends Fragment implements HomeProductButtonInte
 
     //communicate with the logic layer
     private HomeInventoryHandler homeInventoryHandler;
+
+    private InventoryDialog inventoryDialog;
 
     //UI components
     private RecyclerView stockHomeProductView;
@@ -100,6 +104,11 @@ public class InventoryFragment extends Fragment implements HomeProductButtonInte
 
     private void initComponents(View rootView) {
         homeProductInventoryList = homeInventoryHandler.getStockProduct();
+
+        for (HomeProduct abc : homeProductInventoryList){
+            Log.d("abc stock ", abc.getHomeProductName());
+        }
+
         homeProductHiddenList = homeInventoryHandler.getHiddenProduct();
 
         // set adapter for stock products recyclerview
@@ -113,6 +122,9 @@ public class InventoryFragment extends Fragment implements HomeProductButtonInte
         hiddenHomeProductView.setLayoutManager(new LinearLayoutManager(requireContext()));
         homeProductHiddenAdapter = new HomeProductHiddenAdapter(getContext(), homeProductHiddenList, homeInventoryHandler, this, R.id.hiddenHomeInventoryView);
         hiddenHomeProductView.setAdapter(homeProductHiddenAdapter);
+
+        // allow for dialogs to be displayed in this class
+        inventoryDialog = new InventoryDialog(getContext(), homeInventoryHandler, homeProductStockAdapter, homeProductHiddenAdapter);
 
         // sort button
         sortButton = rootView.findViewById(R.id.sortButton);
@@ -154,17 +166,6 @@ public class InventoryFragment extends Fragment implements HomeProductButtonInte
         // Get the context for logging
         Context context = getContext();
 
-        // Check if the context is not null and buttonType is not null or empty
-        if (context != null && buttonType != null && !buttonType.isEmpty()) {
-            // Construct the log message
-            String logMessage = "Button clicked at position " + position + ", Type: " + buttonType;
-
-            // Log the message to the logcat
-            Log.d("InventoryFragment", logMessage);
-
-            Log.d("InventoryFragment", String.valueOf(view.getId()));
-        }
-
         if (recyclerViewId == R.id.stockHomeInventoryView) {
             // Get the clicked HomeProduct from the stock inventory list
             HomeProduct clickedProduct = homeProductInventoryList.get(position);
@@ -175,7 +176,12 @@ public class InventoryFragment extends Fragment implements HomeProductButtonInte
                     homeInventoryHandler.decreaseStockQuantityBy1(clickedProduct);
                     break;
                 case "addStock":
-                    homeInventoryHandler.incrementStockQuantityBy1(clickedProduct);
+                    inventoryDialog.showHomeProductAddExpiryDate(clickedProduct, userInput -> {
+                        // Update homeProductInventoryList and homeProductHiddenList after the stock quantity is incremented
+                        homeProductInventoryList = homeInventoryHandler.getStockProduct();
+                        homeProductHiddenList = homeInventoryHandler.getHiddenProduct();
+                    });
+
                     break;
                 case "removeDesired":
                     homeInventoryHandler.decreaseDesiredQuantityBy1(clickedProduct);
@@ -183,22 +189,12 @@ public class InventoryFragment extends Fragment implements HomeProductButtonInte
                 case "addDesired":
                     homeInventoryHandler.incrementDesiredQuantityBy1(clickedProduct);
                     break;
+                case "productName":
+                    inventoryDialog.showHomeProductExpiryDate(clickedProduct);
+                    break;
                 default:
                     break;
             }
-
-            // Notify the stock inventory adapter that the data has changed
-            homeProductInventoryList = homeInventoryHandler.getStockProduct();
-            homeProductHiddenList = homeInventoryHandler.getHiddenProduct();
-
-            for (HomeProduct homeProduct : homeProductInventoryList) {
-                Log.d("HomeProduct Details", "Product ID: " + homeProduct.getProductID() +
-                        ", Product Name: " + homeProduct.getProductName() +
-                        ", Stock Quantity: " + homeProduct.getHomeProductStockQuantity() +
-                        ", Desired Quantity: " + homeProduct.getHomeProductDesiredQuantity());}
-
-            homeProductStockAdapter.updateData(homeProductInventoryList);
-            homeProductHiddenAdapter.updateData(homeProductHiddenList);
         } else if (recyclerViewId == R.id.hiddenHomeInventoryView) {
             // Get the clicked HomeProduct from the hidden list
             HomeProduct clickedProduct = homeProductHiddenList.get(position);
@@ -209,7 +205,12 @@ public class InventoryFragment extends Fragment implements HomeProductButtonInte
                     homeInventoryHandler.decreaseStockQuantityBy1(clickedProduct);
                     break;
                 case "addStock":
-                    homeInventoryHandler.incrementStockQuantityBy1(clickedProduct);
+                    inventoryDialog.showHomeProductAddExpiryDate(clickedProduct, userInput -> {
+                        // Update homeProductInventoryList and homeProductHiddenList after the stock quantity is incremented
+                        homeProductInventoryList = homeInventoryHandler.getStockProduct();
+                        homeProductHiddenList = homeInventoryHandler.getHiddenProduct();
+                    });
+
                     break;
                 case "removeDesired":
                     homeInventoryHandler.decreaseDesiredQuantityBy1(clickedProduct);
@@ -217,20 +218,18 @@ public class InventoryFragment extends Fragment implements HomeProductButtonInte
                 case "addDesired":
                     homeInventoryHandler.incrementDesiredQuantityBy1(clickedProduct);
                     break;
+                case "productName":
+                    inventoryDialog.showHomeProductExpiryDate(clickedProduct);
+                    break;
                 default:
                     break;
             }
-
-            // Notify the hidden inventory adapter that the data has changed
-            homeProductInventoryList = homeInventoryHandler.getStockProduct();
-            homeProductHiddenList = homeInventoryHandler.getHiddenProduct();
-            for (HomeProduct homeProduct : homeProductInventoryList) {
-                Log.d("HomeProduct Details", "Product ID: " + homeProduct.getProductID() +
-                        ", Product Name: " + homeProduct.getProductName() +
-                        ", Stock Quantity: " + homeProduct.getHomeProductStockQuantity() +
-                        ", Desired Quantity: " + homeProduct.getHomeProductDesiredQuantity());}
-            homeProductStockAdapter.updateData(homeProductInventoryList);
-            homeProductHiddenAdapter.updateData(homeProductHiddenList);
         }
+
+        // Notify the inventory adapter that the data has changed
+        homeProductInventoryList = homeInventoryHandler.getStockProduct();
+        homeProductHiddenList = homeInventoryHandler.getHiddenProduct();
+        homeProductStockAdapter.updateData(homeProductInventoryList);
+        homeProductHiddenAdapter.updateData(homeProductHiddenList);
     }
 }

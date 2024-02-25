@@ -183,9 +183,9 @@ public class ShoppingListFragmentTest {
         onView(withId(R.id.addProductPopUp)).check(matches(isDisplayed()));
 
         // title
-        onView(withId(R.id.input_dialog_title)).check(matches(isDisplayed()));
+        onView(withId(R.id.homeProdAllExpiryDates_dialog_title)).check(matches(isDisplayed()));
 
-        onView(withId(R.id.input_dialog_title)).check(matches(withText("Choose Shopping Lists to Delete:")));
+        onView(withId(R.id.homeProdAllExpiryDates_dialog_title)).check(matches(withText("Choose Shopping Lists to Delete:")));
 
         // list of stores
         onView(withId(R.id.list_view)).check(matches(isDisplayed()));
@@ -216,7 +216,7 @@ public class ShoppingListFragmentTest {
 
         // buttons
         onView(withId(R.id.cancel_btn)).check(matches(isDisplayed()));
-        onView(withId(R.id.submit_btn)).check(matches(isDisplayed()));
+        onView(withId(R.id.close_btn)).check(matches(isDisplayed()));
 
         // click on the cancel button and check if it goes back to the shoppingListFragment
         onView(withId(R.id.cancel_btn)).perform(click());
@@ -249,9 +249,9 @@ public class ShoppingListFragmentTest {
         // check the content inside the pop up
 
         // title
-        onView(withId(R.id.input_dialog_title)).check(matches(isDisplayed()));
+        onView(withId(R.id.homeProdAllExpiryDates_dialog_title)).check(matches(isDisplayed()));
 
-        onView(withId(R.id.input_dialog_title)).check(matches(withText("Choose Products to Add:")));
+        onView(withId(R.id.homeProdAllExpiryDates_dialog_title)).check(matches(withText("Choose Products to Add:")));
 
         // list of products
         onView(withId(R.id.list_view)).check(matches(isDisplayed()));
@@ -282,7 +282,7 @@ public class ShoppingListFragmentTest {
 
         // buttons
         onView(withId(R.id.cancel_btn)).check(matches(isDisplayed()));
-        onView(withId(R.id.submit_btn)).check(matches(isDisplayed()));
+        onView(withId(R.id.close_btn)).check(matches(isDisplayed()));
 
         // click on the cancel button and check if it goes back to the shoppingListFragment
         onView(withId(R.id.cancel_btn)).perform(click());
@@ -321,7 +321,7 @@ public class ShoppingListFragmentTest {
 
         // button
         onView(withId(R.id.cancel_btn)).check(matches(isDisplayed()));
-        onView(withId(R.id.submit_btn)).check(matches(isDisplayed()));
+        onView(withId(R.id.close_btn)).check(matches(isDisplayed()));
 
         // click on the cancel button and check if it goes back to the shoppingListFragment
         onView(withId(R.id.cancel_btn)).perform(click());
@@ -344,7 +344,7 @@ public class ShoppingListFragmentTest {
         SystemClock.sleep(sleepTime);
 
         // check submit button without choosing any store for dropdown
-        onView(withId(R.id.submit_btn)).perform(click());
+        onView(withId(R.id.close_btn)).perform(click());
 
         SystemClock.sleep(sleepTime);
 
@@ -385,7 +385,7 @@ public class ShoppingListFragmentTest {
         }
 
         // check submit button when store is chosen
-        onView(withId(R.id.submit_btn)).perform(click());
+        onView(withId(R.id.close_btn)).perform(click());
 
         // check if it goes back to the shoppingListFragment
         onView(withId(R.id.ShoppingListFragment)).check(matches(isDisplayed()));

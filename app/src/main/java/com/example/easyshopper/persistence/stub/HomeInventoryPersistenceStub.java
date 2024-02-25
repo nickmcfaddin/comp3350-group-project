@@ -8,6 +8,7 @@ import com.example.easyshopper.persistence.HomeProductPersistence;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 
 public class HomeInventoryPersistenceStub implements HomeInventoryPersistence, Serializable {
     private HomeInventory homeInventory;
@@ -26,6 +27,16 @@ public class HomeInventoryPersistenceStub implements HomeInventoryPersistence, S
         return homeInventory.getAllProducts();
     }
 
+    public HomeProduct getHomeProductFromHomeInventory(String homeProductName){
+        for (HomeProduct homeProduct : homeInventory.getAllProducts()){
+            if (Objects.equals(homeProduct.getHomeProductName(), homeProductName)){
+                return homeProduct;
+            }
+        }
+
+        return null;
+    }
+
     @Override
     public List<HomeProduct> getStockProduct() {
         return homeInventory.getStockProduct();
@@ -42,8 +53,8 @@ public class HomeInventoryPersistenceStub implements HomeInventoryPersistence, S
     }
 
     @Override
-    public void incrementStockQuantityBy1(HomeProduct homeProduct) {
-        homeInventory.incrementStockQuantityBy1(homeProduct);
+    public void incrementStockQuantityBy1(HomeProduct homeProduct, String date) {
+        homeInventory.incrementStockQuantityBy1(homeProduct, date);
     }
 
     public void decreaseStockQuantityBy1(HomeProduct homeProduct){
@@ -56,5 +67,20 @@ public class HomeInventoryPersistenceStub implements HomeInventoryPersistence, S
 
     public void decreaseDesiredQuantityBy1(HomeProduct homeProduct){
         homeInventory.decreaseDesiredQuantityBy1(homeProduct);
-    };
+    }
+
+    @Override
+    public List<String> getHomeProductExpiryDates(HomeProduct homeProduct) {
+        return homeInventory.getHomeProductExpiryDate(homeProduct);
+    }
+
+    @Override
+    public List<String> getHomeProductSortedExpiryDatesAscending(HomeProduct homeProduct) {
+        return homeInventory.getHomeProductSortedExpiryDateAscending(homeProduct);
+    }
+
+    @Override
+    public List<String> getHomeProductSortedExpiryDatesDescending(HomeProduct homeProduct) {
+        return homeInventory.getHomeProductSortedExpiryDateDescending(homeProduct);
+    }
 }

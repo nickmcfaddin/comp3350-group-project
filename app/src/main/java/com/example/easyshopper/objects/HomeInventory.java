@@ -8,14 +8,14 @@ import java.util.Comparator;
 import java.util.List;
 
 public class HomeInventory implements Serializable{
-    ArrayList<HomeProduct> allProducts;
+    List<HomeProduct> allProducts;
 
     // Using singleton for the object
     private HomeInventory(){
         allProducts = new ArrayList<>();
     }
 
-    public HomeInventory(ArrayList<HomeProduct> allProducts){
+    public HomeInventory(List<HomeProduct> allProducts){
         this.allProducts = allProducts;
     }
 
@@ -86,12 +86,12 @@ public class HomeInventory implements Serializable{
     }
 
     // METHODS
-    public void incrementStockQuantityBy1(HomeProduct homeProduct){
+    public void incrementStockQuantityBy1(HomeProduct homeProduct, String date){
         if (allProducts.contains(homeProduct)){
             int curIndex = allProducts.indexOf(homeProduct);
             HomeProduct curHomeProduct = allProducts.get(curIndex);
 
-            curHomeProduct.incrementStockQuantityBy1();
+            curHomeProduct.incrementStockQuantityBy1(date);
             allProducts.set(curIndex, curHomeProduct);
         }
     }
@@ -124,5 +124,38 @@ public class HomeInventory implements Serializable{
             curHomeProduct.decreaseDesiredQuantityBy1();
             allProducts.set(curIndex, curHomeProduct);
         }
+    }
+
+    public List<String> getHomeProductExpiryDate(HomeProduct homeProduct){
+        if (allProducts.contains(homeProduct)){
+            int curIndex = allProducts.indexOf(homeProduct);
+            HomeProduct curHomeProduct = allProducts.get(curIndex);
+
+            return curHomeProduct.getHomeProductExpiryDates();
+        }
+
+        return null;
+    }
+
+    public List<String> getHomeProductSortedExpiryDateAscending(HomeProduct homeProduct){
+        if (allProducts.contains(homeProduct)){
+            int curIndex = allProducts.indexOf(homeProduct);
+            HomeProduct curHomeProduct = allProducts.get(curIndex);
+
+            return curHomeProduct.getSortedExpiryDatesAscending();
+        }
+
+        return null;
+    }
+
+    public List<String> getHomeProductSortedExpiryDateDescending(HomeProduct homeProduct){
+        if (allProducts.contains(homeProduct)){
+            int curIndex = allProducts.indexOf(homeProduct);
+            HomeProduct curHomeProduct = allProducts.get(curIndex);
+
+            return curHomeProduct.getSortedExpiryDatesDescending();
+        }
+
+        return null;
     }
 }

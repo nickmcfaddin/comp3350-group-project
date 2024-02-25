@@ -10,6 +10,9 @@ public interface HomeInventoryPersistence {
     // get all products
     List<HomeProduct> getAllHomeProduct();
 
+    // get home product
+    HomeProduct getHomeProductFromHomeInventory(String homeProductName);
+
     // get stock home products
     List<HomeProduct> getStockProduct();
 
@@ -20,11 +23,17 @@ public interface HomeInventoryPersistence {
     List<HomeProduct> getHiddenProduct();
 
     // other methods
-    void incrementStockQuantityBy1(HomeProduct homeProduct);
+    void incrementStockQuantityBy1(HomeProduct homeProduct, String date);
 
     void decreaseStockQuantityBy1(HomeProduct homeProduct);
 
     void incrementDesiredQuantityBy1(HomeProduct homeProduct);
 
     void decreaseDesiredQuantityBy1(HomeProduct homeProduct);
+
+    List<String> getHomeProductExpiryDates(HomeProduct homeProduct);
+
+    List<String> getHomeProductSortedExpiryDatesAscending(HomeProduct homeProduct);
+
+    List<String> getHomeProductSortedExpiryDatesDescending(HomeProduct homeProduct);
 }
