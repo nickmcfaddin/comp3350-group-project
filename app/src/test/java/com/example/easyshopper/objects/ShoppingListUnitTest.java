@@ -38,12 +38,12 @@ public class ShoppingListUnitTest {
         shoppingList.addProductToCart(product);
 
         //Testing ShoppingList functions
-        assertEquals(productArrayList, shoppingList.getItemList());
+        assertEquals(productArrayList, shoppingList.getCart());
         assertTrue(shoppingList.checkForProductInCart(product));
 
         //Test Product removal from ShoppingList
         shoppingList.removeProductFromCart(product);
-        assertEquals(0, shoppingList.getItemList().size());
+        assertEquals(0, shoppingList.getCart().size());
 
         System.out.println("Finished testCreateAShoppingList");
     }

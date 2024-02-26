@@ -54,7 +54,7 @@ public class ShoppingListPersistenceStub implements ShoppingListPersistence, Ser
         int index = -1;
 
         for (int i = 0; i < shoppingListArray.size(); i++){
-            if (shoppingListArray.get(i).getShoppingListID() == newShoppingList.getShoppingListID()) {
+            if (shoppingListArray.get(i).getListID().equals(newShoppingList.getListID())) {
                 // productID will not repeat
                 index = i;
             }
@@ -87,7 +87,7 @@ public class ShoppingListPersistenceStub implements ShoppingListPersistence, Ser
         }
 
         for(ShoppingList list : shoppingListArray) {
-            if(list.getShoppingListID() == queryList.getShoppingListID()) {
+            if(list.getListID().equals(queryList.getListID())) {
                 return true;
             }
         }

@@ -20,52 +20,59 @@ public class ShoppingListPersistenceHSQLDB implements ShoppingListPersistence, S
     private final String dbPath;
     private List<ShoppingList> shoppingLists;
 
+    private ListPersistenceHSQLDB listPersistenceHSQLDB;
+
     public ShoppingListPersistenceHSQLDB(String dbPath) {
         this.dbPath = dbPath;
-        this.shoppingLists = new ArrayList<>();
+        this.listPersistenceHSQLDB = new ListPersistenceHSQLDB(dbPath);
+
         loadShoppingLists();
     }
 
-    private Connection connect() throws SQLException {
-        return DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true", "SA", "");
-    }
-
-    private ShoppingList fromResultSet(final ResultSet rs) throws SQLException {
-
-        return null;
-    }
-
     private void loadShoppingLists() {
-
+        shoppingLists = listPersistenceHSQLDB.getExistingShoppingLists();
     }
 
     @Override
     public List<ShoppingList> getExistingShoppingLists() {
-        return null;
+        return shoppingLists;
     }
 
     @Override
     public void updateShoppingList(ShoppingList shoppingList) {
-
+        listPersistenceHSQLDB.updateList(shoppingList);
+        loadShoppingLists();
     }
 
     @Override
     public void addShoppingList(ShoppingList shoppingList) {
-
+        listPersistenceHSQLDB.addList(shoppingList);
+        loadShoppingLists();
     }
 
     @Override
     public void deleteShoppingList(ShoppingList shoppingList) {
-
+        listPersistenceHSQLDB.deleteList(shoppingList);
+        loadShoppingLists();
     }
 
     @Override
     public boolean shoppingListExists(ShoppingList queryList) {
-        return false;
+        return listPersistenceHSQLDB.listExists(queryList);
     }
 
     @Override
     public boolean listWithStoreExists(Store queryStore) {
+        if (queryStore == null) {
+            return false;
+        }
+
+        for(ShoppingList list : shoppingLists) {
+            if(list.getStore().getStoreID() == queryStore.getStoreID()) {
+                return true;
+            }
+        }
+
         return false;
     }
 }

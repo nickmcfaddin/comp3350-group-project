@@ -37,7 +37,11 @@ public class Services {
 
     public static ShoppingListPersistence getShoppingListPersistence(boolean forProduction) {
         if(shoppingListPersistence == null) {
-            shoppingListPersistence = new ShoppingListPersistenceStub();
+            if(forProduction) {
+                shoppingListPersistence = new ShoppingListPersistenceHSQLDB(Main.getDBPathName());
+            } else {
+                shoppingListPersistence = new ShoppingListPersistenceStub();
+            }
         }
 
         return shoppingListPersistence;
