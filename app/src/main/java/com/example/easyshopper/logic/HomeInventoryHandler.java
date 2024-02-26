@@ -8,10 +8,12 @@ import java.io.Serializable;
 import java.util.List;
 
 public class HomeInventoryHandler implements Serializable {
-    private HomeInventoryPersistence homeInventoryPersistence = Services.getHomeInventoryPersistence();
+    private HomeInventoryPersistence homeInventoryPersistence;
 
     //constructor
-    public HomeInventoryHandler(){};
+    public HomeInventoryHandler(boolean forProduction){
+        this.homeInventoryPersistence = Services.getHomeInventoryPersistence(forProduction);
+    };
 
     public List<HomeProduct> getStockProduct(){
         return homeInventoryPersistence.getStockProduct();

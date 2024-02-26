@@ -49,7 +49,7 @@ public class HomeProductPersistenceStub implements HomeProductPersistence, Seria
 
     //Get a list of all HomeProduct's
     @Override
-    public ArrayList<HomeProduct> getExistingHomeProducts() {
+    public List<HomeProduct> getExistingHomeProducts() {
         return homeProductList;
     }
 

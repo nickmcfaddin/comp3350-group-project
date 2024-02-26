@@ -15,9 +15,7 @@ public class HomeInventoryPersistenceStub implements HomeInventoryPersistence, S
 
     //Constructor
     public HomeInventoryPersistenceStub() {
-        //Setup connections to HomeProductPersistence stubs
-        Services services = new Services();
-        HomeProductPersistence homeProductPersistence = services.getHomeProductPersistence();
+        HomeProductPersistence homeProductPersistence = Services.getHomeProductPersistence(false);
 
         homeInventory = new HomeInventory(homeProductPersistence.getExistingHomeProducts());
     }

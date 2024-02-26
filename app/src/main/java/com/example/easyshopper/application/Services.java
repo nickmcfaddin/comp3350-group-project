@@ -8,6 +8,8 @@ import com.example.easyshopper.persistence.PricePersistence;
 import com.example.easyshopper.persistence.ProductPersistence;
 import com.example.easyshopper.persistence.ShoppingListPersistence;
 import com.example.easyshopper.persistence.StorePersistence;
+import com.example.easyshopper.persistence.hsqldb.HomeInventoryPersistenceHSQLDB;
+import com.example.easyshopper.persistence.hsqldb.HomeProductPersistenceHSQLDB;
 import com.example.easyshopper.persistence.hsqldb.PricePersistenceHSQLDB;
 import com.example.easyshopper.persistence.hsqldb.ProductPersistenceHSQLDB;
 import com.example.easyshopper.persistence.hsqldb.ShoppingListPersistenceHSQLDB;
@@ -25,6 +27,8 @@ public class Services {
     private static ShoppingListPersistence shoppingListPersistence = null;
     private static PricePersistence pricePersistence = null;
     private static StorePersistence storePersistence = null;
+    private static HomeInventoryPersistence homeInventoryPersistence = null;
+    private static HomeProductPersistence homeProductPersistence = null;
 
     //GETTERS
     public static ProductPersistence getProductPersistence(boolean forProduction) {
@@ -75,6 +79,27 @@ public class Services {
         return storePersistence;
     }
 
-    public static HomeProductPersistence getHomeProductPersistence() {return new HomeProductPersistenceStub();}
-    public static HomeInventoryPersistence getHomeInventoryPersistence() {return new HomeInventoryPersistenceStub();}
+    public static HomeProductPersistence getHomeProductPersistence(boolean forProduction) {
+        if(homeProductPersistence == null) {
+            if(forProduction) {
+                homeProductPersistence = new HomeProductPersistenceHSQLDB(Main.getDBPathName());
+            } else {
+                homeProductPersistence = new HomeProductPersistenceStub();
+            }
+        }
+
+        return homeProductPersistence;
+    }
+
+    public static HomeInventoryPersistence getHomeInventoryPersistence(boolean forProduction) {
+        if(homeInventoryPersistence == null) {
+            if(forProduction) {
+                homeInventoryPersistence = new HomeInventoryPersistenceHSQLDB(Main.getDBPathName());
+            } else {
+                homeInventoryPersistence = new HomeInventoryPersistenceStub();
+            }
+        }
+
+        return homeInventoryPersistence;
+    }
 }
