@@ -57,7 +57,7 @@ public class ListPersistenceHSQLDB {
 
                 //prepare list
                 ProductList productList;
-                List<Product> cart = loadCart(listID);
+                List<Product> cart = loadCart(listID, connection);
                 // Determine if it's a shopping list or a user list
                 // based on whether StoreID is null or not
                 if (storeID == -1) {
@@ -80,10 +80,10 @@ public class ListPersistenceHSQLDB {
         }
     }
 
-    private List<Product> loadCart(String listID) {
+    private List<Product> loadCart(String listID, Connection connection) {
         List<Product> cart = new ArrayList<>();
 
-        try (Connection connection = connect()) {
+        try {
             final PreparedStatement statement = connection.prepareStatement("SELECT * FROM CONTAINS WHERE CONTAINS.ListID = ?");
             statement.setString(1, listID);
 

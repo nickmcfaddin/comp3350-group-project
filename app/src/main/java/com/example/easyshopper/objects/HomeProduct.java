@@ -13,7 +13,7 @@ public class HomeProduct extends Product {
     List<String> expiryDates; // ISO 8601 format (yyyy-MM-dd)
 
     public HomeProduct(int productID, String productName, double fat, double carb, double protein, int stockQuantity, int desiredQuantity, List<String> expiryDates) {
-        super(productID, productName, fat, carb, protein);
+        super(productID, productName, fat, carb, protein, 0);
 
         // Validate expiryDates size
         if (expiryDates.size() != stockQuantity) {
@@ -23,6 +23,13 @@ public class HomeProduct extends Product {
             return; // Exit the constructor
         }
 
+        this.stockQuantity = stockQuantity;
+        this.desiredQuantity = desiredQuantity;
+        this.expiryDates = expiryDates;
+    }
+
+    public HomeProduct(Product product, int stockQuantity, int desiredQuantity, List<String> expiryDates){
+        super(product.getProductID(), product.getProductName(), product.getFat(), product.getCarb(), product.getProtein(), 0);
         this.stockQuantity = stockQuantity;
         this.desiredQuantity = desiredQuantity;
         this.expiryDates = expiryDates;
