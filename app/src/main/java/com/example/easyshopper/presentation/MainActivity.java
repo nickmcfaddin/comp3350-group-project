@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 
 import com.example.easyshopper.R;
+import com.example.easyshopper.logic.HomeInventoryHandler;
 import com.example.easyshopper.logic.ProductHandler;
 import com.example.easyshopper.logic.ShoppingListHandler;
 import com.example.easyshopper.logic.StoreHandler;
@@ -19,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String PRODUCT_HANDLER_KEY = "productHandler";
     private static final String STORE_HANDLER_KEY = "storeHandler";
     private static final String LIST_HANDLER_KEY = "shoppingListHandler";
+    private static final String HOME_INVENTORY_HANDLER_KEY = "homeInventoryHandler";
 
     //id of currentFragment that is being displayed
     int currentFragment;
@@ -28,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private ProductHandler productHandler;
     private StoreHandler storeHandler;
     private ShoppingListHandler shoppingListHandler;
+    private HomeInventoryHandler homeInventoryHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,11 +43,13 @@ public class MainActivity extends AppCompatActivity {
             productHandler = (ProductHandler) savedInstanceState.getSerializable(PRODUCT_HANDLER_KEY);
             storeHandler = (StoreHandler) savedInstanceState.getSerializable(STORE_HANDLER_KEY);
             shoppingListHandler = (ShoppingListHandler) savedInstanceState.getSerializable(LIST_HANDLER_KEY);
+            homeInventoryHandler = (HomeInventoryHandler) savedInstanceState.getSerializable(HOME_INVENTORY_HANDLER_KEY);
         }
         else {
             productHandler = new ProductHandler(forProduction);
             storeHandler = new StoreHandler(forProduction);
             shoppingListHandler = new ShoppingListHandler(forProduction);
+            homeInventoryHandler = new HomeInventoryHandler(forProduction);
         }
 
         initComponents();
@@ -55,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
         outState.putSerializable(PRODUCT_HANDLER_KEY, productHandler);
         outState.putSerializable(STORE_HANDLER_KEY, storeHandler);
         outState.putSerializable(LIST_HANDLER_KEY, shoppingListHandler);
+        outState.putSerializable(HOME_INVENTORY_HANDLER_KEY, homeInventoryHandler);
         super.onSaveInstanceState(outState);
     }
 
@@ -62,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         //get and init components
         ShoppingListFragment shoppingListFragment = ShoppingListFragment.newInstance(productHandler, storeHandler, shoppingListHandler);
         SearchFragment searchFragment = SearchFragment.newInstance(productHandler, storeHandler);
-        InventoryFragment inventoryFragment = new InventoryFragment();
+        InventoryFragment inventoryFragment = InventoryFragment.newInstance(homeInventoryHandler);
         UserRequestFragment userRequestFragment = new UserRequestFragment();
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
 
