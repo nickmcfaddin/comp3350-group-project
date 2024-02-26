@@ -25,25 +25,10 @@ public class StorePersistenceStub implements StorePersistence, Serializable {
         storeList.add(costco);
         storeList.add(walmart);
         storeList.add(superstore);
-
-        addAllProductsToStore(costco);
-        addAllProductsToStore(walmart);
-        addAllProductsToStore(superstore);
     }
 
     //Returns a list of all existing Store's
     public List<Store> getExistingStores(){return Collections.unmodifiableList(storeList);};
-
-    //Adds all Product's to the identified Store
-    public void addAllProductsToStore(Store store){
-        Services services = new Services();
-        ProductPersistence productPersistence = services.getProductPersistence(false);
-
-        List<Product> existingProducts = productPersistence.getExistingProducts();
-        for (Product product : existingProducts){
-            store.addProductToStore(product);
-        }
-    }
 
     //Returns a single Store identified by a storeID
     public Store getStoreById(int storeID){

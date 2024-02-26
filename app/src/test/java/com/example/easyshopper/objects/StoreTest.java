@@ -32,10 +32,6 @@ public class StoreTest {
         ArrayList<Product> productArrayList = new ArrayList<>();
         productArrayList.add(product);
 
-        //Tests our addProductToStore method ensuring we only have the Product with content and not the nullProduct
-        store.addProductToStore(product);
-        store.addProductToStore(nullProduct);
-
         System.out.println("Finished testCreateAStore");
     }
 }
