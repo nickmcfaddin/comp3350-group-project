@@ -48,6 +48,11 @@ public class HomeProductPersistenceHSQLDB implements HomeProductPersistence {
                 int desiredQuantity = resultSet.getInt("DesiredQuantity");
 
                 Product product = productPersistenceHSQLDB.getProductById(productID);
+
+                if(product == null) {
+                    continue;
+                }
+
                 List<String> expiryDates = loadExpiryDates(productID, connection);
 
                 HomeProduct homeProduct = new HomeProduct(product, stockQuantity, desiredQuantity,expiryDates);
@@ -63,7 +68,7 @@ public class HomeProductPersistenceHSQLDB implements HomeProductPersistence {
         List<String> expiryDates = new ArrayList<>();
 
         try {
-            final PreparedStatement statement = connection.prepareStatement("SELECT * FROM EXPIRYDATES WHERE CONTAINS.ProductID = ?");
+            final PreparedStatement statement = connection.prepareStatement("SELECT * FROM EXPIRYDATES WHERE EXPIRYDATES.ProductID = ?");
             statement.setInt(1, productID);
 
             final ResultSet resultSet = statement.executeQuery();
