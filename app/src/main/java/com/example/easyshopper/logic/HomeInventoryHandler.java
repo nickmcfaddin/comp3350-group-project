@@ -3,12 +3,14 @@ package com.example.easyshopper.logic;
 import com.example.easyshopper.application.Services;
 import com.example.easyshopper.objects.HomeProduct;
 import com.example.easyshopper.persistence.HomeInventoryPersistence;
+import com.example.easyshopper.persistence.HomeProductPersistence;
 
 import java.io.Serializable;
 import java.util.List;
 
 public class HomeInventoryHandler implements Serializable {
-    private HomeInventoryPersistence homeInventoryPersistence = Services.getHomeInventoryPersistence();
+    private static HomeInventoryPersistence homeInventoryPersistence = Services.getHomeInventoryPersistence();
+    private static HomeProductPersistence homeProductPersistence = Services.getHomeProductPersistence();
 
     //constructor
     public HomeInventoryHandler(){};
