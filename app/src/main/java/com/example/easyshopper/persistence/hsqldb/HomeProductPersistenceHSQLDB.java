@@ -4,9 +4,7 @@ import android.util.Log;
 
 import com.example.easyshopper.objects.HomeProduct;
 import com.example.easyshopper.objects.Product;
-import com.example.easyshopper.objects.ProductList;
 import com.example.easyshopper.objects.ShoppingList;
-import com.example.easyshopper.objects.Store;
 import com.example.easyshopper.objects.UserList;
 import com.example.easyshopper.persistence.HomeProductPersistence;
 
@@ -17,6 +15,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class HomeProductPersistenceHSQLDB implements HomeProductPersistence {
@@ -78,13 +77,165 @@ public class HomeProductPersistenceHSQLDB implements HomeProductPersistence {
 
         return expiryDates;
     }
-    @Override
-    public List<HomeProduct> getExistingHomeProducts() {
-        return homeProducts;
-    }
 
     @Override
-    public HomeProduct getHomeProductById(int productID) {
+    public List<HomeProduct> getStockProduct() {
+        List<HomeProduct> stockProduct = new ArrayList<>();
+
+        for (int i=0; i<homeProducts.size(); i++){
+            HomeProduct curHomeProduct = homeProducts.get(i);
+
+            if (curHomeProduct.getHomeProductDesiredQuantity() != 0 || curHomeProduct.getHomeProductStockQuantity() != 0) {
+                stockProduct.add(homeProducts.get(i));
+            }
+        }
+
+        return stockProduct;
+    }
+
+    public List<HomeProduct> getStockProductSorted() {
+        // sort product by desired/have quantity decreasing order
+        // if have = 0 and desired = 1, it will be at the top
+        List<HomeProduct> stockProductWithHave0 = new ArrayList<>();
+        List<HomeProduct> stockProductWithoutHave0 = new ArrayList<>();
+
+        for (int i=0; i<homeProducts.size(); i++){
+            HomeProduct curHomeProduct = homeProducts.get(i);
+
+            if (curHomeProduct.getHomeProductDesiredQuantity() != 0 || curHomeProduct.getHomeProductStockQuantity() != 0) {
+                if (curHomeProduct.getHomeProductStockQuantity() == 0){
+                    stockProductWithHave0.add(curHomeProduct);
+                }
+                else{
+                    stockProductWithoutHave0.add(curHomeProduct);
+                }
+            }
+        }
+
+        stockProductWithoutHave0.sort(new Comparator<HomeProduct>() {
+            public int compare(HomeProduct product1, HomeProduct product2) {
+                // Calculate the ratio of have/desired for each product
+                double ratio1 = product1.getHomeProductDesiredQuantity() / (double) product1.getHomeProductStockQuantity();
+                double ratio2 = product2.getHomeProductDesiredQuantity() / (double) product2.getHomeProductStockQuantity();
+
+                // Compare the ratios in decreasing order
+                return Double.compare(ratio2, ratio1);
+            }
+        });
+
+        stockProductWithHave0.addAll(stockProductWithoutHave0);
+
+        return stockProductWithHave0;
+    }
+
+    public List<HomeProduct> getHiddenProduct(){
+        List<HomeProduct> hiddenProduct = new ArrayList<>();
+
+        for (int i=0; i<homeProducts.size(); i++){
+            if (homeProducts.get(i).getHomeProductDesiredQuantity() == 0 && homeProducts.get(i).getHomeProductStockQuantity() == 0) {
+                hiddenProduct.add(homeProducts.get(i));
+            }
+        }
+
+        return hiddenProduct;
+    }
+
+    private void updateHomeProduct(HomeProduct homeProduct) {
+        if(homeProduct == null) {
+            return;
+        }
+
+        try (Connection connection = connect()) {
+            PreparedStatement statement = connection.prepareStatement("UPDATE HOMEPRODUCTS set StockQuantity = ?, DesiredQuantity = ? WHERE ProductID = ?");
+            statement.setInt(1, homeProduct.getHomeProductStockQuantity());
+            statement.setInt(2, homeProduct.getHomeProductDesiredQuantity());
+            statement.setInt(3, homeProduct.getProductID());
+
+            statement.executeUpdate();
+        } catch (final SQLException e) {
+            Log.e("Connect SQL", e.getMessage() + e.getSQLState());
+            e.printStackTrace();
+        }
+    }
+
+    public void incrementStockQuantityBy1(HomeProduct homeProduct, String date){
+        if (homeProducts.contains(homeProduct)){
+            int curIndex = homeProducts.indexOf(homeProduct);
+            HomeProduct curHomeProduct = homeProducts.get(curIndex);
+
+            curHomeProduct.incrementStockQuantityBy1(date);
+            homeProducts.set(curIndex, curHomeProduct);
+
+            updateHomeProduct(homeProduct);
+        }
+    }
+
+    public void incrementDesiredQuantityBy1(HomeProduct homeProduct){
+        if (homeProducts.contains(homeProduct)){
+            int curIndex = homeProducts.indexOf(homeProduct);
+            HomeProduct curHomeProduct = homeProducts.get(curIndex);
+
+            curHomeProduct.incrementDesiredQuantityBy1();
+            homeProducts.set(curIndex, curHomeProduct);
+
+            updateHomeProduct(homeProduct);
+        }
+    }
+
+    public void decreaseStockQuantityBy1(HomeProduct homeProduct){
+        if (homeProducts.contains(homeProduct)){
+            int curIndex = homeProducts.indexOf(homeProduct);
+            HomeProduct curHomeProduct = homeProducts.get(curIndex);
+
+            curHomeProduct.decreaseStockQuantityBy1();
+            homeProducts.set(curIndex, curHomeProduct);
+
+            updateHomeProduct(homeProduct);
+        }
+    }
+
+    public void decreaseDesiredQuantityBy1(HomeProduct homeProduct){
+        if (homeProducts.contains(homeProduct)){
+            int curIndex = homeProducts.indexOf(homeProduct);
+            HomeProduct curHomeProduct = homeProducts.get(curIndex);
+
+            curHomeProduct.decreaseDesiredQuantityBy1();
+            homeProducts.set(curIndex, curHomeProduct);
+
+            updateHomeProduct(homeProduct);
+        }
+    }
+
+    public List<String> getHomeProductExpiryDate(HomeProduct homeProduct){
+        if (homeProducts.contains(homeProduct)){
+            int curIndex = homeProducts.indexOf(homeProduct);
+            HomeProduct curHomeProduct = homeProducts.get(curIndex);
+
+            return curHomeProduct.getHomeProductExpiryDates();
+        }
+
+        return null;
+    }
+
+    public List<String> getHomeProductSortedExpiryDateAscending(HomeProduct homeProduct){
+        if (homeProducts.contains(homeProduct)){
+            int curIndex = homeProducts.indexOf(homeProduct);
+            HomeProduct curHomeProduct = homeProducts.get(curIndex);
+
+            return curHomeProduct.getSortedExpiryDatesAscending();
+        }
+
+        return null;
+    }
+
+    public List<String> getHomeProductSortedExpiryDateDescending(HomeProduct homeProduct){
+        if (homeProducts.contains(homeProduct)){
+            int curIndex = homeProducts.indexOf(homeProduct);
+            HomeProduct curHomeProduct = homeProducts.get(curIndex);
+
+            return curHomeProduct.getSortedExpiryDatesDescending();
+        }
+
         return null;
     }
 }
