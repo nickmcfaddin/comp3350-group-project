@@ -6,9 +6,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface HomeProductPersistence {
-    //Returns a list of all HomeProduct's that exist
-    ArrayList<HomeProduct> getExistingHomeProducts();
+    List<HomeProduct> getStockProduct();
 
-    //Returns a single Product type identified by its ProductID
-    HomeProduct getHomeProductById(int productID);
+    List<HomeProduct> getStockProductSorted();
+
+    List<HomeProduct> getHiddenProduct();
+
+    void incrementStockQuantityBy1(HomeProduct homeProduct, String date);
+
+    void incrementDesiredQuantityBy1(HomeProduct homeProduct);
+
+    void decreaseStockQuantityBy1(HomeProduct homeProduct);
+
+    void decreaseDesiredQuantityBy1(HomeProduct homeProduct);
+
+    List<String> getHomeProductExpiryDate(HomeProduct homeProduct);
+
+    List<String> getHomeProductSortedExpiryDateAscending(HomeProduct homeProduct);
+
+    List<String> getHomeProductSortedExpiryDateDescending(HomeProduct homeProduct);
 }

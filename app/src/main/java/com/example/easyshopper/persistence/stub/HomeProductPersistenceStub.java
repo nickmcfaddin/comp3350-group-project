@@ -39,30 +39,13 @@ public class HomeProductPersistenceStub implements HomeProductPersistence, Seria
         HomeProduct pineapple = new HomeProduct(6, "Pineapple", 0.2, 15, 1, 0, 0, pineappleExpiryDate);
         HomeProduct sausage = new HomeProduct(7, "Sausage", 0.2, 15, 1, 0, 0, sausageExpiryDate);
 
-        homeProductList.add(apple);
-        homeProductList.add(kiwi);
-        homeProductList.add(banana);
-        homeProductList.add(orange);
-        homeProductList.add(peanut);
-        homeProductList.add(pineapple);
-        homeProductList.add(sausage);
-    }
-
-    //Get a list of all HomeProduct's
-    @Override
-    public List<HomeProduct> getExistingHomeProducts() {
-        return homeProductList;
-    }
-
-    //Obtain a product using its productID
-    public HomeProduct getHomeProductById(int productID) {
-        for (int i = 0; i < homeProductList.size(); i++){
-            if (homeProductList.get(i).getProductID() == productID){
-                return homeProductList.get(i);
-            }
-        }
-
-        return null;
+        allProducts.add(apple);
+        allProducts.add(kiwi);
+        allProducts.add(banana);
+        allProducts.add(orange);
+        allProducts.add(peanut);
+        allProducts.add(pineapple);
+        allProducts.add(sausage);
     }
 
     public List<HomeProduct> getStockProduct(){
