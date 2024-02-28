@@ -9,6 +9,7 @@ import com.example.easyshopper.objects.Store;
 import com.example.easyshopper.objects.User;
 import com.example.easyshopper.objects.UserList;
 
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -18,7 +19,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListPersistenceHSQLDB {
+public class ListPersistenceHSQLDB implements Serializable {
     private final String dbPath;
     private List<ShoppingList> shoppingLists;
     private List<UserList> userLists;

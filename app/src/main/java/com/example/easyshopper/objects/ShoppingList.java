@@ -8,7 +8,7 @@ import java.util.UUID;
 import java.util.ArrayList;
 
 //List is created per store, products added to list
-public class ShoppingList extends ProductList implements Serializable {
+public class ShoppingList extends ProductList {
     private Store store;
 
     //Constructor

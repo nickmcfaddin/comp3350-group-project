@@ -1,8 +1,9 @@
 package com.example.easyshopper.objects;
 
+import java.io.Serializable;
 import java.util.UUID;
 
-public class User {
+public class User implements Serializable {
     private String userID;
 
     public User() {

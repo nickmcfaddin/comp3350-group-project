@@ -8,6 +8,7 @@ import com.example.easyshopper.objects.ShoppingList;
 import com.example.easyshopper.objects.UserList;
 import com.example.easyshopper.persistence.HomeProductPersistence;
 
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -18,7 +19,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-public class HomeProductPersistenceHSQLDB implements HomeProductPersistence {
+public class HomeProductPersistenceHSQLDB implements HomeProductPersistence, Serializable {
     private String dbPath;
     private List<HomeProduct> homeProducts;
 

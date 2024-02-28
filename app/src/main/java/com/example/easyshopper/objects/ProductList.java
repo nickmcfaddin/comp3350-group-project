@@ -1,10 +1,11 @@
 package com.example.easyshopper.objects;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public abstract class ProductList {
+public abstract class ProductList implements Serializable {
     private String listID;
     private List<Product> cart;
 

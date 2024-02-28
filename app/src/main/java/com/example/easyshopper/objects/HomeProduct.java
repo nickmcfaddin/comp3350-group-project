@@ -1,5 +1,6 @@
 package com.example.easyshopper.objects;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -7,7 +8,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.regex.Pattern;
 
-public class HomeProduct extends Product {
+public class HomeProduct extends Product implements Serializable {
     int stockQuantity;
     int desiredQuantity;
     List<String> expiryDates; // ISO 8601 format (yyyy-MM-dd)
