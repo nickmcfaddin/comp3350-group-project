@@ -4,8 +4,6 @@ import android.util.Log;
 
 import com.example.easyshopper.objects.HomeProduct;
 import com.example.easyshopper.objects.Product;
-import com.example.easyshopper.objects.ShoppingList;
-import com.example.easyshopper.objects.UserList;
 import com.example.easyshopper.persistence.HomeProductPersistence;
 
 import java.io.Serializable;
