@@ -53,6 +53,9 @@ public class InventoryDialog {
         TextView dialogTitle = dialogView.findViewById(R.id.home_product_expiry_dates_title);
         dialogTitle.setText("All Expiry Dates of " + homeProduct.getProductName() + ":");
 
+        TextView homeProdLifeTime = dialogView.findViewById(R.id.home_product_life_time_info);
+        homeProdLifeTime.setText("Life time of " + homeProduct.getProductName() + ": " + homeProduct.getLifeTimeDays() + " days");
+
         ListView listView = dialogView.findViewById(R.id.list_view);
         ArrayAdapter<String> listAdapter = new ArrayAdapter<>(context, android.R.layout.simple_list_item_1, expiryDates);
         listView.setAdapter(listAdapter);
@@ -109,7 +112,7 @@ public class InventoryDialog {
             else{
                 invalidInputWarning.setVisibility(View.GONE);
 
-                homeInventoryHandler.incrementStockQuantityBy1(homeProduct, userInput);
+                homeInventoryHandler.incrementStockQuantityBy1(homeProduct);
                 homeProductStockAdapter.updateData(homeInventoryHandler.getStockProduct());
                 homeProductHiddenAdapter.updateData(homeInventoryHandler.getHiddenProduct());
 

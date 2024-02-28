@@ -164,12 +164,12 @@ public class HomeProductPersistenceHSQLDB implements HomeProductPersistence, Ser
         }
     }
 
-    public void incrementStockQuantityBy1(HomeProduct homeProduct, String date){
+    public void incrementStockQuantityBy1(HomeProduct homeProduct){
         if (homeProducts.contains(homeProduct)){
             int curIndex = homeProducts.indexOf(homeProduct);
             HomeProduct curHomeProduct = homeProducts.get(curIndex);
 
-            curHomeProduct.incrementStockQuantityBy1(date);
+            curHomeProduct.incrementStockQuantityBy1();
             homeProducts.set(curIndex, curHomeProduct);
 
             updateHomeProduct(homeProduct);

@@ -31,13 +31,13 @@ public class HomeProductPersistenceStub implements HomeProductPersistence, Seria
         bananaExpiryDate.add("2024-01-15");
         orangeExpiryDate.add("2024-03-03");
 
-        HomeProduct apple = new HomeProduct(1, "Apple", 1.00, 0.3, 0.5, 3, 2, appleExpiryDate);
-        HomeProduct kiwi = new HomeProduct(2, "Kiwi",  0.5, 11, 1, 2, 1, kiwiExpiryDate);
-        HomeProduct banana = new HomeProduct(3, "Banana", 0.3, 27, 1.3, 1, 3, bananaExpiryDate);
-        HomeProduct orange = new HomeProduct(4, "Orange", 0.2, 15, 1, 1, 0, orangeExpiryDate);
-        HomeProduct peanut = new HomeProduct(5, "Peanut", 0.2, 15, 1, 0, 0, peanutExpiryDate);
-        HomeProduct pineapple = new HomeProduct(6, "Pineapple", 0.2, 15, 1, 0, 0, pineappleExpiryDate);
-        HomeProduct sausage = new HomeProduct(7, "Sausage", 0.2, 15, 1, 0, 0, sausageExpiryDate);
+        HomeProduct apple = new HomeProduct(1, "Apple", 1.00, 0.3, 0.5, 3, 2, 7, appleExpiryDate);
+        HomeProduct kiwi = new HomeProduct(2, "Kiwi",  0.5, 11, 1, 2, 1, 2, kiwiExpiryDate);
+        HomeProduct banana = new HomeProduct(3, "Banana", 0.3, 27, 1.3, 1, 3, 3, bananaExpiryDate);
+        HomeProduct orange = new HomeProduct(4, "Orange", 0.2, 15, 1, 1, 0, 4, orangeExpiryDate);
+        HomeProduct peanut = new HomeProduct(5, "Peanut", 0.2, 15, 1, 0, 0, 5, peanutExpiryDate);
+        HomeProduct pineapple = new HomeProduct(6, "Pineapple", 0.2, 15, 1, 0, 0, 6, pineappleExpiryDate);
+        HomeProduct sausage = new HomeProduct(7, "Sausage", 0.2, 15, 1, 0, 0, 7, sausageExpiryDate);
 
         allProducts.add(apple);
         allProducts.add(kiwi);
@@ -110,12 +110,12 @@ public class HomeProductPersistenceStub implements HomeProductPersistence, Seria
     }
 
     // METHODS
-    public void incrementStockQuantityBy1(HomeProduct homeProduct, String date){
+    public void incrementStockQuantityBy1(HomeProduct homeProduct){
         if (allProducts.contains(homeProduct)){
             int curIndex = allProducts.indexOf(homeProduct);
             HomeProduct curHomeProduct = allProducts.get(curIndex);
 
-            curHomeProduct.incrementStockQuantityBy1(date);
+            curHomeProduct.incrementStockQuantityBy1();
             allProducts.set(curIndex, curHomeProduct);
         }
     }

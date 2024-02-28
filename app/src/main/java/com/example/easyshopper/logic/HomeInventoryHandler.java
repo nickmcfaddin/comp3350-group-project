@@ -27,8 +27,8 @@ public class  HomeInventoryHandler implements Serializable {
         return homeProductPersistence.getHiddenProduct();
     }
 
-    public void incrementStockQuantityBy1(HomeProduct homeProduct, String date){
-        homeProductPersistence.incrementStockQuantityBy1(homeProduct, date);
+    public void incrementStockQuantityBy1(HomeProduct homeProduct){
+        homeProductPersistence.incrementStockQuantityBy1(homeProduct);
     }
 
     public void decreaseStockQuantityBy1(HomeProduct homeProduct){

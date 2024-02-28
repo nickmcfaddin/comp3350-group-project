@@ -161,12 +161,7 @@ public class InventoryFragment extends Fragment implements HomeProductButtonInte
                     homeInventoryHandler.decreaseStockQuantityBy1(clickedProduct);
                     break;
                 case "addStock":
-                    inventoryDialog.showHomeProductAddExpiryDate(clickedProduct, userInput -> {
-                        // Update homeProductInventoryList and homeProductHiddenList after the stock quantity is incremented
-                        homeProductInventoryList = homeInventoryHandler.getStockProduct();
-                        homeProductHiddenList = homeInventoryHandler.getHiddenProduct();
-                    });
-
+                    homeInventoryHandler.incrementStockQuantityBy1(clickedProduct);
                     break;
                 case "removeDesired":
                     homeInventoryHandler.decreaseDesiredQuantityBy1(clickedProduct);
@@ -190,12 +185,7 @@ public class InventoryFragment extends Fragment implements HomeProductButtonInte
                     homeInventoryHandler.decreaseStockQuantityBy1(clickedProduct);
                     break;
                 case "addStock":
-                    inventoryDialog.showHomeProductAddExpiryDate(clickedProduct, userInput -> {
-                        // Update homeProductInventoryList and homeProductHiddenList after the stock quantity is incremented
-                        homeProductInventoryList = homeInventoryHandler.getStockProduct();
-                        homeProductHiddenList = homeInventoryHandler.getHiddenProduct();
-                    });
-
+                    homeInventoryHandler.incrementStockQuantityBy1(clickedProduct);
                     break;
                 case "removeDesired":
                     homeInventoryHandler.decreaseDesiredQuantityBy1(clickedProduct);

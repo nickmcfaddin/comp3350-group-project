@@ -12,7 +12,7 @@ public interface HomeProductPersistence {
 
     List<HomeProduct> getHiddenProduct();
 
-    void incrementStockQuantityBy1(HomeProduct homeProduct, String date);
+    void incrementStockQuantityBy1(HomeProduct homeProduct);
 
     void incrementDesiredQuantityBy1(HomeProduct homeProduct);
 

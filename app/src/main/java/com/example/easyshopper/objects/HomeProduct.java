@@ -1,20 +1,21 @@
 package com.example.easyshopper.objects;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
-import java.util.regex.Pattern;
 
 public class HomeProduct extends Product implements Serializable {
     int stockQuantity;
     int desiredQuantity;
     List<String> expiryDates; // ISO 8601 format (yyyy-MM-dd)
 
-    public HomeProduct(int productID, String productName, double fat, double carb, double protein, int stockQuantity, int desiredQuantity, List<String> expiryDates) {
-        super(productID, productName, fat, carb, protein, 0);
+    public HomeProduct(int productID, String productName, double fat, double carb, double protein, int stockQuantity, int desiredQuantity, int lifeTimeDays, List<String> expiryDates) {
+        super(productID, productName, fat, carb, protein, lifeTimeDays);
 
         // Validate expiryDates size
         if (expiryDates.size() != stockQuantity) {
@@ -54,10 +55,9 @@ public class HomeProduct extends Product implements Serializable {
     }
 
     // increase and decrease stock and desired quantity
-    public void incrementStockQuantityBy1(String date){
-        if (addExpiryDate(date)) {
-            stockQuantity++;
-        }
+    public void incrementStockQuantityBy1(){
+        stockQuantity++;
+        addExpiryDate();
     }
 
     public void incrementDesiredQuantityBy1(){
@@ -127,30 +127,17 @@ public class HomeProduct extends Product implements Serializable {
         }
     }
 
-    public boolean addExpiryDate(String date){
-        DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE;
+    public void addExpiryDate() {
+        // get current date when user add the product
+        Calendar calendar = Calendar.getInstance();
 
-        // regular expression pattern for ISO 8601 date format (yyyy-MM-dd)
-        String iso8601Pattern = "\\d{4}-\\d{2}-\\d{2}";
+        calendar.add(Calendar.DAY_OF_YEAR, getLifeTimeDays());
 
-        // check if the date matches the ISO 8601 format
-        if (Pattern.matches(iso8601Pattern, date)) {
-            // If the date matches the format, attempt to parse it
-            try {
-                LocalDate parsedDate = LocalDate.parse(date, formatter);
-                // If parsing is successful, add the date to list of expiry dates
-                expiryDates.add(date);
-                return true;
-            } catch (Exception e) {
-                // Handle any parsing exceptions here
-                System.out.println("Error parsing date: " + e.getMessage());
-            }
-        } else {
-            // If the date does not match the ISO 8601 format, inform the user
-            System.out.println("Invalid date format. Please use the format yyyy-MM-dd.");
-        }
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
-        return false;
+        String newExpiryDate = sdf.format(calendar.getTime());
+
+        expiryDates.add(newExpiryDate);
     }
 
 }

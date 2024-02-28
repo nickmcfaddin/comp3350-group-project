@@ -84,6 +84,6 @@ public class Services {
             }
         }
 
-        return homeProductPersistence;
+        return new HomeProductPersistenceStub();
     }
 }
