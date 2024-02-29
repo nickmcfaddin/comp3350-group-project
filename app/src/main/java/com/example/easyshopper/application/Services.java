@@ -1,12 +1,11 @@
 package com.example.easyshopper.application;
 
-import android.util.Log;
-
 import com.example.easyshopper.persistence.HomeProductPersistence;
 import com.example.easyshopper.persistence.PricePersistence;
 import com.example.easyshopper.persistence.ProductPersistence;
 import com.example.easyshopper.persistence.ShoppingListPersistence;
 import com.example.easyshopper.persistence.StorePersistence;
+import com.example.easyshopper.persistence.UserPersistence;
 import com.example.easyshopper.persistence.hsqldb.HomeProductPersistenceHSQLDB;
 import com.example.easyshopper.persistence.hsqldb.PricePersistenceHSQLDB;
 import com.example.easyshopper.persistence.hsqldb.ProductPersistenceHSQLDB;
@@ -17,6 +16,7 @@ import com.example.easyshopper.persistence.stub.PricePersistenceStub;
 import com.example.easyshopper.persistence.stub.ProductPersistenceStub;
 import com.example.easyshopper.persistence.stub.ShoppingListPersistenceStub;
 import com.example.easyshopper.persistence.stub.StorePersistenceStub;
+import com.example.easyshopper.persistence.stub.UserPersistenceStub;
 
 //Bridge between persistence layer and business layer
 public class Services {
@@ -25,6 +25,9 @@ public class Services {
     private static PricePersistence pricePersistence = null;
     private static StorePersistence storePersistence = null;
     private static HomeProductPersistence homeProductPersistence = null;
+
+    private static UserPersistence userPersistence = null;
+
 
     //GETTERS
     public static ProductPersistence getProductPersistence(boolean forProduction) {
@@ -85,5 +88,9 @@ public class Services {
         }
 
         return homeProductPersistence;
+    }
+
+    public static UserPersistence getUserPersistence(boolean forProduction){
+        return new UserPersistenceStub();
     }
 }
