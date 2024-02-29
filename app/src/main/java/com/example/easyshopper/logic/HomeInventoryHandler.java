@@ -13,7 +13,7 @@ public class  HomeInventoryHandler implements Serializable {
     //constructor
     public HomeInventoryHandler(boolean forProduction){
         homeProductPersistence = Services.getHomeProductPersistence(forProduction);
-    };
+    }
 
     public List<HomeProduct> getStockProduct(){
         return homeProductPersistence.getStockProduct();

@@ -9,7 +9,8 @@ import java.util.ArrayList;
 public class ShoppingListUnitTest {
 
     @Before
-    public void setup() {System.out.println("Starting test for ShoppingList");
+    public void setup() {
+        System.out.println("Starting test for ShoppingList");
     }
 
     @Test
@@ -26,6 +27,8 @@ public class ShoppingListUnitTest {
         assertNotNull(store);
         assertEquals("Kwik-E-Mart", shoppingList.getShoppingListName());
         assertEquals(store, shoppingList.getStore());
+
+        assertEquals("Kwik-E-Mart", shoppingList.toString());
 
         //Create new Product to use for test
         Product product = new Product(1, "Eggs", 0.3, 5, 0.8, 1);

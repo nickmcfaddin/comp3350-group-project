@@ -5,9 +5,6 @@
       <entry key="AllAcceptanceTests">
         <State />
       </entry>
-      <entry key="SearchFragmentTest">
-        <State />
-      </entry>
       <entry key="app">
         <State>
           <targetSelectedWithDropDown>
@@ -16,12 +13,12 @@
               <deviceKey>
                 <Key>
                   <type value="VIRTUAL_DEVICE_PATH" />
-                  <value value="D:\Android_AVD\Pixel_Tablet_API_34.avd" />
+                  <value value="C:\Users\nrmcf\.android\avd\Pixel_Tablet_API_34.avd" />
                 </Key>
               </deviceKey>
             </Target>
           </targetSelectedWithDropDown>
-          <timeTargetWasSelectedWithDropDown value="2024-02-28T04:26:06.744853300Z" />
+          <timeTargetWasSelectedWithDropDown value="2024-02-28T17:22:18.474356800Z" />
         </State>
       </entry>
     </value>

@@ -24,6 +24,8 @@ public class StoreTest {
         assertEquals(19, store.getStoreID());
         assertEquals("Kwik-E-Mart", store.getStoreName());
 
+        assertEquals("Kwik-E-Mart", store.toString());
+
         //Create two new Product's to use for test, one is null which should not be added to the productArrayList
         Product product = new Product(100, "Eggs", 0.3, 5, 0.8, 1);
         Product nullProduct = null;

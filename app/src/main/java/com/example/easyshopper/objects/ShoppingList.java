@@ -17,6 +17,7 @@ public class ShoppingList extends ProductList {
         this.store = store;
     }
 
+    //Not included in unit testing as this is pulling from the db
     public ShoppingList(String listID, List<Product> cart, Store store){
         super(listID, cart);
         this.store = store;

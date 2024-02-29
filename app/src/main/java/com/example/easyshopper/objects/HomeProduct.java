@@ -30,8 +30,9 @@ public class HomeProduct extends Product implements Serializable {
         this.expiryDates = expiryDates;
     }
 
+    //Not included in unit testing as this is pulling from the db
     public HomeProduct(Product product, int stockQuantity, int desiredQuantity, List<String> expiryDates){
-        super(product.getProductID(), product.getProductName(), product.getFat(), product.getCarb(), product.getProtein(), 0);
+        super(product.getProductID(), product.getProductName(), product.getFat(), product.getCarb(), product.getProtein(), product.getLifeTimeDays());
         this.stockQuantity = stockQuantity;
         this.desiredQuantity = desiredQuantity;
         this.expiryDates = expiryDates;
@@ -53,6 +54,8 @@ public class HomeProduct extends Product implements Serializable {
     public List<String> getHomeProductExpiryDates(){
         return expiryDates;
     }
+
+
 
     // increase and decrease stock and desired quantity
     public void incrementStockQuantityBy1(){

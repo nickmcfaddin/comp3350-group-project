@@ -31,6 +31,7 @@ public class ProductTest {
          */
         assertEquals(25.9, product.getCalories(), 0.00001);
 
+        assertEquals("Eggs", product.toString());
 
         System.out.println("Finished testCreateAProduct");
     }
