@@ -17,11 +17,10 @@ public class UserTest {
         System.out.println("\nStarting testCreateAUser");
 
         //Create Product to use for tests
-        User user = new User("Jack", 1);
+        User user = new User("Jack");
 
         //Tests all GETTER methods
         assertNotNull(user);
-        assertEquals(1, user.getUserID());
         assertEquals("Jack", user.getUserName());
 
         user.setUserName("John");

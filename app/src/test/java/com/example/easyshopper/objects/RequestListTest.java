@@ -19,7 +19,7 @@ public class RequestListTest {
         System.out.println("\nStarting testCreateARequestList");
 
         //Create Store to use for tests
-        User user = new User("Jack", 1);
+        User user = new User("Jack");
 
         //Create ShoppingList to use for tests
         RequestList requestList = new RequestList(user);

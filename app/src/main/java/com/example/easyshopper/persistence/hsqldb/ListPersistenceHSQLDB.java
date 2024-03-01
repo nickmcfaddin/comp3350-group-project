@@ -4,10 +4,10 @@ import android.util.Log;
 
 import com.example.easyshopper.objects.Product;
 import com.example.easyshopper.objects.ProductList;
+import com.example.easyshopper.objects.RequestList;
 import com.example.easyshopper.objects.ShoppingList;
 import com.example.easyshopper.objects.Store;
 import com.example.easyshopper.objects.User;
-import com.example.easyshopper.objects.UserList;
 
 import java.io.Serializable;
 import java.sql.Connection;
@@ -22,7 +22,7 @@ import java.util.List;
 public class ListPersistenceHSQLDB implements Serializable {
     private final String dbPath;
     private List<ShoppingList> shoppingLists;
-    private List<UserList> userLists;
+    private List<RequestList> requestLists;
     private List<ProductList> productLists;
 
     private StorePersistenceHSQLDB storePersistenceHSQLDB;
@@ -43,7 +43,7 @@ public class ListPersistenceHSQLDB implements Serializable {
     private void loadProductLists() {
         //clear existing lists
         this.shoppingLists = new ArrayList<>();
-        this.userLists = new ArrayList<>();
+        this.requestLists = new ArrayList<>();
         this.productLists = new ArrayList<>();
 
         try (Connection connection = connect()) {
@@ -64,8 +64,8 @@ public class ListPersistenceHSQLDB implements Serializable {
                 if (storeID == -1) {
                     //User user = whatever the fuck(userID);
 
-                    productList = new UserList(listID, cart, null);
-                    userLists.add((UserList) productList);
+                    productList = new RequestList(listID, cart, null);
+                    requestLists.add((RequestList) productList);
                 } else {
                     Store store = storePersistenceHSQLDB.getStoreById(storeID);
 
@@ -118,8 +118,8 @@ public class ListPersistenceHSQLDB implements Serializable {
             if(productList instanceof ShoppingList) {
                 statement.setString(1, null);
                 statement.setInt(2,((ShoppingList) productList).getStore().getStoreID());
-            } else if (productList instanceof UserList){
-                statement.setString(1,((UserList) productList).getUser().getUserID());
+            } else if (productList instanceof RequestList){
+                statement.setString(1,((RequestList) productList).getUser().getUserID());
                 statement.setInt(2, -1);
             }
 
@@ -161,8 +161,8 @@ public class ListPersistenceHSQLDB implements Serializable {
             if(productList instanceof ShoppingList) {
                 statement.setString(3, null);
                 statement.setInt(2,((ShoppingList) productList).getStore().getStoreID());
-            } else if (productList instanceof UserList){
-                statement.setString(3,((UserList) productList).getUser().getUserID());
+            } else if (productList instanceof RequestList){
+                statement.setString(3,((RequestList) productList).getUser().getUserID());
                 statement.setInt(2, -1);
             }
 
