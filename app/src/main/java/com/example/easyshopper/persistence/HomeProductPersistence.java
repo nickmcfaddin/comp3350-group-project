@@ -25,4 +25,7 @@ public interface HomeProductPersistence {
     List<String> getHomeProductSortedExpiryDateAscending(HomeProduct homeProduct);
 
     List<String> getHomeProductSortedExpiryDateDescending(HomeProduct homeProduct);
+
+    List<HomeProduct> getHomeProducts();
+
 }

@@ -23,11 +23,14 @@ public class HomeInventoryHandlerTest {
         boolean forProduction = false;
         hIHandlertemp = new HomeInventoryHandler(forProduction);
 
+        apple = hIHandlertemp.getHomeProducts().get(0);
+
         List<String> appleExpiryDate = new ArrayList<>();
         appleExpiryDate.add("2023-11-15");
         appleExpiryDate.add("2024-10-20");
         appleExpiryDate.add("2023-12-31");
-        apple = new HomeProduct(1, "Apple", 1.00, 0.3, 0.5, 3, 2, 7, appleExpiryDate);
+
+        apple.setExpiryDates(appleExpiryDate);
     }
 
     @Test
@@ -61,32 +64,30 @@ public class HomeInventoryHandlerTest {
     public void testStockIncrementAndDecrement(){
         //Test increment (apple stock starts at 3 in the stub and we increment it to 4)
         hIHandlertemp.incrementStockQuantityBy1(apple);
-        assertEquals(4, hIHandlertemp.getStockProduct().size());
+        assertEquals(4, apple.getHomeProductStockQuantity());
 
         //Test decrement (apple stock is at 4 from above, should be 3 when we assert)
         hIHandlertemp.decreaseStockQuantityBy1(apple);
-        assertEquals(3, hIHandlertemp.getStockProduct().size());
+        assertEquals(3, apple.getHomeProductStockQuantity());
     }
 
     @Test
     public void testDesiredQuantityIncrementAndDecrement(){
         //Test increment (apple desired quantity starts at 2 in the stub and we increment it to 3)
         hIHandlertemp.incrementDesiredQuantityBy1(apple);
-        assertEquals(3, hIHandlertemp.getStockProduct().size());
+        assertEquals(3, apple.getHomeProductDesiredQuantity());
 
         //Test decrement (apple desired quantity is at 3 from above, should be 2 when we assert)
         hIHandlertemp.decreaseDesiredQuantityBy1(apple);
-        assertEquals(2, hIHandlertemp.getStockProduct().size());
+        assertEquals(2, apple.getHomeProductDesiredQuantity());
     }
 
     @Test
     public void testGetHomeProductExpiryDates() {
         List<String> expiryDates = hIHandlertemp.getHomeProductExpiryDates(apple);
 
-        for (int i = 0; i < expiryDates.size(); i++) {
-            if (expiryDates.get(i) != "2023-11-15" || expiryDates.get(i) != "2024-10-20" || expiryDates.get(i) != "2023-12-31") {
-                fail();
-            }
+        if (!expiryDates.get(0).equals("2023-11-15") || !expiryDates.get(1).equals("2024-10-20") || !expiryDates.get(2).equals("2023-12-31")) {
+            fail();
         }
     }
 
@@ -94,7 +95,7 @@ public class HomeInventoryHandlerTest {
     public void testGetHomeProductExpiryDatesAscending() {
         List<String> expiryDates = hIHandlertemp.getHomeProductSortedExpiryDatesAscending(apple);
 
-        if (expiryDates.get(0) != "2023-11-15" || expiryDates.get(1) != "2023-12-31" || expiryDates.get(2) != "2024-10-20") {
+        if (!expiryDates.get(0).equals("2023-11-15") || !expiryDates.get(1).equals("2023-12-31") || !expiryDates.get(2).equals("2024-10-20")) {
             fail();
         }
     }
@@ -103,7 +104,7 @@ public class HomeInventoryHandlerTest {
     public void testGetHomeProductExpiryDatesDescending() {
         List<String> expiryDates = hIHandlertemp.getHomeProductSortedExpiryDatesDescending(apple);
 
-        if (expiryDates.get(0) != "2024-10-20" || expiryDates.get(1) != "2023-12-31" || expiryDates.get(2) != "2023-11-15") {
+        if (!expiryDates.get(0).equals("2024-10-20") || !expiryDates.get(1).equals("2023-12-31") || !expiryDates.get(2).equals("2023-11-15")) {
             fail();
         }
     }

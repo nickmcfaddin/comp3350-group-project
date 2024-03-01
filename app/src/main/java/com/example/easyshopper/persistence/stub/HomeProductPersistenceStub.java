@@ -182,4 +182,8 @@ public class HomeProductPersistenceStub implements HomeProductPersistence, Seria
 
         return null;
     }
+
+    public List<HomeProduct> getHomeProducts() {
+        return allProducts;
+    }
 }

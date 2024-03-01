@@ -143,4 +143,8 @@ public class HomeProduct extends Product implements Serializable {
         expiryDates.add(newExpiryDate);
     }
 
+    public void setExpiryDates(List<String> expiryDates){
+        this.expiryDates = expiryDates;
+    }
+
 }

@@ -54,4 +54,8 @@ public class  HomeInventoryHandler implements Serializable {
     public List<String> getHomeProductSortedExpiryDatesDescending(HomeProduct homeProduct) {
         return homeProductPersistence.getHomeProductSortedExpiryDateDescending(homeProduct);
     }
+
+    public List<HomeProduct> getHomeProducts() {
+        return homeProductPersistence.getHomeProducts();
+    }
 }

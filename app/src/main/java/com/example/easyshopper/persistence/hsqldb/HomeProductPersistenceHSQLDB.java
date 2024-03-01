@@ -244,4 +244,9 @@ public class HomeProductPersistenceHSQLDB implements HomeProductPersistence, Ser
 
         return null;
     }
+
+    public List<HomeProduct> getHomeProducts() {
+        return homeProducts;
+    }
+
 }
