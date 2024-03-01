@@ -39,10 +39,6 @@ public class HomeProduct extends Product implements Serializable {
     }
 
     // GETTERS
-    public String getHomeProductName() {
-        return super.getProductName();
-    }
-
     public int getHomeProductStockQuantity(){
         return stockQuantity;
     }
@@ -54,8 +50,6 @@ public class HomeProduct extends Product implements Serializable {
     public List<String> getHomeProductExpiryDates(){
         return expiryDates;
     }
-
-
 
     // increase and decrease stock and desired quantity
     public void incrementStockQuantityBy1(){
