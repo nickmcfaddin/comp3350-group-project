@@ -109,7 +109,7 @@ public class InventoryFragment extends Fragment implements HomeProductButtonInte
         hiddenHomeProductView.setAdapter(homeProductHiddenAdapter);
 
         // allow for dialogs to be displayed in this class
-        inventoryDialog = new InventoryDialog(getContext(), homeInventoryHandler, homeProductStockAdapter, homeProductHiddenAdapter);
+        inventoryDialog = new InventoryDialog(getContext(), homeInventoryHandler);
 
         // sort button
         sortButton = rootView.findViewById(R.id.sortButton);
