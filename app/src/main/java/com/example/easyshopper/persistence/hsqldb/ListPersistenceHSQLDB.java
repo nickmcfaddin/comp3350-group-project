@@ -27,11 +27,13 @@ public class ListPersistenceHSQLDB implements Serializable {
 
     private StorePersistenceHSQLDB storePersistenceHSQLDB;
     private ProductPersistenceHSQLDB productPersistenceHSQLDB;
+    private UserPersistenceHSQLDB userPersistenceHSQLDB;
 
     public ListPersistenceHSQLDB(String dbPath) {
         this.dbPath = dbPath;
         this.storePersistenceHSQLDB = new StorePersistenceHSQLDB(dbPath);
         this.productPersistenceHSQLDB = new ProductPersistenceHSQLDB(dbPath);
+        this.userPersistenceHSQLDB = new UserPersistenceHSQLDB(dbPath);
 
         loadProductLists();
     }
@@ -59,12 +61,13 @@ public class ListPersistenceHSQLDB implements Serializable {
                 //prepare list
                 ProductList productList;
                 List<Product> cart = loadCart(listID, connection);
+
                 // Determine if it's a shopping list or a user list
                 // based on whether StoreID is null or not
                 if (storeID == -1) {
-                    //User user = whatever the fuck(userID);
+                    User user = userPersistenceHSQLDB.getUserById(userID);
 
-                    productList = new RequestList(listID, cart, null);
+                    productList = new RequestList(listID, cart, user);
                     requestLists.add((RequestList) productList);
                 } else {
                     Store store = storePersistenceHSQLDB.getStoreById(storeID);
@@ -102,6 +105,10 @@ public class ListPersistenceHSQLDB implements Serializable {
     }
     public List<ShoppingList> getExistingShoppingLists() {
         return shoppingLists;
+    }
+
+    public List<RequestList> getExistingRequestLists() {
+        return requestLists;
     }
 
     public void updateList(ProductList productList) {

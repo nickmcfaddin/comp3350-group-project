@@ -17,13 +17,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ShoppingListPersistenceHSQLDB implements ShoppingListPersistence, Serializable {
-    private final String dbPath;
     private List<ShoppingList> shoppingLists;
 
     private ListPersistenceHSQLDB listPersistenceHSQLDB;
 
     public ShoppingListPersistenceHSQLDB(String dbPath) {
-        this.dbPath = dbPath;
         this.listPersistenceHSQLDB = new ListPersistenceHSQLDB(dbPath);
 
         loadShoppingLists();
