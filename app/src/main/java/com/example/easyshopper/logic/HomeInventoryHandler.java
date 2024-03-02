@@ -13,7 +13,7 @@ public class  HomeInventoryHandler implements Serializable {
     //constructor
     public HomeInventoryHandler(boolean forProduction){
         homeProductPersistence = Services.getHomeProductPersistence(forProduction);
-    };
+    }
 
     public List<HomeProduct> getStockProduct(){
         return homeProductPersistence.getStockProduct();
@@ -27,8 +27,8 @@ public class  HomeInventoryHandler implements Serializable {
         return homeProductPersistence.getHiddenProduct();
     }
 
-    public void incrementStockQuantityBy1(HomeProduct homeProduct, String date){
-        homeProductPersistence.incrementStockQuantityBy1(homeProduct, date);
+    public void incrementStockQuantityBy1(HomeProduct homeProduct){
+        homeProductPersistence.incrementStockQuantityBy1(homeProduct);
     }
 
     public void decreaseStockQuantityBy1(HomeProduct homeProduct){
@@ -53,5 +53,9 @@ public class  HomeInventoryHandler implements Serializable {
 
     public List<String> getHomeProductSortedExpiryDatesDescending(HomeProduct homeProduct) {
         return homeProductPersistence.getHomeProductSortedExpiryDateDescending(homeProduct);
+    }
+
+    public List<HomeProduct> getHomeProducts() {
+        return homeProductPersistence.getHomeProducts();
     }
 }

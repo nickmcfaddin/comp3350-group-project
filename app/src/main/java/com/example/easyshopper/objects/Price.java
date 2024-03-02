@@ -30,5 +30,4 @@ public class Price implements Serializable {
     public String getPriceFormatted() {
         return "$" + String.format("%.2f", price);
     }
-
 }
