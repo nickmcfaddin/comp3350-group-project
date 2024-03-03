@@ -14,6 +14,7 @@ public abstract class ProductList implements Serializable {
         this.cart = new ArrayList<>();
     }
 
+    //Not included in testing, constructor for db ease
     public ProductList(String listID, List<Product> cart) {
         this.listID = listID;
         this.cart = cart;

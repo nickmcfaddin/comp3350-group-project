@@ -11,22 +11,30 @@ import com.example.easyshopper.objects.Product;
 import com.example.easyshopper.objects.Store;
 import com.example.easyshopper.persistence.ProductPersistence;
 import com.example.easyshopper.persistence.stub.ProductPersistenceStub;
+import com.example.easyshopper.utils.TestUtils;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 
-public class ProductHandlerTest {
+public class ProductHandlerIT {
 
     private ProductHandler productHandler;
     private StoreHandler storeHandler;
+    private File tempDB;
 
     @Before
-    public void setup() {
+    public void setup() throws IOException {
         System.out.println("Starting test for ProductHandler");
-        boolean forProduction = false;
+
+        this.tempDB = TestUtils.copyDB();
+
+        boolean forProduction = true;
 
         productHandler = new ProductHandler(forProduction);
         storeHandler = new StoreHandler(forProduction);
@@ -40,6 +48,7 @@ public class ProductHandlerTest {
         assertNull(productHandler.getProductByID(-1));
         System.out.println("Finished testGetProductByID");
     }
+
     @Test
     public void testGetProductsByName() {
         System.out.println("\nStarting testing testGetProductsByName");
@@ -53,7 +62,7 @@ public class ProductHandlerTest {
         Store store = storeHandler.getExistingStores().get(0);
         Product product = productHandler.getAllProducts().get(0);
 
-        assertEquals(1.99,productHandler.getPriceOfProductInStore(product,store), .01);
+        assertEquals(0.5,productHandler.getPriceOfProductInStore(product,store), .01);
 
         assertEquals(-1,productHandler.getPriceOfProductInStore(null,store), .01);
 
@@ -81,4 +90,11 @@ public class ProductHandlerTest {
 
         System.out.println("Finished testAllStoreSortedPrice");
     }
+
+    @After
+    public void tearDown(){
+        System.out.println("Reset database.");
+        this.tempDB.delete();
+    }
 }
+
