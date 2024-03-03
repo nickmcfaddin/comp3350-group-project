@@ -2,14 +2,14 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/ShoppingListFragment"
+    android:id="@+id/HomeInventoryFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/primary_theme"
     tools:context=".presentation.ShoppingListFragment">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/ShoppingListToolBar"
+        android:id="@+id/HomeInventoryToolBar"
         android:layout_width="0dp"
         android:layout_height="80dp"
         android:background="@color/primary_theme"
@@ -50,7 +50,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ShoppingListToolBar">
+        app:layout_constraintTop_toBottomOf="@+id/HomeInventoryToolBar">
 
         <TableRow>
 
