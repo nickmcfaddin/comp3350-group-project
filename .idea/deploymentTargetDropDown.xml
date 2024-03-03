@@ -2,10 +2,7 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
-      <entry key="SearchFragmentTest">
-        <State />
-      </entry>
-      <entry key="ShoppingListFragmentTest">
+      <entry key="AllAcceptanceTests">
         <State />
       </entry>
       <entry key="app">
@@ -16,12 +13,12 @@
               <deviceKey>
                 <Key>
                   <type value="VIRTUAL_DEVICE_PATH" />
-                  <value value="C:\Users\Leeroy Dilim\.android\avd\Pixel_Tablet_API_34.avd" />
+                  <value value="C:\Users\nrmcf\.android\avd\Pixel_Tablet_API_34.avd" />
                 </Key>
               </deviceKey>
             </Target>
           </targetSelectedWithDropDown>
-          <timeTargetWasSelectedWithDropDown value="2024-02-27T22:54:00.497971400Z" />
+          <timeTargetWasSelectedWithDropDown value="2024-02-28T17:22:18.474356800Z" />
         </State>
       </entry>
     </value>

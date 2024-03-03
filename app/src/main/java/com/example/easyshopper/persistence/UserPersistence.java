@@ -7,7 +7,7 @@ import java.util.List;
 public interface UserPersistence {
     User getUserByName(String name);
 
-    User getUserById(int Id);
+    User getUserById(String Id);
 
     List<User> getExistingUsers();
 }

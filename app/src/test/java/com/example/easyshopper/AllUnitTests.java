@@ -1,8 +1,12 @@
 package com.example.easyshopper;
 
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
+
 import com.example.easyshopper.business.ProductHandlerTest;
 import com.example.easyshopper.business.ShoppingListHandlerTest;
 import com.example.easyshopper.business.StoreHandlerTest;
+import com.example.easyshopper.business.HomeInventoryHandlerTest;
 import com.example.easyshopper.objects.HomeProductTest;
 import com.example.easyshopper.objects.PriceTest;
 import com.example.easyshopper.objects.ProductTest;
@@ -11,9 +15,6 @@ import com.example.easyshopper.objects.ShoppingListUnitTest;
 import com.example.easyshopper.objects.StoreTest;
 import com.example.easyshopper.objects.UserTest;
 
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
-
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
 
@@ -21,6 +22,7 @@ import org.junit.runners.Suite;
         ProductHandlerTest.class,
         ShoppingListHandlerTest.class,
         StoreHandlerTest.class,
+        HomeInventoryHandlerTest.class,
 
         //Object Tests
         PriceTest.class,
