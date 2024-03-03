@@ -15,7 +15,7 @@ public class ProductTest {
         System.out.println("\nStarting testCreateAProduct");
 
         //Create Product to use for tests
-        Product product = new Product(100, "Eggs", 0.3, 5, 0.8);
+        Product product = new Product(100, "Eggs", 0.3, 5, 0.8, 1);
 
         //Tests all GETTER methods
         assertNotNull(product);
@@ -31,6 +31,7 @@ public class ProductTest {
          */
         assertEquals(25.9, product.getCalories(), 0.00001);
 
+        assertEquals("Eggs", product.toString());
 
         System.out.println("Finished testCreateAProduct");
     }

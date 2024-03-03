@@ -22,6 +22,7 @@ public class PriceTest {
         assertEquals(13, price.getStoreID());
         assertEquals(13, price.getProductID());
         assertEquals(2.99, price.getPrice(), 0.00001);
+        assertEquals("$2.99", price.getPriceFormatted());
 
         System.out.println("Finished testCreateAPrice");
 

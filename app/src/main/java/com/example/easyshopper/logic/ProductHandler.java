@@ -12,10 +12,13 @@ import java.util.Comparator;
 import java.util.List;
 
 public class ProductHandler implements Serializable {
-    private ProductPersistence productPersistence = Services.getProductPersistence();
-    private PricePersistence pricePersistence = Services.getPricePersistence();
+    private ProductPersistence productPersistence;
+    private PricePersistence pricePersistence;
 
-    public ProductHandler() {}
+    public ProductHandler(boolean forProduction) {
+        productPersistence = Services.getProductPersistence(forProduction);
+        pricePersistence = Services.getPricePersistence(forProduction);
+    }
 
     /*
      * method searches a list for Product and returns the name, or returns null

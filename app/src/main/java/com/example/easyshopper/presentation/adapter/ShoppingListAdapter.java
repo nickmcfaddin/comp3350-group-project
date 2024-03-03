@@ -90,7 +90,7 @@ public class ShoppingListAdapter extends BaseExpandableListAdapter implements Dy
         TextView shoppingListPriceView = convertView.findViewById(R.id.shopping_list_price);
 
         shoppingListTitleView.setText(shoppingListTitle);
-        shoppingListPriceView.setText("$" + shoppingListHandler.getCartTotal(shoppingList));
+        shoppingListPriceView.setText("$" + String.format("%.2f",shoppingListHandler.getCartTotal(shoppingList)));
 
         return convertView;
     }
@@ -101,7 +101,7 @@ public class ShoppingListAdapter extends BaseExpandableListAdapter implements Dy
         final ShoppingList shoppingList = (ShoppingList) getGroup(groupPosition);
         final Product product = (Product) getChild(groupPosition,childPosition);
         final Store store = shoppingList.getStore();
-        String price = "$" + productHandler.getPriceOfProductInStore(product, store);
+        String price = "$" + String.format("%.2f",productHandler.getPriceOfProductInStore(product, store));
 
         if(convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
