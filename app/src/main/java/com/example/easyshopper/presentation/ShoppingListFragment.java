@@ -1,6 +1,5 @@
 package com.example.easyshopper.presentation;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.os.Bundle;
 
@@ -11,27 +10,17 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
-import android.widget.Button;
-import android.widget.CheckedTextView;
 import android.widget.ExpandableListView;
 import android.widget.ImageButton;
-import android.widget.ListView;
 import android.widget.PopupMenu;
-import android.widget.TextView;
 
 import com.example.easyshopper.R;
 import com.example.easyshopper.logic.ProductHandler;
 import com.example.easyshopper.logic.ShoppingListHandler;
 import com.example.easyshopper.logic.StoreHandler;
-import com.example.easyshopper.objects.Product;
 import com.example.easyshopper.objects.ShoppingList;
-import com.example.easyshopper.objects.Store;
 import com.example.easyshopper.presentation.adapter.ShoppingListAdapter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ShoppingListFragment extends Fragment {
@@ -40,7 +29,7 @@ public class ShoppingListFragment extends Fragment {
     private static final String STORE_HANDLER_KEY = "storeHandler";
     private static final String LIST_HANDLER_KEY = "shoppingListHandler";
 
-    private Dialog dialog;
+    private ListDialog listDialog;
 
     private StoreHandler storeHandler;
     private ProductHandler productHandler;
@@ -110,7 +99,7 @@ public class ShoppingListFragment extends Fragment {
         shoppingListView.setAdapter(shoppingListAdapter);
 
         //allow for dialogs to be displayed in this class
-        dialog = new Dialog(getContext(),productHandler,shoppingListHandler,storeHandler,shoppingListAdapter);
+        listDialog = new ListDialog(getContext(), shoppingListHandler,storeHandler,shoppingListAdapter);
 
         //set behaviour for button
         ImageButton addButton = rootView.findViewById(R.id.addButton);
@@ -125,11 +114,11 @@ public class ShoppingListFragment extends Fragment {
                     @Override
                     public boolean onMenuItemClick(MenuItem menuItem) {
                         if (menuItem.getItemId() == R.id.addProduct) {
-                            dialog.addProductDialog();
+                            listDialog.chooseProductsDialog(productHandler.getAllProducts());
                         } else if (menuItem.getItemId() == R.id.createList) {
-                            dialog.createListDialog();
+                            listDialog.createListDialog();
                         } else if (menuItem.getItemId() == R.id.deleteList) {
-                            dialog.deleteListDialog();
+                            listDialog.deleteListDialog();
                         }
                         return true;
                     }

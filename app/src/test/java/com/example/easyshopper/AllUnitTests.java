@@ -1,11 +1,5 @@
 package com.example.easyshopper;
 
-<<<<<<< app/src/test/java/com/example/easyshopper/AllUnitTests.java
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
-
-=======
->>>>>>> app/src/test/java/com/example/easyshopper/AllUnitTests.java
 import com.example.easyshopper.business.ProductHandlerTest;
 import com.example.easyshopper.business.ShoppingListHandlerTest;
 import com.example.easyshopper.business.StoreHandlerTest;

@@ -10,11 +10,9 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckedTextView;
 import android.widget.ListView;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.easyshopper.R;
-import com.example.easyshopper.logic.ProductHandler;
 import com.example.easyshopper.logic.ShoppingListHandler;
 import com.example.easyshopper.logic.StoreHandler;
 import com.example.easyshopper.objects.Product;
@@ -25,34 +23,28 @@ import com.example.easyshopper.presentation.adapter.DynamicListAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Dialog {
+public class ListDialog {
     private Context context;
-    private ProductHandler productHandler;
     private ShoppingListHandler shoppingListHandler;
     private StoreHandler storeHandler;
     private DynamicListAdapter dynamicListAdapter;
 
-    public Dialog(Context context, ProductHandler productHandler, ShoppingListHandler shoppingListHandler, StoreHandler storeHandler) {
+    public ListDialog(Context context, ShoppingListHandler shoppingListHandler, StoreHandler storeHandler) {
         this.context = context;
-        this.productHandler = productHandler;
         this.shoppingListHandler = shoppingListHandler;
         this.storeHandler = storeHandler;
         dynamicListAdapter = null;
     }
 
-    public Dialog(Context context, ProductHandler productHandler, ShoppingListHandler shoppingListHandler, StoreHandler storeHandler, DynamicListAdapter dynamicListAdapter) {
+    public ListDialog(Context context, ShoppingListHandler shoppingListHandler, StoreHandler storeHandler, DynamicListAdapter dynamicListAdapter) {
         this.context = context;
-        this.productHandler = productHandler;
         this.shoppingListHandler = shoppingListHandler;
         this.storeHandler = storeHandler;
         this.dynamicListAdapter = dynamicListAdapter;
     }
 
     //show a prompt asking the user what products they would like added to their lists
-    public void addProductDialog() {
-        //get list of products to show
-        List<Product> productList = productHandler.getAllProducts();
-
+    public void chooseProductsDialog(List<Product> productList) {
         //Create alert and link it to our custom dialog
         AlertDialog.Builder alert = new AlertDialog.Builder(context);
         View dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_multiple_choice, null);
