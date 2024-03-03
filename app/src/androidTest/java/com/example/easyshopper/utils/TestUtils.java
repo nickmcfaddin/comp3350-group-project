@@ -15,8 +15,7 @@ public class TestUtils {
     private ShoppingListHandler shoppingListHandler;
     private StoreHandler storeHandler;
 
-    public TestUtils(){
-        boolean forProduction = false;
+    public TestUtils(boolean forProduction){
         productHandler = new ProductHandler(forProduction);
         shoppingListHandler = new ShoppingListHandler(forProduction);
         storeHandler = new StoreHandler(forProduction);

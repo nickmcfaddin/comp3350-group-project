@@ -32,6 +32,10 @@ public class MainActivity extends AppCompatActivity {
     private ShoppingListHandler shoppingListHandler;
     private HomeInventoryHandler homeInventoryHandler;
 
+    public void setForProduction(boolean forProduction) {
+        this.forProduction = forProduction;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

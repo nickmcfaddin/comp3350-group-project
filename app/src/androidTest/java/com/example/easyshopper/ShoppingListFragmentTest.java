@@ -30,15 +30,13 @@ import com.example.easyshopper.objects.Product;
 
 import com.example.easyshopper.objects.ShoppingList;
 import com.example.easyshopper.objects.Store;
-import com.example.easyshopper.presentation.MainActivity;
+import com.example.easyshopper.presentation.TestStubDBMainActivity;
 import com.example.easyshopper.utils.TestUtils;
 
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
-import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(AndroidJUnit4.class)
@@ -48,12 +46,12 @@ public class ShoppingListFragmentTest {
     private final int sleepTime = 500;
 
     @Rule
-    public ActivityScenarioRule<MainActivity> activityScenarioRule = new ActivityScenarioRule<>(MainActivity.class);
+    public ActivityScenarioRule<TestStubDBMainActivity> activityScenarioRule = new ActivityScenarioRule<>(TestStubDBMainActivity.class);
     private TestUtils testUtils;
 
     @Before
     public void setUp() {
-        testUtils = new TestUtils();
+        testUtils = new TestUtils(false);
     }
 
     @Test
@@ -94,7 +92,7 @@ public class ShoppingListFragmentTest {
 
             for (int i = 0; i < adapter.getGroupCount(); i++) {
                 // get the product cart for shopping list
-                ArrayList<Product> shoppingListCart = allShoppingList.get(i).getItemList();
+                List<Product> shoppingListCart = allShoppingList.get(i).getCart();
 
                 // get the shopping cart view
                 View parentView = adapter.getGroupView(i, false, null, expandableListView);
