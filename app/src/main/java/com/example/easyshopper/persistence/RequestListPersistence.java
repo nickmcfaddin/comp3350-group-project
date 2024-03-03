@@ -1,6 +1,7 @@
 package com.example.easyshopper.persistence;
 
 import com.example.easyshopper.objects.RequestList;
+<<<<<<< HEAD
 import com.example.easyshopper.objects.User;
 
 import java.util.List;
@@ -24,5 +25,10 @@ public interface RequestListPersistence {
     boolean requestListExists(RequestList queryList);
 
     boolean listWithUserExists(User queryUser);
+=======
+
+public interface RequestListPersistence {
+    RequestList getRequestList();
+>>>>>>> c962722 (user profile classes, requestlist class and persistence about these)
 
 }
