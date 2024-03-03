@@ -8,6 +8,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class StoreHandlerTest {
+    private boolean forProduction = false;
+
     @Before
     public void setup(){
         System.out.println("Start test StoreHandler");
@@ -15,13 +17,13 @@ public class StoreHandlerTest {
 
     @Test
     public void testGetStoreByID() {
-        StoreHandler temp = new StoreHandler();
+        StoreHandler temp = new StoreHandler(forProduction);
         assertEquals("Costco",temp.getStoreById(1).getStoreName());
     }
 
     @Test
     public void testGetExistingStores(){
-        StoreHandler temp = new StoreHandler();
+        StoreHandler temp = new StoreHandler(forProduction);
         assertEquals(3, temp.getExistingStores().size());
     }
 }

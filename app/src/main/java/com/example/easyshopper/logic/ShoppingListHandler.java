@@ -13,11 +13,14 @@ import java.util.List;
 
 //Handles the shopping lists
 public class ShoppingListHandler implements Serializable {
-    private ShoppingListPersistence shoppingListPersistence = Services.getShoppingListPersistence();
-    private PricePersistence pricePersistence = Services.getPricePersistence();
+    private ShoppingListPersistence shoppingListPersistence;
+    private PricePersistence pricePersistence;
 
     //constructor
-    public ShoppingListHandler(){}
+    public ShoppingListHandler(boolean forProduction){
+        shoppingListPersistence = Services.getShoppingListPersistence(forProduction);
+        pricePersistence = Services.getPricePersistence(forProduction);
+    }
 
     public List<ShoppingList> getAllShoppingLists(){
         return shoppingListPersistence.getExistingShoppingLists();

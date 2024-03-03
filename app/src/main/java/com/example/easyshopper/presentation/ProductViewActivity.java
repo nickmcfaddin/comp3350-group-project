@@ -17,6 +17,7 @@ import com.example.easyshopper.objects.Price;
 import com.example.easyshopper.objects.Product;
 import com.example.easyshopper.presentation.adapter.ItemPopupAdapter;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class ProductViewActivity extends AppCompatActivity {
@@ -48,6 +49,12 @@ public class ProductViewActivity extends AppCompatActivity {
         Product product = productHandler.getProductByID(productID);
         String name = product.getProductName();
         double calories = product.getCalories();
+
+        // Create a DecimalFormat object with the desired format
+        DecimalFormat df = new DecimalFormat("#.#");
+        // Format the calories value to have a maximum of two decimal places
+        String formattedCalories = df.format(calories);
+
         double fat = product.getFat();
         double carbs = product.getCarb();
         double protein = product.getProtein();
@@ -69,7 +76,7 @@ public class ProductViewActivity extends AppCompatActivity {
 
         // set product nutritional facts
         nameTextView.setText(name);
-        caloriesTextView.setText("Calories: " + calories);
+        caloriesTextView.setText("Calories: " + formattedCalories);
         fatTextView.setText("Fat: " + fat + "g");
         carbsTextView.setText("Carbs: " + carbs + "g");
         proteinTextView.setText("Protein: " + protein + "g");

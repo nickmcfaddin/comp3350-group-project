@@ -2,16 +2,24 @@ package com.example.easyshopper.objects;
 
 import androidx.annotation.NonNull;
 
-public class User{
-    private String userName;
-    private int userID;
+import java.io.Serializable;
+import java.util.UUID;
 
-    public User(String userName, int userID){
+public class User implements Serializable {
+    private String userName;
+    private String userID;
+
+    public User(String userName){
+        this.userName = userName;
+        this.userID = UUID.randomUUID().toString();
+    }
+
+    public User(String userName, String userID){
         this.userName = userName;
         this.userID = userID;
     }
 
-    public int getUserID(){return userID;}
+    public String getUserID(){return userID;}
 
     public void setUserName(String newName){this.userName = newName;}
 
@@ -20,4 +28,5 @@ public class User{
     @NonNull
     @Override
     public String toString() {return userName;}
+
 }

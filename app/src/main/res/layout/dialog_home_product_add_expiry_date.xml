@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingHorizontal="20dp"
+    android:paddingVertical="15dp"
+    android:background="@color/primary_theme"
+    android:backgroundTint="#0DFFFFFF"
+    android:layout_marginHorizontal="350dp">
+
+    <TextView
+        android:id="@+id/add_expiry_date_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/inter_semibold"
+        android:text="Add Product Expiry Date"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/add_expiry_date_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/add_expiry_date_title"
+        android:fontFamily="@font/inter_semibold"
+        android:hint="Enter your product's expiry date in the format YYYY-MM-DD" />
+
+    <TextView
+        android:id="@+id/add_expiry_date_invalid_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/add_expiry_date_input"
+        android:fontFamily="@font/inter_semibold"
+        android:text="Invalid input. Please double-check and re-enter your input. \nExample input: 2024-01-01"
+        android:textSize="15sp"
+        android:visibility="gone"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/cancel_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/add_expiry_date_invalid_message"
+        android:layout_marginTop="20sp"
+        android:layout_alignParentStart="true"
+        android:fontFamily="@font/inter_semibold"
+        android:background="@color/secondary_theme"
+        android:textColor="@color/primary_theme"
+        android:text="Cancel">
+    </androidx.appcompat.widget.AppCompatButton>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/confirm_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/add_expiry_date_invalid_message"
+        android:layout_marginTop="20sp"
+        android:layout_alignParentEnd="true"
+        android:fontFamily="@font/inter_semibold"
+        android:background="@color/secondary_theme"
+        android:textColor="@color/primary_theme"
+        android:text="Confirm">
+    </androidx.appcompat.widget.AppCompatButton>
+
+</RelativeLayout>

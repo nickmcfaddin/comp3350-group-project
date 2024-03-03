@@ -1,5 +1,11 @@
 <resources>
     <string name="app_name">EasyShopper</string>
+    <string name="add_stock_quantity">Add Stock Quantity</string>
+    <string name="remove_stock_quantity">Remove Stock Quantity</string>
+    <string name="add_desired_quantity">Add Desired Quantity</string>
+    <string name="remove_desired_quantity">Remove Desired Quantity</string>
+    <string name="sort_button">Sort Home Product Inventory</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

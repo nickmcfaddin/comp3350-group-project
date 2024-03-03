@@ -8,9 +8,11 @@ import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 
 import com.example.easyshopper.R;
+import com.example.easyshopper.logic.HomeInventoryHandler;
 import com.example.easyshopper.logic.ProductHandler;
 import com.example.easyshopper.logic.ShoppingListHandler;
 import com.example.easyshopper.logic.StoreHandler;
+import com.example.easyshopper.persistence.utils.DBHelper;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -18,24 +20,36 @@ public class MainActivity extends AppCompatActivity {
     private static final String PRODUCT_HANDLER_KEY = "productHandler";
     private static final String STORE_HANDLER_KEY = "storeHandler";
     private static final String LIST_HANDLER_KEY = "shoppingListHandler";
+    private static final String HOME_INVENTORY_HANDLER_KEY = "homeInventoryHandler";
 
     //id of currentFragment that is being displayed
     int currentFragment;
 
     //get handlers
-    private ProductHandler productHandler = new ProductHandler();
-    private StoreHandler storeHandler = new StoreHandler();
-    private ShoppingListHandler shoppingListHandler = new ShoppingListHandler();
+    private boolean forProduction = true;
+    private ProductHandler productHandler;
+    private StoreHandler storeHandler;
+    private ShoppingListHandler shoppingListHandler;
+    private HomeInventoryHandler homeInventoryHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        DBHelper.copyDatabaseToDevice(this);
+
         if (savedInstanceState != null) {
             productHandler = (ProductHandler) savedInstanceState.getSerializable(PRODUCT_HANDLER_KEY);
             storeHandler = (StoreHandler) savedInstanceState.getSerializable(STORE_HANDLER_KEY);
             shoppingListHandler = (ShoppingListHandler) savedInstanceState.getSerializable(LIST_HANDLER_KEY);
+            homeInventoryHandler = (HomeInventoryHandler) savedInstanceState.getSerializable(HOME_INVENTORY_HANDLER_KEY);
+        }
+        else {
+            productHandler = new ProductHandler(forProduction);
+            storeHandler = new StoreHandler(forProduction);
+            shoppingListHandler = new ShoppingListHandler(forProduction);
+            homeInventoryHandler = new HomeInventoryHandler(forProduction);
         }
 
         initComponents();
@@ -46,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
         outState.putSerializable(PRODUCT_HANDLER_KEY, productHandler);
         outState.putSerializable(STORE_HANDLER_KEY, storeHandler);
         outState.putSerializable(LIST_HANDLER_KEY, shoppingListHandler);
+        outState.putSerializable(HOME_INVENTORY_HANDLER_KEY, homeInventoryHandler);
         super.onSaveInstanceState(outState);
     }
 
@@ -53,6 +68,8 @@ public class MainActivity extends AppCompatActivity {
         //get and init components
         ShoppingListFragment shoppingListFragment = ShoppingListFragment.newInstance(productHandler, storeHandler, shoppingListHandler);
         SearchFragment searchFragment = SearchFragment.newInstance(productHandler, storeHandler);
+        InventoryFragment inventoryFragment = InventoryFragment.newInstance(homeInventoryHandler);
+        UserRequestFragment userRequestFragment = new UserRequestFragment();
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
 
         //On startup, the Shopping List fragment is displayed
@@ -72,22 +89,41 @@ public class MainActivity extends AppCompatActivity {
 
             //display the fragment requested by the user
             if (itemId == R.id.shoppingList) {
+                // Shopping List
                 replaceFragment(shoppingListFragment);
 
                 //Update Icons
                 item.setIcon(R.drawable.icon_paper_fill);
                 bottomNavigationView.getMenu().getItem(1).setIcon(R.drawable.icon_home_line);
-                bottomNavigationView.getMenu().getItem(2).setIcon(R.drawable.icon_search_line);
-            } else if (itemId == R.id.search) {
-                replaceFragment(searchFragment);
-
-                //display the list that was previously searched by the user
-                //searchFragment.setBusStops(busStopsList);
+                bottomNavigationView.getMenu().getItem(2).setIcon(R.drawable.icon_request_line);
+                bottomNavigationView.getMenu().getItem(3).setIcon(R.drawable.icon_search_line);
+            } else if (itemId == R.id.homeInventory) {
+                // Home Inventory
+                replaceFragment(inventoryFragment);
 
                 //Update Icons
-                item.setIcon(R.drawable.icon_search_fill);
+                bottomNavigationView.getMenu().getItem(0).setIcon(R.drawable.icon_paper_line);
+                item.setIcon(R.drawable.icon_home_fill);
+                bottomNavigationView.getMenu().getItem(2).setIcon(R.drawable.icon_request_line);
+                bottomNavigationView.getMenu().getItem(3).setIcon(R.drawable.icon_search_line);
+            } else if (itemId == R.id.userRequest) {
+                // User Request
+                replaceFragment(userRequestFragment);
+
+                //Update Icons
                 bottomNavigationView.getMenu().getItem(0).setIcon(R.drawable.icon_paper_line);
                 bottomNavigationView.getMenu().getItem(1).setIcon(R.drawable.icon_home_line);
+                item.setIcon(R.drawable.icon_request_fill);
+                bottomNavigationView.getMenu().getItem(3).setIcon(R.drawable.icon_search_line);
+            } else if (itemId == R.id.search) {
+                // Search
+                replaceFragment(searchFragment);
+
+                // Update Icons
+                bottomNavigationView.getMenu().getItem(0).setIcon(R.drawable.icon_paper_line);
+                bottomNavigationView.getMenu().getItem(1).setIcon(R.drawable.icon_home_line);
+                bottomNavigationView.getMenu().getItem(2).setIcon(R.drawable.icon_request_line);
+                item.setIcon(R.drawable.icon_search_fill);
             }
 
             return true;

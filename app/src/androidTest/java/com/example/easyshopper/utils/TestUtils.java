@@ -16,9 +16,10 @@ public class TestUtils {
     private StoreHandler storeHandler;
 
     public TestUtils(){
-        productHandler = new ProductHandler();
-        shoppingListHandler = new ShoppingListHandler();
-        storeHandler = new StoreHandler();
+        boolean forProduction = false;
+        productHandler = new ProductHandler(forProduction);
+        shoppingListHandler = new ShoppingListHandler(forProduction);
+        storeHandler = new StoreHandler(forProduction);
     }
 
     //ProductHandler implementations

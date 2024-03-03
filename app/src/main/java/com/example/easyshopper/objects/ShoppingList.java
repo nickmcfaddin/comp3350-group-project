@@ -3,63 +3,32 @@ package com.example.easyshopper.objects;
 import androidx.annotation.NonNull;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.UUID;
 import java.util.ArrayList;
 
 //List is created per store, products added to list
-public class ShoppingList implements Serializable {
-    private String shoppingListID;
-    private ArrayList<Product> cart;
+public class ShoppingList extends ProductList {
     private Store store;
 
     //Constructor
     public ShoppingList(Store store){
-        this.shoppingListID = UUID.randomUUID().toString();
+        super();
         this.store = store;
-        this.cart = new ArrayList<>(); //Cart represents the items in the ShoppingList
+    }
+
+    //Not included in unit testing as this is pulling from the db
+    public ShoppingList(String listID, List<Product> cart, Store store){
+        super(listID, cart);
+        this.store = store;
     }
 
     // GETTERS
-
     public String getShoppingListName() {
         return store.getStoreName();
     }
 
-    public ArrayList<Product> getCart() {
-        return cart;
-    }
-
     public Store getStore(){return store;}
-
-    public String getShoppingListID() {return shoppingListID;}
-
-    public ArrayList<Product> getItemList(){
-        return cart;
-    }
-
-    //Check if the Product is in this ShoppingList
-    public boolean checkForProductInCart (Product product) {
-        for(Product i : cart){
-            if(i.getProductID() == product.getProductID())
-                return true;
-        }
-
-        return false;
-    }
-
-    //Adds Product to the ShoppingList
-    public void addProductToCart(Product product){
-        if(!checkForProductInCart(product)) {
-            cart.add(product);
-        }
-    }
-
-    //Removes Product from ShoppingList
-    public void removeProductFromCart(Product product){
-        if(checkForProductInCart(product)) {
-            cart.remove(product);
-        }
-    }
 
     @NonNull
     @Override

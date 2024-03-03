@@ -14,11 +14,11 @@ public class UserPersistenceStub implements UserPersistence{
     public UserPersistenceStub(){
         this.userList = new ArrayList<>();
 
-        userList.add(new User("Jack", 1));
-        userList.add(new User("Child1", 2));
-        userList.add(new User("Child2", 3));
-        userList.add(new User("Child3", 4));
-        userList.add(new User("Child4", 5));
+        userList.add(new User("Jack"));
+        userList.add(new User("Child1"));
+        userList.add(new User("Child2"));
+        userList.add(new User("Child3"));
+        userList.add(new User("Child4"));
     }
 
     @Override
@@ -32,9 +32,9 @@ public class UserPersistenceStub implements UserPersistence{
     }
 
     @Override
-    public User getUserById(int Id) {
+    public User getUserById(String Id) {
         for(User i : userList){
-            if(i.getUserID() == Id){
+            if(i.getUserID().equals(Id)){
                 return i;
             }
         }

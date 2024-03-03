@@ -11,6 +11,7 @@ import com.example.easyshopper.objects.Price;
 import com.example.easyshopper.objects.Product;
 import com.example.easyshopper.objects.Store;
 import com.example.easyshopper.persistence.ProductPersistence;
+import com.example.easyshopper.persistence.stub.ProductPersistenceStub;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -26,8 +27,10 @@ public class ProductHandlerTest {
     @Before
     public void setup() {
         System.out.println("Starting test for ProductHandler");
-        productHandler = new ProductHandler();
-        storeHandler = new StoreHandler();
+        boolean forProduction = false;
+
+        productHandler = new ProductHandler(forProduction);
+        storeHandler = new StoreHandler(forProduction);
     }
 
     @Test
@@ -62,7 +65,7 @@ public class ProductHandlerTest {
     public void testAllStoreSortedPrice(){
         System.out.println("\nStarting testing testAllStoreSortedPrice");
 
-        ProductPersistence productPersistence = Services.getProductPersistence();
+        ProductPersistence productPersistence = new ProductPersistenceStub();
         Product product = productPersistence.getProductById(1);
         assertEquals("Apple", product.getProductName());
 

@@ -18,7 +18,7 @@ import com.example.easyshopper.objects.Store;
 
 import java.util.List;
 
-public class ShoppingListAdapter extends BaseExpandableListAdapter  {
+public class ShoppingListAdapter extends BaseExpandableListAdapter implements DynamicListAdapter  {
     private Context context;
     private List<ShoppingList> shoppingLists;
     private ProductHandler productHandler;
@@ -29,12 +29,6 @@ public class ShoppingListAdapter extends BaseExpandableListAdapter  {
         this.shoppingLists = shoppingLists;
         this.productHandler = productHandler;
         this.shoppingListHandler = shoppingListHandler;
-    }
-
-    //update from an outer sources
-    public void updateData(List<ShoppingList> shoppingLists) {
-        this.shoppingLists = shoppingLists;
-        notifyDataSetChanged();
     }
 
     //update from internal sources
@@ -96,7 +90,7 @@ public class ShoppingListAdapter extends BaseExpandableListAdapter  {
         TextView shoppingListPriceView = convertView.findViewById(R.id.shopping_list_price);
 
         shoppingListTitleView.setText(shoppingListTitle);
-        shoppingListPriceView.setText("$" + shoppingListHandler.getCartTotal(shoppingList));
+        shoppingListPriceView.setText("$" + String.format("%.2f",shoppingListHandler.getCartTotal(shoppingList)));
 
         return convertView;
     }
@@ -107,7 +101,7 @@ public class ShoppingListAdapter extends BaseExpandableListAdapter  {
         final ShoppingList shoppingList = (ShoppingList) getGroup(groupPosition);
         final Product product = (Product) getChild(groupPosition,childPosition);
         final Store store = shoppingList.getStore();
-        String price = "$" + productHandler.getPriceOfProductInStore(product, store);
+        String price = "$" + String.format("%.2f",productHandler.getPriceOfProductInStore(product, store));
 
         if(convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
