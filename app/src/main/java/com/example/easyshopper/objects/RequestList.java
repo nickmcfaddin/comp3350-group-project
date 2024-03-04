@@ -12,6 +12,7 @@ public class RequestList extends ProductList {
         this.user = user;
     }
 
+    //Not included in testing
     public RequestList(String listID, List<Product> cart, User user){
         super(listID, cart);
         this.user = user;
