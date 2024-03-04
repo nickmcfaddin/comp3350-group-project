@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.fail;
 
-import com.example.easyshopper.application.Services;
 import com.example.easyshopper.logic.ProductHandler;
 import com.example.easyshopper.logic.StoreHandler;
 import com.example.easyshopper.objects.Price;
