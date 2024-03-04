@@ -94,7 +94,7 @@ public class ShoppingListFragmentTest {
 
             for (int i = 0; i < adapter.getGroupCount(); i++) {
                 // get the product cart for shopping list
-                ArrayList<Product> shoppingListCart = allShoppingList.get(i).getItemList();
+                List<Product> shoppingListCart = allShoppingList.get(i).getCart();
 
                 // get the shopping cart view
                 View parentView = adapter.getGroupView(i, false, null, expandableListView);
