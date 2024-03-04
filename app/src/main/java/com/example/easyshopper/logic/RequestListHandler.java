@@ -2,17 +2,12 @@ package com.example.easyshopper.logic;
 
 import com.example.easyshopper.application.Services;
 import com.example.easyshopper.objects.Product;
-import com.example.easyshopper.objects.ProductList;
 import com.example.easyshopper.objects.RequestList;
-import com.example.easyshopper.objects.ShoppingList;
 import com.example.easyshopper.objects.User;
 import com.example.easyshopper.persistence.RequestListPersistence;
-import com.example.easyshopper.persistence.ShoppingListPersistence;
-
 
 import java.io.Serializable;
 import java.util.List;
-
 
 public class RequestListHandler implements Serializable {
     private static RequestListPersistence requestListPersistence;
