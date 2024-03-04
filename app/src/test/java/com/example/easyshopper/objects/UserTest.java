@@ -8,24 +8,25 @@ import org.junit.Test;
 
 public class UserTest {
 
+    //Setup variables
+    User user;
+
     @Before
-    public void setup() {System.out.println("Starting test for User.class");
+    public void setup() {
+        System.out.println("Starting test for User.class");
+
+        user = new User("Jack");
     }
 
     @Test
-    public void testCreateAProduct() {
-        System.out.println("\nStarting testCreateAUser");
-
-        //Create Product to use for tests
-        User user = new User("Jack");
-
-        //Tests all GETTER methods
+    public void testGetUserName() {
         assertNotNull(user);
         assertEquals("Jack", user.getUserName());
+    }
 
+    @Test
+    public void testSetUserName() {
         user.setUserName("John");
         assertEquals("John", user.getUserName());
-
-        System.out.println("Finished testCreateAUser");
     }
 }
