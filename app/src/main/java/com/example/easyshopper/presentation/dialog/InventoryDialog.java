@@ -1,4 +1,4 @@
-package com.example.easyshopper.presentation;
+package com.example.easyshopper.presentation.dialog;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -25,19 +25,16 @@ import java.util.regex.Pattern;
 
 public class InventoryDialog {
     private Context context;
-    private HomeInventoryHandler homeInventoryHandler;
-
-    public InventoryDialog(Context context, HomeInventoryHandler homeInventoryHandler) {
+    public InventoryDialog(Context context) {
         this.context = context;
-        this.homeInventoryHandler = homeInventoryHandler;
     }
 
     @SuppressLint("SetTextI18n")
     public void showHomeProductExpiryDate(HomeProduct homeProduct){
         //get all expiry date of products to show
-        List<String> expiryDates = homeInventoryHandler.getHomeProductExpiryDates(homeProduct);
-        List<String> expiryDateSortedAscending = homeInventoryHandler.getHomeProductSortedExpiryDatesAscending(homeProduct);
-        List<String> expiryDateSortedDescending = homeInventoryHandler.getHomeProductSortedExpiryDatesDescending(homeProduct);
+        List<String> expiryDates = HomeInventoryHandler.getHomeProductExpiryDates(homeProduct);
+        List<String> expiryDateSortedAscending = HomeInventoryHandler.getHomeProductSortedExpiryDatesAscending(homeProduct);
+        List<String> expiryDateSortedDescending = HomeInventoryHandler.getHomeProductSortedExpiryDatesDescending(homeProduct);
 
         //Create alert and link it to our custom dialog
         AlertDialog.Builder alert = new AlertDialog.Builder(context);

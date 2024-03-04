@@ -35,7 +35,8 @@
         android:background="@color/secondary_theme"
         android:fontFamily="@font/inter_semibold"
         android:text="CANCEL"
-        android:textColor="@color/primary_theme"></androidx.appcompat.widget.AppCompatButton>
+        android:textColor="@color/primary_theme">
+    </androidx.appcompat.widget.AppCompatButton>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/submit_btn"
@@ -46,6 +47,7 @@
         android:background="@color/secondary_theme"
         android:fontFamily="@font/inter_semibold"
         android:text="SUBMIT"
-        android:textColor="@color/primary_theme"></androidx.appcompat.widget.AppCompatButton>
+        android:textColor="@color/primary_theme">
+    </androidx.appcompat.widget.AppCompatButton>
 
 </RelativeLayout>

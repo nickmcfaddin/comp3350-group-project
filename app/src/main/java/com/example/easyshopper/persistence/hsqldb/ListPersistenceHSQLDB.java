@@ -63,8 +63,12 @@ public class ListPersistenceHSQLDB implements Serializable {
                 List<Product> cart = loadCart(listID, connection);
 
                 // Determine if it's a shopping list or a user list
-                // based on whether StoreID is null or not
-                if (storeID == -1) {
+                // based on whether userID is null or not
+                if (!resultSet.wasNull()) {
+                    if(userPersistenceHSQLDB.getUserById(userID) == null) {
+                        User user = userPersistenceHSQLDB.getUserById(userID);
+
+                    }
                     User user = userPersistenceHSQLDB.getUserById(userID);
 
                     productList = new RequestList(listID, cart, user);
@@ -127,7 +131,7 @@ public class ListPersistenceHSQLDB implements Serializable {
                 statement.setInt(2,((ShoppingList) productList).getStore().getStoreID());
             } else if (productList instanceof RequestList){
                 statement.setString(1,((RequestList) productList).getUser().getUserID());
-                statement.setInt(2, -1);
+                statement.setNull(2, java.sql.Types.INTEGER); // Set StoreID to NULL
             }
 
             statement.executeUpdate();
@@ -140,7 +144,7 @@ public class ListPersistenceHSQLDB implements Serializable {
                 statement = connection.prepareStatement("INSERT INTO CONTAINS VALUES(?,?,0)");
                 statement.setString(1, productList.getListID());
                 statement.setInt(2, product.getProductID());
-                Log.i("a", statement.toString());
+
                 statement.executeUpdate();
             }
 
@@ -170,7 +174,7 @@ public class ListPersistenceHSQLDB implements Serializable {
                 statement.setInt(2,((ShoppingList) productList).getStore().getStoreID());
             } else if (productList instanceof RequestList){
                 statement.setString(3,((RequestList) productList).getUser().getUserID());
-                statement.setInt(2, -1);
+                statement.setNull(2, java.sql.Types.INTEGER); // Set StoreID to NULL
             }
 
             statement.executeUpdate();

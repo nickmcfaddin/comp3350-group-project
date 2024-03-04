@@ -2,14 +2,12 @@ package com.example.easyshopper.persistence.hsqldb;
 
 import android.util.Log;
 
-import com.example.easyshopper.objects.Price;
 import com.example.easyshopper.objects.Product;
 import com.example.easyshopper.persistence.ProductPersistence;
 
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;

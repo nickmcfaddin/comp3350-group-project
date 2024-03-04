@@ -1,4 +1,4 @@
-package com.example.easyshopper.presentation;
+package com.example.easyshopper.presentation.dialog;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -10,11 +10,9 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckedTextView;
 import android.widget.ListView;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.easyshopper.R;
-import com.example.easyshopper.logic.ProductHandler;
 import com.example.easyshopper.logic.ShoppingListHandler;
 import com.example.easyshopper.logic.StoreHandler;
 import com.example.easyshopper.objects.Product;
@@ -25,34 +23,17 @@ import com.example.easyshopper.presentation.adapter.DynamicListAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Dialog {
+public class ListDialog {
     private Context context;
-    private ProductHandler productHandler;
-    private ShoppingListHandler shoppingListHandler;
-    private StoreHandler storeHandler;
     private DynamicListAdapter dynamicListAdapter;
 
-    public Dialog(Context context, ProductHandler productHandler, ShoppingListHandler shoppingListHandler, StoreHandler storeHandler) {
+    public ListDialog(Context context, DynamicListAdapter dynamicListAdapter) {
         this.context = context;
-        this.productHandler = productHandler;
-        this.shoppingListHandler = shoppingListHandler;
-        this.storeHandler = storeHandler;
-        dynamicListAdapter = null;
-    }
-
-    public Dialog(Context context, ProductHandler productHandler, ShoppingListHandler shoppingListHandler, StoreHandler storeHandler, DynamicListAdapter dynamicListAdapter) {
-        this.context = context;
-        this.productHandler = productHandler;
-        this.shoppingListHandler = shoppingListHandler;
-        this.storeHandler = storeHandler;
         this.dynamicListAdapter = dynamicListAdapter;
     }
 
     //show a prompt asking the user what products they would like added to their lists
-    public void addProductDialog() {
-        //get list of products to show
-        List<Product> productList = productHandler.getAllProducts();
-
+    public void chooseProductsDialog(List<Product> productList) {
         //Create alert and link it to our custom dialog
         AlertDialog.Builder alert = new AlertDialog.Builder(context);
         View dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_multiple_choice, null);
@@ -116,7 +97,7 @@ public class Dialog {
 
     //show a prompt asking the user what lists they would like to add their products onto
     public void addProductsToListDialog(List<Product> clickedProducts) {
-        List<ShoppingList> shoppingLists = shoppingListHandler.getAllShoppingLists();
+        List<ShoppingList> shoppingLists = ShoppingListHandler.getAllShoppingLists();
 
         //Create alert and link it to our custom dialog
         AlertDialog.Builder alert = new AlertDialog.Builder(context);
@@ -161,7 +142,7 @@ public class Dialog {
                 //add clicked products to clicked shopping lists
                 for(ShoppingList shoppingList : clickedShoppingLists) {
                     for(Product product : clickedProducts) {
-                        shoppingListHandler.addItemToList(product, shoppingList);
+                        ShoppingListHandler.addItemToList(product, shoppingList);
                     }
                 }
 
@@ -196,7 +177,7 @@ public class Dialog {
         final AlertDialog alertDialog = alert.create();
 
         //get and init components
-        List<Store> storeList = storeHandler.getExistingStores();
+        List<Store> storeList = StoreHandler.getExistingStores();
         AutoCompleteTextView autoCompleteTextView = dialogView.findViewById(R.id.dropdown_field);
         ArrayAdapter<Store> listAdapter = new ArrayAdapter<>(context, android.R.layout.simple_list_item_1, storeList);
         autoCompleteTextView.setAdapter(listAdapter);
@@ -224,7 +205,7 @@ public class Dialog {
                 }
 
                 //create shopping list and update the list view
-                shoppingListHandler.createShoppingList(store);
+                ShoppingListHandler.createShoppingList(store);
 
                 //update the displayed list
                 if(dynamicListAdapter != null) {
@@ -249,7 +230,7 @@ public class Dialog {
     //show a prompt asking the user what list they'd like to delete
     public void deleteListDialog() {
         //get all existing shopping lists
-        List<ShoppingList> shoppingLists = shoppingListHandler.getAllShoppingLists();
+        List<ShoppingList> shoppingLists = ShoppingListHandler.getAllShoppingLists();
 
         //Create alert and link it to our custom dialog
         AlertDialog.Builder alert = new AlertDialog.Builder(context);
@@ -292,7 +273,7 @@ public class Dialog {
 
                 //remove shopping lists
                 for(ShoppingList shoppingList : clickedShoppingLists) {
-                    shoppingListHandler.removeShoppingList(shoppingList);
+                    ShoppingListHandler.removeShoppingList(shoppingList);
                 }
 
                 //update the displayed list

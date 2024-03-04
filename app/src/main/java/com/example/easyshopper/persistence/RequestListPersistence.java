@@ -19,8 +19,6 @@ public interface RequestListPersistence {
     //Delete a RequestList from the overall RequestList array
     void deleteRequestList(RequestList requestList);
 
-    void clearRequestList(RequestList requestList);
-
     boolean requestListExists(RequestList queryList);
 
     boolean listWithUserExists(User queryUser);

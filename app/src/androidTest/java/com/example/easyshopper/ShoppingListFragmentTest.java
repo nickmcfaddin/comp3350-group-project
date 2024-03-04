@@ -94,7 +94,7 @@ public class ShoppingListFragmentTest {
 
             for (int i = 0; i < adapter.getGroupCount(); i++) {
                 // get the product cart for shopping list
-                ArrayList<Product> shoppingListCart = allShoppingList.get(i).getItemList();
+                List<Product> shoppingListCart = allShoppingList.get(i).getCart();
 
                 // get the shopping cart view
                 View parentView = adapter.getGroupView(i, false, null, expandableListView);
@@ -105,7 +105,7 @@ public class ShoppingListFragmentTest {
                 // check if the name and price for shopping cart is correct
                 TextView shoppingCartName = parentView.findViewById(R.id.shopping_list_header_name);
                 String cartName = shoppingCartName.getText().toString();
-                String expectedCartName = allShoppingList.get(i).getShoppingListName();
+                String expectedCartName = allShoppingList.get(i).getListName();
                 assertEquals(expectedCartName, cartName);
 
                 TextView shoppingCartTotal = parentView.findViewById(R.id.shopping_list_price);

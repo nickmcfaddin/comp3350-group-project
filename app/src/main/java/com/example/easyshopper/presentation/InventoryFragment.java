@@ -20,6 +20,7 @@ import com.example.easyshopper.objects.HomeProduct;
 import com.example.easyshopper.presentation.adapter.HomeProductButtonInterface;
 import com.example.easyshopper.presentation.adapter.HomeProductHiddenAdapter;
 import com.example.easyshopper.presentation.adapter.HomeProductStockAdapter;
+import com.example.easyshopper.presentation.dialog.InventoryDialog;
 
 import java.util.List;
 
@@ -29,12 +30,6 @@ import java.util.List;
  * create an instance of this fragment.
  */
 public class InventoryFragment extends Fragment implements HomeProductButtonInterface {
-    //keys for serializable objects
-    private static final String HOME_INVENTORY_HANDLER_KEY = "homeInventoryHandler";
-
-    //communicate with the logic layer
-    private HomeInventoryHandler homeInventoryHandler;
-
     private InventoryDialog inventoryDialog;
 
     //UI components
@@ -52,26 +47,8 @@ public class InventoryFragment extends Fragment implements HomeProductButtonInte
         // Required empty public constructor
     }
 
-    public InventoryFragment(HomeInventoryHandler homeInventoryHandler) {
-        this.homeInventoryHandler = homeInventoryHandler;
-    }
-
-    public static InventoryFragment newInstance(HomeInventoryHandler homeInventoryHandler) {
-        InventoryFragment fragment = new InventoryFragment(homeInventoryHandler);
-        Bundle args = new Bundle();
-        args.putSerializable(HOME_INVENTORY_HANDLER_KEY, homeInventoryHandler);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (savedInstanceState != null) {
-            homeInventoryHandler = (HomeInventoryHandler) savedInstanceState.getSerializable(HOME_INVENTORY_HANDLER_KEY);
-        } else if (getArguments() != null) {
-            homeInventoryHandler = (HomeInventoryHandler) getArguments().getSerializable(HOME_INVENTORY_HANDLER_KEY);
-        }
+    public static InventoryFragment newInstance() {
+        return new InventoryFragment();
     }
 
     @Override
@@ -86,15 +63,9 @@ public class InventoryFragment extends Fragment implements HomeProductButtonInte
         return rootView;
     }
 
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        outState.putSerializable(HOME_INVENTORY_HANDLER_KEY, homeInventoryHandler);
-        super.onSaveInstanceState(outState);
-    }
-
     private void initComponents(View rootView) {
-        homeProductInventoryList = homeInventoryHandler.getStockProduct();
-        homeProductHiddenList = homeInventoryHandler.getHiddenProduct();
+        homeProductInventoryList = HomeInventoryHandler.getStockProduct();
+        homeProductHiddenList = HomeInventoryHandler.getHiddenProduct();
 
         // set adapter for stock products recyclerview
         stockHomeProductView = rootView.findViewById(R.id.stockHomeInventoryView);
@@ -109,7 +80,7 @@ public class InventoryFragment extends Fragment implements HomeProductButtonInte
         hiddenHomeProductView.setAdapter(homeProductHiddenAdapter);
 
         // allow for dialogs to be displayed in this class
-        inventoryDialog = new InventoryDialog(getContext(), homeInventoryHandler);
+        inventoryDialog = new InventoryDialog(getContext());
 
         // sort button
         sortButton = rootView.findViewById(R.id.sortButton);
@@ -125,7 +96,7 @@ public class InventoryFragment extends Fragment implements HomeProductButtonInte
     }
 
     private void sortStockHomeProduct() {
-        homeProductInventoryList = homeInventoryHandler.getSortedStockProduct();
+        homeProductInventoryList = HomeInventoryHandler.getSortedStockProduct();
         homeProductStockAdapter.updateData(homeProductInventoryList);
     }
 
@@ -158,16 +129,16 @@ public class InventoryFragment extends Fragment implements HomeProductButtonInte
             // Check the buttonType and update quantities accordingly
             switch (buttonType) {
                 case "removeStock":
-                    homeInventoryHandler.decreaseStockQuantityBy1(clickedProduct);
+                    HomeInventoryHandler.decreaseStockQuantityBy1(clickedProduct);
                     break;
                 case "addStock":
-                    homeInventoryHandler.incrementStockQuantityBy1(clickedProduct);
+                    HomeInventoryHandler.incrementStockQuantityBy1(clickedProduct);
                     break;
                 case "removeDesired":
-                    homeInventoryHandler.decreaseDesiredQuantityBy1(clickedProduct);
+                    HomeInventoryHandler.decreaseDesiredQuantityBy1(clickedProduct);
                     break;
                 case "addDesired":
-                    homeInventoryHandler.incrementDesiredQuantityBy1(clickedProduct);
+                    HomeInventoryHandler.incrementDesiredQuantityBy1(clickedProduct);
                     break;
                 case "productName":
                     inventoryDialog.showHomeProductExpiryDate(clickedProduct);
@@ -182,16 +153,16 @@ public class InventoryFragment extends Fragment implements HomeProductButtonInte
             // Check the buttonType and update quantities accordingly
             switch (buttonType) {
                 case "removeStock":
-                    homeInventoryHandler.decreaseStockQuantityBy1(clickedProduct);
+                    HomeInventoryHandler.decreaseStockQuantityBy1(clickedProduct);
                     break;
                 case "addStock":
-                    homeInventoryHandler.incrementStockQuantityBy1(clickedProduct);
+                    HomeInventoryHandler.incrementStockQuantityBy1(clickedProduct);
                     break;
                 case "removeDesired":
-                    homeInventoryHandler.decreaseDesiredQuantityBy1(clickedProduct);
+                    HomeInventoryHandler.decreaseDesiredQuantityBy1(clickedProduct);
                     break;
                 case "addDesired":
-                    homeInventoryHandler.incrementDesiredQuantityBy1(clickedProduct);
+                    HomeInventoryHandler.incrementDesiredQuantityBy1(clickedProduct);
                     break;
                 case "productName":
                     inventoryDialog.showHomeProductExpiryDate(clickedProduct);
@@ -202,8 +173,8 @@ public class InventoryFragment extends Fragment implements HomeProductButtonInte
         }
 
         // Notify the inventory adapter that the data has changed
-        homeProductInventoryList = homeInventoryHandler.getStockProduct();
-        homeProductHiddenList = homeInventoryHandler.getHiddenProduct();
+        homeProductInventoryList = HomeInventoryHandler.getStockProduct();
+        homeProductHiddenList = HomeInventoryHandler.getHiddenProduct();
         homeProductStockAdapter.updateData(homeProductInventoryList);
         homeProductHiddenAdapter.updateData(homeProductHiddenList);
     }
