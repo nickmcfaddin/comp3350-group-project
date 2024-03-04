@@ -19,7 +19,7 @@ public class StoreHandlerIT {
 
     @Before
     public void setup() throws IOException{
-        System.out.println("Start test StoreHandler");
+        System.out.println("Start integration test StoreHandler");
 
         this.tempDB = TestUtils.copyDB();
         sLHandler = new StoreHandler(forProduction);

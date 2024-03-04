@@ -27,7 +27,7 @@ public class ShoppingListHandlerIT {
 
     @Before
     public void setup() throws IOException{
-        System.out.println("Starting test ShoppingListHandler");
+        System.out.println("Starting integration test for ShoppingListHandler");
 
         this.tempDB = TestUtils.copyDB();
         forProduction = true;

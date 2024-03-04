@@ -30,7 +30,7 @@ public class ProductHandlerIT {
 
     @Before
     public void setup() throws IOException {
-        System.out.println("Starting test for ProductHandler");
+        System.out.println("Starting integration test for ProductHandler");
 
         this.tempDB = TestUtils.copyDB();
 
