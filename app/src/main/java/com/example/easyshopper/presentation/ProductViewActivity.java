@@ -21,9 +21,6 @@ import java.text.DecimalFormat;
 import java.util.List;
 
 public class ProductViewActivity extends AppCompatActivity {
-    private ProductHandler productHandler;
-    private StoreHandler storeHandler;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,11 +39,9 @@ public class ProductViewActivity extends AppCompatActivity {
 
         //get values passed to the intent
         int productID = getIntent().getIntExtra("productID", 0);
-        productHandler = (ProductHandler) getIntent().getSerializableExtra("productHandler");
-        storeHandler = (StoreHandler) getIntent().getSerializableExtra("storeHandler");
 
         //get product with associating id and its values
-        Product product = productHandler.getProductByID(productID);
+        Product product = ProductHandler.getProductByID(productID);
         String name = product.getProductName();
         double calories = product.getCalories();
 
@@ -59,7 +54,7 @@ public class ProductViewActivity extends AppCompatActivity {
         double carbs = product.getCarb();
         double protein = product.getProtein();
         String xmlFileName = "icon_" + name.toLowerCase();
-        List<Price> prices = productHandler.allStoreSortedPrice(product);
+        List<Price> prices = ProductHandler.allStoreSortedPrice(product);
 
         //get components from xml
         TextView nameTextView = findViewById(R.id.searchedProductName);
@@ -84,7 +79,7 @@ public class ProductViewActivity extends AppCompatActivity {
         //  set adapter for price per store of product
         RecyclerView pricePerStoreList = findViewById(R.id.pricePerStoreList);
         pricePerStoreList.setLayoutManager(new LinearLayoutManager(this));
-        ItemPopupAdapter adapter = new ItemPopupAdapter(storeHandler, this, prices);
+        ItemPopupAdapter adapter = new ItemPopupAdapter(this, prices);
         pricePerStoreList.setAdapter(adapter);
     }
 }

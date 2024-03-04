@@ -2,10 +2,7 @@ package com.example.easyshopper.objects;
 
 import androidx.annotation.NonNull;
 
-import java.io.Serializable;
 import java.util.List;
-import java.util.UUID;
-import java.util.ArrayList;
 
 //List is created per store, products added to list
 public class ShoppingList extends ProductList {
@@ -24,7 +21,7 @@ public class ShoppingList extends ProductList {
     }
 
     // GETTERS
-    public String getShoppingListName() {
+    public String getListName() {
         return store.getStoreName();
     }
 

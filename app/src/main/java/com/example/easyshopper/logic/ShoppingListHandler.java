@@ -13,8 +13,8 @@ import java.util.List;
 
 //Handles the shopping lists
 public class ShoppingListHandler implements Serializable {
-    private ShoppingListPersistence shoppingListPersistence;
-    private PricePersistence pricePersistence;
+    private static ShoppingListPersistence shoppingListPersistence;
+    private static PricePersistence pricePersistence;
 
     //constructor
     public ShoppingListHandler(boolean forProduction){
@@ -22,12 +22,12 @@ public class ShoppingListHandler implements Serializable {
         pricePersistence = Services.getPricePersistence(forProduction);
     }
 
-    public List<ShoppingList> getAllShoppingLists(){
+    public static List<ShoppingList> getAllShoppingLists(){
         return shoppingListPersistence.getExistingShoppingLists();
     }
 
     //add item into the given shopping list
-    public void addItemToList(Product newProduct, ShoppingList shoppingList){
+    public static void addItemToList(Product newProduct, ShoppingList shoppingList){
         if(!shoppingListPersistence.shoppingListExists(shoppingList) ||
                 newProduct == null || shoppingList == null) {
 
@@ -39,7 +39,7 @@ public class ShoppingListHandler implements Serializable {
     }
 
     //create a new shopping list and add to overall shopping list array
-    public void createShoppingList(Store store){
+    public static void createShoppingList(Store store){
         //validate inputs
         if(store == null || shoppingListPersistence.listWithStoreExists(store)) {
             return;
@@ -50,14 +50,14 @@ public class ShoppingListHandler implements Serializable {
     }
 
     //remove given shoppingList from overall shopping list array
-    public void removeShoppingList(ShoppingList shoppingList){
+    public static void removeShoppingList(ShoppingList shoppingList){
         if(shoppingList != null && shoppingListPersistence.shoppingListExists(shoppingList)) {
             shoppingListPersistence.deleteShoppingList(shoppingList);
         }
     }
 
     //remove an item from a shopping list
-    public void removeProduct(Product product, ShoppingList shoppingList){
+    public static void removeProduct(Product product, ShoppingList shoppingList){
         if(!shoppingListPersistence.shoppingListExists(shoppingList)||
                 product == null || shoppingList == null) {
             return;
@@ -69,7 +69,7 @@ public class ShoppingListHandler implements Serializable {
 
 
     //Gives total price of the ShoppingList
-    public double getCartTotal(ShoppingList shoppingList){
+    public static double getCartTotal(ShoppingList shoppingList){
         if(shoppingList == null || !shoppingListPersistence.shoppingListExists(shoppingList))
         {
             return -1;
@@ -90,7 +90,7 @@ public class ShoppingListHandler implements Serializable {
     }
 
     //Returns the total price of all Product's on all ShoppingList's combined
-    public double getAllShoppingListTotal() {
+    public static double getAllShoppingListTotal() {
         double total = 0;
         List<ShoppingList> shoppingLists = shoppingListPersistence.getExistingShoppingLists();
 

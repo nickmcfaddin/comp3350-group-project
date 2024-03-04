@@ -15,47 +15,47 @@ public class  HomeInventoryHandler implements Serializable {
         homeProductPersistence = Services.getHomeProductPersistence(forProduction);
     }
 
-    public List<HomeProduct> getStockProduct(){
+    public static List<HomeProduct> getStockProduct(){
         return homeProductPersistence.getStockProduct();
     }
 
-    public List<HomeProduct> getSortedStockProduct(){
+    public static List<HomeProduct> getSortedStockProduct(){
         return homeProductPersistence.getStockProductSorted();
     }
 
-    public List<HomeProduct> getHiddenProduct(){
+    public static List<HomeProduct> getHiddenProduct(){
         return homeProductPersistence.getHiddenProduct();
     }
 
-    public void incrementStockQuantityBy1(HomeProduct homeProduct){
+    public static void incrementStockQuantityBy1(HomeProduct homeProduct){
         homeProductPersistence.incrementStockQuantityBy1(homeProduct);
     }
 
-    public void decreaseStockQuantityBy1(HomeProduct homeProduct){
+    public static void decreaseStockQuantityBy1(HomeProduct homeProduct){
         homeProductPersistence.decreaseStockQuantityBy1(homeProduct);
     }
 
-    public void incrementDesiredQuantityBy1(HomeProduct homeProduct){
+    public static void incrementDesiredQuantityBy1(HomeProduct homeProduct){
         homeProductPersistence.incrementDesiredQuantityBy1(homeProduct);
     }
 
-    public void decreaseDesiredQuantityBy1(HomeProduct homeProduct){
+    public static void decreaseDesiredQuantityBy1(HomeProduct homeProduct){
         homeProductPersistence.decreaseDesiredQuantityBy1(homeProduct);
     }
 
-    public List<String> getHomeProductExpiryDates(HomeProduct homeProduct){
+    public static List<String> getHomeProductExpiryDates(HomeProduct homeProduct){
         return homeProductPersistence.getHomeProductExpiryDate(homeProduct);
     }
 
-    public List<String> getHomeProductSortedExpiryDatesAscending(HomeProduct homeProduct){
+    public static List<String> getHomeProductSortedExpiryDatesAscending(HomeProduct homeProduct){
         return homeProductPersistence.getHomeProductSortedExpiryDateAscending(homeProduct);
     }
 
-    public List<String> getHomeProductSortedExpiryDatesDescending(HomeProduct homeProduct) {
+    public static List<String> getHomeProductSortedExpiryDatesDescending(HomeProduct homeProduct) {
         return homeProductPersistence.getHomeProductSortedExpiryDateDescending(homeProduct);
     }
 
-    public List<HomeProduct> getHomeProducts() {
+    public static List<HomeProduct> getHomeProducts() {
         return homeProductPersistence.getHomeProducts();
     }
 }

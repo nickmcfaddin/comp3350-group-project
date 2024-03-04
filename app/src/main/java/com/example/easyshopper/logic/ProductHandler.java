@@ -12,8 +12,8 @@ import java.util.Comparator;
 import java.util.List;
 
 public class ProductHandler implements Serializable {
-    private ProductPersistence productPersistence;
-    private PricePersistence pricePersistence;
+    private static ProductPersistence productPersistence;
+    private static PricePersistence pricePersistence;
 
     public ProductHandler(boolean forProduction) {
         productPersistence = Services.getProductPersistence(forProduction);
@@ -23,7 +23,7 @@ public class ProductHandler implements Serializable {
     /*
      * method searches a list for Product and returns the name, or returns null
      */
-    public List<Product> getProductsByName(String prodName)
+    public static List<Product> getProductsByName(String prodName)
     {
         return productPersistence.getProductsByName(prodName);
     }
@@ -31,7 +31,7 @@ public class ProductHandler implements Serializable {
     /*
      * method gets a list of all products initialized in the database
      */
-    public List<Product> getAllProducts()
+    public static List<Product> getAllProducts()
     {
         return productPersistence.getExistingProducts();
     }
@@ -39,7 +39,7 @@ public class ProductHandler implements Serializable {
     /*
      * method gets a product by its productId
      */
-    public Product getProductByID(int id)
+    public static Product getProductByID(int id)
     {
         if(id < 0) {
             return null;
@@ -51,7 +51,7 @@ public class ProductHandler implements Serializable {
     /*
     * method gets the price of a product in a store
      */
-    public double getPriceOfProductInStore(Product product, Store store)
+    public static double getPriceOfProductInStore(Product product, Store store)
     {
         if(product == null || store == null) {
             return -1;
@@ -63,7 +63,7 @@ public class ProductHandler implements Serializable {
     /*
      * returns a list of all the prices sorted in order for a given product
      */
-    public List<Price> allStoreSortedPrice(Product product)
+    public static List<Price> allStoreSortedPrice(Product product)
     {
         if(product == null) {
             return  null;

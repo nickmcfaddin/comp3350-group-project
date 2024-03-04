@@ -43,11 +43,16 @@ public abstract class ProductList implements Serializable {
             cart.remove(product);
         }
     }
+
     public String getListID() {
         return listID;
     }
 
     public List<Product> getCart() {
         return cart;
+    }
+
+    public String getListName() {
+        return null;
     }
 }

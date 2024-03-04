@@ -80,14 +80,6 @@ public class RequestListPersistenceStub implements RequestListPersistence {
         }
     }
 
-    @Override
-    public void clearRequestList(RequestList requestList){
-        if(requestList != null) {
-            requestList.getCart().clear();
-            updateRequestList(requestList);
-        }
-    }
-
     public boolean requestListExists(RequestList queryList) {
         if (queryList == null) {
             return false;

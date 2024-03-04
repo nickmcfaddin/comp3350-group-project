@@ -1,6 +1,5 @@
 package com.example.easyshopper.presentation;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.os.Bundle;
 
@@ -11,83 +10,31 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
-import android.widget.Button;
-import android.widget.CheckedTextView;
 import android.widget.ExpandableListView;
 import android.widget.ImageButton;
-import android.widget.ListView;
 import android.widget.PopupMenu;
-import android.widget.TextView;
 
 import com.example.easyshopper.R;
 import com.example.easyshopper.logic.ProductHandler;
 import com.example.easyshopper.logic.ShoppingListHandler;
 import com.example.easyshopper.logic.StoreHandler;
-import com.example.easyshopper.objects.Product;
 import com.example.easyshopper.objects.ShoppingList;
-import com.example.easyshopper.objects.Store;
 import com.example.easyshopper.presentation.adapter.ShoppingListAdapter;
+import com.example.easyshopper.presentation.dialog.ListDialog;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ShoppingListFragment extends Fragment {
     //keys for serializable objects
-    private static final String PRODUCT_HANDLER_KEY = "productHandler";
-    private static final String STORE_HANDLER_KEY = "storeHandler";
-    private static final String LIST_HANDLER_KEY = "shoppingListHandler";
-
-    private Dialog dialog;
-
-    private StoreHandler storeHandler;
-    private ProductHandler productHandler;
-    private ShoppingListHandler shoppingListHandler;
-
+    private ListDialog listDialog;
     private List<ShoppingList> shoppingLists;
     private ShoppingListAdapter shoppingListAdapter;
 
     public ShoppingListFragment() {
     }
 
-    public ShoppingListFragment(StoreHandler storeHandler, ProductHandler productHandler, ShoppingListHandler shoppingListHandler) {
-        this.storeHandler = storeHandler;
-        this.productHandler = productHandler;
-        this.shoppingListHandler = shoppingListHandler;
-    }
-
-    public static ShoppingListFragment newInstance(ProductHandler productHandler, StoreHandler storeHandler, ShoppingListHandler shoppingListHandler) {
-        Bundle args = new Bundle();
-        ShoppingListFragment fragment = new ShoppingListFragment(storeHandler, productHandler, shoppingListHandler);
-        args.putSerializable(PRODUCT_HANDLER_KEY, productHandler);
-        args.putSerializable(STORE_HANDLER_KEY, storeHandler);
-        args.putSerializable(LIST_HANDLER_KEY, shoppingListHandler);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (savedInstanceState != null) {
-            productHandler = (ProductHandler) savedInstanceState.getSerializable(PRODUCT_HANDLER_KEY);
-            storeHandler = (StoreHandler) savedInstanceState.getSerializable(STORE_HANDLER_KEY);
-            shoppingListHandler = (ShoppingListHandler) savedInstanceState.getSerializable(LIST_HANDLER_KEY);
-        } else if (getArguments() != null) {
-            productHandler = (ProductHandler) getArguments().getSerializable(PRODUCT_HANDLER_KEY);
-            storeHandler = (StoreHandler) getArguments().getSerializable(STORE_HANDLER_KEY);
-            shoppingListHandler = (ShoppingListHandler) getArguments().getSerializable(LIST_HANDLER_KEY);
-        }
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        outState.putSerializable(PRODUCT_HANDLER_KEY, productHandler);
-        outState.putSerializable(STORE_HANDLER_KEY, storeHandler);
-        outState.putSerializable(LIST_HANDLER_KEY, shoppingListHandler);
-        super.onSaveInstanceState(outState);
+    public static ShoppingListFragment newInstance() {
+        return new ShoppingListFragment();
     }
 
     @Override
@@ -104,13 +51,13 @@ public class ShoppingListFragment extends Fragment {
 
     private void initComponents(View rootView) {
         //set adapters for list view
-        shoppingLists = shoppingListHandler.getAllShoppingLists();
+        shoppingLists = ShoppingListHandler.getAllShoppingLists();
         ExpandableListView shoppingListView = rootView.findViewById(R.id.shoppingListView);
-        shoppingListAdapter = new ShoppingListAdapter(getContext(), shoppingLists, productHandler, shoppingListHandler);
+        shoppingListAdapter = new ShoppingListAdapter(getContext(), shoppingLists);
         shoppingListView.setAdapter(shoppingListAdapter);
 
         //allow for dialogs to be displayed in this class
-        dialog = new Dialog(getContext(),productHandler,shoppingListHandler,storeHandler,shoppingListAdapter);
+        listDialog = new ListDialog(getContext(),shoppingListAdapter);
 
         //set behaviour for button
         ImageButton addButton = rootView.findViewById(R.id.addButton);
@@ -125,11 +72,11 @@ public class ShoppingListFragment extends Fragment {
                     @Override
                     public boolean onMenuItemClick(MenuItem menuItem) {
                         if (menuItem.getItemId() == R.id.addProduct) {
-                            dialog.addProductDialog();
+                            listDialog.chooseProductsDialog(ProductHandler.getAllProducts());
                         } else if (menuItem.getItemId() == R.id.createList) {
-                            dialog.createListDialog();
+                            listDialog.createListDialog();
                         } else if (menuItem.getItemId() == R.id.deleteList) {
-                            dialog.deleteListDialog();
+                            listDialog.deleteListDialog();
                         }
                         return true;
                     }

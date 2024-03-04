@@ -10,4 +10,6 @@ public interface UserPersistence {
     User getUserById(String Id);
 
     List<User> getExistingUsers();
+
+    User createUser(User user);
 }

@@ -1,5 +1,7 @@
 package com.example.easyshopper.persistence.hsqldb;
 
+import androidx.annotation.NonNull;
+
 import com.example.easyshopper.objects.RequestList;
 import com.example.easyshopper.objects.ShoppingList;
 import com.example.easyshopper.objects.User;
@@ -48,14 +50,6 @@ public class RequestListPersistenceHSQLDB implements RequestListPersistence, Ser
     }
 
     @Override
-    public void clearRequestList(RequestList requestList) {
-        requestList.getCart().clear();
-
-        listPersistenceHSQLDB.updateList(requestList);
-        loadRequestLists();
-    }
-
-    @Override
     public boolean requestListExists(RequestList queryList) {
         return listPersistenceHSQLDB.listExists(queryList);
     }
@@ -74,4 +68,5 @@ public class RequestListPersistenceHSQLDB implements RequestListPersistence, Ser
 
         return false;
     }
+
 }

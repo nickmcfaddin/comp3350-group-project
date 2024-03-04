@@ -35,7 +35,7 @@ public class RequestListTest {
 
     @Test
     public void testGetUserName(){
-        assertEquals("Jack", requestList.getUserName());
+        assertEquals("Jack", requestList.getListName());
     }
 
     @Test

@@ -8,17 +8,17 @@ import java.io.Serializable;
 import java.util.List;
 
 public class StoreHandler implements Serializable {
-    StorePersistence storePersistence;
+    private static StorePersistence storePersistence;
 
     public StoreHandler(boolean forProduction) {
         storePersistence = Services.getStorePersistence(forProduction);
     }
 
-    public Store getStoreById(int storeID) {
+    public static Store getStoreById(int storeID) {
         return storePersistence.getStoreById(storeID);
     }
 
-    public List<Store> getExistingStores() {
+    public static List<Store> getExistingStores() {
         return storePersistence.getExistingStores();
     }
 }
