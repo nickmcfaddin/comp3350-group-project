@@ -34,6 +34,10 @@ public class MainActivity extends AppCompatActivity {
     private UserHandler userHandler;
     private Dialog dialog;
 
+    public void setForProduction(boolean forProduction) {
+        this.forProduction = forProduction;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

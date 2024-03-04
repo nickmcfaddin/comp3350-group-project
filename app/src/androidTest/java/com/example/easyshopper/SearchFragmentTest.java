@@ -23,14 +23,13 @@ import androidx.test.filters.LargeTest;
 import com.example.easyshopper.objects.Price;
 import com.example.easyshopper.objects.Product;
 
-import com.example.easyshopper.presentation.MainActivity;
+import com.example.easyshopper.presentation.TestStubDBMainActivity;
 import com.example.easyshopper.utils.TestUtils;
 
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
 import java.util.List;
 
 @RunWith(AndroidJUnit4.class)
@@ -40,12 +39,12 @@ public class SearchFragmentTest {
     private final int sleepTime = 500;
 
     @Rule
-    public ActivityScenarioRule<MainActivity> activityScenarioRule = new ActivityScenarioRule<>(MainActivity.class);
+    public ActivityScenarioRule<TestStubDBMainActivity> activityScenarioRule = new ActivityScenarioRule<>(TestStubDBMainActivity.class);
     private TestUtils testUtils;
 
     @Before
     public void setUp() {
-        testUtils = new TestUtils();
+        testUtils = new TestUtils(false);
     }
 
     @Test
@@ -118,6 +117,14 @@ public class SearchFragmentTest {
         // verify that the search fragment is displayed after clicking the search icon
         onView(withId(R.id.SearchFragment)).check(matches(isDisplayed()));
 
+        // click on the search icon
+        onView(withId(R.id.search)).perform(click());
+
+        SystemClock.sleep(sleepTime);
+
+        // verify that the search fragment is displayed after clicking the search icon
+        onView(withId(R.id.SearchFragment)).check(matches(isDisplayed()));
+
         onView(withId(R.id.searchView)).perform(typeText("Kiwi"));
         onView(allOf(withId(R.id.productListView), isDisplayed())).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
 
@@ -128,6 +135,14 @@ public class SearchFragmentTest {
 
     @Test
     public void testSearchFragmentItemPopUp() {
+        // click on the search icon
+        onView(withId(R.id.search)).perform(click());
+
+        SystemClock.sleep(sleepTime);
+
+        // verify that the search fragment is displayed after clicking the search icon
+        onView(withId(R.id.SearchFragment)).check(matches(isDisplayed()));
+
         // click on the search icon
         onView(withId(R.id.search)).perform(click());
 
