@@ -164,6 +164,14 @@ public class ShoppingListFragmentTest {
 
     @Test
     public void testShoppingListFragmentDeleteList() {
+        // click on the shopping list icon
+        onView(withId(R.id.shoppingList)).perform(click());
+
+        SystemClock.sleep(sleepTime);
+
+        // verify that the search fragment is displayed after clicking the shopping list icon
+        onView(withId(R.id.ShoppingListFragment)).check(matches(isDisplayed()));
+
         // click on the addButton
         onView(withId(R.id.addButton)).perform(click());
 
@@ -226,6 +234,14 @@ public class ShoppingListFragmentTest {
 
     @Test
     public void testShoppingListFragmentAddProduct() {
+        // click on the shopping list icon
+        onView(withId(R.id.shoppingList)).perform(click());
+
+        SystemClock.sleep(sleepTime);
+
+        // verify that the search fragment is displayed after clicking the shopping list icon
+        onView(withId(R.id.ShoppingListFragment)).check(matches(isDisplayed()));
+
         // click on the addButton
         onView(withId(R.id.addButton)).perform(click());
 
@@ -292,6 +308,14 @@ public class ShoppingListFragmentTest {
 
     @Test
     public void testShoppingListFragmentCreateList() {
+        // click on the shopping list icon
+        onView(withId(R.id.shoppingList)).perform(click());
+
+        SystemClock.sleep(sleepTime);
+
+        // verify that the search fragment is displayed after clicking the shopping list icon
+        onView(withId(R.id.ShoppingListFragment)).check(matches(isDisplayed()));
+
         // click on the addButton
         onView(withId(R.id.addButton)).perform(click());
 

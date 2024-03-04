@@ -117,6 +117,14 @@ public class SearchFragmentTest {
         // verify that the search fragment is displayed after clicking the search icon
         onView(withId(R.id.SearchFragment)).check(matches(isDisplayed()));
 
+        // click on the search icon
+        onView(withId(R.id.search)).perform(click());
+
+        SystemClock.sleep(sleepTime);
+
+        // verify that the search fragment is displayed after clicking the search icon
+        onView(withId(R.id.SearchFragment)).check(matches(isDisplayed()));
+
         onView(withId(R.id.searchView)).perform(typeText("Kiwi"));
         onView(allOf(withId(R.id.productListView), isDisplayed())).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
 
@@ -127,6 +135,14 @@ public class SearchFragmentTest {
 
     @Test
     public void testSearchFragmentItemPopUp() {
+        // click on the search icon
+        onView(withId(R.id.search)).perform(click());
+
+        SystemClock.sleep(sleepTime);
+
+        // verify that the search fragment is displayed after clicking the search icon
+        onView(withId(R.id.SearchFragment)).check(matches(isDisplayed()));
+
         // click on the search icon
         onView(withId(R.id.search)).perform(click());
 
