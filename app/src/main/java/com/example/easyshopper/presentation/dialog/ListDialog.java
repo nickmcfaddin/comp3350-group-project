@@ -25,21 +25,10 @@ import java.util.List;
 
 public class ListDialog {
     private Context context;
-    private ShoppingListHandler shoppingListHandler;
-    private StoreHandler storeHandler;
     private DynamicListAdapter dynamicListAdapter;
 
-    public ListDialog(Context context, ShoppingListHandler shoppingListHandler, StoreHandler storeHandler) {
+    public ListDialog(Context context, DynamicListAdapter dynamicListAdapter) {
         this.context = context;
-        this.shoppingListHandler = shoppingListHandler;
-        this.storeHandler = storeHandler;
-        dynamicListAdapter = null;
-    }
-
-    public ListDialog(Context context, ShoppingListHandler shoppingListHandler, StoreHandler storeHandler, DynamicListAdapter dynamicListAdapter) {
-        this.context = context;
-        this.shoppingListHandler = shoppingListHandler;
-        this.storeHandler = storeHandler;
         this.dynamicListAdapter = dynamicListAdapter;
     }
 
@@ -108,7 +97,7 @@ public class ListDialog {
 
     //show a prompt asking the user what lists they would like to add their products onto
     public void addProductsToListDialog(List<Product> clickedProducts) {
-        List<ShoppingList> shoppingLists = shoppingListHandler.getAllShoppingLists();
+        List<ShoppingList> shoppingLists = ShoppingListHandler.getAllShoppingLists();
 
         //Create alert and link it to our custom dialog
         AlertDialog.Builder alert = new AlertDialog.Builder(context);
@@ -153,7 +142,7 @@ public class ListDialog {
                 //add clicked products to clicked shopping lists
                 for(ShoppingList shoppingList : clickedShoppingLists) {
                     for(Product product : clickedProducts) {
-                        shoppingListHandler.addItemToList(product, shoppingList);
+                        ShoppingListHandler.addItemToList(product, shoppingList);
                     }
                 }
 
@@ -188,7 +177,7 @@ public class ListDialog {
         final AlertDialog alertDialog = alert.create();
 
         //get and init components
-        List<Store> storeList = storeHandler.getExistingStores();
+        List<Store> storeList = StoreHandler.getExistingStores();
         AutoCompleteTextView autoCompleteTextView = dialogView.findViewById(R.id.dropdown_field);
         ArrayAdapter<Store> listAdapter = new ArrayAdapter<>(context, android.R.layout.simple_list_item_1, storeList);
         autoCompleteTextView.setAdapter(listAdapter);
@@ -216,7 +205,7 @@ public class ListDialog {
                 }
 
                 //create shopping list and update the list view
-                shoppingListHandler.createShoppingList(store);
+                ShoppingListHandler.createShoppingList(store);
 
                 //update the displayed list
                 if(dynamicListAdapter != null) {
@@ -241,7 +230,7 @@ public class ListDialog {
     //show a prompt asking the user what list they'd like to delete
     public void deleteListDialog() {
         //get all existing shopping lists
-        List<ShoppingList> shoppingLists = shoppingListHandler.getAllShoppingLists();
+        List<ShoppingList> shoppingLists = ShoppingListHandler.getAllShoppingLists();
 
         //Create alert and link it to our custom dialog
         AlertDialog.Builder alert = new AlertDialog.Builder(context);
@@ -284,7 +273,7 @@ public class ListDialog {
 
                 //remove shopping lists
                 for(ShoppingList shoppingList : clickedShoppingLists) {
-                    shoppingListHandler.removeShoppingList(shoppingList);
+                    ShoppingListHandler.removeShoppingList(shoppingList);
                 }
 
                 //update the displayed list

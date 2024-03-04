@@ -21,19 +21,14 @@ import java.util.List;
 public class ShoppingListAdapter extends BaseExpandableListAdapter implements DynamicListAdapter  {
     private Context context;
     private List<ShoppingList> shoppingLists;
-    private ProductHandler productHandler;
-    private ShoppingListHandler shoppingListHandler;
-
-    public ShoppingListAdapter(Context context, List<ShoppingList> shoppingLists, ProductHandler productHandler, ShoppingListHandler shoppingListHandler) {
+    public ShoppingListAdapter(Context context, List<ShoppingList> shoppingLists) {
         this.context = context;
         this.shoppingLists = shoppingLists;
-        this.productHandler = productHandler;
-        this.shoppingListHandler = shoppingListHandler;
     }
 
     //update from internal sources
     public void updateData() {
-        shoppingLists = shoppingListHandler.getAllShoppingLists();
+        shoppingLists = ShoppingListHandler.getAllShoppingLists();
         notifyDataSetChanged();
     }
 
@@ -90,7 +85,7 @@ public class ShoppingListAdapter extends BaseExpandableListAdapter implements Dy
         TextView shoppingListPriceView = convertView.findViewById(R.id.shopping_list_price);
 
         shoppingListTitleView.setText(shoppingListTitle);
-        shoppingListPriceView.setText("$" + String.format("%.2f",shoppingListHandler.getCartTotal(shoppingList)));
+        shoppingListPriceView.setText("$" + String.format("%.2f", ShoppingListHandler.getCartTotal(shoppingList)));
 
         return convertView;
     }
@@ -101,7 +96,7 @@ public class ShoppingListAdapter extends BaseExpandableListAdapter implements Dy
         final ShoppingList shoppingList = (ShoppingList) getGroup(groupPosition);
         final Product product = (Product) getChild(groupPosition,childPosition);
         final Store store = shoppingList.getStore();
-        String price = "$" + String.format("%.2f",productHandler.getPriceOfProductInStore(product, store));
+        String price = "$" + String.format("%.2f", ProductHandler.getPriceOfProductInStore(product, store));
 
         if(convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -153,7 +148,7 @@ public class ShoppingListAdapter extends BaseExpandableListAdapter implements Dy
             @Override
             public void onClick(View v) {
                 //remove product from list and update view
-                shoppingListHandler.removeProduct(product,shoppingList);
+                ShoppingListHandler.removeProduct(product,shoppingList);
 
                 updateData();
 

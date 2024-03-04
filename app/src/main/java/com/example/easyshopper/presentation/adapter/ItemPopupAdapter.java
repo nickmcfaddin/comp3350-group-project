@@ -17,12 +17,10 @@ import com.example.easyshopper.objects.Store;
 import java.util.List;
 
 public class ItemPopupAdapter extends RecyclerView.Adapter<ItemPopupAdapter.ProductPriceViewHolder> {
-    private StoreHandler storeHandler;
     private Context context;
     private List<Price> priceList;
 
-    public ItemPopupAdapter(StoreHandler storeHandler, Context context, List<Price> priceList) {
-        this.storeHandler = storeHandler;
+    public ItemPopupAdapter(Context context, List<Price> priceList) {
         this.context = context;
         this.priceList = priceList;
     }
@@ -39,7 +37,7 @@ public class ItemPopupAdapter extends RecyclerView.Adapter<ItemPopupAdapter.Prod
         Price currentPrice = priceList.get(position);
 
         int storeID = currentPrice.getStoreID();
-        Store store = storeHandler.getStoreById(storeID);
+        Store store = StoreHandler.getStoreById(storeID);
 
         //bind values to the display
         holder.productPriceView.setText(currentPrice.getPriceFormatted());
