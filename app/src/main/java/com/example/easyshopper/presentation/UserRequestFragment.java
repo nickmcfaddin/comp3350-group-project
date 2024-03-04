@@ -15,8 +15,19 @@ import android.widget.ImageButton;
 import android.widget.PopupMenu;
 
 import com.example.easyshopper.R;
+import com.example.easyshopper.application.Dialog;
+import com.example.easyshopper.logic.ProductHandler;
+import com.example.easyshopper.logic.RequestListHandler;
+import com.example.easyshopper.logic.ShoppingListHandler;
+import com.example.easyshopper.logic.StoreHandler;
+import com.example.easyshopper.logic.UserHandler;
+import com.example.easyshopper.objects.ProductList;
 import com.example.easyshopper.objects.RequestList;
+import com.example.easyshopper.presentation.adapter.RequestListAdapter;
+import com.example.easyshopper.presentation.dialog.ListDialog;
+import com.example.easyshopper.presentation.dialog.RequestListDialog;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,29 +36,14 @@ import java.util.List;
  * create an instance of this fragment.
  */
 public class UserRequestFragment extends Fragment {
-    private ListDialog listDialog;
-
-    private List<RequestList> requestLists;
-    private RequestList requestListAdapter;
+    private RequestListDialog requestListDialog;
 
     public UserRequestFragment() {
         // Required empty public constructor
     }
 
-    public static UserRequestFragment newInstance(String param1, String param2) {
-        UserRequestFragment fragment = new UserRequestFragment();
-        Bundle args = new Bundle();
-
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-
-        }
+    public static UserRequestFragment newInstance() {
+        return new UserRequestFragment();
     }
 
     @Override
@@ -64,13 +60,14 @@ public class UserRequestFragment extends Fragment {
 
     private void initComponents(View rootView) {
         //set adapters for list view
-        //requestLists = requestListHandler.getAllRequestLists();
+        List<RequestList> requestLists = RequestListHandler.getAllRequestLists();
         ExpandableListView requestListView = rootView.findViewById(R.id.requestListView);
-        //requestListAdapter = new ShoppingListAdapter(getContext(), shoppingLists, productHandler, shoppingListHandler);
-        //requestListView.setAdapter(requestListAdapter);
+        RequestListAdapter requestListAdapter = new RequestListAdapter(getContext(), requestLists);
+        requestListView.setAdapter(requestListAdapter);
 
         //allow for dialogs to be displayed in this class
-        //dialog = new Dialog(getContext(), shoppingListHandler,storeHandler,shoppingListAdapter);
+        requestListDialog = Dialog.getRequestListDialog();
+        requestListDialog.setDynamicListAdapter(requestListAdapter);
 
         //set behaviour for button
         ImageButton addButton = rootView.findViewById(R.id.addButton);
@@ -85,9 +82,11 @@ public class UserRequestFragment extends Fragment {
                     @Override
                     public boolean onMenuItemClick(MenuItem menuItem) {
                         if (menuItem.getItemId() == R.id.addUser) {
-
-                        } else if (menuItem.getItemId() == R.id.createList) {
-
+                            requestListDialog.createListDialog();
+                        } else if (menuItem.getItemId() == R.id.deleteUser) {
+                            requestListDialog.deleteListDialog();
+                        } else if (menuItem.getItemId() == R.id.addProductsToRequest) {
+                            requestListDialog.chooseProductsDialog(ProductHandler.getAllProducts(), new ArrayList<>(RequestListHandler.getAllRequestLists()));
                         }
                         return true;
                     }

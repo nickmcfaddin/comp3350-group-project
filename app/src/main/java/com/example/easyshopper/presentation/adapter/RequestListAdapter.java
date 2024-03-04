@@ -7,54 +7,55 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.easyshopper.R;
-import com.example.easyshopper.logic.ProductHandler;
+import com.example.easyshopper.application.Dialog;
+import com.example.easyshopper.logic.RequestListHandler;
 import com.example.easyshopper.logic.ShoppingListHandler;
 import com.example.easyshopper.objects.Product;
+import com.example.easyshopper.objects.ProductList;
+import com.example.easyshopper.objects.RequestList;
 import com.example.easyshopper.objects.ShoppingList;
 import com.example.easyshopper.objects.Store;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class ShoppingListAdapter extends BaseExpandableListAdapter implements DynamicListAdapter  {
+public class RequestListAdapter extends BaseExpandableListAdapter implements DynamicListAdapter  {
     private Context context;
-    private List<ShoppingList> shoppingLists;
-    private ProductHandler productHandler;
-    private ShoppingListHandler shoppingListHandler;
+    private List<RequestList> requestLists;
 
-    public ShoppingListAdapter(Context context, List<ShoppingList> shoppingLists, ProductHandler productHandler, ShoppingListHandler shoppingListHandler) {
+    public RequestListAdapter(Context context, List<RequestList> requestLists) {
         this.context = context;
-        this.shoppingLists = shoppingLists;
-        this.productHandler = productHandler;
-        this.shoppingListHandler = shoppingListHandler;
+        this.requestLists = requestLists;
     }
 
     //update from internal sources
     public void updateData() {
-        shoppingLists = shoppingListHandler.getAllShoppingLists();
+        requestLists = RequestListHandler.getAllRequestLists();
         notifyDataSetChanged();
     }
 
     @Override
     public int getGroupCount() {
-        return shoppingLists.size();
+        return requestLists.size();
     }
 
     @Override
     public int getChildrenCount(int groupPosition) {
-        return shoppingLists.get(groupPosition).getCart().size();
+        return requestLists.get(groupPosition).getCart().size();
     }
 
     @Override
     public Object getGroup(int groupPosition) {
-        return shoppingLists.get(groupPosition);
+        return requestLists.get(groupPosition);
     }
 
     @Override
     public Object getChild(int groupPosition, int childPosition) {
-        return shoppingLists.get(groupPosition).getCart().get(childPosition);
+        return requestLists.get(groupPosition).getCart().get(childPosition);
     }
 
     @Override
@@ -75,22 +76,38 @@ public class ShoppingListAdapter extends BaseExpandableListAdapter implements Dy
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
         //get values
-        final ShoppingList shoppingList = (ShoppingList) getGroup(groupPosition);
-        String shoppingListTitle = shoppingList.getListName();
+        final RequestList requestList = (RequestList) getGroup(groupPosition);
+        String requestListTitle = requestList.getListName();
 
         //create view if not initialized
         if(convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-            convertView = inflater.inflate(R.layout.shopping_list_header, null);
+            convertView = inflater.inflate(R.layout.request_list_header, null);
         }
 
         //bind value to display
-        TextView shoppingListTitleView = convertView.findViewById(R.id.shopping_list_header_name);
-        TextView shoppingListPriceView = convertView.findViewById(R.id.shopping_list_price);
+        TextView shoppingListTitleView = convertView.findViewById(R.id.request_list_header_name);
+        ImageButton clearButton = convertView.findViewById(R.id.clearRequest);
+        ImageButton approveButton = convertView.findViewById(R.id.approveRequest);
 
-        shoppingListTitleView.setText(shoppingListTitle);
-        shoppingListPriceView.setText("$" + String.format("%.2f",shoppingListHandler.getCartTotal(shoppingList)));
+        clearButton.setFocusable(false);
+        approveButton.setFocusable(false);
+
+        shoppingListTitleView.setText(requestListTitle);
+
+        clearButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Dialog.getRequestListDialog().clearListDialog(requestList);
+            }
+        });
+        approveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Dialog.getRequestListDialog().approveProductsDialog(requestList);
+            }
+        });
 
         return convertView;
     }
@@ -98,29 +115,25 @@ public class ShoppingListAdapter extends BaseExpandableListAdapter implements Dy
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
         //get values
-        final ShoppingList shoppingList = (ShoppingList) getGroup(groupPosition);
+        final RequestList requestList = (RequestList) getGroup(groupPosition);
         final Product product = (Product) getChild(groupPosition,childPosition);
-        final Store store = shoppingList.getStore();
-        String price = "$" + String.format("%.2f",productHandler.getPriceOfProductInStore(product, store));
 
         if(convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-            convertView = inflater.inflate(R.layout.shopping_list_item, null);
+            convertView = inflater.inflate(R.layout.request_list_item, null);
         }
 
         //bind values to display
         final TextView productNameView = convertView.findViewById(R.id.productNameView);
-        final TextView productPriceView = convertView.findViewById(R.id.productPriceView);
 
         productNameView.setText(product.getProductName());
-        productPriceView.setText(price);
 
         //ask user if they want to remove this item from the list
         convertView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                removeProductPrompt(shoppingList,product);
+                removeProductPrompt(requestList,product);
                 return true;
             }
         });
@@ -133,7 +146,7 @@ public class ShoppingListAdapter extends BaseExpandableListAdapter implements Dy
     }
 
     //show user a prompt asking them if they want to remove product from a list
-    public void removeProductPrompt(ShoppingList shoppingList, Product product) {
+    public void removeProductPrompt(RequestList requestList, Product product) {
         //Create alert and link it to our custom dialog
         AlertDialog.Builder alert = new AlertDialog.Builder(context);
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -153,7 +166,7 @@ public class ShoppingListAdapter extends BaseExpandableListAdapter implements Dy
             @Override
             public void onClick(View v) {
                 //remove product from list and update view
-                shoppingListHandler.removeProduct(product,shoppingList);
+                RequestListHandler.removeProduct(product,requestList);
 
                 updateData();
 

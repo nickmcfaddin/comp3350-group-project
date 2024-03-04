@@ -10,8 +10,10 @@ import com.example.easyshopper.persistence.UserPersistence;
 import com.example.easyshopper.persistence.hsqldb.HomeProductPersistenceHSQLDB;
 import com.example.easyshopper.persistence.hsqldb.PricePersistenceHSQLDB;
 import com.example.easyshopper.persistence.hsqldb.ProductPersistenceHSQLDB;
+import com.example.easyshopper.persistence.hsqldb.RequestListPersistenceHSQLDB;
 import com.example.easyshopper.persistence.hsqldb.ShoppingListPersistenceHSQLDB;
 import com.example.easyshopper.persistence.hsqldb.StorePersistenceHSQLDB;
+import com.example.easyshopper.persistence.hsqldb.UserPersistenceHSQLDB;
 import com.example.easyshopper.persistence.stub.HomeProductPersistenceStub;
 import com.example.easyshopper.persistence.stub.PricePersistenceStub;
 import com.example.easyshopper.persistence.stub.ProductPersistenceStub;
@@ -27,9 +29,7 @@ public class Services {
     private static PricePersistence pricePersistence = null;
     private static StorePersistence storePersistence = null;
     private static HomeProductPersistence homeProductPersistence = null;
-
     private static UserPersistence userPersistence = null;
-
     private static RequestListPersistence requestListPersistence = null;
 
 
@@ -97,7 +97,7 @@ public class Services {
     public static RequestListPersistence getRequestListPersistence(boolean forProduction) {
         if(requestListPersistence == null) {
             if(forProduction) {
-                requestListPersistence = new requestListPersistenceHSQLDB(Main.getDBPathName());
+                requestListPersistence = new RequestListPersistenceHSQLDB(Main.getDBPathName());
             } else {
                 requestListPersistence = new RequestListPersistenceStub();
             }
@@ -106,6 +106,14 @@ public class Services {
     }
 
     public static UserPersistence getUserPersistence(boolean forProduction){
-        return new UserPersistenceStub();
+        if(userPersistence == null) {
+            if(forProduction) {
+                userPersistence = new UserPersistenceHSQLDB(Main.getDBPathName());
+            } else {
+                userPersistence = new UserPersistenceStub();
+            }
+        }
+
+        return userPersistence;
     }
 }

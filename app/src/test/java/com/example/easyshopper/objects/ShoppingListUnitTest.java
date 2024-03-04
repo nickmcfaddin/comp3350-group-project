@@ -25,7 +25,7 @@ public class ShoppingListUnitTest {
 
         //Test GETTER methods
         assertNotNull(store);
-        assertEquals("Kwik-E-Mart", shoppingList.getShoppingListName());
+        assertEquals("Kwik-E-Mart", shoppingList.getListName());
         assertEquals(store, shoppingList.getStore());
 
         assertEquals("Kwik-E-Mart", shoppingList.toString());

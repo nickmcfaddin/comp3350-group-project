@@ -45,4 +45,10 @@ public class UserPersistenceStub implements UserPersistence{
     public List<User> getExistingUsers() {
         return Collections.unmodifiableList(userList);
     }
+
+    @Override
+    public User createUser(User user) {
+        userList.add(user);
+        return user;
+    }
 }

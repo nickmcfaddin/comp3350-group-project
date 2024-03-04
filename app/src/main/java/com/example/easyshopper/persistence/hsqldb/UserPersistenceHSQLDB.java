@@ -9,6 +9,7 @@ import com.example.easyshopper.persistence.UserPersistence;
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -21,7 +22,6 @@ public class UserPersistenceHSQLDB implements UserPersistence, Serializable {
 
     public UserPersistenceHSQLDB(String dbPath) {
         this.dbPath = dbPath;
-        users = new ArrayList<>();
         loadUsers();
     }
 
@@ -30,6 +30,8 @@ public class UserPersistenceHSQLDB implements UserPersistence, Serializable {
     }
 
     private void loadUsers() {
+        users = new ArrayList<>();
+
         try (Connection connection = connect()) {
             final Statement statement = connection.createStatement();
             final ResultSet resultSet = statement.executeQuery("SELECT * FROM USER");
@@ -59,16 +61,48 @@ public class UserPersistenceHSQLDB implements UserPersistence, Serializable {
 
     @Override
     public User getUserById(String Id) {
-        for(User i : users){
-            if(i.getUserID().equals(Id)){
-                return i;
+        User user = null;
+        try (Connection connection = connect()) {
+            final PreparedStatement statement = connection.prepareStatement("SELECT * FROM USER WHERE UserID = ?");
+            statement.setString(1, Id); // Set the parameter value
+
+            final ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                String userID = resultSet.getString("UserID");
+                String userName = resultSet.getString("Name");
+
+                user = new User(userName, userID);
             }
+
+        } catch (final SQLException e) {
+            Log.e("Connect SQL", e.getMessage() + e.getSQLState());
+            e.printStackTrace();
         }
-        return null;
+
+        return user;
     }
 
     @Override
     public List<User> getExistingUsers() {
         return users;
+    }
+
+    @Override
+    public User createUser(User user) {
+        try (Connection connection = connect()) {
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO USER VALUES(?,?)");
+            statement.setString(1, user.getUserID());
+            statement.setString(2, user.getUserName());
+
+            statement.executeUpdate();
+            loadUsers();
+            return user;
+        } catch (final SQLException e) {
+            Log.e("Connect SQL", e.getMessage() + e.getSQLState());
+            e.printStackTrace();
+        }
+
+        return null;
     }
 }

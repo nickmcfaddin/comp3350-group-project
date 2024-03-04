@@ -1,4 +1,4 @@
-package com.example.easyshopper.presentation;
+package com.example.easyshopper.presentation.dialog;
 
 import android.app.AlertDialog;
 import android.content.Context;

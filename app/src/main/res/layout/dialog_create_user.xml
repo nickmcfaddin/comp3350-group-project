@@ -10,36 +10,26 @@
     android:layout_marginHorizontal="350dp">
 
     <TextView
-        android:id="@+id/add_expiry_date_title"
+        android:id="@+id/create_user_dialog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/inter_semibold"
-        android:text="Add Product Expiry Date"
+        android:text="Enter User Name"
         android:textSize="20sp" />
 
     <EditText
-        android:id="@+id/add_expiry_date_input"
+        android:id="@+id/user_name_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/add_expiry_date_title"
+        android:layout_below="@id/create_user_dialog"
         android:fontFamily="@font/inter_semibold"
-        android:hint="Enter your product's expiry date in the format YYYY-MM-DD" />
-
-    <TextView
-        android:id="@+id/add_expiry_date_invalid_message"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/add_expiry_date_input"
-        android:fontFamily="@font/inter_semibold"
-        android:text="Invalid input. Please double-check and re-enter your input. \nExample input: 2024-01-01"
-        android:textSize="15sp"
-        android:visibility="gone"/>
+        android:hint="Name" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/cancel_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/add_expiry_date_invalid_message"
+        android:layout_below="@+id/user_name_input"
         android:layout_marginTop="20sp"
         android:layout_alignParentStart="true"
         android:fontFamily="@font/inter_semibold"
@@ -52,7 +42,7 @@
         android:id="@+id/confirm_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/add_expiry_date_invalid_message"
+        android:layout_below="@+id/user_name_input"
         android:layout_marginTop="20sp"
         android:layout_alignParentEnd="true"
         android:fontFamily="@font/inter_semibold"

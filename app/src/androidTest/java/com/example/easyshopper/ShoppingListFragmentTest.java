@@ -105,7 +105,7 @@ public class ShoppingListFragmentTest {
                 // check if the name and price for shopping cart is correct
                 TextView shoppingCartName = parentView.findViewById(R.id.shopping_list_header_name);
                 String cartName = shoppingCartName.getText().toString();
-                String expectedCartName = allShoppingList.get(i).getShoppingListName();
+                String expectedCartName = allShoppingList.get(i).getListName();
                 assertEquals(expectedCartName, cartName);
 
                 TextView shoppingCartTotal = parentView.findViewById(R.id.shopping_list_price);

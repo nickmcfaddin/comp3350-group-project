@@ -20,6 +20,7 @@ import com.example.easyshopper.objects.HomeProduct;
 import com.example.easyshopper.presentation.adapter.HomeProductButtonInterface;
 import com.example.easyshopper.presentation.adapter.HomeProductHiddenAdapter;
 import com.example.easyshopper.presentation.adapter.HomeProductStockAdapter;
+import com.example.easyshopper.presentation.dialog.InventoryDialog;
 
 import java.util.List;
 

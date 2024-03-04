@@ -26,7 +26,7 @@ public class RequestListTest {
 
         //Test GETTER methods
         assertNotNull(user);
-        assertEquals("Jack", requestList.getUserName());
+        assertEquals("Jack", requestList.getListName());
         assertEquals(user, requestList.getUser());
 
         //Create new Product to use for test

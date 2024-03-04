@@ -1,4 +1,4 @@
-package com.example.easyshopper.presentation;
+package com.example.easyshopper.presentation.dialog;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;

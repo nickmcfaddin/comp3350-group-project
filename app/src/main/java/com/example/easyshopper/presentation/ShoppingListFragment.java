@@ -20,6 +20,7 @@ import com.example.easyshopper.logic.ShoppingListHandler;
 import com.example.easyshopper.logic.StoreHandler;
 import com.example.easyshopper.objects.ShoppingList;
 import com.example.easyshopper.presentation.adapter.ShoppingListAdapter;
+import com.example.easyshopper.presentation.dialog.ListDialog;
 
 import java.util.List;
 

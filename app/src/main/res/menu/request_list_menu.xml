@@ -6,6 +6,11 @@
         android:layout_height="wrap_content"
         android:title="Create User" />
     <item
+        android:id="@+id/deleteUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:title="Delete User" />
+    <item
         android:id="@+id/addProductsToRequest"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
