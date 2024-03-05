@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
             homeInventoryHandler = new HomeInventoryHandler(forProduction);
             userHandler = new UserHandler(forProduction);
             requestListHandler = new RequestListHandler(forProduction);
-            dialog = new Dialog(this, userHandler, requestListHandler);
+            dialog = new Dialog(this);
         }
 
         initComponents();

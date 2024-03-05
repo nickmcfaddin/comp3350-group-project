@@ -29,4 +29,13 @@ public class RequestList extends ProductList {
     public String toString() {
         return user.getUserName();
     }
+
+    public void add(ProductListVisitor visitor) {
+        visitor.add(this);
+    }
+
+    public void delete(ProductListVisitor visitor){
+        visitor.delete(this);
+    }
+
 }

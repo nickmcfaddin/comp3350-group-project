@@ -42,9 +42,9 @@ public class RequestListHandlerTest {
     @Test
     public void testAddItemToRequestList(){
         assertEquals(4, requestHandler.getAllRequestLists().get(0).getCart().size());
-        requestHandler.addItemToList(testProduct, requestHandler.getAllRequestLists().get(0));
-        requestHandler.addItemToList(testProduct2, requestHandler.getAllRequestLists().get(0));
-        requestHandler.addItemToList(testProduct3, requestHandler.getAllRequestLists().get(0));
+        requestHandler.addProductToCart(testProduct, requestHandler.getAllRequestLists().get(0));
+        requestHandler.addProductToCart(testProduct2, requestHandler.getAllRequestLists().get(0));
+        requestHandler.addProductToCart(testProduct3, requestHandler.getAllRequestLists().get(0));
         assertEquals(7, requestHandler.getAllRequestLists().get(0).getCart().size());
     }
 
@@ -52,7 +52,7 @@ public class RequestListHandlerTest {
     @Test
     public void testRemoveItemFromRequestList(){
         assertEquals(4, requestHandler.getAllRequestLists().get(0).getCart().size());
-        requestHandler.removeProduct(testProduct, requestHandler.getAllRequestLists().get(0));
+        requestHandler.removeProductFromCart(testProduct, requestHandler.getAllRequestLists().get(0));
         assertEquals(4, requestHandler.getAllRequestLists().get(0).getCart().size());
     }
 

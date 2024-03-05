@@ -18,13 +18,8 @@ import com.example.easyshopper.R;
 import com.example.easyshopper.application.Dialog;
 import com.example.easyshopper.logic.ProductHandler;
 import com.example.easyshopper.logic.RequestListHandler;
-import com.example.easyshopper.logic.ShoppingListHandler;
-import com.example.easyshopper.logic.StoreHandler;
-import com.example.easyshopper.logic.UserHandler;
-import com.example.easyshopper.objects.ProductList;
 import com.example.easyshopper.objects.RequestList;
 import com.example.easyshopper.presentation.adapter.RequestListAdapter;
-import com.example.easyshopper.presentation.dialog.ListDialog;
 import com.example.easyshopper.presentation.dialog.RequestListDialog;
 
 import java.util.ArrayList;
@@ -86,7 +81,7 @@ public class UserRequestFragment extends Fragment {
                         } else if (menuItem.getItemId() == R.id.deleteUser) {
                             requestListDialog.deleteListDialog();
                         } else if (menuItem.getItemId() == R.id.addProductsToRequest) {
-                            requestListDialog.chooseProductsDialog(ProductHandler.getAllProducts(), new ArrayList<>(RequestListHandler.getAllRequestLists()));
+                            requestListDialog.chooseProductsDialog();
                         }
                         return true;
                     }

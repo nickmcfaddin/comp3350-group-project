@@ -2,6 +2,7 @@ package com.example.easyshopper.application;
 
 import com.example.easyshopper.persistence.HomeProductPersistence;
 import com.example.easyshopper.persistence.PricePersistence;
+import com.example.easyshopper.persistence.ProductListPersistence;
 import com.example.easyshopper.persistence.ProductPersistence;
 import com.example.easyshopper.persistence.RequestListPersistence;
 import com.example.easyshopper.persistence.ShoppingListPersistence;
@@ -9,6 +10,7 @@ import com.example.easyshopper.persistence.StorePersistence;
 import com.example.easyshopper.persistence.UserPersistence;
 import com.example.easyshopper.persistence.hsqldb.HomeProductPersistenceHSQLDB;
 import com.example.easyshopper.persistence.hsqldb.PricePersistenceHSQLDB;
+import com.example.easyshopper.persistence.hsqldb.ProductListPersistenceHSQLDB;
 import com.example.easyshopper.persistence.hsqldb.ProductPersistenceHSQLDB;
 import com.example.easyshopper.persistence.hsqldb.RequestListPersistenceHSQLDB;
 import com.example.easyshopper.persistence.hsqldb.ShoppingListPersistenceHSQLDB;
@@ -16,6 +18,7 @@ import com.example.easyshopper.persistence.hsqldb.StorePersistenceHSQLDB;
 import com.example.easyshopper.persistence.hsqldb.UserPersistenceHSQLDB;
 import com.example.easyshopper.persistence.stub.HomeProductPersistenceStub;
 import com.example.easyshopper.persistence.stub.PricePersistenceStub;
+import com.example.easyshopper.persistence.stub.ProductListPersistenceStub;
 import com.example.easyshopper.persistence.stub.ProductPersistenceStub;
 import com.example.easyshopper.persistence.stub.RequestListPersistenceStub;
 import com.example.easyshopper.persistence.stub.ShoppingListPersistenceStub;
@@ -31,7 +34,7 @@ public class Services {
     private static HomeProductPersistence homeProductPersistence = null;
     private static UserPersistence userPersistence = null;
     private static RequestListPersistence requestListPersistence = null;
-
+    private static ProductListPersistence productListPersistence = null;
 
     //GETTERS
     public static ProductPersistence getProductPersistence(boolean forProduction) {
@@ -49,9 +52,9 @@ public class Services {
     public static ShoppingListPersistence getShoppingListPersistence(boolean forProduction) {
         if(shoppingListPersistence == null) {
             if(forProduction) {
-                shoppingListPersistence = new ShoppingListPersistenceHSQLDB(Main.getDBPathName());
+                shoppingListPersistence = new ShoppingListPersistenceHSQLDB(getProductListPersistence(forProduction));
             } else {
-                shoppingListPersistence = new ShoppingListPersistenceStub();
+                shoppingListPersistence = new ShoppingListPersistenceStub(getProductListPersistence(forProduction));
             }
         }
 
@@ -97,9 +100,9 @@ public class Services {
     public static RequestListPersistence getRequestListPersistence(boolean forProduction) {
         if(requestListPersistence == null) {
             if(forProduction) {
-                requestListPersistence = new RequestListPersistenceHSQLDB(Main.getDBPathName());
+                requestListPersistence = new RequestListPersistenceHSQLDB(getProductListPersistence(forProduction));
             } else {
-                requestListPersistence = new RequestListPersistenceStub();
+                requestListPersistence = new RequestListPersistenceStub(getProductListPersistence(forProduction));
             }
         }
         return requestListPersistence;
@@ -115,5 +118,16 @@ public class Services {
         }
 
         return userPersistence;
+    }
+    public static ProductListPersistence getProductListPersistence(boolean forProduction){
+        if(productListPersistence == null) {
+            if(forProduction) {
+                productListPersistence = new ProductListPersistenceHSQLDB(Main.getDBPathName());
+            } else {
+                productListPersistence = new ProductListPersistenceStub();
+            }
+        }
+
+        return productListPersistence;
     }
 }

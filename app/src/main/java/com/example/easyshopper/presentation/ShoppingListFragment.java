@@ -15,18 +15,18 @@ import android.widget.ImageButton;
 import android.widget.PopupMenu;
 
 import com.example.easyshopper.R;
+import com.example.easyshopper.application.Dialog;
 import com.example.easyshopper.logic.ProductHandler;
 import com.example.easyshopper.logic.ShoppingListHandler;
-import com.example.easyshopper.logic.StoreHandler;
 import com.example.easyshopper.objects.ShoppingList;
 import com.example.easyshopper.presentation.adapter.ShoppingListAdapter;
-import com.example.easyshopper.presentation.dialog.ListDialog;
+import com.example.easyshopper.presentation.dialog.ShoppingListDialog;
 
 import java.util.List;
 
 public class ShoppingListFragment extends Fragment {
     //keys for serializable objects
-    private ListDialog listDialog;
+    private ShoppingListDialog shoppingListDialog;
     private List<ShoppingList> shoppingLists;
     private ShoppingListAdapter shoppingListAdapter;
 
@@ -57,7 +57,8 @@ public class ShoppingListFragment extends Fragment {
         shoppingListView.setAdapter(shoppingListAdapter);
 
         //allow for dialogs to be displayed in this class
-        listDialog = new ListDialog(getContext(),shoppingListAdapter);
+        shoppingListDialog = Dialog.getShoppingListDialog();
+        shoppingListDialog.setDynamicListAdapter(shoppingListAdapter);
 
         //set behaviour for button
         ImageButton addButton = rootView.findViewById(R.id.addButton);
@@ -72,11 +73,11 @@ public class ShoppingListFragment extends Fragment {
                     @Override
                     public boolean onMenuItemClick(MenuItem menuItem) {
                         if (menuItem.getItemId() == R.id.addProduct) {
-                            listDialog.chooseProductsDialog(ProductHandler.getAllProducts());
+                            shoppingListDialog.chooseProductsDialog();
                         } else if (menuItem.getItemId() == R.id.createList) {
-                            listDialog.createListDialog();
+                            shoppingListDialog.createListDialog();
                         } else if (menuItem.getItemId() == R.id.deleteList) {
-                            listDialog.deleteListDialog();
+                            shoppingListDialog.deleteListDialog();
                         }
                         return true;
                     }

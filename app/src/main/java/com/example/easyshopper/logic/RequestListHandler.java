@@ -9,11 +9,12 @@ import com.example.easyshopper.persistence.RequestListPersistence;
 import java.io.Serializable;
 import java.util.List;
 
-public class RequestListHandler implements Serializable {
+public class RequestListHandler extends ProductListHandler implements Serializable {
     private static RequestListPersistence requestListPersistence;
 
     //constructor
     public RequestListHandler(boolean forProduction) {
+        super(forProduction);
         requestListPersistence = Services.getRequestListPersistence(forProduction);
     }
 
@@ -24,44 +25,7 @@ public class RequestListHandler implements Serializable {
     public static void createRequestList(User user){
         if(!requestListPersistence.listWithUserExists(user)){
             RequestList newRequestList = new RequestList(user);
-            requestListPersistence.addRequestList(newRequestList);
+            createList(newRequestList);
         }
     }
-
-    //add item into the given shopping list
-    public static void addItemToList(Product newProduct, RequestList requestList){
-        if(!requestListPersistence.requestListExists(requestList) ||
-                newProduct == null || requestList == null) {
-
-            return;
-        }
-
-        requestList.addProductToCart(newProduct);
-        requestListPersistence.updateRequestList(requestList);
-    }
-
-    //remove an item from a shopping list
-    public static void removeProduct(Product product, RequestList requestList){
-        if(!requestListPersistence.requestListExists(requestList)||
-                product == null || requestList == null) {
-            return;
-        }
-
-        requestList.removeProductFromCart(product);
-        requestListPersistence.updateRequestList(requestList);
-    }
-
-    public static void clearList(RequestList requestList) {
-        if(requestList != null) {
-            requestList.getCart().clear();
-            requestListPersistence.updateRequestList(requestList);
-        }
-    }
-
-    public static void deleteList(RequestList requestList) {
-        if(requestList != null) {
-            requestListPersistence.deleteRequestList(requestList);
-        }
-    }
-
 }

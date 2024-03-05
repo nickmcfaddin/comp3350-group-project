@@ -12,30 +12,19 @@ import java.util.List;
 
 
 //Handles the shopping lists
-public class ShoppingListHandler implements Serializable {
+public class ShoppingListHandler extends ProductListHandler implements Serializable {
     private static ShoppingListPersistence shoppingListPersistence;
     private static PricePersistence pricePersistence;
 
     //constructor
     public ShoppingListHandler(boolean forProduction){
+        super(forProduction);
         shoppingListPersistence = Services.getShoppingListPersistence(forProduction);
         pricePersistence = Services.getPricePersistence(forProduction);
     }
 
     public static List<ShoppingList> getAllShoppingLists(){
         return shoppingListPersistence.getExistingShoppingLists();
-    }
-
-    //add item into the given shopping list
-    public static void addItemToList(Product newProduct, ShoppingList shoppingList){
-        if(!shoppingListPersistence.shoppingListExists(shoppingList) ||
-                newProduct == null || shoppingList == null) {
-
-            return;
-        }
-
-        shoppingList.addProductToCart(newProduct);
-        shoppingListPersistence.updateShoppingList(shoppingList);
     }
 
     //create a new shopping list and add to overall shopping list array
@@ -46,31 +35,13 @@ public class ShoppingListHandler implements Serializable {
         }
 
         ShoppingList newList = new ShoppingList(store);
-        shoppingListPersistence.addShoppingList(newList);
+
+        createList(newList);
     }
-
-    //remove given shoppingList from overall shopping list array
-    public static void removeShoppingList(ShoppingList shoppingList){
-        if(shoppingList != null && shoppingListPersistence.shoppingListExists(shoppingList)) {
-            shoppingListPersistence.deleteShoppingList(shoppingList);
-        }
-    }
-
-    //remove an item from a shopping list
-    public static void removeProduct(Product product, ShoppingList shoppingList){
-        if(!shoppingListPersistence.shoppingListExists(shoppingList)||
-                product == null || shoppingList == null) {
-            return;
-        }
-
-        shoppingList.removeProductFromCart(product);
-        shoppingListPersistence.updateShoppingList(shoppingList);
-    }
-
 
     //Gives total price of the ShoppingList
     public static double getCartTotal(ShoppingList shoppingList){
-        if(shoppingList == null || !shoppingListPersistence.shoppingListExists(shoppingList))
+        if(shoppingList == null || !listExists(shoppingList))
         {
             return -1;
         }

@@ -50,34 +50,34 @@ public class ShoppingListHandlerTest {
         //Tests that the size of the existing shopping lists reflects the change
         assertEquals(4, sLHandlertemp.getAllShoppingLists().size());
 
-        sLHandlertemp.removeShoppingList(Services.getShoppingListPersistence(false).getExistingShoppingLists().get(0));
+        sLHandlertemp.deleteList(Services.getShoppingListPersistence(false).getExistingShoppingLists().get(0));
         assertEquals(3, Services.getShoppingListPersistence(false).getExistingShoppingLists().size());
 
         sLHandlertemp.createShoppingList(null);
         assertEquals(3, Services.getShoppingListPersistence(false).getExistingShoppingLists().size());
 
-        sLHandlertemp.removeShoppingList(null);
+        sLHandlertemp.deleteList(null);
         assertEquals(3, Services.getShoppingListPersistence(false).getExistingShoppingLists().size());
     }
 
     @Test
     public void testItemAddAndRemove() {
-        sLHandlertemp.addItemToList(product, sLHandlertemp.getAllShoppingLists().get(0));
+        sLHandlertemp.addProductToCart(product, sLHandlertemp.getAllShoppingLists().get(0));
         assertEquals(10, sLHandlertemp.getAllShoppingLists().get(0).getCart().get(4).getProductID());
 
-        sLHandlertemp.removeProduct(product, sLHandlertemp.getAllShoppingLists().get(0));
+        sLHandlertemp.removeProductFromCart(product, sLHandlertemp.getAllShoppingLists().get(0));
         assertEquals(4, sLHandlertemp.getAllShoppingLists().get(0).getCart().size());
 
-        sLHandlertemp.addItemToList(null, sLHandlertemp.getAllShoppingLists().get(0));
+        sLHandlertemp.addProductToCart(null, sLHandlertemp.getAllShoppingLists().get(0));
         assertEquals(4, sLHandlertemp.getAllShoppingLists().get(0).getCart().size());
 
-        sLHandlertemp.addItemToList(product, null);
+        sLHandlertemp.addProductToCart(product, null);
         assertEquals(4, sLHandlertemp.getAllShoppingLists().get(0).getCart().size());
 
-        sLHandlertemp.removeProduct(null, sLHandlertemp.getAllShoppingLists().get(0));
+        sLHandlertemp.removeProductFromCart(null, sLHandlertemp.getAllShoppingLists().get(0));
         assertEquals(4, sLHandlertemp.getAllShoppingLists().get(0).getCart().size());
 
-        sLHandlertemp.removeProduct(product, null);
+        sLHandlertemp.removeProductFromCart(product, null);
         assertEquals(4, sLHandlertemp.getAllShoppingLists().get(0).getCart().size());
     }
 
