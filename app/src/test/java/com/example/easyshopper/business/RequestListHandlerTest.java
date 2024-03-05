@@ -3,6 +3,7 @@ package com.example.easyshopper.business;
 import static org.junit.Assert.assertEquals;
 
 import com.example.easyshopper.objects.Product;
+import com.example.easyshopper.objects.ProductList;
 import com.example.easyshopper.objects.User;
 import com.example.easyshopper.logic.RequestListHandler;
 
@@ -51,9 +52,11 @@ public class RequestListHandlerTest {
     //Something wrong here
     @Test
     public void testRemoveItemFromRequestList(){
+        Product homeProduct = requestHandler.getAllRequestLists().get(0).getCart().get(0);
+
         assertEquals(4, requestHandler.getAllRequestLists().get(0).getCart().size());
-        requestHandler.removeProduct(testProduct, requestHandler.getAllRequestLists().get(0));
-        assertEquals(4, requestHandler.getAllRequestLists().get(0).getCart().size());
+        requestHandler.removeProduct(homeProduct, requestHandler.getAllRequestLists().get(0));
+        assertEquals(3, requestHandler.getAllRequestLists().get(0).getCart().size());
     }
 
     @Test
