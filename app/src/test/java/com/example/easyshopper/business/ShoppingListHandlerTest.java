@@ -48,27 +48,6 @@ public class ShoppingListHandlerTest {
         ShoppingListHandler.createShoppingList(null);
         assertEquals(4, ShoppingListHandler.getAllShoppingLists().size());
     }
-    /*
-    @Test
-    public void testItemAddAndRemove() {
-        sLHandlertemp.addProductToCart(product, sLHandlertemp.getAllShoppingLists().get(0));
-        assertEquals(10, sLHandlertemp.getAllShoppingLists().get(0).getCart().get(4).getProductID());
-
-        sLHandlertemp.removeProductFromCart(product, sLHandlertemp.getAllShoppingLists().get(0));
-        assertEquals(4, sLHandlertemp.getAllShoppingLists().get(0).getCart().size());
-
-        sLHandlertemp.addProductToCart(null, sLHandlertemp.getAllShoppingLists().get(0));
-        assertEquals(4, sLHandlertemp.getAllShoppingLists().get(0).getCart().size());
-
-        sLHandlertemp.addProductToCart(product, null);
-        assertEquals(4, sLHandlertemp.getAllShoppingLists().get(0).getCart().size());
-
-        sLHandlertemp.removeProductFromCart(null, sLHandlertemp.getAllShoppingLists().get(0));
-        assertEquals(4, sLHandlertemp.getAllShoppingLists().get(0).getCart().size());
-
-        sLHandlertemp.removeProductFromCart(product, null);
-        assertEquals(4, sLHandlertemp.getAllShoppingLists().get(0).getCart().size());
-    }*/
 
     @Test
     public void testCartTotal(){

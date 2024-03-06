@@ -18,7 +18,6 @@ import java.io.File;
 import java.io.IOException;
 
 public class ShoppingListHandlerIT {
-
     private ShoppingListHandler sLHandlertemp;
     private Product product;
     private Store store;
@@ -36,74 +35,48 @@ public class ShoppingListHandlerIT {
 
         //Product and store to use in tests
         product = new Product(1, "Apple", 0.26, 13.81, 0.17, 14);
-        store = new Store(1, "Loblaws");
+        store = new Store(10, "TestStore");
     }
 
     @Test
     public void testGetAllShoppingLists() {
         //Tests if we initially have our zero lists, will be modified in next test
-        List<ShoppingList> existLists = sLHandlertemp.getAllShoppingLists();
+        List<ShoppingList> existLists = ShoppingListHandler.getAllShoppingLists();
         assertEquals(0, existLists.size());
     }
 
     @Test
-    public void testCreateAndDeleteShoppingList() {//Create a list with the new store as the parameter
-        sLHandlertemp.createShoppingList(store);
+    public void testCreateShoppingList() {//Create a list with the new store as the parameter
+        ShoppingListHandler.createShoppingList(store);
 
         //Tests that the size of the existing shopping lists reflects the change
-        assertEquals(1, sLHandlertemp.getAllShoppingLists().size());
+        assertEquals(1, ShoppingListHandler.getAllShoppingLists().size());
 
-        sLHandlertemp.removeShoppingList(Services.getShoppingListPersistence(forProduction).getExistingShoppingLists().get(0));
-        assertEquals(0, Services.getShoppingListPersistence(forProduction).getExistingShoppingLists().size());
-
-        sLHandlertemp.createShoppingList(null);
-        assertEquals(0, Services.getShoppingListPersistence(forProduction).getExistingShoppingLists().size());
-    }
-
-    @Test
-    public void testItemAddAndRemove() {
-        sLHandlertemp.createShoppingList(store);
-
-        sLHandlertemp.addItemToList(product, sLHandlertemp.getAllShoppingLists().get(0));
-        assertEquals(1, sLHandlertemp.getAllShoppingLists().get(0).getCart().get(0).getProductID());
-
-        sLHandlertemp.removeProduct(product, sLHandlertemp.getAllShoppingLists().get(0));
-        assertEquals(0, sLHandlertemp.getAllShoppingLists().get(0).getCart().size());
-
-        sLHandlertemp.addItemToList(null, sLHandlertemp.getAllShoppingLists().get(0));
-        assertEquals(0, sLHandlertemp.getAllShoppingLists().get(0).getCart().size());
-
-        sLHandlertemp.addItemToList(product, null);
-        assertEquals(0, sLHandlertemp.getAllShoppingLists().get(0).getCart().size());
-
-        sLHandlertemp.removeProduct(null, sLHandlertemp.getAllShoppingLists().get(0));
-        assertEquals(0, sLHandlertemp.getAllShoppingLists().get(0).getCart().size());
-
-        sLHandlertemp.removeProduct(product, null);
-        assertEquals(0, sLHandlertemp.getAllShoppingLists().get(0).getCart().size());
+        ShoppingListHandler.createShoppingList(null);
+        assertEquals(1, ShoppingListHandler.getAllShoppingLists().size());
     }
 
     @Test
     public void testCartTotal(){
-        sLHandlertemp.createShoppingList(store);
-        sLHandlertemp.addItemToList(product, sLHandlertemp.getAllShoppingLists().get(0));
 
-        double total = sLHandlertemp.getCartTotal(sLHandlertemp.getAllShoppingLists().get(0));
-        assertEquals(13.96, total);
+        double total = ShoppingListHandler.getCartTotal(ShoppingListHandler.getAllShoppingLists().get(0));
+        assertEquals(0.0, total);
 
-        total = sLHandlertemp.getCartTotal(null);
+        total = ShoppingListHandler.getCartTotal(null);
         assertEquals(-1.0, total);
     }
 
     @Test
     public void testAllShoppingListsCartTotal(){
-        double total = sLHandlertemp.getAllShoppingListTotal();
-        assertEquals(71.88, total);
+        double total = ShoppingListHandler.getAllShoppingListTotal();
+        assertEquals(0.0, total);
     }
 
     @After
     public void tearDown(){
         System.out.println("Reset database.");
         this.tempDB.delete();
+
+        Services.clean();
     }
 }

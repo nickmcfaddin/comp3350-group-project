@@ -3,6 +3,7 @@ package com.example.easyshopper.business;
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.fail;
 
+import com.example.easyshopper.application.Services;
 import com.example.easyshopper.logic.HomeInventoryHandler;
 import com.example.easyshopper.objects.HomeProduct;
 
