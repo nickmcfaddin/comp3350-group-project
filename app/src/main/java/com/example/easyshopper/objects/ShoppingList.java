@@ -32,4 +32,13 @@ public class ShoppingList extends ProductList {
     public String toString() {
         return store.getStoreName();
     }
+
+    public void add(ProductListVisitor visitor) {
+        visitor.add(this);
+    }
+
+    public void delete(ProductListVisitor visitor){
+        visitor.delete(this);
+    }
+
 }

@@ -2,35 +2,41 @@ package com.example.easyshopper.business;
 
 import static org.junit.Assert.assertEquals;
 
+import com.example.easyshopper.application.Services;
 import com.example.easyshopper.logic.UserHandler;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 public class UserHandlerTest {
-    private UserHandler userHandler;
-
     @Before
     public void setup() {
         System.out.println("Starting test for UserHandler");
-        boolean forProduction = false;
 
-        userHandler = new UserHandler(forProduction);
+        boolean forProduction = false;
+        UserHandler userHandler = new UserHandler(forProduction);
     }
 
-    //Weird case, currently fails every second time as the db doesn't reset to not include the test user that is created
     @Test
     public void testGetAll(){
-        assertEquals(5, userHandler.getExistingUsers());
+        assertEquals(5, UserHandler.getExistingUsers().size());
     }
 
     @Test
     public void testCreateUser(){
         //Tests the valid name function within this
-        userHandler.createUser("InV@l1d N@m3");
-        assertEquals(5, userHandler.getExistingUsers().size());
+        UserHandler.createUser("InV@l1d N@m3");
+        assertEquals(5, UserHandler.getExistingUsers().size());
 
-        userHandler.createUser("Fred");
-        assertEquals(6, userHandler.getExistingUsers().size());
+        UserHandler.createUser("Fred");
+        assertEquals(6, UserHandler.getExistingUsers().size());
+    }
+
+    @After
+    public void tearDown(){
+        System.out.println("Reset database.");
+
+        Services.clean();
     }
 }

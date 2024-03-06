@@ -55,4 +55,8 @@ public abstract class ProductList implements Serializable {
     public String getListName() {
         return null;
     }
+
+    public abstract void add(ProductListVisitor visitor);
+
+    public abstract void delete(ProductListVisitor visitor);
 }

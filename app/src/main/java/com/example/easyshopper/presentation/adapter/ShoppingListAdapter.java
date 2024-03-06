@@ -148,7 +148,7 @@ public class ShoppingListAdapter extends BaseExpandableListAdapter implements Dy
             @Override
             public void onClick(View v) {
                 //remove product from list and update view
-                ShoppingListHandler.removeProduct(product,shoppingList);
+                ShoppingListHandler.removeProductFromCart(product,shoppingList);
 
                 updateData();
 
