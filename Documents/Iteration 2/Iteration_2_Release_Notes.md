@@ -28,8 +28,6 @@ We were able to implement every feature we intended to, however there were some 
 #### User Profiles
 1. Have multiple profiles for the people you shop for: completed.
 2. Specify preferences for people to personalize your shopping experience: completed.
-3. Add peoples requests into the main lists: added.
-    We added a functioni that integrates the sub-users' requests into the main list view.
  
 ## Testing Instructions
 
