@@ -37,7 +37,6 @@ public class RequestListHandlerTest {
     @After
     public void tearDown(){
         System.out.println("Reset database.");
-
         Services.clean();
     }
 

@@ -27,7 +27,7 @@ public class ShoppingListHandlerIT {
     @Before
     public void setup() throws IOException{
         System.out.println("Starting integration test for ShoppingListHandler");
-
+        Services.clean();
         this.tempDB = TestUtils.copyDB();
         forProduction = true;
 
@@ -35,7 +35,7 @@ public class ShoppingListHandlerIT {
 
         //Product and store to use in tests
         product = new Product(1, "Apple", 0.26, 13.81, 0.17, 14);
-        store = new Store(10, "TestStore");
+        store = new Store(1, "Loblaws");
     }
 
     @Test
@@ -58,6 +58,7 @@ public class ShoppingListHandlerIT {
 
     @Test
     public void testCartTotal(){
+        ShoppingListHandler.createShoppingList(store);
 
         double total = ShoppingListHandler.getCartTotal(ShoppingListHandler.getAllShoppingLists().get(0));
         assertEquals(0.0, total);
@@ -76,7 +77,6 @@ public class ShoppingListHandlerIT {
     public void tearDown(){
         System.out.println("Reset database.");
         this.tempDB.delete();
-
         Services.clean();
     }
 }

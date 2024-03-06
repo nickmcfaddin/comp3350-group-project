@@ -3,7 +3,7 @@ package com.example.easyshopper.business;
 import static org.junit.Assert.assertEquals;
 
 import com.example.easyshopper.application.Services;
-import com.example.easyshopper.objects.Product;
+import com.example.easyshopper.logic.UserHandler;
 import com.example.easyshopper.objects.User;
 import com.example.easyshopper.logic.RequestListHandler;
 import com.example.easyshopper.utils.TestUtils;
@@ -20,14 +20,18 @@ public class RequestListHandlerIT {
     private RequestListHandler requestHandler;
     private User testUser;
 
+    private UserHandler userHandler;
+
     @Before
     public void setup() throws IOException {
         System.out.println("Starting integration test for RequestListHandler");
+        Services.clean();
         this.tempDB = TestUtils.copyDB();
 
         boolean forProduction = true;
         requestHandler = new RequestListHandler(forProduction);
-        testUser = new User("George", "10");
+        userHandler = new UserHandler(forProduction);
+        testUser = UserHandler.createUser("Tester");
     }
 
     @Test
@@ -38,7 +42,7 @@ public class RequestListHandlerIT {
     @Test
     public void testCreateRequestList(){
         RequestListHandler.createRequestList(testUser);
-        System.out.println("abc "+RequestListHandler.getAllRequestLists());
+        System.out.println("abc " + RequestListHandler.getAllRequestLists());
         assertEquals(1, RequestListHandler.getAllRequestLists().size());
     }
 
@@ -46,7 +50,6 @@ public class RequestListHandlerIT {
     public void tearDown(){
         System.out.println("Reset database.");
         this.tempDB.delete();
-
         Services.clean();
     }
 }

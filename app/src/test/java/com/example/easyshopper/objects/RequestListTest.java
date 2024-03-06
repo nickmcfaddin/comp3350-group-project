@@ -44,6 +44,11 @@ public class RequestListTest {
     }
 
     @Test
+    public void testToString(){
+        assertEquals("Jack", requestList.toString());
+    }
+
+    @Test
     public void testAddProductToCart(){
         requestList.addProductToCart(product);
         assertEquals(1, requestList.getCart().size());

@@ -112,7 +112,6 @@ public class HomeInventoryHandlerTest {
     @After
     public void tearDown(){
         System.out.println("Reset database.");
-
         Services.clean();
     }
 }

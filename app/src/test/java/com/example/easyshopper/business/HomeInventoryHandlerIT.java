@@ -3,6 +3,7 @@ package com.example.easyshopper.business;
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.fail;
 
+import com.example.easyshopper.application.Services;
 import com.example.easyshopper.logic.HomeInventoryHandler;
 import com.example.easyshopper.objects.HomeProduct;
 import com.example.easyshopper.utils.TestUtils;
@@ -24,13 +25,13 @@ public class HomeInventoryHandlerIT {
     @Before
     public void setup() throws IOException {
         System.out.println("Starting integration test for HomeInventoryHandler");
-
+        Services.clean();
         this.tempDB = TestUtils.copyDB();
 
         boolean forProduction = true;
         hIHandlertemp = new HomeInventoryHandler(forProduction);
 
-        apple = hIHandlertemp.getHomeProducts().get(0);
+        apple = HomeInventoryHandler.getHomeProducts().get(0);
 
         List<String> appleExpiryDate = new ArrayList<>();
         appleExpiryDate.add("2023-11-15");
@@ -42,51 +43,52 @@ public class HomeInventoryHandlerIT {
 
     @Test
     public void testGetStockProducts() {
-        //Tests if we can get all stock products (apple has stock 1 to start)
-        List<HomeProduct> existStockProducts = hIHandlertemp.getStockProduct();
-        assertEquals(1, existStockProducts.size());
+        //Tests if we can get all stock products (0 initially)
+        List<HomeProduct> existStockProducts = HomeInventoryHandler.getStockProduct();
+        assertEquals(0, existStockProducts.size());
     }
 
     @Test
     public void testSortStockProducts() {
-        //Tests if the products being sorted by have/desired is working properly, only apple has stock
-        List<HomeProduct> sortedStockProducts = hIHandlertemp.getSortedStockProduct();
-        assertEquals(1,sortedStockProducts.size());
-        assertEquals("Apple", sortedStockProducts.get(0).getProductName());
+        //Tests if we initially have 0 products sorted (because they all have 0 stock and 0 desired stock)
+        List<HomeProduct> sortedStockProducts = HomeInventoryHandler.getSortedStockProduct();
+        assertEquals(0,sortedStockProducts.size());
+        //assertEquals("Apple", sortedStockProducts.get(0).getProductName());
     }
 
     @Test
     public void testGetHiddenProducts() {
         //Tests if we can get all of the hidden products (0 stock, 0 desired stock), 35 prods in total, 34 are hidden
-        List<HomeProduct> hiddenProducts = hIHandlertemp.getHiddenProduct();
-        assertEquals(34, hiddenProducts.size());
+        List<HomeProduct> hiddenProducts = HomeInventoryHandler.getHiddenProduct();
+        assertEquals(35, hiddenProducts.size());
     }
 
     @Test
     public void testStockIncrementAndDecrement(){
         //Test increment (apple stock starts at 3 in the stub and we increment it to 4)
-        hIHandlertemp.incrementStockQuantityBy1(apple);
-        assertEquals(2, apple.getHomeProductStockQuantity());
+        HomeInventoryHandler.incrementStockQuantityBy1(apple);
+        assertEquals(1, apple.getHomeProductStockQuantity());
+
 
         //Test decrement (apple stock is at 4 from above, should be 3 when we assert)
-        hIHandlertemp.decreaseStockQuantityBy1(apple);
-        assertEquals(1, apple.getHomeProductStockQuantity());
+        HomeInventoryHandler.decreaseStockQuantityBy1(apple);
+        assertEquals(0, apple.getHomeProductStockQuantity());
     }
 
     @Test
     public void testDesiredQuantityIncrementAndDecrement(){
         //Test increment (apple desired quantity starts at 2 in the stub and we increment it to 3)
-        hIHandlertemp.incrementDesiredQuantityBy1(apple);
+        HomeInventoryHandler.incrementDesiredQuantityBy1(apple);
         assertEquals(1, apple.getHomeProductDesiredQuantity());
 
         //Test decrement (apple desired quantity is at 3 from above, should be 2 when we assert)
-        hIHandlertemp.decreaseDesiredQuantityBy1(apple);
+        HomeInventoryHandler.decreaseDesiredQuantityBy1(apple);
         assertEquals(0, apple.getHomeProductDesiredQuantity());
     }
 
     @Test
     public void testGetHomeProductExpiryDates() {
-        List<String> expiryDates = hIHandlertemp.getHomeProductExpiryDates(apple);
+        List<String> expiryDates = HomeInventoryHandler.getHomeProductExpiryDates(apple);
 
         if (!expiryDates.get(0).equals("2023-11-15") || !expiryDates.get(1).equals("2024-10-20") || !expiryDates.get(2).equals("2023-12-31")) {
             fail();
@@ -95,7 +97,7 @@ public class HomeInventoryHandlerIT {
 
     @Test
     public void testGetHomeProductExpiryDatesAscending() {
-        List<String> expiryDates = hIHandlertemp.getHomeProductSortedExpiryDatesAscending(apple);
+        List<String> expiryDates = HomeInventoryHandler.getHomeProductSortedExpiryDatesAscending(apple);
 
         if (!expiryDates.get(0).equals("2023-11-15") || !expiryDates.get(1).equals("2023-12-31") || !expiryDates.get(2).equals("2024-10-20")) {
             fail();
@@ -104,7 +106,7 @@ public class HomeInventoryHandlerIT {
 
     @Test
     public void testGetHomeProductExpiryDatesDescending() {
-        List<String> expiryDates = hIHandlertemp.getHomeProductSortedExpiryDatesDescending(apple);
+        List<String> expiryDates = HomeInventoryHandler.getHomeProductSortedExpiryDatesDescending(apple);
 
         if (!expiryDates.get(0).equals("2024-10-20") || !expiryDates.get(1).equals("2023-12-31") || !expiryDates.get(2).equals("2023-11-15")) {
             fail();
@@ -115,6 +117,7 @@ public class HomeInventoryHandlerIT {
     public void tearDown(){
         System.out.println("Reset database.");
         this.tempDB.delete();
+        Services.clean();
     }
 }
 

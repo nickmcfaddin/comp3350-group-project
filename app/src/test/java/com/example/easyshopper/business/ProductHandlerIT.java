@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.fail;
 
+import com.example.easyshopper.application.Services;
 import com.example.easyshopper.logic.ProductHandler;
 import com.example.easyshopper.logic.StoreHandler;
 import com.example.easyshopper.objects.Price;
@@ -31,7 +32,7 @@ public class ProductHandlerIT {
     @Before
     public void setup() throws IOException {
         System.out.println("Starting integration test for ProductHandler");
-
+        Services.clean();
         this.tempDB = TestUtils.copyDB();
 
         boolean forProduction = true;
@@ -44,29 +45,29 @@ public class ProductHandlerIT {
     public void testGetProductByID(){
         System.out.println("\nStarting testing testGetProductByID");
 
-        assertEquals(productHandler.getProductByID(1).getProductName(), "Apple");
-        assertNull(productHandler.getProductByID(-1));
+        assertEquals(ProductHandler.getProductByID(1).getProductName(), "Apple");
+        assertNull(ProductHandler.getProductByID(-1));
         System.out.println("Finished testGetProductByID");
     }
 
     @Test
     public void testGetProductsByName() {
         System.out.println("\nStarting testing testGetProductsByName");
-        List<Product> testList = productHandler.getProductsByName("Apple");
+        List<Product> testList = ProductHandler.getProductsByName("Apple");
         assertEquals("Apple", testList.get(0).getProductName());
         System.out.println("Finished testGetProductsByName");
     }
 
     @Test
     public void testGetProductPriceByStore() {
-        Store store = storeHandler.getExistingStores().get(0);
-        Product product = productHandler.getAllProducts().get(0);
+        Store store = StoreHandler.getExistingStores().get(0);
+        Product product = ProductHandler.getAllProducts().get(0);
 
-        assertEquals(0.5,productHandler.getPriceOfProductInStore(product,store), .01);
+        assertEquals(0.5, ProductHandler.getPriceOfProductInStore(product,store), .01);
 
-        assertEquals(-1,productHandler.getPriceOfProductInStore(null,store), .01);
+        assertEquals(-1, ProductHandler.getPriceOfProductInStore(null,store), .01);
 
-        assertEquals(-1,productHandler.getPriceOfProductInStore(product,null), .01);
+        assertEquals(-1, ProductHandler.getPriceOfProductInStore(product,null), .01);
 
     }
     @Test
@@ -77,7 +78,7 @@ public class ProductHandlerIT {
         Product product = productPersistence.getProductById(1);
         assertEquals("Apple", product.getProductName());
 
-        List<Price> priceList = productHandler.allStoreSortedPrice(product);
+        List<Price> priceList = ProductHandler.allStoreSortedPrice(product);
 
         double previousPrice = 0;
         for (Price price : priceList)
@@ -95,6 +96,7 @@ public class ProductHandlerIT {
     public void tearDown(){
         System.out.println("Reset database.");
         this.tempDB.delete();
+        Services.clean();
     }
 }
 
