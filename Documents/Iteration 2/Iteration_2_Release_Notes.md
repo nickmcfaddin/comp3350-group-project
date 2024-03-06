@@ -57,7 +57,7 @@ On the search view, users can get more information about any specific product. T
 - Application layer: 82%
 - Logic layer: 96%
 - Domain specific objects: 93%
-- Persistence layer (stubs): 68%
+- Persistence layer (stubs + hsqldb): 68%
 - Presentation layer: Not applicable for Line%, ran by androidTest
 
 ## Architecture Diagram
