@@ -37,7 +37,7 @@ public class Services {
     private static ProductListPersistence productListPersistence = null;
 
     //GETTERS
-    public static ProductPersistence getProductPersistence(boolean forProduction) {
+    public static synchronized ProductPersistence getProductPersistence(boolean forProduction) {
         if(productPersistence == null) {
             if(forProduction) {
                 productPersistence = new ProductPersistenceHSQLDB(Main.getDBPathName());
@@ -49,7 +49,7 @@ public class Services {
         return productPersistence;
     }
 
-    public static ShoppingListPersistence getShoppingListPersistence(boolean forProduction) {
+    public static synchronized ShoppingListPersistence getShoppingListPersistence(boolean forProduction) {
         if(shoppingListPersistence == null) {
             if(forProduction) {
                 shoppingListPersistence = new ShoppingListPersistenceHSQLDB(getProductListPersistence(forProduction));
@@ -61,7 +61,7 @@ public class Services {
         return shoppingListPersistence;
     }
 
-    public static PricePersistence getPricePersistence(boolean forProduction) {
+    public static synchronized PricePersistence getPricePersistence(boolean forProduction) {
         if(pricePersistence == null) {
             if(forProduction) {
                 pricePersistence = new PricePersistenceHSQLDB(Main.getDBPathName());
@@ -73,7 +73,7 @@ public class Services {
         return pricePersistence;
     }
 
-    public static StorePersistence getStorePersistence(boolean forProduction) {
+    public static synchronized StorePersistence getStorePersistence(boolean forProduction) {
         if(storePersistence == null) {
             if(forProduction) {
                 storePersistence = new StorePersistenceHSQLDB(Main.getDBPathName());
@@ -85,7 +85,7 @@ public class Services {
         return storePersistence;
     }
 
-    public static HomeProductPersistence getHomeProductPersistence(boolean forProduction) {
+    public static synchronized HomeProductPersistence getHomeProductPersistence(boolean forProduction) {
         if(homeProductPersistence == null) {
             if(forProduction) {
                 homeProductPersistence = new HomeProductPersistenceHSQLDB(Main.getDBPathName());
@@ -97,7 +97,7 @@ public class Services {
         return homeProductPersistence;
     }
 
-    public static RequestListPersistence getRequestListPersistence(boolean forProduction) {
+    public static synchronized RequestListPersistence getRequestListPersistence(boolean forProduction) {
         if(requestListPersistence == null) {
             if(forProduction) {
                 requestListPersistence = new RequestListPersistenceHSQLDB(getProductListPersistence(forProduction));
@@ -108,7 +108,7 @@ public class Services {
         return requestListPersistence;
     }
 
-    public static UserPersistence getUserPersistence(boolean forProduction){
+    public static synchronized UserPersistence getUserPersistence(boolean forProduction){
         if(userPersistence == null) {
             if(forProduction) {
                 userPersistence = new UserPersistenceHSQLDB(Main.getDBPathName());
@@ -119,7 +119,7 @@ public class Services {
 
         return userPersistence;
     }
-    public static ProductListPersistence getProductListPersistence(boolean forProduction){
+    public static synchronized ProductListPersistence getProductListPersistence(boolean forProduction){
         if(productListPersistence == null) {
             if(forProduction) {
                 productListPersistence = new ProductListPersistenceHSQLDB(Main.getDBPathName());
@@ -129,5 +129,21 @@ public class Services {
         }
 
         return productListPersistence;
+    }
+
+    /**
+     * clean
+     *
+     * Reset all services so to be reloaded from scratch next time they are referenced
+     */
+    public static synchronized void clean() {
+        productPersistence = null;
+        shoppingListPersistence = null;
+        pricePersistence = null;
+        storePersistence = null;
+        homeProductPersistence = null;
+        userPersistence = null;
+        requestListPersistence = null;
+        productListPersistence = null;
     }
 }

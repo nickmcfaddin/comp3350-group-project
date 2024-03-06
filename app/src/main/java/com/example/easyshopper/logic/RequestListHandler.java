@@ -1,7 +1,6 @@
 package com.example.easyshopper.logic;
 
 import com.example.easyshopper.application.Services;
-import com.example.easyshopper.objects.Product;
 import com.example.easyshopper.objects.RequestList;
 import com.example.easyshopper.objects.User;
 import com.example.easyshopper.persistence.RequestListPersistence;
