@@ -54,10 +54,10 @@ On the search view, users can get more information about any specific product. T
 2. To run the tests for the Presentation layer, navigate to the com.example.easyshopper (androidTest) package and click on the AllAcceptanceTests.java file. This file will run all of the tests for the Presentation layer. If you want to break them down individually, they are all found within the com.example.easyshopper (androidTest) package.
 
 ## Code Coverage Statistics
-- Application layer: 71%
+- Application layer: 82%
 - Logic layer: 96%
-- Domain specific objects: 90%
-- Persistence layer (stubs): 68.8%
+- Domain specific objects: 93%
+- Persistence layer (stubs): 68%
 - Presentation layer: Not applicable for Line%, ran by androidTest
 
 ## Architecture Diagram
