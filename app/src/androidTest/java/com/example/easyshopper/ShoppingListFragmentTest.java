@@ -108,7 +108,11 @@ public class ShoppingListFragmentTest {
 
                 TextView shoppingCartTotal = parentView.findViewById(R.id.shopping_list_price);
                 String cartTotal = shoppingCartTotal.getText().toString();
-                String expectedCartTotal = "$" + testUtils.getCartTotal(allShoppingList.get(i));
+                System.out.println("abc " + shoppingCartTotal.getText().toString());
+                String expectedCartTotal = "$" +  String.format("%.2f", testUtils.getCartTotal(allShoppingList.get(i)));
+
+                System.out.println("xyz " + expectedCartTotal);
+
                 assertEquals(expectedCartTotal, cartTotal);
 
                 // expand the group
@@ -191,7 +195,7 @@ public class ShoppingListFragmentTest {
         // title
         onView(withId(R.id.input_dialog_title)).check(matches(isDisplayed()));
 
-        onView(withId(R.id.input_dialog_title)).check(matches(withText("Choose Shopping Lists to Delete:")));
+        onView(withId(R.id.input_dialog_title)).check(matches(withText("Choose Lists to Delete:")));
 
         // list of stores
         onView(withId(R.id.list_view)).check(matches(isDisplayed()));

@@ -123,7 +123,7 @@ public class UserRequestFragmentTest {
         // title
         onView(withId(R.id.input_dialog_title)).check(matches(isDisplayed()));
 
-        onView(withId(R.id.input_dialog_title)).check(matches(withText("Choose Shopping Lists to Delete:")));
+        onView(withId(R.id.input_dialog_title)).check(matches(withText("Choose Lists to Delete:")));
 
         // list of users
         onView(withId(R.id.list_view)).check(matches(isDisplayed()));
@@ -331,7 +331,7 @@ public class UserRequestFragmentTest {
         // title
         onView(withId(R.id.input_dialog_title)).check(matches(isDisplayed()));
 
-        onView(withId(R.id.input_dialog_title)).check(matches(withText("Choose Shopping Lists to Add Products Onto:")));
+            onView(withId(R.id.input_dialog_title)).check(matches(withText("Choose Lists to Add Products Onto:")));
 
         // list of users
         onView(withId(R.id.list_view)).check(matches(isDisplayed()));
@@ -483,7 +483,7 @@ public class UserRequestFragmentTest {
         // check content of popup
         onView(withId(R.id.input_dialog_title)).check(matches(isDisplayed()));
 
-        // onView(withId(R.id.input_dialog_title)).check(matches(withText("Choose Shopping Lists to Add Products Onto:")));
+        onView(withId(R.id.input_dialog_title)).check(matches(withText("Choose Shopping Lists to Add Products Onto:")));
 
         // list of users
         onView(withId(R.id.list_view)).check(matches(isDisplayed()));
