@@ -19,7 +19,7 @@ We were able to implement every feature we intended to, however there were some 
 #### Manage Home Storage
 1. Manage quantities: modified\
     We separated the list and inventory views and decided that there would be no connection between the two. For the time being, we added quantities to the inventory view and are going to revisit adding quantities to the list view and how that may integrate with our inventory.
-2. Track what products you have in your house: completed.
+2. Track home products: completed.
 3. Add product to list if below desired quantity: removed.
     We removed this feature as we decided that our list view and inventory view would be independent for the time being which makes this story impossible to implement.
 4. Sort inventory by priority: added.\
