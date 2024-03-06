@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/deletePromptDialog"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingHorizontal="20dp"
-    android:paddingVertical="15dp"
+    android:layout_marginHorizontal="350dp"
     android:background="@color/primary_theme"
     android:backgroundTint="#0DFFFFFF"
-    android:layout_marginHorizontal="350dp">
+    android:paddingHorizontal="20dp"
+    android:paddingVertical="15dp">
 
     <TextView
         android:id="@+id/input_dialog_title"
@@ -24,23 +25,21 @@
         android:layout_below="@+id/input_dialog_title"
         android:layout_alignParentStart="true"
         android:layout_marginTop="50dp"
-        android:fontFamily="@font/inter_semibold"
         android:background="@color/secondary_theme"
-        android:textColor="@color/primary_theme"
-        android:text="NO">
-    </androidx.appcompat.widget.AppCompatButton>
+        android:fontFamily="@font/inter_semibold"
+        android:text="NO"
+        android:textColor="@color/primary_theme"></androidx.appcompat.widget.AppCompatButton>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/yes_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/input_dialog_title"
-        android:layout_marginTop="50dp"
         android:layout_alignParentEnd="true"
-        android:fontFamily="@font/inter_semibold"
+        android:layout_marginTop="50dp"
         android:background="@color/secondary_theme"
-        android:textColor="@color/primary_theme"
-        android:text="YES">
-    </androidx.appcompat.widget.AppCompatButton>
+        android:fontFamily="@font/inter_semibold"
+        android:text="YES"
+        android:textColor="@color/primary_theme"></androidx.appcompat.widget.AppCompatButton>
 
 </RelativeLayout>

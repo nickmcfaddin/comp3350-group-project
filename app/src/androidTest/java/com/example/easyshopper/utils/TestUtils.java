@@ -2,13 +2,17 @@ package com.example.easyshopper.utils;
 
 import com.example.easyshopper.logic.HomeInventoryHandler;
 import com.example.easyshopper.logic.ProductHandler;
+import com.example.easyshopper.logic.RequestListHandler;
 import com.example.easyshopper.logic.ShoppingListHandler;
 import com.example.easyshopper.logic.StoreHandler;
+import com.example.easyshopper.logic.UserHandler;
 import com.example.easyshopper.objects.HomeProduct;
 import com.example.easyshopper.objects.Price;
 import com.example.easyshopper.objects.Product;
+import com.example.easyshopper.objects.RequestList;
 import com.example.easyshopper.objects.ShoppingList;
 import com.example.easyshopper.objects.Store;
+import com.example.easyshopper.objects.User;
 
 import java.util.List;
 
@@ -17,12 +21,16 @@ public class TestUtils {
     private ShoppingListHandler shoppingListHandler;
     private StoreHandler storeHandler;
     private HomeInventoryHandler homeInventoryHandler;
+    private RequestListHandler requestListHandler;
+    private UserHandler userHandler;
 
     public TestUtils(boolean forProduction){
         productHandler = new ProductHandler(forProduction);
         shoppingListHandler = new ShoppingListHandler(forProduction);
         storeHandler = new StoreHandler(forProduction);
         homeInventoryHandler = new HomeInventoryHandler(forProduction);
+        requestListHandler = new RequestListHandler(forProduction);
+        userHandler = new UserHandler(forProduction);
     }
 
     //ProductHandler implementations
@@ -66,4 +74,10 @@ public class TestUtils {
     public List<String> getHomeProductSortedExpiryDatesAscending(HomeProduct homeProduct){return homeInventoryHandler.getHomeProductSortedExpiryDatesAscending(homeProduct);};
 
     public List<String> getHomeProductSortedExpiryDatesDescending(HomeProduct homeProduct){return homeInventoryHandler.getHomeProductSortedExpiryDatesDescending(homeProduct);};
+
+    // RequestListHandler implementations
+    public List<RequestList> getAllRequestLists() {return requestListHandler.getAllRequestLists();};
+
+    // UserHandler implementations
+    public List<User> getExistingUsers() {return userHandler.getExistingUsers();};
 }
