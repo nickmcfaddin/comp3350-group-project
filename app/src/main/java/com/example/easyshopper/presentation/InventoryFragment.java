@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.example.easyshopper.R;
+import com.example.easyshopper.application.Dialog;
 import com.example.easyshopper.logic.HomeInventoryHandler;
 import com.example.easyshopper.objects.HomeProduct;
 import com.example.easyshopper.presentation.adapter.HomeProductButtonInterface;
@@ -80,7 +81,7 @@ public class InventoryFragment extends Fragment implements HomeProductButtonInte
         hiddenHomeProductView.setAdapter(homeProductHiddenAdapter);
 
         // allow for dialogs to be displayed in this class
-        inventoryDialog = new InventoryDialog(getContext());
+        inventoryDialog = Dialog.getInventoryDialog();
 
         // sort button
         sortButton = rootView.findViewById(R.id.sortButton);

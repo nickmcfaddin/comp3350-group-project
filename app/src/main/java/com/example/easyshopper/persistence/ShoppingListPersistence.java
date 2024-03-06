@@ -11,17 +11,6 @@ public interface ShoppingListPersistence {
     //Returns all currently existing ShoppingList's
     List<ShoppingList> getExistingShoppingLists();
 
-    //Updates the ShoppingList's information
-    void updateShoppingList(ShoppingList shoppingList);
-
-    //Adds a ShoppingList to the overall ShoppingList array
-    void addShoppingList(ShoppingList shoppingList);
-
-    //Delete a ShoppingList from the overall ShoppingList array by it's shoppingListID
-    void deleteShoppingList(ShoppingList shoppingList);
-
-    boolean shoppingListExists(ShoppingList queryList);
-
     boolean listWithStoreExists(Store queryStore);
 
     //Currently removed functions -> ProductPersistence

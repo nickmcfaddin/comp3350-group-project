@@ -42,5 +42,5 @@ dependencies {
     debugImplementation("androidx.fragment:fragment-testing:1.6.2");
     androidTestImplementation("androidx.test.espresso:espresso-contrib:3.5.1")
     implementation ("org.hsqldb:hsqldb:2.4.1")
-
+    testImplementation("com.google.guava:guava:33.0.0-android")
 }

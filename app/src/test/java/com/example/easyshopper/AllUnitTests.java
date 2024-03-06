@@ -1,6 +1,7 @@
 package com.example.easyshopper;
 
 import com.example.easyshopper.business.ProductHandlerTest;
+import com.example.easyshopper.business.ProductListHandlerTest;
 import com.example.easyshopper.business.RequestListHandlerTest;
 import com.example.easyshopper.business.ShoppingListHandlerTest;
 import com.example.easyshopper.business.StoreHandlerTest;
@@ -27,6 +28,7 @@ import org.junit.runners.Suite;
         HomeInventoryHandlerTest.class,
         RequestListHandlerTest.class,
         UserHandlerTest.class,
+        ProductListHandlerTest.class,
 
         //Object Tests
         PriceTest.class,

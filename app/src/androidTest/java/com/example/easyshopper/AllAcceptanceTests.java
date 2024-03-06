@@ -11,7 +11,8 @@ import org.junit.runners.Suite;
         MainActivityTest.class,
         SearchFragmentTest.class,
         ShoppingListFragmentTest.class,
-        HomeInventoryFragmentTest.class
+        HomeInventoryFragmentTest.class,
+        UserRequestFragmentTest.class
 })
 
 public class AllAcceptanceTests {}

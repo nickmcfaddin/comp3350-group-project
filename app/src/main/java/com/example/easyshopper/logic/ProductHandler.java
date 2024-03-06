@@ -66,7 +66,7 @@ public class ProductHandler implements Serializable {
     public static List<Price> allStoreSortedPrice(Product product)
     {
         if(product == null) {
-            return  null;
+            return null;
         }
 
         List<Price> productPrices = pricePersistence.getAllPricesForSameProduct(product);

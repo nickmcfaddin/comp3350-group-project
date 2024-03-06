@@ -13,14 +13,9 @@ import android.widget.TextView;
 import com.example.easyshopper.R;
 import com.example.easyshopper.application.Dialog;
 import com.example.easyshopper.logic.RequestListHandler;
-import com.example.easyshopper.logic.ShoppingListHandler;
 import com.example.easyshopper.objects.Product;
-import com.example.easyshopper.objects.ProductList;
 import com.example.easyshopper.objects.RequestList;
-import com.example.easyshopper.objects.ShoppingList;
-import com.example.easyshopper.objects.Store;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class RequestListAdapter extends BaseExpandableListAdapter implements DynamicListAdapter  {
@@ -166,7 +161,7 @@ public class RequestListAdapter extends BaseExpandableListAdapter implements Dyn
             @Override
             public void onClick(View v) {
                 //remove product from list and update view
-                RequestListHandler.removeProduct(product,requestList);
+                RequestListHandler.removeProductFromCart(product,requestList);
 
                 updateData();
 

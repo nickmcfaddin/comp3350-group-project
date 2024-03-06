@@ -4,10 +4,12 @@ import android.util.Log;
 
 import com.example.easyshopper.objects.Product;
 import com.example.easyshopper.objects.ProductList;
+import com.example.easyshopper.objects.ProductListVisitor;
 import com.example.easyshopper.objects.RequestList;
 import com.example.easyshopper.objects.ShoppingList;
 import com.example.easyshopper.objects.Store;
 import com.example.easyshopper.objects.User;
+import com.example.easyshopper.persistence.ProductListPersistence;
 
 import java.io.Serializable;
 import java.sql.Connection;
@@ -19,7 +21,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListPersistenceHSQLDB implements Serializable {
+public class ProductListPersistenceHSQLDB implements Serializable, ProductListVisitor, ProductListPersistence {
     private final String dbPath;
     private List<ShoppingList> shoppingLists;
     private List<RequestList> requestLists;
@@ -29,7 +31,7 @@ public class ListPersistenceHSQLDB implements Serializable {
     private ProductPersistenceHSQLDB productPersistenceHSQLDB;
     private UserPersistenceHSQLDB userPersistenceHSQLDB;
 
-    public ListPersistenceHSQLDB(String dbPath) {
+    public ProductListPersistenceHSQLDB(String dbPath) {
         this.dbPath = dbPath;
         this.storePersistenceHSQLDB = new StorePersistenceHSQLDB(dbPath);
         this.productPersistenceHSQLDB = new ProductPersistenceHSQLDB(dbPath);
@@ -65,10 +67,6 @@ public class ListPersistenceHSQLDB implements Serializable {
                 // Determine if it's a shopping list or a user list
                 // based on whether userID is null or not
                 if (!resultSet.wasNull()) {
-                    if(userPersistenceHSQLDB.getUserById(userID) == null) {
-                        User user = userPersistenceHSQLDB.getUserById(userID);
-
-                    }
                     User user = userPersistenceHSQLDB.getUserById(userID);
 
                     productList = new RequestList(listID, cart, user);
@@ -107,6 +105,7 @@ public class ListPersistenceHSQLDB implements Serializable {
 
         return cart;
     }
+
     public List<ShoppingList> getExistingShoppingLists() {
         return shoppingLists;
     }
@@ -150,7 +149,6 @@ public class ListPersistenceHSQLDB implements Serializable {
 
             connection.commit();
             statement.close();
-            loadProductLists();
 
         } catch (final SQLException e) {
             Log.e("Connect SQL", e.getMessage() + e.getSQLState());
@@ -189,7 +187,9 @@ public class ListPersistenceHSQLDB implements Serializable {
 
             statement.close();
             connection.commit();
-            loadProductLists();
+
+            productLists.add(productList);
+            productList.add(this);
 
         } catch (final SQLException e) {
             Log.e("Connect SQL", e.getMessage() + e.getSQLState());
@@ -215,8 +215,9 @@ public class ListPersistenceHSQLDB implements Serializable {
 
             connection.commit();
             statement.close();
-            loadProductLists();
 
+            productLists.remove(productList);
+            productList.delete(this);
         } catch (final SQLException e) {
             Log.e("Connect SQL", e.getMessage() + e.getSQLState());
             e.printStackTrace();
@@ -235,5 +236,25 @@ public class ListPersistenceHSQLDB implements Serializable {
         }
 
         return false;
+    }
+
+    @Override
+    public void add(ShoppingList shoppingList) {
+        shoppingLists.add(shoppingList);
+    }
+
+    @Override
+    public void add(RequestList requestList) {
+        requestLists.add(requestList);
+    }
+
+    @Override
+    public void delete(ShoppingList shoppingList) {
+        shoppingLists.remove(shoppingList);
+    }
+
+    @Override
+    public void delete(RequestList requestList) {
+        requestLists.remove(requestList);
     }
 }
