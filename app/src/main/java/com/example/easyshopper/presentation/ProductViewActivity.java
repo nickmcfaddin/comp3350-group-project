@@ -12,14 +12,15 @@ import android.widget.TextView;
 
 import com.example.easyshopper.R;
 import com.example.easyshopper.logic.ProductHandler;
+import com.example.easyshopper.logic.StoreHandler;
 import com.example.easyshopper.objects.Price;
 import com.example.easyshopper.objects.Product;
 import com.example.easyshopper.presentation.adapter.ItemPopupAdapter;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class ProductViewActivity extends AppCompatActivity {
-    ProductHandler productHandler = new ProductHandler();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,18 +37,24 @@ public class ProductViewActivity extends AppCompatActivity {
             }
         });
 
-        //get id passed to the intent
-        int productID = getIntent().getIntExtra("Product ID", 0);
+        //get values passed to the intent
+        int productID = getIntent().getIntExtra("productID", 0);
 
         //get product with associating id and its values
-        Product product = productHandler.getProductByID(productID);
+        Product product = ProductHandler.getProductByID(productID);
         String name = product.getProductName();
         double calories = product.getCalories();
+
+        // Create a DecimalFormat object with the desired format
+        DecimalFormat df = new DecimalFormat("#.#");
+        // Format the calories value to have a maximum of two decimal places
+        String formattedCalories = df.format(calories);
+
         double fat = product.getFat();
         double carbs = product.getCarb();
         double protein = product.getProtein();
         String xmlFileName = "icon_" + name.toLowerCase();
-        List<Price> prices = productHandler.allStoreSortedPrice(product);
+        List<Price> prices = ProductHandler.allStoreSortedPrice(product);
 
         //get components from xml
         TextView nameTextView = findViewById(R.id.searchedProductName);
@@ -64,7 +71,7 @@ public class ProductViewActivity extends AppCompatActivity {
 
         // set product nutritional facts
         nameTextView.setText(name);
-        caloriesTextView.setText("Calories: " + calories);
+        caloriesTextView.setText("Calories: " + formattedCalories);
         fatTextView.setText("Fat: " + fat + "g");
         carbsTextView.setText("Carbs: " + carbs + "g");
         proteinTextView.setText("Protein: " + protein + "g");

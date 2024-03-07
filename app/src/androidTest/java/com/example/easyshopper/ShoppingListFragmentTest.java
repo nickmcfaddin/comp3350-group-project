@@ -30,15 +30,13 @@ import com.example.easyshopper.objects.Product;
 
 import com.example.easyshopper.objects.ShoppingList;
 import com.example.easyshopper.objects.Store;
-import com.example.easyshopper.presentation.MainActivity;
+import com.example.easyshopper.presentation.TestStubDBMainActivity;
 import com.example.easyshopper.utils.TestUtils;
 
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
-import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(AndroidJUnit4.class)
@@ -48,12 +46,12 @@ public class ShoppingListFragmentTest {
     private final int sleepTime = 500;
 
     @Rule
-    public ActivityScenarioRule<MainActivity> activityScenarioRule = new ActivityScenarioRule<>(MainActivity.class);
+    public ActivityScenarioRule<TestStubDBMainActivity> activityScenarioRule = new ActivityScenarioRule<>(TestStubDBMainActivity.class);
     private TestUtils testUtils;
 
     @Before
     public void setUp() {
-        testUtils = new TestUtils();
+        testUtils = new TestUtils(false);
     }
 
     @Test
@@ -94,7 +92,7 @@ public class ShoppingListFragmentTest {
 
             for (int i = 0; i < adapter.getGroupCount(); i++) {
                 // get the product cart for shopping list
-                ArrayList<Product> shoppingListCart = allShoppingList.get(i).getItemList();
+                List<Product> shoppingListCart = allShoppingList.get(i).getCart();
 
                 // get the shopping cart view
                 View parentView = adapter.getGroupView(i, false, null, expandableListView);
@@ -105,12 +103,16 @@ public class ShoppingListFragmentTest {
                 // check if the name and price for shopping cart is correct
                 TextView shoppingCartName = parentView.findViewById(R.id.shopping_list_header_name);
                 String cartName = shoppingCartName.getText().toString();
-                String expectedCartName = allShoppingList.get(i).getShoppingListName();
+                String expectedCartName = allShoppingList.get(i).getListName();
                 assertEquals(expectedCartName, cartName);
 
                 TextView shoppingCartTotal = parentView.findViewById(R.id.shopping_list_price);
                 String cartTotal = shoppingCartTotal.getText().toString();
-                String expectedCartTotal = "$" + testUtils.getCartTotal(allShoppingList.get(i));
+                System.out.println("abc " + shoppingCartTotal.getText().toString());
+                String expectedCartTotal = "$" +  String.format("%.2f", testUtils.getCartTotal(allShoppingList.get(i)));
+
+                System.out.println("xyz " + expectedCartTotal);
+
                 assertEquals(expectedCartTotal, cartTotal);
 
                 // expand the group
@@ -166,6 +168,14 @@ public class ShoppingListFragmentTest {
 
     @Test
     public void testShoppingListFragmentDeleteList() {
+        // click on the shopping list icon
+        onView(withId(R.id.shoppingList)).perform(click());
+
+        SystemClock.sleep(sleepTime);
+
+        // verify that the search fragment is displayed after clicking the shopping list icon
+        onView(withId(R.id.ShoppingListFragment)).check(matches(isDisplayed()));
+
         // click on the addButton
         onView(withId(R.id.addButton)).perform(click());
 
@@ -185,7 +195,7 @@ public class ShoppingListFragmentTest {
         // title
         onView(withId(R.id.input_dialog_title)).check(matches(isDisplayed()));
 
-        onView(withId(R.id.input_dialog_title)).check(matches(withText("Choose Shopping Lists to Delete:")));
+        onView(withId(R.id.input_dialog_title)).check(matches(withText("Choose Lists to Delete:")));
 
         // list of stores
         onView(withId(R.id.list_view)).check(matches(isDisplayed()));
@@ -228,6 +238,14 @@ public class ShoppingListFragmentTest {
 
     @Test
     public void testShoppingListFragmentAddProduct() {
+        // click on the shopping list icon
+        onView(withId(R.id.shoppingList)).perform(click());
+
+        SystemClock.sleep(sleepTime);
+
+        // verify that the search fragment is displayed after clicking the shopping list icon
+        onView(withId(R.id.ShoppingListFragment)).check(matches(isDisplayed()));
+
         // click on the addButton
         onView(withId(R.id.addButton)).perform(click());
 
@@ -294,6 +312,14 @@ public class ShoppingListFragmentTest {
 
     @Test
     public void testShoppingListFragmentCreateList() {
+        // click on the shopping list icon
+        onView(withId(R.id.shoppingList)).perform(click());
+
+        SystemClock.sleep(sleepTime);
+
+        // verify that the search fragment is displayed after clicking the shopping list icon
+        onView(withId(R.id.ShoppingListFragment)).check(matches(isDisplayed()));
+
         // click on the addButton
         onView(withId(R.id.addButton)).perform(click());
 

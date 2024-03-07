@@ -18,26 +18,17 @@ import com.example.easyshopper.objects.Store;
 
 import java.util.List;
 
-public class ShoppingListAdapter extends BaseExpandableListAdapter  {
+public class ShoppingListAdapter extends BaseExpandableListAdapter implements DynamicListAdapter  {
     private Context context;
     private List<ShoppingList> shoppingLists;
-    private ProductHandler productHandler = new ProductHandler();
-    private ShoppingListHandler shoppingListHandler = new ShoppingListHandler();
-
     public ShoppingListAdapter(Context context, List<ShoppingList> shoppingLists) {
         this.context = context;
         this.shoppingLists = shoppingLists;
     }
 
-    //update from an outer sources
-    public void updateData(List<ShoppingList> shoppingLists) {
-        this.shoppingLists = shoppingLists;
-        notifyDataSetChanged();
-    }
-
     //update from internal sources
     public void updateData() {
-        shoppingLists = shoppingListHandler.getAllShoppingLists();
+        shoppingLists = ShoppingListHandler.getAllShoppingLists();
         notifyDataSetChanged();
     }
 
@@ -80,7 +71,7 @@ public class ShoppingListAdapter extends BaseExpandableListAdapter  {
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
         //get values
         final ShoppingList shoppingList = (ShoppingList) getGroup(groupPosition);
-        String shoppingListTitle = shoppingList.getShoppingListName();
+        String shoppingListTitle = shoppingList.getListName();
 
         //create view if not initialized
         if(convertView == null) {
@@ -94,7 +85,7 @@ public class ShoppingListAdapter extends BaseExpandableListAdapter  {
         TextView shoppingListPriceView = convertView.findViewById(R.id.shopping_list_price);
 
         shoppingListTitleView.setText(shoppingListTitle);
-        shoppingListPriceView.setText("$" + shoppingListHandler.getCartTotal(shoppingList));
+        shoppingListPriceView.setText("$" + String.format("%.2f", ShoppingListHandler.getCartTotal(shoppingList)));
 
         return convertView;
     }
@@ -105,7 +96,7 @@ public class ShoppingListAdapter extends BaseExpandableListAdapter  {
         final ShoppingList shoppingList = (ShoppingList) getGroup(groupPosition);
         final Product product = (Product) getChild(groupPosition,childPosition);
         final Store store = shoppingList.getStore();
-        String price = "$" + productHandler.getPriceOfProductInStore(product, store);
+        String price = "$" + String.format("%.2f", ProductHandler.getPriceOfProductInStore(product, store));
 
         if(convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -157,7 +148,7 @@ public class ShoppingListAdapter extends BaseExpandableListAdapter  {
             @Override
             public void onClick(View v) {
                 //remove product from list and update view
-                shoppingListHandler.removeProduct(product,shoppingList);
+                ShoppingListHandler.removeProductFromCart(product,shoppingList);
 
                 updateData();
 

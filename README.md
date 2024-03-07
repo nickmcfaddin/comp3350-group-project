@@ -6,7 +6,7 @@ EasyShopper is a new app that enables shoppers to store, view, and modify their 
 
 ## Release Notes
 - [Iteration 1](https://code.cs.umanitoba.ca/comp3350-winter2024/lethalcompany-a01-13/-/blob/main/Documents/Iteration%201/Iteration_1_Release_Notes.md): February 8, 2024
-- Iteration 2
+- [Iteration 2](https://code.cs.umanitoba.ca/comp3350-winter2024/lethalcompany-a01-13/-/blob/main/Documents/Iteration%202/Iteration_2_Release_Notes.md?ref_type=heads): March 7, 2024
 - Iteration 3
 
 ## Iteration Milestones 
@@ -22,17 +22,17 @@ EasyShopper is a new app that enables shoppers to store, view, and modify their 
 
 ## User Stories
 - [Iteration 1](https://code.cs.umanitoba.ca/comp3350-winter2024/lethalcompany-a01-13/-/issues/?sort=created_date&state=all&label_name%5B%5D=User%20Stories&milestone_title=Iteration%201&first_page_size=20)
-- Iteration 2
+- [Iteration 2](https://code.cs.umanitoba.ca/comp3350-winter2024/lethalcompany-a01-13/-/issues/?sort=created_date&state=opened&label_name%5B%5D=User%20Stories&milestone_title=Iteration%202&first_page_size=20)
 - Iteration 3
 
 ## Developer Task
 - [Iteration 1](https://code.cs.umanitoba.ca/comp3350-winter2024/lethalcompany-a01-13/-/issues/?sort=created_date&state=all&label_name%5B%5D=Dev%20Task&milestone_title=Iteration%201&first_page_size=20)
-- Iteration 2
+- [Iteration 2](https://code.cs.umanitoba.ca/comp3350-winter2024/lethalcompany-a01-13/-/issues/?sort=created_date&state=opened&milestone_title=Iteration%202&label_name%5B%5D=Dev%20Task&first_page_size=20)
 - Iteration 3
 
 ## Architecture
-- [Iteration 1](https://code.cs.umanitoba.ca/comp3350-winter2024/lethalcompany-a01-13/-/blob/main/Documents/Iteration%201/Iteration%201%20Architecture%20Diagram%20Final.md)
-- Iteration 2
+- [Iteration 1](https://code.cs.umanitoba.ca/comp3350-winter2024/lethalcompany-a01-13/-/blob/main/Documents/Iteration%201/Architecture%20Diagram/Iteration%201%20Architecture%20Diagram%20Final.md?ref_type=heads)
+- [Iteration 2](https://code.cs.umanitoba.ca/comp3350-winter2024/lethalcompany-a01-13/-/blob/main/Documents/Iteration%202/Iteration_2_Architecture_Diagram.png)
 - Iteration 3
 
 ## Work Flow/Contributing
@@ -41,9 +41,12 @@ EasyShopper is a new app that enables shoppers to store, view, and modify their 
 ## Restrospective 
 - [Iteration 0](https://code.cs.umanitoba.ca/comp3350-winter2024/lethalcompany-a01-13/-/blob/main/Documents/Iteration0Retrospective.md)
 - Iteration 1
+    * [Group](https://code.cs.umanitoba.ca/comp3350-winter2024/lethalcompany-a01-13/-/blob/main/Documents/Iteration%201/Retrospective/Iteration1_GroupRetrospective.md?ref_type=heads)
+    * [Individual](https://code.cs.umanitoba.ca/comp3350-winter2024/lethalcompany-a01-13/-/blob/main/Documents/Iteration%201/Retrospective/Iteration1_IndividualRetrospective.md?ref_type=heads)
 - Iteration 2
 - Iteration 3
 
 ## Tests
 - [Unit Tests](https://code.cs.umanitoba.ca/comp3350-winter2024/lethalcompany-a01-13/-/blob/main/app/src/test/java/com/example/easyshopper/AllUnitTests.java?ref_type=heads)
+- Integration Tests
 - [Acceptance Tests](https://code.cs.umanitoba.ca/comp3350-winter2024/lethalcompany-a01-13/-/blob/main/app/src/androidTest/java/com/example/easyshopper/AllAcceptanceTests.java?ref_type=heads)

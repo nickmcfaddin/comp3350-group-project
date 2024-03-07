@@ -1,6 +1,7 @@
 package com.example.easyshopper.persistence;
 
 import com.example.easyshopper.objects.ShoppingList;
+import com.example.easyshopper.objects.Store;
 
 import java.util.List;
 
@@ -10,14 +11,7 @@ public interface ShoppingListPersistence {
     //Returns all currently existing ShoppingList's
     List<ShoppingList> getExistingShoppingLists();
 
-    //Updates the ShoppingList's information
-    void updateShoppingList(ShoppingList shoppingList);
-
-    //Adds a ShoppingList to the overall ShoppingList array
-    void addShoppingList(ShoppingList shoppingList);
-
-    //Delete a ShoppingList from the overall ShoppingList array by it's shoppingListID
-    void deleteShoppingList(ShoppingList shoppingList);
+    boolean listWithStoreExists(Store queryStore);
 
     //Currently removed functions -> ProductPersistence
     //Product addProduct(Product newProduct);

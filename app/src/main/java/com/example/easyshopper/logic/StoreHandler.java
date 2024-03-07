@@ -4,16 +4,21 @@ import com.example.easyshopper.application.Services;
 import com.example.easyshopper.objects.Store;
 import com.example.easyshopper.persistence.StorePersistence;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class StoreHandler {
-    StorePersistence storePersistence = Services.getStorePersistence();
+public class StoreHandler implements Serializable {
+    private static StorePersistence storePersistence;
 
-    public Store getStoreById(int storeID) {
+    public StoreHandler(boolean forProduction) {
+        storePersistence = Services.getStorePersistence(forProduction);
+    }
+
+    public static Store getStoreById(int storeID) {
         return storePersistence.getStoreById(storeID);
     }
 
-     public List<Store> getExistingStores() {
+    public static List<Store> getExistingStores() {
         return storePersistence.getExistingStores();
-     }
+    }
 }

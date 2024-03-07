@@ -2,15 +2,6 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
-      <entry key="AllAcceptanceTests">
-        <State />
-      </entry>
-      <entry key="SearchFragmentTest">
-        <State />
-      </entry>
-      <entry key="Tests in 'com.example.easyshopper'">
-        <State />
-      </entry>
       <entry key="app">
         <State>
           <targetSelectedWithDropDown>
@@ -24,11 +15,8 @@
               </deviceKey>
             </Target>
           </targetSelectedWithDropDown>
-          <timeTargetWasSelectedWithDropDown value="2024-02-08T14:41:39.733452500Z" />
+          <timeTargetWasSelectedWithDropDown value="2024-02-28T17:22:18.474356800Z" />
         </State>
-      </entry>
-      <entry key="testSearchFragmentItemPopUp()">
-        <State />
       </entry>
     </value>
   </component>

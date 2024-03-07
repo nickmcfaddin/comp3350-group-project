@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/addUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:title="Create User" />
+    <item
+        android:id="@+id/deleteUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:title="Delete User" />
+    <item
+        android:id="@+id/addProductsToRequest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:title="Add Products to Request" />
+</menu>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/addUserPopUp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="350dp"
+    android:background="@color/primary_theme"
+    android:backgroundTint="#0DFFFFFF"
+    android:paddingHorizontal="20dp"
+    android:paddingVertical="15dp">
+
+    <TextView
+        android:id="@+id/create_user_dialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/inter_semibold"
+        android:text="Enter User Name"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/user_name_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/create_user_dialog"
+        android:fontFamily="@font/inter_semibold"
+        android:hint="Name" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/cancel_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/user_name_input"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="20sp"
+        android:background="@color/secondary_theme"
+        android:fontFamily="@font/inter_semibold"
+        android:text="Cancel"
+        android:textColor="@color/primary_theme"></androidx.appcompat.widget.AppCompatButton>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/confirm_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/user_name_input"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="20sp"
+        android:background="@color/secondary_theme"
+        android:fontFamily="@font/inter_semibold"
+        android:text="Confirm"
+        android:textColor="@color/primary_theme"></androidx.appcompat.widget.AppCompatButton>
+
+</RelativeLayout>

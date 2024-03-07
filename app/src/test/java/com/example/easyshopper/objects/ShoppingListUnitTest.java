@@ -9,7 +9,8 @@ import java.util.ArrayList;
 public class ShoppingListUnitTest {
 
     @Before
-    public void setup() {System.out.println("Starting test for ShoppingList");
+    public void setup() {
+        System.out.println("Starting test for ShoppingList");
     }
 
     @Test
@@ -24,11 +25,13 @@ public class ShoppingListUnitTest {
 
         //Test GETTER methods
         assertNotNull(store);
-        assertEquals("Kwik-E-Mart", shoppingList.getShoppingListName());
+        assertEquals("Kwik-E-Mart", shoppingList.getListName());
         assertEquals(store, shoppingList.getStore());
 
+        assertEquals("Kwik-E-Mart", shoppingList.toString());
+
         //Create new Product to use for test
-        Product product = new Product(1, "Eggs", 0.3, 5, 0.8);
+        Product product = new Product(1, "Eggs", 0.3, 5, 0.8, 1);
 
         //Add our new Product's to the ArrayList<Product> to test against
         ArrayList<Product> productArrayList = new ArrayList<>();
@@ -38,12 +41,12 @@ public class ShoppingListUnitTest {
         shoppingList.addProductToCart(product);
 
         //Testing ShoppingList functions
-        assertEquals(productArrayList, shoppingList.getItemList());
+        assertEquals(productArrayList, shoppingList.getCart());
         assertTrue(shoppingList.checkForProductInCart(product));
 
         //Test Product removal from ShoppingList
         shoppingList.removeProductFromCart(product);
-        assertEquals(0, shoppingList.getItemList().size());
+        assertEquals(0, shoppingList.getCart().size());
 
         System.out.println("Finished testCreateAShoppingList");
     }

@@ -1,16 +1,15 @@
 package com.example.easyshopper.persistence.stub;
 
-import com.example.easyshopper.application.Services;
-import com.example.easyshopper.objects.Product;
 import com.example.easyshopper.objects.Store;
-import com.example.easyshopper.persistence.ProductPersistence;
+import com.example.easyshopper.persistence.ProductListPersistence;
 import com.example.easyshopper.persistence.StorePersistence;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class StorePersistenceStub implements StorePersistence {
+public class StorePersistenceStub implements StorePersistence, Serializable {
     private List<Store> storeList;
 
     //Constructor
@@ -24,25 +23,10 @@ public class StorePersistenceStub implements StorePersistence {
         storeList.add(costco);
         storeList.add(walmart);
         storeList.add(superstore);
-
-        addAllProductsToStore(costco);
-        addAllProductsToStore(walmart);
-        addAllProductsToStore(superstore);
     }
 
     //Returns a list of all existing Store's
     public List<Store> getExistingStores(){return Collections.unmodifiableList(storeList);};
-
-    //Adds all Product's to the identified Store
-    public void addAllProductsToStore(Store store){
-        Services services = new Services();
-        ProductPersistence productPersistence = services.getProductPersistence();
-
-        List<Product> existingProducts = productPersistence.getExistingProducts();
-        for (Product product : existingProducts){
-            store.addProductToStore(product);
-        }
-    }
 
     //Returns a single Store identified by a storeID
     public Store getStoreById(int storeID){
@@ -56,11 +40,8 @@ public class StorePersistenceStub implements StorePersistence {
     }
 
     public void addStore(Store store){
-        for (Store i :storeList){
-            if(i.equals(store)){
-                return;
-            }
+        if(store != null){
+            storeList.add(store);
         }
-        storeList.add(store);
     }
 }

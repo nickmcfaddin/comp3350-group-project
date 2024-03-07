@@ -10,7 +10,9 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses({
         MainActivityTest.class,
         SearchFragmentTest.class,
-        ShoppingListFragmentTest.class
+        ShoppingListFragmentTest.class,
+        HomeInventoryFragmentTest.class,
+        UserRequestFragmentTest.class
 })
 
 public class AllAcceptanceTests {}

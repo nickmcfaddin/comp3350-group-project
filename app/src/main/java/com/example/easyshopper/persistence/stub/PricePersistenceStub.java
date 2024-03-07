@@ -8,6 +8,7 @@ import com.example.easyshopper.persistence.PricePersistence;
 import com.example.easyshopper.persistence.ProductPersistence;
 import com.example.easyshopper.persistence.StorePersistence;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +17,7 @@ import java.util.Random;
 import java.text.DecimalFormat;
 
 //Price fake db
-public class PricePersistenceStub implements PricePersistence {
+public class PricePersistenceStub implements PricePersistence, Serializable {
     private List<Price> priceList;
 
     //Stub Constructor
@@ -26,8 +27,8 @@ public class PricePersistenceStub implements PricePersistence {
 
         //Setup connections to StorePersistence and ProductPersistence stubs
         Services services = new Services();
-        StorePersistence storePersistence = services.getStorePersistence();
-        ProductPersistence productPersistence = services.getProductPersistence();
+        StorePersistence storePersistence = services.getStorePersistence(false);
+        ProductPersistence productPersistence = services.getProductPersistence(false);
 
         //Gives us the total quantity of stores and products
         int totalStores = storePersistence.getExistingStores().size();
