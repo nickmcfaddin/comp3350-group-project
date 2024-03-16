@@ -12,10 +12,14 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.easyshopper.R;
+import com.example.easyshopper.application.Dialog;
 import com.example.easyshopper.logic.ProductListHandler;
 import com.example.easyshopper.logic.RequestListHandler;
 import com.example.easyshopper.logic.ShoppingListHandler;
 import com.example.easyshopper.logic.UserHandler;
+import com.example.easyshopper.logic.exceptions.InvalidRequestListException;
+import com.example.easyshopper.logic.exceptions.InvalidUserException;
+import com.example.easyshopper.logic.exceptions.LogicException;
 import com.example.easyshopper.objects.Product;
 import com.example.easyshopper.objects.ProductList;
 import com.example.easyshopper.objects.RequestList;
@@ -47,8 +51,13 @@ public class RequestListDialog extends ProductListDialog implements Serializable
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                User newUser = UserHandler.createUser(inputText.getText().toString());
-                RequestListHandler.createRequestList(newUser);
+                try {
+                    User newUser = UserHandler.createUser(inputText.getText().toString());
+                    RequestListHandler.createRequestList(newUser);
+                } catch (LogicException e) {
+                    Dialog.showErrorMessageDialog(e);
+                    return;
+                }
 
                 dynamicListAdapter.updateData();
                 alertDialog.dismiss();

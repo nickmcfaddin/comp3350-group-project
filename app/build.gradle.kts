@@ -6,6 +6,10 @@ android {
     namespace = "com.example.easyshopper"
     compileSdk = 34
 
+    testOptions {
+        unitTests.isReturnDefaultValues = true;
+    }
+
     defaultConfig {
         applicationId = "com.example.easyshopper"
         minSdk = 26
