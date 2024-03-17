@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.easyshopper.R;
+import com.example.easyshopper.application.Dialog;
 import com.example.easyshopper.logic.ProductHandler;
 import com.example.easyshopper.logic.ShoppingListHandler;
 import com.example.easyshopper.objects.Product;
@@ -115,7 +116,7 @@ public class ShoppingListAdapter extends BaseExpandableListAdapter implements Dy
         convertView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                removeProductPrompt(shoppingList,product);
+                Dialog.getShoppingListDialog().removeProductPrompt(shoppingList,product);
                 return true;
             }
         });
@@ -125,45 +126,5 @@ public class ShoppingListAdapter extends BaseExpandableListAdapter implements Dy
     @Override
     public boolean isChildSelectable(int groupPosition, int childPosition) {
         return false;
-    }
-
-    //show user a prompt asking them if they want to remove product from a list
-    public void removeProductPrompt(ShoppingList shoppingList, Product product) {
-        //Create alert and link it to our custom dialog
-        AlertDialog.Builder alert = new AlertDialog.Builder(context);
-        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View dialogView = inflater.inflate(R.layout.dialog_delete_prompt, null);
-        alert.setView(dialogView);
-        final AlertDialog alertDialog = alert.create();
-
-        //get and init components
-        TextView dialogTitle = dialogView.findViewById(R.id.input_dialog_title);
-        dialogTitle.setText("Remove Product From List?");
-
-        Button yesButton = dialogView.findViewById(R.id.yes_btn);
-        Button noButton = dialogView.findViewById(R.id.no_btn);
-
-        //set behaviour for buttons
-        yesButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //remove product from list and update view
-                ShoppingListHandler.removeProductFromCart(product,shoppingList);
-
-                updateData();
-
-                alertDialog.dismiss();
-            }
-        });
-
-        noButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                alertDialog.dismiss();
-            }
-        });
-
-        // Show the dialog
-        alertDialog.show();
     }
 }

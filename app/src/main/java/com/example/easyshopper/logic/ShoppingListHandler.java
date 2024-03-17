@@ -1,6 +1,9 @@
 package com.example.easyshopper.logic;
 
+import android.util.Log;
+
 import com.example.easyshopper.application.Services;
+import com.example.easyshopper.logic.exceptions.InvalidShoppingListException;
 import com.example.easyshopper.objects.Product;
 import com.example.easyshopper.objects.ShoppingList;
 import com.example.easyshopper.objects.Store;
@@ -28,14 +31,17 @@ public class ShoppingListHandler extends ProductListHandler implements Serializa
     }
 
     //create a new shopping list and add to overall shopping list array
-    public static void createShoppingList(Store store){
-        //validate inputs
-        if(store == null || shoppingListPersistence.listWithStoreExists(store)) {
+    public static void createShoppingList(Store store) throws InvalidShoppingListException {
+        if(store == null) {
+            Log.e("ShoppingListHandler", "Null store passed when making shopping list!");
             return;
         }
 
-        ShoppingList newList = new ShoppingList(store);
+        if(shoppingListPersistence.listWithStoreExists(store)) {
+            throw new InvalidShoppingListException("Shopping list with store already exists!");
+        }
 
+        ShoppingList newList = new ShoppingList(store);
         createList(newList);
     }
 
@@ -43,6 +49,7 @@ public class ShoppingListHandler extends ProductListHandler implements Serializa
     public static double getCartTotal(ShoppingList shoppingList){
         if(shoppingList == null || !listExists(shoppingList))
         {
+            Log.e("ShoppingListHandler", "Invalid Shopping List passed when calculating cart total!");
             return -1;
         }
 
