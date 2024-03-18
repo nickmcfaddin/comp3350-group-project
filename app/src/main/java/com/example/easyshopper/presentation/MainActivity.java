@@ -16,7 +16,6 @@ import com.example.easyshopper.logic.RequestListHandler;
 import com.example.easyshopper.logic.ShoppingListHandler;
 import com.example.easyshopper.logic.StoreHandler;
 import com.example.easyshopper.logic.UserHandler;
-import com.example.easyshopper.objects.User;
 import com.example.easyshopper.persistence.utils.DBHelper;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 

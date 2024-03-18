@@ -53,7 +53,7 @@ public class ProductViewActivity extends AppCompatActivity {
         double fat = product.getFat();
         double carbs = product.getCarb();
         double protein = product.getProtein();
-        String xmlFileName = "icon_" + name.toLowerCase();
+        String xmlFileName = "icon_" + name.toLowerCase().replace(" ", "_");
         List<Price> prices = ProductHandler.allStoreSortedPrice(product);
 
         //get components from xml

@@ -16,12 +16,10 @@ import android.widget.PopupMenu;
 
 import com.example.easyshopper.R;
 import com.example.easyshopper.application.Dialog;
-import com.example.easyshopper.logic.ProductHandler;
 import com.example.easyshopper.logic.ShoppingListHandler;
 import com.example.easyshopper.objects.ShoppingList;
 import com.example.easyshopper.presentation.adapter.ShoppingListAdapter;
 import com.example.easyshopper.presentation.dialog.ShoppingListDialog;
-
 import java.util.List;
 
 public class ShoppingListFragment extends Fragment {
@@ -41,7 +39,7 @@ public class ShoppingListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView =  inflater.inflate(R.layout.fragment_shopping_list, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_shopping_list, container, false);
 
         //set behaviour for components
         initComponents(rootView);
@@ -86,5 +84,9 @@ public class ShoppingListFragment extends Fragment {
                 popupMenu.show();
             }
         });
+
+        ImageButton exportButton = rootView.findViewById(R.id.exportButton);
+
+        exportButton.setOnClickListener(v -> shoppingListDialog.exportListDialog(getContext()));
     }
 }
