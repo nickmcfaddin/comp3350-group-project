@@ -33,7 +33,6 @@ public class HomeProductPersistenceHSQLDB implements HomeProductPersistence, Ser
         return DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true", "SA", "");
     }
 
-
     private void loadHomeProducts() {
         homeProducts = new ArrayList<>();
 
@@ -63,20 +62,15 @@ public class HomeProductPersistenceHSQLDB implements HomeProductPersistence, Ser
         }
     }
 
-    private List<String> loadExpiryDates(int productID, Connection connection) {
+    private List<String> loadExpiryDates(int productID, Connection connection) throws SQLException {
         List<String> expiryDates = new ArrayList<>();
 
-        try {
-            final PreparedStatement statement = connection.prepareStatement("SELECT * FROM EXPIRYDATES WHERE EXPIRYDATES.ProductID = ?");
-            statement.setInt(1, productID);
+        final PreparedStatement statement = connection.prepareStatement("SELECT * FROM EXPIRYDATES WHERE EXPIRYDATES.ProductID = ?");
+        statement.setInt(1, productID);
 
-            final ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                expiryDates.add(resultSet.getString("ExpiryDate"));
-            }
-        } catch (final SQLException e) {
-            Log.e("Connect SQL", e.getMessage() + e.getSQLState());
-            e.printStackTrace();
+        final ResultSet resultSet = statement.executeQuery();
+        while (resultSet.next()) {
+            expiryDates.add(resultSet.getString("ExpiryDate"));
         }
 
         return expiryDates;
@@ -145,10 +139,6 @@ public class HomeProductPersistenceHSQLDB implements HomeProductPersistence, Ser
     }
 
     private void updateHomeProduct(HomeProduct homeProduct) {
-        if(homeProduct == null) {
-            return;
-        }
-
         try (Connection connection = connect()) {
             PreparedStatement statement = connection.prepareStatement("UPDATE HOMEPRODUCTS set StockQuantity = ?, DesiredQuantity = ? WHERE ProductID = ?");
             statement.setInt(1, homeProduct.getHomeProductStockQuantity());
@@ -210,7 +200,7 @@ public class HomeProductPersistenceHSQLDB implements HomeProductPersistence, Ser
         }
     }
 
-    public List<String> getHomeProductExpiryDate(HomeProduct homeProduct){
+    public List<String> getHomeProductExpiryDate(HomeProduct homeProduct) {
         if (homeProducts.contains(homeProduct)){
             int curIndex = homeProducts.indexOf(homeProduct);
             HomeProduct curHomeProduct = homeProducts.get(curIndex);
@@ -221,7 +211,7 @@ public class HomeProductPersistenceHSQLDB implements HomeProductPersistence, Ser
         return null;
     }
 
-    public List<String> getHomeProductSortedExpiryDateAscending(HomeProduct homeProduct){
+    public List<String> getHomeProductSortedExpiryDateAscending(HomeProduct homeProduct) {
         if (homeProducts.contains(homeProduct)){
             int curIndex = homeProducts.indexOf(homeProduct);
             HomeProduct curHomeProduct = homeProducts.get(curIndex);
@@ -232,7 +222,7 @@ public class HomeProductPersistenceHSQLDB implements HomeProductPersistence, Ser
         return null;
     }
 
-    public List<String> getHomeProductSortedExpiryDateDescending(HomeProduct homeProduct){
+    public List<String> getHomeProductSortedExpiryDateDescending(HomeProduct homeProduct) {
         if (homeProducts.contains(homeProduct)){
             int curIndex = homeProducts.indexOf(homeProduct);
             HomeProduct curHomeProduct = homeProducts.get(curIndex);
@@ -246,5 +236,4 @@ public class HomeProductPersistenceHSQLDB implements HomeProductPersistence, Ser
     public List<HomeProduct> getHomeProducts() {
         return homeProducts;
     }
-
 }

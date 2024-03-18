@@ -11,35 +11,33 @@
     android:paddingVertical="15dp">
 
     <TextView
-        android:id="@+id/input_dialog_title"
+        android:id="@+id/error_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/inter_semibold"
-        android:text="Do you want to remove this product from the list?"
+        android:text="Oops!"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/error_message_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/error_title"
+        android:fontFamily="@font/inter_semibold"
+        android:text="Usernames can only contain letters!"
         android:textSize="20sp" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/no_btn"
+        android:id="@+id/ok_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/input_dialog_title"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="50dp"
-        android:background="@color/secondary_theme"
-        android:fontFamily="@font/inter_semibold"
-        android:text="NO"
-        android:textColor="@color/primary_theme"></androidx.appcompat.widget.AppCompatButton>
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/yes_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/input_dialog_title"
+        android:layout_below="@+id/error_message_view"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="10dp"
         android:background="@color/secondary_theme"
         android:fontFamily="@font/inter_semibold"
-        android:text="YES"
+        android:text="OK"
         android:textColor="@color/primary_theme">
     </androidx.appcompat.widget.AppCompatButton>
 

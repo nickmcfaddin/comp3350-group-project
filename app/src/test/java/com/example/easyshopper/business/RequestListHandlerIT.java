@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import com.example.easyshopper.application.Services;
 import com.example.easyshopper.logic.UserHandler;
+import com.example.easyshopper.logic.exceptions.InvalidRequestListException;
 import com.example.easyshopper.objects.User;
 import com.example.easyshopper.logic.RequestListHandler;
 import com.example.easyshopper.utils.TestUtils;
@@ -43,6 +44,15 @@ public class RequestListHandlerIT {
     public void testCreateRequestList(){
         RequestListHandler.createRequestList(testUser);
         System.out.println("abc " + RequestListHandler.getAllRequestLists());
+        assertEquals(1, RequestListHandler.getAllRequestLists().size());
+    }
+
+    @Test (expected = InvalidRequestListException.class)
+    public void testDuplicateUser(){
+        RequestListHandler.createRequestList(testUser);
+        assertEquals(1, RequestListHandler.getAllRequestLists().size());
+
+        RequestListHandler.createRequestList(testUser);
         assertEquals(1, RequestListHandler.getAllRequestLists().size());
     }
 

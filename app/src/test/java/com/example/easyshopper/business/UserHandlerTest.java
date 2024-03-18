@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import com.example.easyshopper.application.Services;
 import com.example.easyshopper.logic.UserHandler;
+import com.example.easyshopper.logic.exceptions.InvalidUserException;
 
 import org.junit.After;
 import org.junit.Before;
@@ -23,7 +24,7 @@ public class UserHandlerTest {
         assertEquals(5, UserHandler.getExistingUsers().size());
     }
 
-    @Test
+    @Test(expected = InvalidUserException.class)
     public void testCreateUser(){
         //Tests the valid name function within this
         UserHandler.createUser("InV@l1d N@m3");

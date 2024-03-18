@@ -13,12 +13,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.easyshopper.R;
-import com.example.easyshopper.logic.ProductHandler;
+import com.example.easyshopper.application.Dialog;
 import com.example.easyshopper.logic.ShoppingListHandler;
 import com.example.easyshopper.logic.StoreHandler;
+import com.example.easyshopper.logic.exceptions.InvalidShoppingListException;
 import com.example.easyshopper.objects.Product;
 import com.example.easyshopper.objects.ShoppingList;
 import com.example.easyshopper.objects.Store;
+import com.example.easyshopper.presentation.adapter.DynamicListAdapter;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -90,7 +92,12 @@ public class ShoppingListDialog extends ProductListDialog {
                 }
 
                 //create shopping list and update the list view
-                ShoppingListHandler.createShoppingList(store);
+                try {
+                    ShoppingListHandler.createShoppingList(store);
+                } catch (InvalidShoppingListException e) {
+                    Dialog.showErrorMessageDialog(e);
+                    return;
+                }
 
                 //update the displayed list
                 if(dynamicListAdapter != null) {
