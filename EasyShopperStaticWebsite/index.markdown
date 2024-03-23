@@ -1,0 +1,22 @@
+---
+# Feel free to add content and custom Front Matter to this file.
+# To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
+
+layout: page
+author: ""
+---
+
+## Vision
+To enhance the grocery shopping experience, providing a platform that organizes and structures each shopping journey, ensuring simplicity and efficiency for all shoppers.
+
+## What is EasyShopper?
+EasyShopper puts all of your grocery lists in one location, providing a convenient and accessible way to monitor your shopping routine. This platform also keeps tabs on the quantities and expiry dates of items in your home. When you're running low on a product, EasyShopper will notice its low stock and optionally add it to your lists, ensuring that you never run out. EasyShopper also allows shoppers to search for a product and get more information regarding that product such as nutritional facts.
+
+## Who is EasyShopper for?
+EasyShopper is catered to frequent grocery shoppers of all kinds, including university students, parents and even newlyweds. What they have in common is that their lives are busy and always on the go. Our goal is to simplify one aspect of their busy lifestyle by reducing the complication involved in routine grocery shopping.
+
+## What Makes EasyShopper so Valuable?
+What makes this platform so valuable is that we are redefining the grocery shopping experience so that it better aligns with our modern lifestyles. We live in a world where inventions are made on a daily basis to make life easier, yet shopping is still so complicated. It can be especially difficult for people who have the tough task of integrating out of a fast food diet. Trying to have a healthier, more cost effective lifestyle sounds appealing, yet keeping track of necessary grocery items while staying organized amid life’s other responsibilities often proves to be a challenge. Many resort to methods such as using a post it note on the fridge, a note on their phone, or even just trying to memorize their list. Inevitably these lackluster attempts to provide some guidance get misplaced, deleted or forgotten. We get it, life is stressful, and the little things are hard to remember, that’s why we designed Easy Shopper: to provide an easy, centralized and accessible way for you to monitor your grocery lists.
+
+## Success Criterias for EasyShopper
+The success criteria for our project includes achieving a high rating on the app store (4.0 stars or higher). In addition, we want to receive positive feedback from users regarding the app’s user-friendly and convenient features that makes the routine of grocery shopping easier. Lastly, due to weekly user engagement, we aim for consistent ad revenue growth. The goal is to generate a minimum of $5,000 in ad revenue per month, displaying the app’s ability to retain both users and advertisers through its frequent usage. These criteria will signify both user satisfaction and the app’s financial sustainability, and determine the overall success of the platform.
