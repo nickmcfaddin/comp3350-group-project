@@ -37,6 +37,8 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(AndroidJUnit4.class)
@@ -155,6 +157,9 @@ public class ShoppingListFragmentTest {
         // check if the add button display
         onView(withId(R.id.addButton)).check(matches(isDisplayed()));
 
+        // check if the export button display
+        onView(withId(R.id.exportButton)).check(matches(isDisplayed()));
+
         // click on the addButton
         onView(withId(R.id.addButton)).perform(click());
 
@@ -164,6 +169,142 @@ public class ShoppingListFragmentTest {
         onView(withText("Add product to list")).check(matches(isDisplayed()));
         onView(withText("Create a list")).check(matches(isDisplayed()));
         onView(withText("Delete a list")).check(matches(isDisplayed()));
+    }
+
+    @Test
+    public void testShoppingListFragmentExportList() {
+        // click on the shopping list icon
+        onView(withId(R.id.shoppingList)).perform(click());
+
+        SystemClock.sleep(sleepTime);
+
+        // verify that the search fragment is displayed after clicking the shopping list icon
+        onView(withId(R.id.ShoppingListFragment)).check(matches(isDisplayed()));
+
+        // click on the exportButton
+        onView(withId(R.id.exportButton)).perform(click());
+
+        SystemClock.sleep(sleepTime);
+
+        // check if the export list pop up appears
+        onView(withId(R.id.createListPopUp)).check(matches(isDisplayed()));
+
+        // check the content inside the pop up
+
+        // title
+        onView(withId(R.id.store_select_title)).check(matches(isDisplayed()));
+
+        onView(withId(R.id.store_select_title)).check(matches(withText("Select Affiliated Store:")));
+
+        // button
+        onView(withId(R.id.cancel_btn)).check(matches(isDisplayed()));
+        onView(withId(R.id.submit_btn)).check(matches(isDisplayed()));
+
+        // click cancel button
+        onView(withId(R.id.cancel_btn)).perform(click());
+
+        SystemClock.sleep(sleepTime);
+
+        // verify that the search fragment is displayed after clicking the shopping list icon
+        onView(withId(R.id.ShoppingListFragment)).check(matches(isDisplayed()));
+
+        // click on the exportButton again
+        onView(withId(R.id.exportButton)).perform(click());
+
+        SystemClock.sleep(sleepTime);
+
+        // store dropdown test
+        onView(withId(R.id.textInputLayout)).check(matches(isDisplayed()));
+
+        SystemClock.sleep(sleepTime);
+
+        List<ShoppingList> allShoppingList = testUtils.getAllShoppingList();
+
+        // check dropdown menu store name and interaction with dropdown menu's items
+        for (int i = 0; i < allShoppingList.size(); i++) {
+            // click the dropdown
+            onView(withId(R.id.textInputLayout)).perform(click());
+
+            // check if the values in dropdown menu is correct
+            onData(anything())
+                    .inRoot(isPlatformPopup())
+                    .atPosition(i)
+                    .check(matches(withText(allShoppingList.get(i).getListName())));
+
+            SystemClock.sleep(sleepTime);
+
+            // click on dropdown item
+            onData(anything())
+                    .inRoot(isPlatformPopup())
+                    .atPosition(i)
+                    .perform(click());
+
+            SystemClock.sleep(sleepTime);
+
+            // check if the text input change
+            onView(allOf(withId(R.id.dropdown_field), isDescendantOfA(withId(R.id.textInputLayout))))
+                    .check(matches(withText(allShoppingList.get(i).getListName())));
+        }
+
+        // check submit button when shopping list is chosen
+        onView(withId(R.id.submit_btn)).perform(click());
+
+        // check if it goes back to the export type dialog
+        onView(withId(R.id.createListPopUp)).check(matches(isDisplayed()));
+
+        // check the content inside the pop up
+
+        // title
+        onView(withId(R.id.store_select_title)).check(matches(isDisplayed()));
+
+        onView(withId(R.id.store_select_title)).check(matches(withText("Choose export file type:")));
+
+        // button
+        onView(withId(R.id.cancel_btn)).check(matches(isDisplayed()));
+        onView(withId(R.id.submit_btn)).check(matches(isDisplayed()));
+
+        // export type dropdown test
+        onView(withId(R.id.textInputLayout)).check(matches(isDisplayed()));
+
+        SystemClock.sleep(sleepTime);
+
+        List<String> exportType = new ArrayList<>();
+        exportType.add("TXT");
+        exportType.add("PDF");
+
+        // check dropdown menu store name and interaction with dropdown menu's items
+        for (int i = 0; i < exportType.size(); i++) {
+            // click the dropdown
+            onView(withId(R.id.textInputLayout)).perform(click());
+
+            // check if the values in dropdown menu is correct
+            onData(anything())
+                    .inRoot(isPlatformPopup())
+                    .atPosition(i)
+                    .check(matches(withText(exportType.get(i))));
+
+            SystemClock.sleep(sleepTime);
+
+            // click on dropdown item
+            onData(anything())
+                    .inRoot(isPlatformPopup())
+                    .atPosition(i)
+                    .perform(click());
+
+            SystemClock.sleep(sleepTime);
+
+            // check if the text input change
+            onView(allOf(withId(R.id.dropdown_field), isDescendantOfA(withId(R.id.textInputLayout))))
+                    .check(matches(withText(exportType.get(i))));
+        }
+
+        // the chosen shopping list will be SuperStore in our stub db and the type will be PDF
+
+        // check submit button when export type is chosen
+        onView(withId(R.id.submit_btn)).perform(click());
+
+        // verify that the shopping list fragment is displayed
+        onView(withId(R.id.ShoppingListFragment)).check(matches(isDisplayed()));
     }
 
     @Test
@@ -413,7 +554,26 @@ public class ShoppingListFragmentTest {
         // check submit button when store is chosen
         onView(withId(R.id.submit_btn)).perform(click());
 
-        // check if it goes back to the shoppingListFragment
+        SystemClock.sleep(sleepTime);
+
+        // all stores are available in stub db, so error msg will show
+
+        // check if it shows error dialog
+        onView(withId(R.id.deletePromptDialog)).check(matches(isDisplayed()));
+
+        onView(withId(R.id.ok_btn)).check(matches(isDisplayed()));
+
+        onView(withId(R.id.ok_btn)).perform(click());
+
+        SystemClock.sleep(sleepTime);
+
+        // check if the create list pop up is displayed after clicking ok btn
+        onView(withId(R.id.createListPopUp)).check(matches(isDisplayed()));
+
+        // click cancel btn
+        onView(withId(R.id.cancel_btn)).perform(click());
+
+        // check if shopping list fragment is shown
         onView(withId(R.id.ShoppingListFragment)).check(matches(isDisplayed()));
 
         // check if shopping list change or not
