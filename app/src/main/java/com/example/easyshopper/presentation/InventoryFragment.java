@@ -130,16 +130,16 @@ public class InventoryFragment extends Fragment implements HomeProductButtonInte
             // Check the buttonType and update quantities accordingly
             switch (buttonType) {
                 case "removeStock":
-                    HomeInventoryHandler.decreaseStockQuantityBy1(clickedProduct);
+                    HomeInventoryHandler.decreaseStockQuantity(clickedProduct);
                     break;
                 case "addStock":
-                    HomeInventoryHandler.incrementStockQuantityBy1(clickedProduct);
+                    HomeInventoryHandler.incrementStockQuantity(clickedProduct);
                     break;
                 case "removeDesired":
-                    HomeInventoryHandler.decreaseDesiredQuantityBy1(clickedProduct);
+                    HomeInventoryHandler.decreaseDesiredQuantity(clickedProduct);
                     break;
                 case "addDesired":
-                    HomeInventoryHandler.incrementDesiredQuantityBy1(clickedProduct);
+                    HomeInventoryHandler.incrementDesiredQuantity(clickedProduct);
                     break;
                 case "productName":
                     inventoryDialog.showHomeProductExpiryDate(clickedProduct);
@@ -154,16 +154,16 @@ public class InventoryFragment extends Fragment implements HomeProductButtonInte
             // Check the buttonType and update quantities accordingly
             switch (buttonType) {
                 case "removeStock":
-                    HomeInventoryHandler.decreaseStockQuantityBy1(clickedProduct);
+                    HomeInventoryHandler.decreaseStockQuantity(clickedProduct);
                     break;
                 case "addStock":
-                    HomeInventoryHandler.incrementStockQuantityBy1(clickedProduct);
+                    HomeInventoryHandler.incrementStockQuantity(clickedProduct);
                     break;
                 case "removeDesired":
-                    HomeInventoryHandler.decreaseDesiredQuantityBy1(clickedProduct);
+                    HomeInventoryHandler.decreaseDesiredQuantity(clickedProduct);
                     break;
                 case "addDesired":
-                    HomeInventoryHandler.incrementDesiredQuantityBy1(clickedProduct);
+                    HomeInventoryHandler.incrementDesiredQuantity(clickedProduct);
                     break;
                 case "productName":
                     inventoryDialog.showHomeProductExpiryDate(clickedProduct);

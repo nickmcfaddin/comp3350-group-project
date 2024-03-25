@@ -2,7 +2,6 @@ package com.example.easyshopper.persistence;
 
 import com.example.easyshopper.objects.HomeProduct;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public interface HomeProductPersistence {
@@ -12,13 +11,13 @@ public interface HomeProductPersistence {
 
     List<HomeProduct> getHiddenProduct();
 
-    void incrementStockQuantityBy1(HomeProduct homeProduct);
+    void incrementStockQuantity(HomeProduct homeProduct);
 
-    void incrementDesiredQuantityBy1(HomeProduct homeProduct);
+    void incrementDesiredQuantity(HomeProduct homeProduct);
 
-    void decreaseStockQuantityBy1(HomeProduct homeProduct);
+    void decreaseStockQuantity(HomeProduct homeProduct);
 
-    void decreaseDesiredQuantityBy1(HomeProduct homeProduct);
+    void decreaseDesiredQuantity(HomeProduct homeProduct);
 
     List<String> getHomeProductExpiryDate(HomeProduct homeProduct);
 

@@ -31,10 +31,10 @@ public class StorePersistenceHSQLDB implements StorePersistence, Serializable {
     }
 
     private Store fromResultSet(final ResultSet rs) throws SQLException {
-        int storeID = rs.getInt("StoreID");
-        String name = rs.getString("Name");
+        int storeID = rs.getInt(ColumnNames.STORE_ID);
+        String name = rs.getString(ColumnNames.NAME);
 
-        return new Store(storeID,name);
+        return new Store(storeID, name);
     }
 
     private void loadStores() {
@@ -59,9 +59,8 @@ public class StorePersistenceHSQLDB implements StorePersistence, Serializable {
 
     @Override
     public Store getStoreById(int storeID) {
-        for (int i=0; i<stores.size(); i++){
-            if (stores.get(i).getStoreID() == storeID)
-            {
+        for (int i = 0; i < stores.size(); i++) {
+            if (stores.get(i).getStoreID() == storeID) {
                 return stores.get(i);
             }
         }

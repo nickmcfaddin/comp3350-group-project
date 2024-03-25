@@ -60,14 +60,14 @@ public class HomeProductTest {
         assertEquals(0, invalidHomeProduct.getHomeProductExpiryDates().size());
 
         // Test decrementing and incrementing methods that will be used by +/- in UI
-        homeProduct.decreaseDesiredQuantityBy1();
-        homeProduct.decreaseStockQuantityBy1();
+        homeProduct.decreaseDesiredQuantity();
+        homeProduct.decreaseStockQuantity();
         assertEquals(2, homeProduct.getHomeProductStockQuantity());
         assertEquals(0, homeProduct.getHomeProductDesiredQuantity());
 
-        homeProduct.incrementDesiredQuantityBy1();
+        homeProduct.incrementDesiredQuantity();
         assertEquals(1, homeProduct.getHomeProductDesiredQuantity());
-        homeProduct.incrementStockQuantityBy1();
+        homeProduct.incrementStockQuantity();
         assertEquals(3, homeProduct.getHomeProductStockQuantity());
 
         System.out.println("Finished testCreateAHomeProduct");

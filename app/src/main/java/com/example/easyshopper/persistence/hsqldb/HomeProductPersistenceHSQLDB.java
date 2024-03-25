@@ -41,9 +41,9 @@ public class HomeProductPersistenceHSQLDB implements HomeProductPersistence, Ser
             final ResultSet resultSet = statement.executeQuery("SELECT * FROM HOMEPRODUCTS");
 
             while (resultSet.next()) {
-                int productID = resultSet.getInt("ProductID");
-                int stockQuantity = resultSet.getInt("StockQuantity");
-                int desiredQuantity = resultSet.getInt("DesiredQuantity");
+                int productID = resultSet.getInt(ColumnNames.PRODUCT_ID);
+                int stockQuantity = resultSet.getInt(ColumnNames.STOCK_QUANTITY);
+                int desiredQuantity = resultSet.getInt(ColumnNames.DESIRED_QUANTITY);
 
                 Product product = productPersistenceHSQLDB.getProductById(productID);
 
@@ -70,7 +70,7 @@ public class HomeProductPersistenceHSQLDB implements HomeProductPersistence, Ser
 
         final ResultSet resultSet = statement.executeQuery();
         while (resultSet.next()) {
-            expiryDates.add(resultSet.getString("ExpiryDate"));
+            expiryDates.add(resultSet.getString(ColumnNames.EXPIRY_DATE));
         }
 
         return expiryDates;
@@ -152,48 +152,48 @@ public class HomeProductPersistenceHSQLDB implements HomeProductPersistence, Ser
         }
     }
 
-    public void incrementStockQuantityBy1(HomeProduct homeProduct){
+    public void incrementStockQuantity(HomeProduct homeProduct){
         if (homeProducts.contains(homeProduct)){
             int curIndex = homeProducts.indexOf(homeProduct);
             HomeProduct curHomeProduct = homeProducts.get(curIndex);
 
-            curHomeProduct.incrementStockQuantityBy1();
+            curHomeProduct.incrementStockQuantity();
             homeProducts.set(curIndex, curHomeProduct);
 
             updateHomeProduct(homeProduct);
         }
     }
 
-    public void incrementDesiredQuantityBy1(HomeProduct homeProduct){
+    public void incrementDesiredQuantity(HomeProduct homeProduct){
         if (homeProducts.contains(homeProduct)){
             int curIndex = homeProducts.indexOf(homeProduct);
             HomeProduct curHomeProduct = homeProducts.get(curIndex);
 
-            curHomeProduct.incrementDesiredQuantityBy1();
+            curHomeProduct.incrementDesiredQuantity();
             homeProducts.set(curIndex, curHomeProduct);
 
             updateHomeProduct(homeProduct);
         }
     }
 
-    public void decreaseStockQuantityBy1(HomeProduct homeProduct){
+    public void decreaseStockQuantity(HomeProduct homeProduct){
         if (homeProducts.contains(homeProduct)){
             int curIndex = homeProducts.indexOf(homeProduct);
             HomeProduct curHomeProduct = homeProducts.get(curIndex);
 
-            curHomeProduct.decreaseStockQuantityBy1();
+            curHomeProduct.decreaseStockQuantity();
             homeProducts.set(curIndex, curHomeProduct);
 
             updateHomeProduct(homeProduct);
         }
     }
 
-    public void decreaseDesiredQuantityBy1(HomeProduct homeProduct){
+    public void decreaseDesiredQuantity(HomeProduct homeProduct){
         if (homeProducts.contains(homeProduct)){
             int curIndex = homeProducts.indexOf(homeProduct);
             HomeProduct curHomeProduct = homeProducts.get(curIndex);
 
-            curHomeProduct.decreaseDesiredQuantityBy1();
+            curHomeProduct.decreaseDesiredQuantity();
             homeProducts.set(curIndex, curHomeProduct);
 
             updateHomeProduct(homeProduct);

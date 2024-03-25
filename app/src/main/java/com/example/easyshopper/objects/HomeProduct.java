@@ -16,21 +16,23 @@ public class HomeProduct extends Product implements Serializable {
 
     public HomeProduct(int productID, String productName, double fat, double carb, double protein, int stockQuantity, int desiredQuantity, int lifeTimeDays, List<String> expiryDates) {
         super(productID, productName, fat, carb, protein, lifeTimeDays);
+        initialize(stockQuantity, desiredQuantity, expiryDates);
+    }
 
+    private void initialize(int stockQuantity, int desiredQuantity, List<String> expiryDates) {
         // Validate expiryDates size
         if (expiryDates.size() != stockQuantity) {
             this.stockQuantity = 0; // Reset stockQuantity to 0
             this.desiredQuantity = desiredQuantity;
             this.expiryDates = new ArrayList<>();
-            return; // Exit the constructor
         }
-
-        this.stockQuantity = stockQuantity;
-        this.desiredQuantity = desiredQuantity;
-        this.expiryDates = expiryDates;
+        else{
+            this.stockQuantity = stockQuantity;
+            this.desiredQuantity = desiredQuantity;
+            this.expiryDates = expiryDates;
+        }
     }
 
-    //Not included in unit testing as this is pulling from the db
     public HomeProduct(Product product, int stockQuantity, int desiredQuantity, List<String> expiryDates){
         super(product.getProductID(), product.getProductName(), product.getFat(), product.getCarb(), product.getProtein(), product.getLifeTimeDays());
         this.stockQuantity = stockQuantity;
@@ -52,23 +54,23 @@ public class HomeProduct extends Product implements Serializable {
     }
 
     // increase and decrease stock and desired quantity
-    public void incrementStockQuantityBy1(){
+    public void incrementStockQuantity(){
         stockQuantity++;
         addExpiryDate();
     }
 
-    public void incrementDesiredQuantityBy1(){
+    public void incrementDesiredQuantity(){
         desiredQuantity++;
     }
 
-    public void decreaseStockQuantityBy1(){
+    public void decreaseStockQuantity(){
         if (stockQuantity > 0){
             stockQuantity--;
             removeEarliestExpiryDate();
         }
     }
 
-    public void decreaseDesiredQuantityBy1(){
+    public void decreaseDesiredQuantity(){
         if (desiredQuantity > 0){
             desiredQuantity--;
         }
