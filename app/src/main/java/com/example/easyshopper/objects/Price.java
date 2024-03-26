@@ -3,7 +3,7 @@ package com.example.easyshopper.objects;
 import java.io.Serializable;
 
 //Price class acts as link between Store's and Product's.
-public class Price implements Serializable {
+public class Price implements Serializable, Comparable<Price>  {
     private final int storeID;
     private final int productID;
     private final double price;
@@ -30,4 +30,10 @@ public class Price implements Serializable {
     public String getPriceFormatted() {
         return "$" + String.format("%.2f", price);
     }
+
+    @Override
+    public int compareTo(Price other){
+        return Double.compare(this.price, other.price);
+    }
+
 }

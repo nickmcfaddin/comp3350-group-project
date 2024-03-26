@@ -8,7 +8,7 @@ import com.example.easyshopper.persistence.PricePersistence;
 import com.example.easyshopper.persistence.ProductPersistence;
 
 import java.io.Serializable;
-import java.util.Comparator;
+import java.util.Collections;
 import java.util.List;
 
 public class ProductHandler implements Serializable {
@@ -72,12 +72,7 @@ public class ProductHandler implements Serializable {
         List<Price> productPrices = pricePersistence.getAllPricesForSameProduct(product);
 
         // Sort the list by their price
-        productPrices.sort(new Comparator<Price>() {
-            @Override
-            public int compare(Price p1, Price p2) {
-                return Double.compare(p1.getPrice(), p2.getPrice());
-            }
-        });
+        Collections.sort(productPrices);
 
         return productPrices;
     }

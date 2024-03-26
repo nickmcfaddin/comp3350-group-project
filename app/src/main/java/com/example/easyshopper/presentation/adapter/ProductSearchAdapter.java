@@ -67,7 +67,7 @@ public class ProductSearchAdapter extends RecyclerView.Adapter<ProductSearchAdap
                         int pos = getAdapterPosition();
 
                         if(pos != RecyclerView.NO_POSITION) {
-                            productViewInterface.onItemClick(pos);
+                            productViewInterface.onProductClick(pos);
                         }
                     }
                 }
