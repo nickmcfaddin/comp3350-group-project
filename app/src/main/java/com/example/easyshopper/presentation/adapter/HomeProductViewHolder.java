@@ -16,10 +16,12 @@ public class HomeProductViewHolder extends RecyclerView.ViewHolder{
     private ImageButton removeDesiredButton;
     private ImageButton addDesiredButton;
     private int recyclerViewId;
+    private HomeProductButtonInterface listener;
 
     public HomeProductViewHolder(@NonNull View itemView, HomeProductButtonInterface listener, int recyclerViewId) {
         super(itemView);
         this.recyclerViewId = recyclerViewId;
+        this.listener = listener;
 
         // set values for home products
         homeProductName = itemView.findViewById(R.id.homeProductName);
@@ -32,41 +34,18 @@ public class HomeProductViewHolder extends RecyclerView.ViewHolder{
         removeDesiredButton = itemView.findViewById(R.id.removeDesiredQuantity);
         addDesiredButton = itemView.findViewById(R.id.addDesiredQuantity);
 
-        // Set click listeners
-        removeStockButton.setOnClickListener(v -> {
-            int position = getAdapterPosition();
-            if (position != RecyclerView.NO_POSITION && listener != null) {
-                listener.onButtonClick(v, position, "removeStock", this.recyclerViewId);
-            }
-        });
+        // Set click listeners for each button
+        removeStockButton.setOnClickListener(v -> handleClick("removeStock"));
+        addStockButton.setOnClickListener(v -> handleClick("addStock"));
+        removeDesiredButton.setOnClickListener(v -> handleClick("removeDesired"));
+        addDesiredButton.setOnClickListener(v -> handleClick("addDesired"));
+        homeProductName.setOnClickListener(v -> handleClick("productName"));
+    }
 
-        addStockButton.setOnClickListener(v -> {
-            int position = getAdapterPosition();
-            if (position != RecyclerView.NO_POSITION && listener != null) {
-                listener.onButtonClick(v, position, "addStock", this.recyclerViewId);
-            }
-        });
-
-        removeDesiredButton.setOnClickListener(v -> {
-            int position = getAdapterPosition();
-            if (position != RecyclerView.NO_POSITION && listener != null) {
-                listener.onButtonClick(v, position, "removeDesired", this.recyclerViewId);
-            }
-        });
-
-        addDesiredButton.setOnClickListener(v -> {
-            int position = getAdapterPosition();
-            if (position != RecyclerView.NO_POSITION && listener != null) {
-                listener.onButtonClick(v, position, "addDesired", this.recyclerViewId);
-            }
-        });
-
-        // Set click listener for product name TextView
-        homeProductName.setOnClickListener(v -> {
-            int position = getAdapterPosition();
-            if (position != RecyclerView.NO_POSITION && listener != null) {
-                listener.onButtonClick(v, position, "productName", this.recyclerViewId);
-            }
-        });
+    private void handleClick(String buttonType) {
+        int position = getAdapterPosition();
+        if (position != RecyclerView.NO_POSITION && listener != null) {
+            listener.onButtonClick(itemView, position, buttonType, recyclerViewId);
+        }
     }
 }

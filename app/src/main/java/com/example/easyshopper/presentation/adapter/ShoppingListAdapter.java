@@ -63,6 +63,14 @@ public class ShoppingListAdapter extends BaseExpandableListAdapter implements Dy
         return childPosition;
     }
 
+    /**
+     * Indicates whether this adapter has stable unique IDs for the items.
+     *
+     * @return True if the adapter has stable IDs, false otherwise.
+     *         Returning false indicates that the adapter does not guarantee
+     *         that the IDs assigned to the items remain consistent across
+     *         changes in the underlying data or ordering of the items.
+     */
     @Override
     public boolean hasStableIds() {
         return false;

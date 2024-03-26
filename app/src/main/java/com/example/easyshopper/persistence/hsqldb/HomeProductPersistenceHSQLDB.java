@@ -2,6 +2,7 @@ package com.example.easyshopper.persistence.hsqldb;
 
 import android.util.Log;
 
+import com.example.easyshopper.logic.exceptions.NoProductRequestException;
 import com.example.easyshopper.objects.HomeProduct;
 import com.example.easyshopper.objects.Product;
 import com.example.easyshopper.persistence.HomeProductPersistence;
@@ -41,13 +42,14 @@ public class HomeProductPersistenceHSQLDB implements HomeProductPersistence, Ser
             final ResultSet resultSet = statement.executeQuery("SELECT * FROM HOMEPRODUCTS");
 
             while (resultSet.next()) {
-                int productID = resultSet.getInt("ProductID");
-                int stockQuantity = resultSet.getInt("StockQuantity");
-                int desiredQuantity = resultSet.getInt("DesiredQuantity");
+                int productID = resultSet.getInt(ColumnNames.PRODUCT_ID);
+                int stockQuantity = resultSet.getInt(ColumnNames.STOCK_QUANTITY);
+                int desiredQuantity = resultSet.getInt(ColumnNames.DESIRED_QUANTITY);
 
                 Product product = productPersistenceHSQLDB.getProductById(productID);
 
                 if(product == null) {
+                    Log.e("Connect SQL", "Product with id:" + productID + " not found!");
                     continue;
                 }
 
@@ -70,7 +72,7 @@ public class HomeProductPersistenceHSQLDB implements HomeProductPersistence, Ser
 
         final ResultSet resultSet = statement.executeQuery();
         while (resultSet.next()) {
-            expiryDates.add(resultSet.getString("ExpiryDate"));
+            expiryDates.add(resultSet.getString(ColumnNames.EXPIRY_DATE));
         }
 
         return expiryDates;
@@ -139,6 +141,10 @@ public class HomeProductPersistenceHSQLDB implements HomeProductPersistence, Ser
     }
 
     private void updateHomeProduct(HomeProduct homeProduct) {
+        if(homeProduct == null) {
+            return;
+        }
+
         try (Connection connection = connect()) {
             PreparedStatement statement = connection.prepareStatement("UPDATE HOMEPRODUCTS set StockQuantity = ?, DesiredQuantity = ? WHERE ProductID = ?");
             statement.setInt(1, homeProduct.getHomeProductStockQuantity());
@@ -152,55 +158,83 @@ public class HomeProductPersistenceHSQLDB implements HomeProductPersistence, Ser
         }
     }
 
-    public void incrementStockQuantityBy1(HomeProduct homeProduct){
+    public void incrementStockQuantity(HomeProduct homeProduct){
+        if(homeProduct == null) {
+            return;
+        }
+
         if (homeProducts.contains(homeProduct)){
             int curIndex = homeProducts.indexOf(homeProduct);
             HomeProduct curHomeProduct = homeProducts.get(curIndex);
 
-            curHomeProduct.incrementStockQuantityBy1();
+            curHomeProduct.incrementStockQuantity();
             homeProducts.set(curIndex, curHomeProduct);
 
             updateHomeProduct(homeProduct);
         }
+
+        throw new NoProductRequestException("Product with id: "+ homeProduct.getProductID() + "not found!");
     }
 
-    public void incrementDesiredQuantityBy1(HomeProduct homeProduct){
+    public void incrementDesiredQuantity(HomeProduct homeProduct){
+        if(homeProduct == null) {
+            return;
+        }
+
         if (homeProducts.contains(homeProduct)){
             int curIndex = homeProducts.indexOf(homeProduct);
             HomeProduct curHomeProduct = homeProducts.get(curIndex);
 
-            curHomeProduct.incrementDesiredQuantityBy1();
+            curHomeProduct.incrementDesiredQuantity();
             homeProducts.set(curIndex, curHomeProduct);
 
             updateHomeProduct(homeProduct);
         }
+
+        throw new NoProductRequestException("Product with id: "+ homeProduct.getProductID() + "not found!");
     }
 
-    public void decreaseStockQuantityBy1(HomeProduct homeProduct){
+    public void decreaseStockQuantity(HomeProduct homeProduct){
+        if(homeProduct == null) {
+            return;
+        }
+
         if (homeProducts.contains(homeProduct)){
             int curIndex = homeProducts.indexOf(homeProduct);
             HomeProduct curHomeProduct = homeProducts.get(curIndex);
 
-            curHomeProduct.decreaseStockQuantityBy1();
+            curHomeProduct.decreaseStockQuantity();
             homeProducts.set(curIndex, curHomeProduct);
 
             updateHomeProduct(homeProduct);
         }
+
+        throw new NoProductRequestException("Product with id: "+ homeProduct.getProductID() + "not found!");
     }
 
-    public void decreaseDesiredQuantityBy1(HomeProduct homeProduct){
+    public void decreaseDesiredQuantity(HomeProduct homeProduct){
+        if(homeProduct == null) {
+            return;
+        }
+
         if (homeProducts.contains(homeProduct)){
             int curIndex = homeProducts.indexOf(homeProduct);
             HomeProduct curHomeProduct = homeProducts.get(curIndex);
 
-            curHomeProduct.decreaseDesiredQuantityBy1();
+            curHomeProduct.decreaseDesiredQuantity();
             homeProducts.set(curIndex, curHomeProduct);
 
             updateHomeProduct(homeProduct);
         }
+
+        throw new NoProductRequestException("Product with id: "+ homeProduct.getProductID() + "not found!");
     }
 
     public List<String> getHomeProductExpiryDate(HomeProduct homeProduct) {
+        if(homeProduct == null) {
+            throw new NoProductRequestException("Null home product passed!");
+        }
+
         if (homeProducts.contains(homeProduct)){
             int curIndex = homeProducts.indexOf(homeProduct);
             HomeProduct curHomeProduct = homeProducts.get(curIndex);
@@ -208,10 +242,14 @@ public class HomeProductPersistenceHSQLDB implements HomeProductPersistence, Ser
             return curHomeProduct.getHomeProductExpiryDates();
         }
 
-        return null;
+        throw new NoProductRequestException("Product with id: "+ homeProduct.getProductID() + "not found!");
     }
 
     public List<String> getHomeProductSortedExpiryDateAscending(HomeProduct homeProduct) {
+        if(homeProduct == null) {
+            throw new NoProductRequestException("Null home product passed!");
+        }
+
         if (homeProducts.contains(homeProduct)){
             int curIndex = homeProducts.indexOf(homeProduct);
             HomeProduct curHomeProduct = homeProducts.get(curIndex);
@@ -219,10 +257,14 @@ public class HomeProductPersistenceHSQLDB implements HomeProductPersistence, Ser
             return curHomeProduct.getSortedExpiryDatesAscending();
         }
 
-        return null;
+        throw new NoProductRequestException("Product with id: "+ homeProduct.getProductID() + "not found!");
     }
 
     public List<String> getHomeProductSortedExpiryDateDescending(HomeProduct homeProduct) {
+        if(homeProduct == null) {
+            throw new NoProductRequestException("Null home product passed!");
+        }
+
         if (homeProducts.contains(homeProduct)){
             int curIndex = homeProducts.indexOf(homeProduct);
             HomeProduct curHomeProduct = homeProducts.get(curIndex);
@@ -230,7 +272,7 @@ public class HomeProductPersistenceHSQLDB implements HomeProductPersistence, Ser
             return curHomeProduct.getSortedExpiryDatesDescending();
         }
 
-        return null;
+        throw new NoProductRequestException("Product with id: "+ homeProduct.getProductID() + "not found!");
     }
 
     public List<HomeProduct> getHomeProducts() {

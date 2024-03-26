@@ -27,28 +27,29 @@ public class  HomeInventoryHandler implements Serializable {
         return homeProductPersistence.getHiddenProduct();
     }
 
-    public static void incrementStockQuantityBy1(HomeProduct homeProduct){
+    public static void incrementStockQuantity(HomeProduct homeProduct){
         if(validHomeProduct(homeProduct)) {
-            homeProductPersistence.incrementStockQuantityBy1(homeProduct);
+            homeProductPersistence.incrementStockQuantity(homeProduct);
         }
     }
 
-    public static void decreaseStockQuantityBy1(HomeProduct homeProduct){
+    public static void decreaseStockQuantity(HomeProduct homeProduct){
         if(validHomeProduct(homeProduct)) {
-            homeProductPersistence.decreaseStockQuantityBy1(homeProduct);
+            homeProductPersistence.decreaseStockQuantity(homeProduct);
         }
     }
 
-    public static void incrementDesiredQuantityBy1(HomeProduct homeProduct){
+    public static void incrementDesiredQuantity(HomeProduct homeProduct){
         if(validHomeProduct(homeProduct)) {
-            homeProductPersistence.incrementDesiredQuantityBy1(homeProduct);
+            homeProductPersistence.incrementDesiredQuantity(homeProduct);
         }
     }
 
-    public static void decreaseDesiredQuantityBy1(HomeProduct homeProduct){
+    public static void decreaseDesiredQuantity(HomeProduct homeProduct){
         if(validHomeProduct(homeProduct)) {
-            homeProductPersistence.decreaseDesiredQuantityBy1(homeProduct);
-        }    }
+            homeProductPersistence.decreaseDesiredQuantity(homeProduct);
+        }
+    }
 
     public static List<String> getHomeProductExpiryDates(HomeProduct homeProduct){
         if(validHomeProduct(homeProduct)) {

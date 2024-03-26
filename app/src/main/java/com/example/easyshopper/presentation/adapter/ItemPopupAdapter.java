@@ -46,12 +46,7 @@ public class ItemPopupAdapter extends RecyclerView.Adapter<ItemPopupAdapter.Prod
 
     @Override
     public int getItemCount() {
-        if(priceList != null)
-        {
-            return priceList.size();
-        }
-
-        return 0;
+        return priceList == null ? 0 : priceList.size();
     }
 
     public static class ProductPriceViewHolder extends RecyclerView.ViewHolder {

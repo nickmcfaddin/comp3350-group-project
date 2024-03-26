@@ -2,6 +2,7 @@ package com.example.easyshopper.persistence.hsqldb;
 
 import android.util.Log;
 
+import com.example.easyshopper.logic.exceptions.NoProductFoundException;
 import com.example.easyshopper.objects.Product;
 import com.example.easyshopper.persistence.ProductPersistence;
 
@@ -29,14 +30,23 @@ public class ProductPersistenceHSQLDB implements ProductPersistence, Serializabl
     }
 
     private Product fromResultSet(final ResultSet rs) throws SQLException {
-        int productID = rs.getInt("ProductID");
-        String name = rs.getString("Name");
-        double protein = rs.getBigDecimal("Protein").doubleValue();
-        double carbs = rs.getBigDecimal("Carbs").doubleValue();
-        double fat = rs.getBigDecimal("Fat").doubleValue();
-        int lifetimeDays = rs.getInt("LifetimeDays");
+        try
+        {
+            int productID = rs.getInt(ColumnNames.PRODUCT_ID);
+            String name = rs.getString(ColumnNames.NAME);
+            double protein = rs.getBigDecimal(ColumnNames.PROTEIN).doubleValue();
+            double carbs = rs.getBigDecimal(ColumnNames.CARBS).doubleValue();
+            double fat = rs.getBigDecimal(ColumnNames.FAT).doubleValue();
+            int lifetimeDays = rs.getInt(ColumnNames.LIFETIME_DAYS);
 
-        return new Product(productID, name, fat, carbs, protein, lifetimeDays);
+            return new Product(productID, name, fat, carbs, protein, lifetimeDays);
+
+        } catch (SQLException e) {
+            Log.e("Connect SQL", "Could not parse result set: " + rs);
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
     private void loadProducts() {
@@ -46,7 +56,10 @@ public class ProductPersistenceHSQLDB implements ProductPersistence, Serializabl
 
             while (resultSet.next()) {
                 final Product product = fromResultSet(resultSet);
-                this.products.add(product);
+
+                if(product != null) {
+                    this.products.add(product);
+                }
             }
         } catch (final SQLException e) {
             Log.e("Connect SQL", e.getMessage() + e.getSQLState());
@@ -61,21 +74,21 @@ public class ProductPersistenceHSQLDB implements ProductPersistence, Serializabl
 
     @Override
     public Product getProductById(int productID) {
-        for (int i = 0; i < products.size(); i++){
-            if (products.get(i).getProductID() == productID){
+        for (int i = 0; i < products.size(); i++) {
+            if (products.get(i).getProductID() == productID) {
                 return products.get(i);
             }
         }
 
-        return null;
+        throw new NoProductFoundException("Product with id: " + productID + "not found!");
     }
 
     @Override
     public List<Product> getProductsByName(String productName) {
         List<Product> newList = new ArrayList<>();
 
-        for (int i = 0; i < products.size(); i++){
-            if (products.get(i).getProductName().toLowerCase().contains(productName.toLowerCase())){
+        for (int i = 0; i < products.size(); i++) {
+            if (products.get(i).getProductName().toLowerCase().contains(productName.toLowerCase())) {
                 newList.add(products.get(i));
             }
         }

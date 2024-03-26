@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 
 import com.example.easyshopper.R;
 import com.example.easyshopper.application.Dialog;
@@ -107,37 +108,25 @@ public class MainActivity extends AppCompatActivity {
                 replaceFragment(shoppingListFragment);
 
                 //Update Icons
-                item.setIcon(R.drawable.icon_paper_fill);
-                bottomNavigationView.getMenu().getItem(1).setIcon(R.drawable.icon_home_line);
-                bottomNavigationView.getMenu().getItem(2).setIcon(R.drawable.icon_request_line);
-                bottomNavigationView.getMenu().getItem(3).setIcon(R.drawable.icon_search_line);
+                updateBottomNavigationIcons(0);
             } else if (itemId == R.id.homeInventory) {
                 // Home Inventory
                 replaceFragment(inventoryFragment);
 
                 //Update Icons
-                bottomNavigationView.getMenu().getItem(0).setIcon(R.drawable.icon_paper_line);
-                item.setIcon(R.drawable.icon_home_fill);
-                bottomNavigationView.getMenu().getItem(2).setIcon(R.drawable.icon_request_line);
-                bottomNavigationView.getMenu().getItem(3).setIcon(R.drawable.icon_search_line);
+                updateBottomNavigationIcons(1);
             } else if (itemId == R.id.userRequest) {
                 // User Request
                 replaceFragment(userRequestFragment);
 
                 //Update Icons
-                bottomNavigationView.getMenu().getItem(0).setIcon(R.drawable.icon_paper_line);
-                bottomNavigationView.getMenu().getItem(1).setIcon(R.drawable.icon_home_line);
-                item.setIcon(R.drawable.icon_request_fill);
-                bottomNavigationView.getMenu().getItem(3).setIcon(R.drawable.icon_search_line);
+                updateBottomNavigationIcons(2);
             } else if (itemId == R.id.search) {
                 // Search
                 replaceFragment(searchFragment);
 
                 // Update Icons
-                bottomNavigationView.getMenu().getItem(0).setIcon(R.drawable.icon_paper_line);
-                bottomNavigationView.getMenu().getItem(1).setIcon(R.drawable.icon_home_line);
-                bottomNavigationView.getMenu().getItem(2).setIcon(R.drawable.icon_request_line);
-                item.setIcon(R.drawable.icon_search_fill);
+                updateBottomNavigationIcons(3);
             }
 
             return true;
@@ -149,5 +138,38 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.frameLayout, fragment);
         fragmentTransaction.commit();
+    }
+
+    private void updateBottomNavigationIcons(int selectedItemIndex) {
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
+
+        MenuItem[] menuItems = {
+                bottomNavigationView.getMenu().getItem(0),
+                bottomNavigationView.getMenu().getItem(1),
+                bottomNavigationView.getMenu().getItem(2),
+                bottomNavigationView.getMenu().getItem(3)
+        };
+
+        int[] iconIdsLine = {
+                R.drawable.icon_paper_line,
+                R.drawable.icon_home_line,
+                R.drawable.icon_request_line,
+                R.drawable.icon_search_line
+        };
+
+        int[] iconIdsFill = {
+                R.drawable.icon_paper_fill,
+                R.drawable.icon_home_fill,
+                R.drawable.icon_request_fill,
+                R.drawable.icon_search_fill
+        };
+
+        for (int i = 0; i < menuItems.length; i++) {
+            if (i == selectedItemIndex) {
+                menuItems[i].setIcon(iconIdsFill[i]);
+            } else {
+                menuItems[i].setIcon(iconIdsLine[i]);
+            }
+        }
     }
 }
