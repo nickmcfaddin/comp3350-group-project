@@ -234,5 +234,48 @@ public abstract class ProductListDialog {
         alertDialog.show();
     }
 
+    //show user a prompt asking them if they want to remove product from a list
+    public void removeProductPrompt(ProductList productList, Product product) {
+        //Create alert and link it to our custom dialog
+        AlertDialog.Builder alert = new AlertDialog.Builder(context);
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View dialogView = inflater.inflate(R.layout.dialog_delete_prompt, null);
+        alert.setView(dialogView);
+        final AlertDialog alertDialog = alert.create();
+
+        //get and init components
+        TextView dialogTitle = dialogView.findViewById(R.id.input_dialog_title);
+        dialogTitle.setText("Remove Product From List?");
+
+        Button yesButton = dialogView.findViewById(R.id.yes_btn);
+        Button noButton = dialogView.findViewById(R.id.no_btn);
+
+        //set behaviour for buttons
+        yesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //remove product from list and update view
+                ProductListHandler.removeProductFromCart(product,productList);
+
+                //update the displayed list
+                if(dynamicListAdapter != null) {
+                    dynamicListAdapter.updateData();
+                }
+
+                alertDialog.dismiss();
+            }
+        });
+
+        noButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+            }
+        });
+
+        // Show the dialog
+        alertDialog.show();
+    }
+
     public abstract void createListDialog();
 }

@@ -110,42 +110,42 @@ public class HomeProductPersistenceStub implements HomeProductPersistence, Seria
     }
 
     // METHODS
-    public void incrementStockQuantityBy1(HomeProduct homeProduct){
+    public void incrementStockQuantity(HomeProduct homeProduct){
         if (allProducts.contains(homeProduct)){
             int curIndex = allProducts.indexOf(homeProduct);
             HomeProduct curHomeProduct = allProducts.get(curIndex);
 
-            curHomeProduct.incrementStockQuantityBy1();
+            curHomeProduct.incrementStockQuantity();
             allProducts.set(curIndex, curHomeProduct);
         }
     }
 
-    public void incrementDesiredQuantityBy1(HomeProduct homeProduct){
+    public void incrementDesiredQuantity(HomeProduct homeProduct){
         if (allProducts.contains(homeProduct)){
             int curIndex = allProducts.indexOf(homeProduct);
             HomeProduct curHomeProduct = allProducts.get(curIndex);
 
-            curHomeProduct.incrementDesiredQuantityBy1();
+            curHomeProduct.incrementDesiredQuantity();
             allProducts.set(curIndex, curHomeProduct);
         }
     }
 
-    public void decreaseStockQuantityBy1(HomeProduct homeProduct){
+    public void decreaseStockQuantity(HomeProduct homeProduct){
         if (allProducts.contains(homeProduct)){
             int curIndex = allProducts.indexOf(homeProduct);
             HomeProduct curHomeProduct = allProducts.get(curIndex);
 
-            curHomeProduct.decreaseStockQuantityBy1();
+            curHomeProduct.decreaseStockQuantity();
             allProducts.set(curIndex, curHomeProduct);
         }
     }
 
-    public void decreaseDesiredQuantityBy1(HomeProduct homeProduct){
+    public void decreaseDesiredQuantity(HomeProduct homeProduct){
         if (allProducts.contains(homeProduct)){
             int curIndex = allProducts.indexOf(homeProduct);
             HomeProduct curHomeProduct = allProducts.get(curIndex);
 
-            curHomeProduct.decreaseDesiredQuantityBy1();
+            curHomeProduct.decreaseDesiredQuantity();
             allProducts.set(curIndex, curHomeProduct);
         }
     }

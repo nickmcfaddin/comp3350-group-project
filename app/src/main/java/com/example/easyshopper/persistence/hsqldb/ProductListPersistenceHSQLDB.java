@@ -56,9 +56,9 @@ public class ProductListPersistenceHSQLDB implements Serializable, ProductListVi
 
             while (resultSet.next()) {
                 // Retrieve ListID, StoreID, and UserID from the result set
-                String listID = resultSet.getString("ListID");
-                int storeID = resultSet.getInt("StoreID");
-                String userID = resultSet.getString("UserID");
+                String listID = resultSet.getString(ColumnNames.LIST_ID);
+                int storeID = resultSet.getInt(ColumnNames.STORE_ID);
+                String userID = resultSet.getString(ColumnNames.USER_ID);
 
                 //prepare list
                 ProductList productList;
@@ -95,7 +95,7 @@ public class ProductListPersistenceHSQLDB implements Serializable, ProductListVi
 
             final ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                int productID = resultSet.getInt("ProductID");
+                int productID = resultSet.getInt(ColumnNames.PRODUCT_ID);
                 cart.add(productPersistenceHSQLDB.getProductById(productID));
             }
         } catch (final SQLException e) {

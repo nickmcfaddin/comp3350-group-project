@@ -27,35 +27,67 @@ public class  HomeInventoryHandler implements Serializable {
         return homeProductPersistence.getHiddenProduct();
     }
 
-    public static void incrementStockQuantityBy1(HomeProduct homeProduct){
-        homeProductPersistence.incrementStockQuantityBy1(homeProduct);
+    public static void incrementStockQuantity(HomeProduct homeProduct){
+        if(validHomeProduct(homeProduct)) {
+            homeProductPersistence.incrementStockQuantity(homeProduct);
+        }
     }
 
-    public static void decreaseStockQuantityBy1(HomeProduct homeProduct){
-        homeProductPersistence.decreaseStockQuantityBy1(homeProduct);
+    public static void decreaseStockQuantity(HomeProduct homeProduct){
+        if(validHomeProduct(homeProduct)) {
+            homeProductPersistence.decreaseStockQuantity(homeProduct);
+        }
     }
 
-    public static void incrementDesiredQuantityBy1(HomeProduct homeProduct){
-        homeProductPersistence.incrementDesiredQuantityBy1(homeProduct);
+    public static void incrementDesiredQuantity(HomeProduct homeProduct){
+        if(validHomeProduct(homeProduct)) {
+            homeProductPersistence.incrementDesiredQuantity(homeProduct);
+        }
     }
 
-    public static void decreaseDesiredQuantityBy1(HomeProduct homeProduct){
-        homeProductPersistence.decreaseDesiredQuantityBy1(homeProduct);
+    public static void decreaseDesiredQuantity(HomeProduct homeProduct){
+        if(validHomeProduct(homeProduct)) {
+            homeProductPersistence.decreaseDesiredQuantity(homeProduct);
+        }
     }
 
     public static List<String> getHomeProductExpiryDates(HomeProduct homeProduct){
-        return homeProductPersistence.getHomeProductExpiryDate(homeProduct);
+        if(validHomeProduct(homeProduct)) {
+            return homeProductPersistence.getHomeProductExpiryDate(homeProduct);
+        }
+
+        return null;
     }
 
     public static List<String> getHomeProductSortedExpiryDatesAscending(HomeProduct homeProduct){
-        return homeProductPersistence.getHomeProductSortedExpiryDateAscending(homeProduct);
+        if(validHomeProduct(homeProduct)) {
+            return homeProductPersistence.getHomeProductSortedExpiryDateAscending(homeProduct);
+        }
+
+        return null;
     }
 
     public static List<String> getHomeProductSortedExpiryDatesDescending(HomeProduct homeProduct) {
-        return homeProductPersistence.getHomeProductSortedExpiryDateDescending(homeProduct);
+        if(validHomeProduct(homeProduct)) {
+            return homeProductPersistence.getHomeProductSortedExpiryDateDescending(homeProduct);
+        }
+
+        return null;
     }
 
     public static List<HomeProduct> getHomeProducts() {
         return homeProductPersistence.getHomeProducts();
+    }
+
+    private static boolean validHomeProduct(HomeProduct homeProduct) {
+        if(homeProduct == null) {
+            return false;
+        }
+
+        if(!getHomeProducts().contains(homeProduct)) {
+            return false;
+        }
+
+        return true;
     }
 }

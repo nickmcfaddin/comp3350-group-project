@@ -1,5 +1,7 @@
 package com.example.easyshopper.logic;
 
+import android.util.Log;
+
 import com.example.easyshopper.application.Services;
 import com.example.easyshopper.objects.Price;
 import com.example.easyshopper.objects.Product;
@@ -8,7 +10,7 @@ import com.example.easyshopper.persistence.PricePersistence;
 import com.example.easyshopper.persistence.ProductPersistence;
 
 import java.io.Serializable;
-import java.util.Comparator;
+import java.util.Collections;
 import java.util.List;
 
 public class ProductHandler implements Serializable {
@@ -42,6 +44,7 @@ public class ProductHandler implements Serializable {
     public static Product getProductByID(int id)
     {
         if(id < 0) {
+            Log.e("Product Handler", "Invalid product id passed when retrieving product!");
             return null;
         }
 
@@ -54,6 +57,7 @@ public class ProductHandler implements Serializable {
     public static double getPriceOfProductInStore(Product product, Store store)
     {
         if(product == null || store == null) {
+            Log.e("Product Handler", "Invalid product/store passed when retrieving price!");
             return -1;
         }
 
@@ -66,18 +70,14 @@ public class ProductHandler implements Serializable {
     public static List<Price> allStoreSortedPrice(Product product)
     {
         if(product == null) {
+            Log.e("Product Handler", "Invalid product passed when retrieving product!");
             return null;
         }
 
         List<Price> productPrices = pricePersistence.getAllPricesForSameProduct(product);
 
         // Sort the list by their price
-        productPrices.sort(new Comparator<Price>() {
-            @Override
-            public int compare(Price p1, Price p2) {
-                return Double.compare(p1.getPrice(), p2.getPrice());
-            }
-        });
+        Collections.sort(productPrices);
 
         return productPrices;
     }

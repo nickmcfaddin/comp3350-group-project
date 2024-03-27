@@ -25,10 +25,21 @@
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_gravity="end"
-            android:layout_marginEnd="50dp"
+            android:layout_marginEnd="25dp"
             android:background="@color/primary_theme"
             android:backgroundTint="#00FFFFFF"
             android:src="@drawable/icon_add"
+            />
+
+        <ImageButton
+            android:id="@+id/exportButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="end"
+            android:layout_marginEnd="25dp"
+            android:background="@color/primary_theme"
+            android:backgroundTint="#00FFFFFF"
+            android:src="@drawable/icon_export"
             />
 
         <TextView

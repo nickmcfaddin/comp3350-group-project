@@ -37,8 +37,8 @@ public class UserPersistenceHSQLDB implements UserPersistence, Serializable {
             final ResultSet resultSet = statement.executeQuery("SELECT * FROM USER");
 
             while (resultSet.next()) {
-                String userID = resultSet.getString("UserID");
-                String userName = resultSet.getString("Name");
+                String userID = resultSet.getString(ColumnNames.USER_ID);
+                String userName = resultSet.getString(ColumnNames.NAME);
 
                 users.add(new User(userName, userID));
             }
@@ -69,8 +69,8 @@ public class UserPersistenceHSQLDB implements UserPersistence, Serializable {
             final ResultSet resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
-                String userID = resultSet.getString("UserID");
-                String userName = resultSet.getString("Name");
+                String userID = resultSet.getString(ColumnNames.USER_ID);
+                String userName = resultSet.getString(ColumnNames.NAME);
 
                 user = new User(userName, userID);
             }

@@ -4,6 +4,7 @@ import static junit.framework.TestCase.assertEquals;
 
 import com.example.easyshopper.application.Services;
 import com.example.easyshopper.logic.ShoppingListHandler;
+import com.example.easyshopper.logic.exceptions.InvalidShoppingListException;
 import com.example.easyshopper.objects.Product;
 import com.example.easyshopper.objects.ShoppingList;
 import com.example.easyshopper.objects.Store;
@@ -46,6 +47,19 @@ public class ShoppingListHandlerTest {
         assertEquals(4, ShoppingListHandler.getAllShoppingLists().size());
 
         ShoppingListHandler.createShoppingList(null);
+        assertEquals(4, ShoppingListHandler.getAllShoppingLists().size());
+    }
+
+    @Test(expected = InvalidShoppingListException.class)
+    public void testDuplicateShoppingList() {
+        //Create a list with the new store as the parameter
+        ShoppingListHandler.createShoppingList(store);
+
+        //Tests that the size of the existing shopping lists reflects the change
+        assertEquals(4, ShoppingListHandler.getAllShoppingLists().size());
+
+        ShoppingListHandler.createShoppingList(store);
+
         assertEquals(4, ShoppingListHandler.getAllShoppingLists().size());
     }
 

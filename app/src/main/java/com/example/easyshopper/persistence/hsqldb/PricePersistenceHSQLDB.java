@@ -32,9 +32,9 @@ public class PricePersistenceHSQLDB implements PricePersistence, Serializable {
     }
 
     private Price fromResultSet(final ResultSet rs) throws SQLException {
-        int storeID = rs.getInt("StoreID");
-        int productID = rs.getInt("ProductID");
-        double price = rs.getBigDecimal("Price").doubleValue();
+        int storeID = rs.getInt(ColumnNames.STORE_ID);
+        int productID = rs.getInt(ColumnNames.PRODUCT_ID);
+        double price = rs.getBigDecimal(ColumnNames.PRICE).doubleValue();
 
         return new Price(storeID,productID,price);
     }

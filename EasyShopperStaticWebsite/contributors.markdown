@@ -1,0 +1,34 @@
+---
+layout: page
+title: Contributors
+permalink: /contributors/
+---
+
+## Leeroy Dillim
+There are two things I learned in this course which I feel are going to be important in the long term. One is using version control in a group project setting, learning of git branching strategies and the whole process of approving merge requests is something that I will take into workplace and will benefit me greatly. 
+
+Another thing that I learned in this course was of the n-tier architecture design pattern, more specifically the 3-tier architecture. Learning of how to separate classes into three layers: presentation, logic, and persistence, I now know how to design projects so that they are both modular and easy to maintain. This is easily the most important thing I learned in this course and I plan to apply this knowledge into my future projects.
+
+## Hung Tran
+Before taking this course, I had a passion with software development but didn't have much idea of how to work in a big team project and properly make a working software. At the beginning of the course, I had no insight in Android Studio and what the basics are. As the time went by, I got more comfortable using Android Studio and made great progress in it. Although having prior knowledge in Git and Version Control, I was amazed by the wide usage of it in a big team project and how it differs from my personal projects, where I don't need to worry much about those things such as branching, publishing, solving branches conflicts, etc. Moreover, making project milestones, user stories and different related documents are things I've never made a good use of in my personal projects that helped me a lot in organizing and keeping track of my working progress.
+
+In this project, I learned how to make an interactive UI design for my app, as well as connecting and structuring different layers: presentation, persistence, database, etc. Having taken COMP3020 - HCI and COMP3380 - Databases before, this course strengthened my skills in those aspects and helped me understand the usage of those in a real project. Moreover, it made me realize the importance of writing different type of tests for my app, which I barely did before. Lastly, I learned about the importance of avoiding tech-debts in an early stage and writing clean codes that are easily maintained in a long run. 
+
+Last but not least, not only I learned a lot from the project itself, but I also had a great time working with amazing people and learned a lot from them. This project is a great experience for me to prepare myself for challenging work in the industry in the future.
+
+## Nick McFaddin
+Throughout the course of this project I learnt a lot more about version control. Having never used Git before, this was a new experience for me, but one that added a lot of value to my portfolio as it is used lots in industry. In addition, being the main person in our group to maintain our repository, I became familiar with the organization of GitLab which will translate well to a personal GitHub account of my own.
+
+I grew as a coder, learning how to make more advanced UI designs and layer them with our database using Android Studio. I also wrote many tests (unit, integration and system) that set a good foundation for testing my code bases in the future. Lastly, I built the static website which I felt was a good ending point to the project as it was something new to learn and in a language (html) that I had never used before.
+
+I feel like this project was perfect as an end to end experience on building an app and giving us insight to all the challenges we may experience later on in life and learning how to overcome them.
+
+## Yuan Tao
+I learned the skills about gitlab and android studio through this project, and participated in team cooperation for the first time. I had little experience with any of this before. I especially want to thank my teammates who have done a lot of work and helped me a lot. In the programming of the project, what has benefited me the most is the SOLID principle. I am taking the 2150 course at the same time this semester. I found that when writing code under the premise of adhering to these principles, many expected problems will be solved easily, and the project will be smoother. Testing and maintenance will become quite simple. Overall, this course was very interesting and benefited me a lot.
+
+## Jarett Koley
+Through out this project I picked up skills in using and better understanding GitLab, as I've had minimal experience with it beforehand. Learning and implementing version control and Git flow was very interesting and different from any other project I've previouly worked on, and it will no doubt be useful in the future.
+
+Learning about unit tests and testing multiple files over seems was also something that I learned from this project, I helped to implement some tests for a few features and had never really done testing on this scope of work before.
+
+Overall this experince was interesting, app design is not a field I wanted to pursue but it was intersting to simulate the process. 

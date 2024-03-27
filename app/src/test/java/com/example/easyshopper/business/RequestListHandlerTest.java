@@ -3,6 +3,7 @@ package com.example.easyshopper.business;
 import static org.junit.Assert.assertEquals;
 
 import com.example.easyshopper.application.Services;
+import com.example.easyshopper.logic.exceptions.InvalidRequestListException;
 import com.example.easyshopper.objects.User;
 import com.example.easyshopper.logic.RequestListHandler;
 
@@ -33,6 +34,16 @@ public class RequestListHandlerTest {
         RequestListHandler.createRequestList(testUser);
         assertEquals(6, RequestListHandler.getAllRequestLists().size());
     }
+
+    @Test (expected = InvalidRequestListException.class)
+    public void testDuplicateUser(){
+        RequestListHandler.createRequestList(testUser);
+        assertEquals(6, RequestListHandler.getAllRequestLists().size());
+
+        RequestListHandler.createRequestList(testUser);
+        assertEquals(6, RequestListHandler.getAllRequestLists().size());
+    }
+
 
     @After
     public void tearDown(){

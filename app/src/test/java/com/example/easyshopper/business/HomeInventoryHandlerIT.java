@@ -66,23 +66,23 @@ public class HomeInventoryHandlerIT {
     @Test
     public void testStockIncrementAndDecrement(){
         //Test increment (apple stock starts at 3 in the stub and we increment it to 4)
-        HomeInventoryHandler.incrementStockQuantityBy1(apple);
+        HomeInventoryHandler.incrementStockQuantity(apple);
         assertEquals(1, apple.getHomeProductStockQuantity());
 
 
         //Test decrement (apple stock is at 4 from above, should be 3 when we assert)
-        HomeInventoryHandler.decreaseStockQuantityBy1(apple);
+        HomeInventoryHandler.decreaseStockQuantity(apple);
         assertEquals(0, apple.getHomeProductStockQuantity());
     }
 
     @Test
     public void testDesiredQuantityIncrementAndDecrement(){
         //Test increment (apple desired quantity starts at 2 in the stub and we increment it to 3)
-        HomeInventoryHandler.incrementDesiredQuantityBy1(apple);
+        HomeInventoryHandler.incrementDesiredQuantity(apple);
         assertEquals(1, apple.getHomeProductDesiredQuantity());
 
         //Test decrement (apple desired quantity is at 3 from above, should be 2 when we assert)
-        HomeInventoryHandler.decreaseDesiredQuantityBy1(apple);
+        HomeInventoryHandler.decreaseDesiredQuantity(apple);
         assertEquals(0, apple.getHomeProductDesiredQuantity());
     }
 
