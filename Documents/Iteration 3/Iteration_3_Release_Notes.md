@@ -11,9 +11,9 @@ In the third iteration of the EasyShopper application, users can now share their
 We were only required to implement 1 feature and thus pushed the Tracking Shopping History feature to the future.
 
 #### Share Lists
-1. Save individual lists to photos: modified.
+1. Save individual lists to photos: modified.\
     We added functionality to allow individual lists to be saved as pdf or txt files so that the user would have an additional choice in how they want to send their data.
-2. Save inventory to photo: removed.
+2. Save inventory to photo: removed.\
     We decided that having one list be saved would be sufficient as the whole inventory would usually be out of scope of what a subuser would be expected to buy.
 
 #### Tracking Shopping History (pushed to future)
