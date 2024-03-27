@@ -80,7 +80,7 @@ public class ProductPersistenceHSQLDB implements ProductPersistence, Serializabl
             }
         }
 
-        throw new NoProductFoundException("Product with id: " + productID + "not found!");
+        throw new NoProductFoundException("Product with id: " + productID + " not found!");
     }
 
     @Override
