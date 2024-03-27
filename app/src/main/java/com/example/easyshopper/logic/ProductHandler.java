@@ -1,5 +1,7 @@
 package com.example.easyshopper.logic;
 
+import android.util.Log;
+
 import com.example.easyshopper.application.Services;
 import com.example.easyshopper.objects.Price;
 import com.example.easyshopper.objects.Product;
@@ -42,6 +44,7 @@ public class ProductHandler implements Serializable {
     public static Product getProductByID(int id)
     {
         if(id < 0) {
+            Log.e("Product Handler", "Invalid product id passed when retrieving product!");
             return null;
         }
 
@@ -54,6 +57,7 @@ public class ProductHandler implements Serializable {
     public static double getPriceOfProductInStore(Product product, Store store)
     {
         if(product == null || store == null) {
+            Log.e("Product Handler", "Invalid product/store passed when retrieving price!");
             return -1;
         }
 
@@ -66,6 +70,7 @@ public class ProductHandler implements Serializable {
     public static List<Price> allStoreSortedPrice(Product product)
     {
         if(product == null) {
+            Log.e("Product Handler", "Invalid product passed when retrieving product!");
             return null;
         }
 
