@@ -53,4 +53,4 @@ On the search view, users can get more information about any specific product. T
 - Presentation layer: Not applicable for Line%, ran by androidTest
 
 ## Architecture Diagram
-Found in the following [link](a)
+Found in the following [link](https://code.cs.umanitoba.ca/comp3350-winter2024/lethalcompany-a01-13/-/blob/main/Documents/Iteration%203/Iteration_3_Architecture_Diagram.png?ref_type=heads)
